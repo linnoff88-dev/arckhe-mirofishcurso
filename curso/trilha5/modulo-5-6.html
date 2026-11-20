@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5.6 Troubleshooting e Dicas | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .bg-teal-500\/20 { background-color: rgba(13, 148, 136, 0.12); }
+    html:not(.dark) .bg-teal-500\/10 { background-color: rgba(13, 148, 136, 0.08); }
+    html:not(.dark) .border-teal-500\/30 { border-color: rgba(13, 148, 136, 0.25); }
+    html:not(.dark) .hover\:bg-teal-500\/30:hover { background-color: rgba(13, 148, 136, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-teal-400 bg-teal-500/10"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <div class="bg-gradient-to-b from-teal-900/30 to-dark-900 border-b border-dark-700">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="px-2 py-0.5 bg-teal-500/20 text-teal-400 text-xs font-semibold rounded">MÓDULO 5.6</span>
+      </div>
+      <h1 class="text-2xl font-bold text-neutral-100 mb-2">🔧 Troubleshooting e Dicas</h1>
+      <p class="text-neutral-400">Problemas comuns, suas causas e soluções. Referência rápida para quando algo dá errado.</p>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-4">
+
+    <!-- Topic 1 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+        <span class="text-neutral-100 font-semibold">🐛 Backend Não Inicia - Funções ausentes em config.py</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> O repositório original do MiroFish tem funções faltando em config.py que causam ImportError na inicialização do backend. O fork inematds corrigiu isso.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Se você clonou o repositório errado (original em vez do fork), este é o primeiro erro que vai encontrar. A solução é usar o fork.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Erro típico:</p>
+          <p class="text-red-400">ImportError: cannot import name 'get_llm_config' from 'config'</p>
+          <p class="text-red-400">AttributeError: module 'config' has no attribute 'get_graph_db_path'</p>
+          <p class="text-teal-400 mt-3 mb-2"># Causa:</p>
+          <p class="text-neutral-300">O original não tem as funções que outros módulos importam.</p>
+          <p class="text-neutral-300">config.py original é incompleto.</p>
+          <p class="text-teal-400 mt-3 mb-2"># Solução:</p>
+          <p class="text-neutral-300"># Use o fork inematds (já corrigido):</p>
+          <p class="text-neutral-300">git clone https://github.com/inematds/mirofish.git</p>
+          <p class="text-neutral-300 mt-2"># Ou consulte MIGRATION-GUIDE.md para as</p>
+          <p class="text-neutral-300"># funções que precisam ser adicionadas.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+        <span class="text-neutral-100 font-semibold">💥 Claude CLI Falha - Prompts longos demais</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Claude CLI falha quando o prompt é passado como argumento de linha de comando e excede o limite do OS (ARG_MAX ~2MB no Linux). A solução é usar stdin.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Este bug só aparece em simulações reais com contexto rico. É um dos problemas mais frustrantes porque a mensagem de erro não é clara.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Erro típico:</p>
+          <p class="text-red-400">OSError: [Errno 7] Argument list too long: 'claude'</p>
+          <p class="text-red-400"># ou simplesmente: exit code 1 sem mensagem</p>
+          <p class="text-teal-400 mt-3 mb-2"># Causa:</p>
+          <p class="text-neutral-300">claude --print "prompt muito longo aqui..."</p>
+          <p class="text-neutral-300"># O prompt excede o limite de argumentos do shell</p>
+          <p class="text-teal-400 mt-3 mb-2"># Solução (já implementada no fork):</p>
+          <p class="text-neutral-300"># Em vez de passar como argumento:</p>
+          <p class="text-red-400">❌ subprocess.run(["claude", "--print", prompt])</p>
+          <p class="text-neutral-300 mt-1"># Passar via stdin:</p>
+          <p class="text-green-400">✅ subprocess.run(["claude", "--print", "-"],</p>
+          <p class="text-green-400">     input=prompt, text=True)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+        <span class="text-neutral-100 font-semibold">🐌 Simulação Lenta/Cara - Limitar escala</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Simulações podem ser lentas (horas) ou caras ($100+) se mal dimensionadas. As principais causas são muitas rodadas, muitos agentes ou modelo LLM caro demais.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Otimizar a relação custo/qualidade é essencial para uso prático. Nem sempre mais rodadas = melhores resultados.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Estratégias de otimização:</p>
+          <p class="text-neutral-300 mt-1">1. Limitar rodadas (< 40 para testes, < 100 para produção)</p>
+          <p class="text-neutral-300">2. Usar LLM mais barato para simulação (LLM_BOOST)</p>
+          <p class="text-neutral-300">3. Reduzir número de agentes (10-20 é suficiente para testes)</p>
+          <p class="text-neutral-300">4. Usar Claude CLI para testes ($0)</p>
+          <p class="text-teal-400 mt-3 mb-2"># Tabela de referência de tempo:</p>
+          <p class="text-neutral-300">10 agentes × 10 rodadas (Claude CLI):  ~5 min</p>
+          <p class="text-neutral-300">20 agentes × 20 rodadas (GPT-4o-mini): ~15 min</p>
+          <p class="text-neutral-300">50 agentes × 50 rodadas (GPT-4o):      ~2 horas</p>
+          <p class="text-neutral-300">100 agentes × 100 rodadas (qualquer):   ~8+ horas</p>
+          <p class="text-teal-400 mt-3 mb-2"># Dica: comece com 5 agentes, 5 rodadas</p>
+          <p class="text-neutral-300"># Valide que funciona, depois escale gradualmente.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+        <span class="text-neutral-100 font-semibold">🐳 Docker sem Claude CLI - Mapear volumes</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Dentro do Docker, o Claude CLI não consegue acessar suas credenciais a menos que os diretórios de configuração sejam montados como volumes.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Este é o problema #1 reportado por usuários que fazem deploy com Docker + Claude CLI. A mensagem de erro é "not authenticated".</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Erro típico:</p>
+          <p class="text-red-400">Error: Not authenticated. Please run 'claude' to authenticate.</p>
+          <p class="text-teal-400 mt-3 mb-2"># Causa:</p>
+          <p class="text-neutral-300">O container Docker não tem acesso aos arquivos de</p>
+          <p class="text-neutral-300">autenticação do Claude CLI que ficam no host.</p>
+          <p class="text-teal-400 mt-3 mb-2"># Solução - adicionar volumes no docker-compose.yml:</p>
+          <p class="text-neutral-300">volumes:</p>
+          <p class="text-neutral-300">  - ~/.claude:/root/.claude:ro</p>
+          <p class="text-neutral-300">  - ~/.local/share/claude:/root/.local/share/claude:ro</p>
+          <p class="text-teal-400 mt-3 mb-2"># Verificar dentro do container:</p>
+          <p class="text-neutral-300">docker compose exec app ls -la /root/.claude/</p>
+          <p class="text-neutral-300">docker compose exec app claude --version</p>
+          <p class="text-neutral-300 mt-2"># Dica: :ro = read-only (mais seguro)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+        <span class="text-neutral-100 font-semibold">🔄 Importação Circular - Bug corrigido com lazy import</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> O código original tinha dependências circulares entre módulos Python (build_graph.py importava config.py que importava build_graph.py), causando ImportError.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Importação circular é um erro Python clássico. A técnica de lazy import (mover o import para dentro da função) é a solução padrão.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Erro típico:</p>
+          <p class="text-red-400">ImportError: cannot import name 'build_graph' from</p>
+          <p class="text-red-400">partially initialized module 'backend.build_graph'</p>
+          <p class="text-red-400">(most likely due to a circular import)</p>
+          <p class="text-teal-400 mt-3 mb-2"># Código original (problema):</p>
+          <p class="text-red-400">❌ # No topo do arquivo</p>
+          <p class="text-red-400">from build_graph import process_documents</p>
+          <p class="text-teal-400 mt-3 mb-2"># Código corrigido no fork (lazy import):</p>
+          <p class="text-green-400">✅ def some_function():</p>
+          <p class="text-green-400">       # Import dentro da função (lazy)</p>
+          <p class="text-green-400">       from build_graph import process_documents</p>
+          <p class="text-green-400">       return process_documents(data)</p>
+          <p class="text-teal-400 mt-3 mb-2"># O import só acontece quando a função é chamada,</p>
+          <p class="text-neutral-300"># quebrando o ciclo de dependência.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+        <span class="text-neutral-100 font-semibold">📋 Checklist de Problemas Comuns</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Tabela de referência rápida com os problemas mais frequentes, suas causas e soluções. Consulte antes de abrir uma issue no GitHub.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> 95% dos problemas reportados são os mesmos. Esta tabela resolve a maioria sem precisar de ajuda externa.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Tabela: Problema → Causa → Solução</p>
+          <p class="text-neutral-300 mt-1">┌──────────────────────────────────────────────────────┐</p>
+          <p class="text-neutral-300">│ PROBLEMA              │ CAUSA        │ SOLUÇÃO        │</p>
+          <p class="text-neutral-300">├──────────────────────────────────────────────────────┤</p>
+          <p class="text-neutral-300">│ ModuleNotFoundError   │ Python 3.13+ │ Use 3.11/3.12  │</p>
+          <p class="text-neutral-300">│ npm setup:all falha   │ uv ausente   │ Instalar uv    │</p>
+          <p class="text-neutral-300">│ Backend não inicia    │ .env faltando│ cp .env.example │</p>
+          <p class="text-neutral-300">│ "Not authenticated"   │ Docker s/vol │ Montar ~/.claude│</p>
+          <p class="text-neutral-300">│ Porta 5001 em uso     │ Outro proc.  │ lsof -i :5001  │</p>
+          <p class="text-neutral-300">│ ENOMEM / killed       │ Pouca RAM    │ Usar ≥8GB      │</p>
+          <p class="text-neutral-300">│ Arg list too long     │ Prompt grande│ Usar stdin     │</p>
+          <p class="text-neutral-300">│ Circular import       │ Bug original │ Usar fork      │</p>
+          <p class="text-neutral-300">│ OASIS incompatível    │ API não-OAI  │ Usar LLM_BOOST │</p>
+          <p class="text-neutral-300">│ Simulação sem fim     │ Muitas rodadas│ Limitar < 40  │</p>
+          <p class="text-neutral-300">│ Relatório vazio       │ LLM timeout  │ Verificar logs │</p>
+          <p class="text-neutral-300">│ SSL não funciona      │ acme.json    │ chmod 600      │</p>
+          <p class="text-neutral-300">└──────────────────────────────────────────────────────┘</p>
+          <p class="text-teal-400 mt-3 mb-2"># Comandos de diagnóstico rápido:</p>
+          <p class="text-neutral-300">python --version          # Deve ser 3.11 ou 3.12</p>
+          <p class="text-neutral-300">node --version            # Deve ser 18+</p>
+          <p class="text-neutral-300">cat .env | grep PROVIDER  # Deve ter LLM_PROVIDER</p>
+          <p class="text-neutral-300">docker compose ps         # Deve mostrar "Up"</p>
+          <p class="text-neutral-300">docker compose logs --tail=50 app  # Últimos erros</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mt-8 pt-6 border-t border-dark-700">
+      <a href="modulo-5-5.html" class="flex items-center gap-2 text-neutral-400 hover:text-teal-400 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        Anterior: Primeira Simulação
+      </a>
+      <a href="index.html" class="flex items-center gap-2 text-neutral-400 hover:text-teal-400 transition-colors">
+        Voltar ao Índice
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const allExplanations = document.querySelectorAll('.topic-explanation.active');
+      allExplanations.forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

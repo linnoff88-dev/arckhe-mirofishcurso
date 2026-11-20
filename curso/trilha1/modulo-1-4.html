@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 1.4 - O Ecossistema Completo | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5, 150, 105, 0.18); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span>
+          </a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span>
+          </a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm text-neutral-400 mb-8">
+      <a href="../../index.html" class="hover:text-emerald-400 transition-colors">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-emerald-400 transition-colors">Trilha 1</a>
+      <span>/</span>
+      <span class="text-neutral-100">Módulo 1.4</span>
+    </nav>
+
+    <!-- Header -->
+    <div class="mb-12">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-sm font-semibold rounded-full mb-4">MÓDULO 1.4</span>
+      <h1 class="text-2xl font-bold text-neutral-100 mb-4">🔗 O Ecossistema Completo</h1>
+      <p class="text-neutral-300 text-lg">Conheça todas as peças do ecossistema MiroFish: do crawler de opinião pública ao simulador de predição, passando pelo analista multiagente.</p>
+    </div>
+
+    <!-- Topic 1 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🕷️ MindSpider</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">O MindSpider é (ou era) o crawler de opinião pública do ecossistema. Projetado para coletar dados de 13+ plataformas sociais, ele extraía posts, comentários e reações para alimentar os outros componentes com dados reais do mundo real.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300">O MindSpider foi projetado como um "ouvido digital" - capaz de capturar o pulso da opinião pública em plataformas como Twitter/X, Reddit, Weibo, Zhihu, Douyin e outras. Utilizava IA para filtrar ruído e identificar tendências relevantes. Embora o repositório tenha sido arquivado, suas funcionalidades foram integradas ao BettaFish, que agora oferece coleta e análise em um único sistema.</p>
+      </div>
+
+      <div class="bg-primary/10 border border-primary/40 rounded-xl p-6 mb-6">
+        <h3 class="text-primary font-semibold mb-3">Dica Prática</h3>
+        <p class="text-neutral-300">Mesmo com o MindSpider arquivado, o conceito de coleta estruturada é fundamental. Para simulações no MiroFish, você pode usar o BettaFish para coleta ou preparar seus próprios dados em formato compatível (documentos de texto com opiniões de diferentes fontes e perspectivas).</p>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🐠 BettaFish</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">O BettaFish é o analista multiagente do ecossistema, com impressionantes 39.6k stars no GitHub. Ele utiliza 5 agentes especializados para transformar dados brutos em análises estruturadas e acionáveis.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300">Os 5 agentes especializados do BettaFish trabalham em sequência: <strong>QueryEngine</strong> decompõe perguntas complexas em sub-consultas. <strong>MediaEngine</strong> coleta e processa dados de plataformas sociais. <strong>InsightEngine</strong> analisa padrões e gera insights. <strong>ReportEngine</strong> compila tudo em relatórios estruturados. <strong>ForumEngine</strong> monitora fóruns e comunidades para opiniões de nicho.</p>
+      </div>
+
+      <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-blue-400 font-semibold mb-3">Dados e Pesquisa</h3>
+        <p class="text-neutral-300">Com 39.6k stars, o BettaFish é um dos projetos de análise multiagente mais populares do GitHub. Cada agente usa ferramentas específicas como insight_forge (geração de insights estruturados), panorama_search (busca contextual ampla) e interview_agents (entrevistas automatizadas entre agentes para validação cruzada de informações).</p>
+      </div>
+
+      <!-- Timeline dos Agentes -->
+      <div class="space-y-4 mb-6">
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">Q</span>
+            <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
+          </div>
+          <div class="pb-4">
+            <h4 class="text-emerald-400 font-semibold">QueryEngine</h4>
+            <p class="text-neutral-300 text-sm mt-1">Recebe a pergunta do usuário e a decompõe em sub-consultas otimizadas para cada fonte de dados.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">M</span>
+            <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
+          </div>
+          <div class="pb-4">
+            <h4 class="text-emerald-400 font-semibold">MediaEngine</h4>
+            <p class="text-neutral-300 text-sm mt-1">Coleta dados de redes sociais, notícias e outras fontes. Integra funcionalidades do antigo MindSpider.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">I</span>
+            <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
+          </div>
+          <div class="pb-4">
+            <h4 class="text-emerald-400 font-semibold">InsightEngine</h4>
+            <p class="text-neutral-300 text-sm mt-1">Analisa os dados coletados, identifica padrões, tendências e gera insights acionáveis.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">R</span>
+            <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
+          </div>
+          <div class="pb-4">
+            <h4 class="text-emerald-400 font-semibold">ReportEngine</h4>
+            <p class="text-neutral-300 text-sm mt-1">Compila análises em relatórios estruturados com visualizações, pronto para alimentar o MiroFish.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">F</span>
+          </div>
+          <div>
+            <h4 class="text-emerald-400 font-semibold">ForumEngine</h4>
+            <p class="text-neutral-300 text-sm mt-1">Monitora fóruns e comunidades de nicho para capturar opiniões especializadas e contranarrativas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🐟 MiroFish</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">O MiroFish é o coração do ecossistema: o motor de simulação e predição que transforma dados analisados em mundos digitais paralelos onde agentes autônomos interagem e geram previsões comportamentais.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300">O MiroFish recebe dados do BettaFish (ou de documentos preparados manualmente), constrói um grafo de conhecimento via GraphRAG, gera personas diversas para centenas de agentes, configura um ambiente de simulação (tipo Twitter/Reddit) e executa simulações paralelas onde esses agentes interagem. Os padrões emergentes dessas interações são as predições do sistema.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-5">
+          <h4 class="text-emerald-400 font-semibold mb-3">Entradas do MiroFish</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Relatórios do BettaFish</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Documentos de contexto (artigos, posts)</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Cenário a ser testado</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Configurações da simulação</li>
+          </ul>
+        </div>
+        <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-5">
+          <h4 class="text-blue-400 font-semibold mb-3">Saídas do MiroFish</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">+</span> Relatório de predição com tendências</li>
+            <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">+</span> Mapa de sentimentos por grupo</li>
+            <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">+</span> Interações individuais com agentes</li>
+            <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">+</span> Visualizações de grafo e timeline</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🔄 A Esteira Completa</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">O verdadeiro poder do ecossistema está na integração das peças: cada componente alimenta o próximo com dados cada vez mais estruturados e enriquecidos, criando uma esteira que vai de dados brutos a predições acionáveis.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300">A esteira completa: <strong>Coleta</strong> (BettaFish/MediaEngine captura dados de redes sociais e notícias) → <strong>Análise</strong> (BettaFish/InsightEngine identifica padrões e gera insights) → <strong>Predição</strong> (MiroFish constrói grafo, gera agentes e simula cenários). Cada etapa multiplica o valor dos dados, transformando ruído em sinal.</p>
+      </div>
+
+      <!-- Timeline -->
+      <div class="space-y-4 mb-6">
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
+          </div>
+          <div class="pb-6">
+            <h4 class="text-emerald-400 font-semibold">Coleta de Dados Brutos</h4>
+            <p class="text-neutral-300 text-sm mt-1">BettaFish coleta posts, comentários, notícias e análises de múltiplas plataformas sobre o tema de interesse.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
+          </div>
+          <div class="pb-6">
+            <h4 class="text-emerald-400 font-semibold">Análise e Estruturação</h4>
+            <p class="text-neutral-300 text-sm mt-1">InsightEngine e ReportEngine analisam os dados, identificam padrões de opinião e geram relatórios estruturados.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
+          </div>
+          <div class="pb-6">
+            <h4 class="text-emerald-400 font-semibold">Construção de Conhecimento</h4>
+            <p class="text-neutral-300 text-sm mt-1">MiroFish constrói o grafo de conhecimento (GraphRAG) a partir dos relatórios e dados estruturados.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+          </div>
+          <div>
+            <h4 class="text-emerald-400 font-semibold">Simulação e Predição</h4>
+            <p class="text-neutral-300 text-sm mt-1">Agentes são gerados, o cenário é configurado e a simulação roda, gerando predições comportamentais.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🔎 DeepSearchAgent</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">O DeepSearchAgent é uma ferramenta de pesquisa profunda que funciona como uma etapa preparatória para a simulação. Ele busca informações detalhadas sobre um tema, indo além de buscas superficiais para coletar contexto rico e diversificado.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300">Diferente de uma busca simples no Google, o DeepSearchAgent realiza múltiplas iterações de pesquisa: busca inicial, análise dos resultados, geração de novas consultas baseadas no que encontrou, e aprofundamento em subtemas relevantes. O resultado é um corpus de documentos abrangente e diversificado que serve como entrada ideal para o GraphRAG do MiroFish.</p>
+      </div>
+
+      <div class="bg-primary/10 border border-primary/40 rounded-xl p-6 mb-6">
+        <h3 class="text-primary font-semibold mb-3">Dica Prática</h3>
+        <p class="text-neutral-300">Use o DeepSearchAgent antes de simulações sobre temas que você não conhece profundamente. Ele garante que o grafo de conhecimento será construído a partir de informações abrangentes, não apenas de fontes superficiais que você encontraria em uma busca rápida.</p>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🗺️ Mapa de Relações</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Compreender como cada peça do ecossistema se conecta é fundamental para planejar projetos e resolver problemas. O mapa de relações mostra as entradas, saídas e dependências de cada componente.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300 mb-3"><strong>DeepSearchAgent → BettaFish:</strong> Pesquisa profunda alimenta a coleta com contexto adicional.</p>
+        <p class="text-neutral-300 mb-3"><strong>BettaFish → MiroFish:</strong> Relatórios de análise servem como dados de entrada para o GraphRAG.</p>
+        <p class="text-neutral-300 mb-3"><strong>MiroFish (GraphRAG) → MiroFish (Simulação):</strong> O grafo alimenta a geração de personas e contextualização.</p>
+        <p class="text-neutral-300"><strong>MiroFish (Simulação) → Usuário:</strong> Relatórios de predição e interface de interação com agentes.</p>
+      </div>
+
+      <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-blue-400 font-semibold mb-3">Dados e Pesquisa</h3>
+        <p class="text-neutral-300">Na prática, não é obrigatório usar todos os componentes. Você pode alimentar o MiroFish diretamente com seus próprios documentos, pulando BettaFish e DeepSearchAgent. A esteira completa é o caminho ideal para máxima qualidade, mas o MiroFish funciona de forma independente quando os dados de entrada são adequados.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-5">
+          <h4 class="text-emerald-400 font-semibold mb-3">Usar Esteira Completa Quando</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Tema é novo e pouco conhecido</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Precisa de dados atualizados de redes sociais</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Máxima qualidade e diversidade é essencial</li>
+          </ul>
+        </div>
+        <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-5">
+          <h4 class="text-blue-400 font-semibold mb-3">Usar MiroFish Direto Quando</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">+</span> Já possui documentos de qualidade</li>
+            <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">+</span> Teste rápido de cenário específico</li>
+            <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">+</span> Dados proprietários ou confidenciais</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="bg-dark-800 border border-dark-700 rounded-xl p-8 mb-8">
+      <h2 class="text-2xl font-bold text-neutral-100 mb-6">Resumo do Módulo</h2>
+      <div class="space-y-3 mb-6">
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Conheço os componentes: MindSpider, BettaFish, MiroFish e DeepSearchAgent</span>
+        </label>
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Entendo os 5 agentes do BettaFish e suas funções</span>
+        </label>
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Sei como a esteira completa funciona: Coleta → Análise → Predição</span>
+        </label>
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Consigo decidir quando usar a esteira completa vs MiroFish direto</span>
+        </label>
+      </div>
+
+      <div class="flex justify-between items-center pt-4 border-t border-dark-700">
+        <a href="modulo-1-3.html" class="flex items-center gap-2 text-neutral-400 hover:text-emerald-400 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+          Anterior: GraphRAG e Grafos
+        </a>
+        <a href="modulo-1-5.html" class="flex items-center gap-2 text-neutral-400 hover:text-emerald-400 transition-colors">
+          Próximo: Arquitetura Técnica
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => {
+        if (exp !== explanation) exp.classList.remove('active');
+      });
+      explanation.classList.toggle('active');
+    }
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

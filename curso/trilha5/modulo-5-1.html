@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5.1 Preparando o Ambiente | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .bg-teal-500\/20 { background-color: rgba(13, 148, 136, 0.12); }
+    html:not(.dark) .bg-teal-500\/10 { background-color: rgba(13, 148, 136, 0.08); }
+    html:not(.dark) .border-teal-500\/30 { border-color: rgba(13, 148, 136, 0.25); }
+    html:not(.dark) .hover\:bg-teal-500\/30:hover { background-color: rgba(13, 148, 136, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-teal-400 bg-teal-500/10"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <div class="bg-gradient-to-b from-teal-900/30 to-dark-900 border-b border-dark-700">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="px-2 py-0.5 bg-teal-500/20 text-teal-400 text-xs font-semibold rounded">MÓDULO 5.1</span>
+      </div>
+      <h1 class="text-2xl font-bold text-neutral-100 mb-2">🖥️ Preparando o Ambiente</h1>
+      <p class="text-neutral-400">Instale Node.js, Python, uv, Docker e obtenha suas chaves de API antes de começar.</p>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-4">
+
+    <!-- Topic 1 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+        <span class="text-neutral-100 font-semibold">📋 Requisitos de Sistema</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Antes de instalar qualquer coisa, verifique se sua máquina atende aos requisitos mínimos. O MiroFish roda simulações que consomem CPU e memória, especialmente com muitos agentes.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Hardware insuficiente causa travamentos, simulações que nunca terminam e erros de "out of memory". Validar antes evita frustração depois.</p>
+        <div class="mb-3"><strong class="text-teal-400">Conceitos-chave:</strong></div>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Requisitos Mínimos de Hardware</p>
+          <p class="text-neutral-300">RAM:        8 GB (16 GB recomendado)</p>
+          <p class="text-neutral-300">CPU:        4+ cores (8+ cores recomendado)</p>
+          <p class="text-neutral-300">Disco:      10 GB livres</p>
+          <p class="text-neutral-300">GPU:        Não necessária (LLM roda na nuvem)</p>
+          <p class="text-neutral-300 mt-2"># Sistemas Operacionais Suportados</p>
+          <p class="text-neutral-300">Linux:      Ubuntu 20.04+, Debian 11+, Fedora 38+</p>
+          <p class="text-neutral-300">macOS:      12 Monterey+ (Intel ou Apple Silicon)</p>
+          <p class="text-neutral-300">Windows:    WSL2 com Ubuntu (nativo não suportado)</p>
+        </div>
+        <p class="text-neutral-400 text-xs">Dica: Em Windows, instale WSL2 primeiro com <code class="text-teal-400">wsl --install</code> no PowerShell como administrador.</p>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+        <span class="text-neutral-100 font-semibold">🟢 Node.js 18+ via nvm</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Node.js é necessário para o frontend Vue.js, os scripts de build e os comandos npm. Use nvm (Node Version Manager) para instalar sem conflitos com o sistema.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Sem Node.js, o frontend não compila e os scripts npm (como setup:all) não funcionam. nvm permite trocar de versão facilmente.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># 1. Instalar nvm</p>
+          <p class="text-neutral-300">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash</p>
+          <p class="text-neutral-300 mt-1">source ~/.bashrc  # ou ~/.zshrc</p>
+          <p class="text-teal-400 mt-3 mb-2"># 2. Instalar Node.js 20 LTS</p>
+          <p class="text-neutral-300">nvm install 20</p>
+          <p class="text-neutral-300">nvm use 20</p>
+          <p class="text-neutral-300">nvm alias default 20</p>
+          <p class="text-teal-400 mt-3 mb-2"># 3. Verificar instalação</p>
+          <p class="text-neutral-300">node --version   # v20.x.x</p>
+          <p class="text-neutral-300">npm --version    # 10.x.x</p>
+        </div>
+        <p class="text-neutral-400 text-xs">Node 18 é o mínimo, mas Node 20 LTS é recomendado por ser mais estável e ter suporte mais longo.</p>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+        <span class="text-neutral-100 font-semibold">🐍 Python 3.11-3.12 (NÃO 3.13+)</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> O backend Python requer versão 3.11 ou 3.12. Python 3.13+ NÃO é compatível com dependências do CAMEL-AI/OASIS. Use pyenv para gerenciar versões.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> A versão errada do Python é a causa número 1 de falhas na instalação. CAMEL-AI tem dependências que quebram no Python 3.13+.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># 1. Instalar pyenv</p>
+          <p class="text-neutral-300">curl https://pyenv.run | bash</p>
+          <p class="text-neutral-300 mt-1"># Adicionar ao ~/.bashrc ou ~/.zshrc:</p>
+          <p class="text-neutral-300">export PYENV_ROOT="$HOME/.pyenv"</p>
+          <p class="text-neutral-300">export PATH="$PYENV_ROOT/bin:$PATH"</p>
+          <p class="text-neutral-300">eval "$(pyenv init -)"</p>
+          <p class="text-teal-400 mt-3 mb-2"># 2. Instalar Python 3.12</p>
+          <p class="text-neutral-300">pyenv install 3.12.7</p>
+          <p class="text-neutral-300">pyenv global 3.12.7</p>
+          <p class="text-teal-400 mt-3 mb-2"># 3. Verificar</p>
+          <p class="text-neutral-300">python --version   # Python 3.12.7</p>
+          <p class="text-neutral-300 mt-2 text-red-400">⚠️  NÃO use Python 3.13+ - CAMEL-AI não é compatível!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+        <span class="text-neutral-100 font-semibold">📦 uv - Gerenciador de pacotes moderno</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> uv é um gerenciador de pacotes Python escrito em Rust, 10-100x mais rápido que pip. O fork inematds usa uv para gerenciar dependências do backend.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> npm run setup:all depende do uv para instalar pacotes Python. Sem uv instalado, o setup falha na etapa do backend.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Instalar uv</p>
+          <p class="text-neutral-300">curl -LsSf https://astral.sh/uv/install.sh | sh</p>
+          <p class="text-teal-400 mt-3 mb-2"># Verificar instalação</p>
+          <p class="text-neutral-300">uv --version   # uv 0.x.x</p>
+          <p class="text-teal-400 mt-3 mb-2"># Comandos úteis do uv</p>
+          <p class="text-neutral-300">uv venv          # Criar ambiente virtual</p>
+          <p class="text-neutral-300">uv pip install   # Instalar pacote (compatível com pip)</p>
+          <p class="text-neutral-300">uv sync          # Sincronizar dependências do pyproject.toml</p>
+        </div>
+        <p class="text-neutral-400 text-xs">uv é da Astral (mesma empresa do ruff). Substitui pip, pip-tools, virtualenv e poetry em um único binário.</p>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+        <span class="text-neutral-100 font-semibold">🐳 Docker e Docker Compose</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Docker containeriza a aplicação para deploy consistente. Docker Compose orquestra múltiplos serviços (app + Traefik). Essencial para produção.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Docker é o método recomendado para deploy em produção. Para desenvolvimento local, é opcional (npm run dev funciona direto).</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Ubuntu/Debian - Instalar Docker</p>
+          <p class="text-neutral-300">curl -fsSL https://get.docker.com | sh</p>
+          <p class="text-neutral-300">sudo usermod -aG docker $USER</p>
+          <p class="text-neutral-300">newgrp docker</p>
+          <p class="text-teal-400 mt-3 mb-2"># macOS - Instalar Docker Desktop</p>
+          <p class="text-neutral-300">brew install --cask docker</p>
+          <p class="text-teal-400 mt-3 mb-2"># Verificar instalação</p>
+          <p class="text-neutral-300">docker --version          # Docker 24.x+</p>
+          <p class="text-neutral-300">docker compose version    # Docker Compose v2.x+</p>
+          <p class="text-neutral-300">docker run hello-world    # Teste rápido</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+        <span class="text-neutral-100 font-semibold">🔑 Contas e Chaves de API</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> O MiroFish precisa de acesso a um LLM. Você tem duas opções: usar Claude CLI/Codex CLI (sem API key, usa assinatura existente) ou obter API keys da OpenAI/Anthropic.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Sem LLM configurado, o sistema não consegue gerar personas, simular agentes ou criar relatórios. É o pré-requisito mais importante.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Opção 1: Claude CLI (GRATUITO com assinatura)</p>
+          <p class="text-neutral-300">npm install -g @anthropic-ai/claude-code</p>
+          <p class="text-neutral-300">claude  # Autenticar na primeira execução</p>
+          <p class="text-neutral-300"># Nenhuma API key necessária!</p>
+          <p class="text-teal-400 mt-3 mb-2"># Opção 2: API Key da OpenAI</p>
+          <p class="text-neutral-300"># Acesse: https://platform.openai.com/api-keys</p>
+          <p class="text-neutral-300"># Crie uma key: sk-proj-...</p>
+          <p class="text-teal-400 mt-3 mb-2"># Opção 3: API Key da Anthropic</p>
+          <p class="text-neutral-300"># Acesse: https://console.anthropic.com/settings/keys</p>
+          <p class="text-neutral-300"># Crie uma key: sk-ant-...</p>
+        </div>
+        <p class="text-neutral-400 text-xs">Recomendação: Comece com Claude CLI para testes (custo $0). Migre para API quando precisar de mais controle ou escala.</p>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mt-8 pt-6 border-t border-dark-700">
+      <a href="index.html" class="flex items-center gap-2 text-neutral-400 hover:text-teal-400 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        Índice da Trilha
+      </a>
+      <a href="modulo-5-2.html" class="flex items-center gap-2 text-neutral-400 hover:text-teal-400 transition-colors">
+        Próximo: Clonando o Fork
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const allExplanations = document.querySelectorAll('.topic-explanation.active');
+      allExplanations.forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

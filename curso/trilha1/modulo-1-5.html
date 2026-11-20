@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 1.5 - Arquitetura Técnica | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5, 150, 105, 0.18); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span>
+          </a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span>
+          </a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm text-neutral-400 mb-8">
+      <a href="../../index.html" class="hover:text-emerald-400 transition-colors">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-emerald-400 transition-colors">Trilha 1</a>
+      <span>/</span>
+      <span class="text-neutral-100">Módulo 1.5</span>
+    </nav>
+
+    <!-- Header -->
+    <div class="mb-12">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-sm font-semibold rounded-full mb-4">MÓDULO 1.5</span>
+      <h1 class="text-2xl font-bold text-neutral-100 mb-4">🏗️ Arquitetura Técnica</h1>
+      <p class="text-neutral-300 text-lg">Explore as camadas técnicas do MiroFish: do frontend Vue.js ao motor de simulação OASIS, passando pelo backend Flask e pela camada de IA.</p>
+    </div>
+
+    <!-- Topic 1 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🖥️ Frontend</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">A interface do MiroFish é uma Single Page Application (SPA) construída com Vue.js 3 e o build tool Vite, com visualizações de grafos e simulações renderizadas pelo D3.js. O frontend roda na porta 3000 e se comunica com o backend via APIs REST e WebSocket.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300"><strong>Vue.js 3</strong> fornece a estrutura de componentes reativos - cada parte da interface (lista de agentes, grafo de conhecimento, timeline da simulação) é um componente independente. <strong>Vite</strong> garante hot module replacement (HMR) para desenvolvimento rápido. <strong>D3.js</strong> renderiza visualizações interativas: o grafo de conhecimento como rede de nós e arestas, a timeline da simulação como diagrama temporal e os sentimentos como heatmap.</p>
+      </div>
+
+      <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-blue-400 font-semibold mb-3">Dados e Pesquisa</h3>
+        <p class="text-neutral-300">O frontend é completamente desacoplado do backend - qualquer interface pode consumir as APIs. Isso significa que é possível criar dashboards customizados, integrações com ferramentas de BI ou até interfaces de linha de comando para automatizar simulações. A porta padrão 3000 pode ser alterada no arquivo de configuração do Vite.</p>
+      </div>
+
+      <div class="bg-primary/10 border border-primary/40 rounded-xl p-6 mb-6">
+        <h3 class="text-primary font-semibold mb-3">Dica Prática</h3>
+        <p class="text-neutral-300">Para desenvolvimento, rode o frontend com <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">npm run dev</code> que ativa o HMR do Vite. Para produção, <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">npm run build</code> gera arquivos estáticos otimizados que podem ser servidos por qualquer servidor web.</p>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold text-neutral-100">⚙️ Backend</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">O backend é um servidor Python com Flask rodando na porta 5001. Ele é responsável por toda a lógica de negócio: orquestração de simulações, gerenciamento do grafo de conhecimento, comunicação com LLMs e persistência de dados.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300">O backend expõe APIs REST para operações CRUD (criar/ler/atualizar/deletar simulações) e usa WebSocket para comunicação em tempo real durante simulações ativas. As principais rotas incluem: <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">/api/simulation</code> (gerenciamento de simulações), <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">/api/graphrag</code> (operações no grafo de conhecimento) e <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">/api/agents</code> (interação com agentes individuais).</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-5">
+          <h4 class="text-emerald-400 font-semibold mb-3">Responsabilidades do Backend</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Orquestração de simulações</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Gestão do GraphRAG / KuzuDB</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Comunicação com LLMs</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Persistência e recuperação de dados</li>
+          </ul>
+        </div>
+        <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-5">
+          <h4 class="text-blue-400 font-semibold mb-3">Stack Técnica</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">+</span> Python 3.10+</li>
+            <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">+</span> Flask + Flask-SocketIO</li>
+            <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">+</span> SQLAlchemy (ORM)</li>
+            <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">+</span> KuzuDB / Zep SDK</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🤖 Motor de Simulação - OASIS</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">O OASIS (Open Agent Social Interaction Simulations) é o motor de simulação social desenvolvido pelo CAMEL-AI que o MiroFish utiliza. Ele define 23 ações sociais que os agentes podem executar em ambientes que simulam Twitter e Reddit simultaneamente.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300">As 23 ações sociais incluem operações como: postar conteúdo original, responder a posts, curtir, compartilhar, seguir/deixar de seguir usuários, criar threads, votar em enquetes e mais. Cada agente, a cada turno da simulação, observa seu feed e decide qual ação executar baseado na sua personalidade e no contexto. O OASIS suporta simulação simultânea em ambientes tipo Twitter (posts curtos, retweets) e Reddit (threads, upvotes/downvotes, subreddits).</p>
+      </div>
+
+      <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-blue-400 font-semibold mb-3">Dados e Pesquisa</h3>
+        <p class="text-neutral-300">O OASIS foi desenvolvido pelo CAMEL-AI (Communicative Agents for Machine Learning), um framework open-source para criação de sistemas multiagente. A simulação simultânea em dois ambientes (Twitter + Reddit) permite observar como a mesma população se comporta de forma diferente em contextos distintos - mensagens curtas vs discussões longas.</p>
+      </div>
+
+      <div class="bg-primary/10 border border-primary/40 rounded-xl p-6 mb-6">
+        <h3 class="text-primary font-semibold mb-3">Dica Prática</h3>
+        <p class="text-neutral-300">Ao configurar uma simulação, considere qual ambiente é mais relevante para seu cenário. Notícias e reações rápidas funcionam melhor no ambiente Twitter. Discussões aprofundadas e análises são mais ricas no ambiente Reddit. Simular ambos oferece a visão mais completa.</p>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🧠 Camada de IA</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Os LLMs são o "cérebro" de cada agente no MiroFish. Cada vez que um agente precisa tomar uma decisão, um prompt é construído com sua personalidade, memória e contexto atual, e enviado ao LLM para gerar uma resposta.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300">O prompt de cada agente é composto por: (1) System prompt com a persona do agente (personalidade, valores, estilo); (2) Contexto do grafo de conhecimento relevante para a interação atual; (3) Memória das últimas interações; (4) O conteúdo que o agente está respondendo; (5) Instruções sobre as ações disponíveis. O LLM retorna tanto o conteúdo (texto do post/comentário) quanto a ação escolhida (postar, curtir, compartilhar, etc.).</p>
+      </div>
+
+      <!-- Timeline -->
+      <div class="space-y-4 mb-6">
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
+          </div>
+          <div class="pb-6">
+            <h4 class="text-emerald-400 font-semibold">Montagem do Prompt</h4>
+            <p class="text-neutral-300 text-sm mt-1">Persona + contexto do grafo + memória recente + conteúdo atual + ações disponíveis são combinados em um prompt.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
+          </div>
+          <div class="pb-6">
+            <h4 class="text-emerald-400 font-semibold">Chamada ao LLM</h4>
+            <p class="text-neutral-300 text-sm mt-1">O prompt é enviado ao LLM configurado (DeepSeek, Gemini, Qwen, etc.) via API.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
+          </div>
+          <div class="pb-6">
+            <h4 class="text-emerald-400 font-semibold">Parsing da Resposta</h4>
+            <p class="text-neutral-300 text-sm mt-1">A resposta é parseada para extrair a ação escolhida e o conteúdo gerado pelo agente.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+          </div>
+          <div>
+            <h4 class="text-emerald-400 font-semibold">Execução e Memória</h4>
+            <p class="text-neutral-300 text-sm mt-1">A ação é executada no ambiente simulado e a interação é salva na memória do agente.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold text-neutral-100">💾 Persistência de Dados</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">O MiroFish usa uma combinação pragmática de tecnologias de armazenamento: SQLite para dados estruturados, JSON para configurações e resultados, e o filesystem para logs e artefatos gerados durante simulações.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300"><strong>SQLite:</strong> Armazena metadados de simulações, perfis de agentes e dados de interação em um banco relacional embarcado. Zero configuração, perfeito para uso local. <strong>JSON:</strong> Configurações de simulação, resultados de relatórios e exportações são armazenados em JSON para fácil leitura e portabilidade. <strong>Filesystem:</strong> Logs detalhados de cada turno da simulação, grafos de conhecimento exportados e artefatos visuais são salvos em diretórios organizados por simulação.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-5">
+          <h4 class="text-emerald-400 font-semibold mb-3">Fazer</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Fazer backup do diretório data/ regularmente</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Usar JSON exportado para análises offline</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Versionar configurações de simulação</li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 border border-red-500/30 rounded-xl p-5">
+          <h4 class="text-red-400 font-semibold mb-3">Evitar</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Editar o SQLite manualmente</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Deletar logs durante uma simulação ativa</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Ignorar o tamanho do disco com muitas simulações</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🐳 Deploy</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">O MiroFish pode ser implantado de duas formas: via Docker Compose (recomendado para produção e compartilhamento) ou via scripts npm (recomendado para desenvolvimento). Ambos os métodos orquestram frontend, backend e banco de dados.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300"><strong>Docker Compose:</strong> Um único <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">docker-compose up</code> sobe todos os serviços (frontend na porta 3000, backend na porta 5001, banco de dados). Ideal para ambientes de produção e para compartilhar o setup com equipes. <strong>Scripts npm:</strong> O <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">npm run dev</code> inicia frontend e backend simultaneamente com hot reload. Ideal para desenvolvimento e debug.</p>
+      </div>
+
+      <div class="bg-primary/10 border border-primary/40 rounded-xl p-6 mb-6">
+        <h3 class="text-primary font-semibold mb-3">Dica Prática</h3>
+        <p class="text-neutral-300">Configure as variáveis de ambiente antes de fazer deploy. As mais importantes são: as API keys dos LLMs que você pretende usar (DEEPSEEK_API_KEY, GEMINI_API_KEY, etc.), a porta do backend (FLASK_PORT) e o diretório de dados (DATA_DIR). Nunca comite API keys no repositório - use arquivo .env.</p>
+      </div>
+
+      <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-blue-400 font-semibold mb-3">Dados e Pesquisa</h3>
+        <p class="text-neutral-300">Os requisitos mínimos de hardware são: 4GB RAM (8GB recomendado), 2 cores de CPU e 5GB de espaço em disco. O maior consumo de recursos vem das chamadas paralelas aos LLMs durante a simulação. Se rodar LLMs locais (como Ollama), considere 16GB+ RAM e GPU dedicada.</p>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="bg-dark-800 border border-dark-700 rounded-xl p-8 mb-8">
+      <h2 class="text-2xl font-bold text-neutral-100 mb-6">Resumo do Módulo</h2>
+      <div class="space-y-3 mb-6">
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Conheço a stack: Vue.js 3 + Vite + D3.js (frontend) e Python + Flask (backend)</span>
+        </label>
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Entendo o motor OASIS e suas 23 ações sociais</span>
+        </label>
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Sei como a camada de IA monta prompts e processa respostas</span>
+        </label>
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Conheço as opções de deploy: Docker Compose vs scripts npm</span>
+        </label>
+      </div>
+
+      <div class="flex justify-between items-center pt-4 border-t border-dark-700">
+        <a href="modulo-1-4.html" class="flex items-center gap-2 text-neutral-400 hover:text-emerald-400 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+          Anterior: O Ecossistema Completo
+        </a>
+        <a href="modulo-1-6.html" class="flex items-center gap-2 text-neutral-400 hover:text-emerald-400 transition-colors">
+          Próximo: LLMs como Agentes
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => {
+        if (exp !== explanation) exp.classList.remove('active');
+      });
+      explanation.classList.toggle('active');
+    }
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

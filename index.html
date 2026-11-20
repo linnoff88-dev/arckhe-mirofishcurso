@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecossistema MiroFish | INEMA.CLUB</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Light mode overrides */
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* Light mode - ALL trail accent colors (landing page uses all) */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-emerald-400 { color: #059669; }
+
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37, 99, 235, 0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-blue-400 { color: #2563eb; }
+
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124, 58, 237, 0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124, 58, 237, 0.25); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-purple-400 { color: #7c3aed; }
+
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217, 119, 6, 0.12); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217, 119, 6, 0.25); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-amber-400 { color: #92400e; }
+
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .bg-teal-500\/20 { background-color: rgba(13, 148, 136, 0.12); }
+    html:not(.dark) .bg-teal-500\/10 { background-color: rgba(13, 148, 136, 0.08); }
+    html:not(.dark) .border-teal-500\/30 { border-color: rgba(13, 148, 136, 0.25); }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13, 148, 136, 0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-teal-400 { color: #0d9488; }
+
+    /* Light mode - remove gradients + special colors */
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
+    /* Light mode - nav */
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Nav -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <div class="flex items-center gap-3 flex-shrink-0">
+          <a href="index.html" class="text-yellow-400 font-bold text-lg hover:text-yellow-300 transition-colors">
+            <span class="text-xl">&#x1F41F;</span> Ecossistema MiroFish
+          </a>
+          <span class="text-neutral-500 hidden sm:inline">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium hidden sm:inline transition-colors">INEMA.CLUB</a>
+        </div>
+
+        <!-- Trail links -->
+        <div class="hidden md:flex items-center gap-1">
+          <a href="curso/trilha1/index.html" class="text-emerald-400 hover:bg-emerald-500/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors">T1 Fundamentos</a>
+          <a href="curso/trilha2/index.html" class="text-blue-400 hover:bg-blue-500/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors">T2 Aplica&ccedil;&otilde;es</a>
+          <a href="curso/trilha3/index.html" class="text-purple-400 hover:bg-purple-500/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors">T3 Avan&ccedil;ado</a>
+          <a href="curso/trilha4/index.html" class="text-amber-400 hover:bg-amber-500/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors">T4 Exemplos</a>
+          <a href="curso/trilha5/index.html" class="text-teal-400 hover:bg-teal-500/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors">T5 Instala&ccedil;&atilde;o</a>
+        </div>
+
+        <!-- Mobile trail links + theme toggle -->
+        <div class="flex items-center gap-2">
+          <div class="flex md:hidden items-center gap-1">
+            <a href="curso/trilha1/index.html" class="text-emerald-400 hover:bg-emerald-500/10 px-2 py-1 rounded text-xs font-medium transition-colors">T1</a>
+            <a href="curso/trilha2/index.html" class="text-blue-400 hover:bg-blue-500/10 px-2 py-1 rounded text-xs font-medium transition-colors">T2</a>
+            <a href="curso/trilha3/index.html" class="text-purple-400 hover:bg-purple-500/10 px-2 py-1 rounded text-xs font-medium transition-colors">T3</a>
+            <a href="curso/trilha4/index.html" class="text-amber-400 hover:bg-amber-500/10 px-2 py-1 rounded text-xs font-medium transition-colors">T4</a>
+            <a href="curso/trilha5/index.html" class="text-teal-400 hover:bg-teal-500/10 px-2 py-1 rounded text-xs font-medium transition-colors">T5</a>
+          </div>
+
+          <!-- Theme toggle -->
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors" title="Alternar tema">
+            <!-- Sun icon (shown in dark mode) -->
+            <svg id="icon-sun" class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+            </svg>
+            <!-- Moon icon (shown in light mode) -->
+            <svg id="icon-moon" class="w-5 h-5 text-blue-400 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="pt-24 pb-16 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-yellow-500/5 via-transparent to-emerald-500/5"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="mb-8">
+        <span class="text-6xl sm:text-7xl">&#x1F41F;</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-100 mb-6">
+        Ecossistema <span class="text-yellow-400">MiroFish</span>
+      </h1>
+      <p class="text-lg sm:text-xl text-neutral-300 max-w-3xl mx-auto mb-10 leading-relaxed">
+        Domine o motor de predi&ccedil;&atilde;o multiagente que constr&oacute;i mundos digitais paralelos para simular cen&aacute;rios futuros
+      </p>
+
+      <!-- Stats -->
+      <div class="flex flex-wrap justify-center gap-4 sm:gap-8 mb-12">
+        <div class="bg-dark-800 border border-dark-700 rounded-xl px-5 py-3">
+          <span class="text-2xl font-bold text-primary">5</span>
+          <span class="text-neutral-400 text-sm ml-2">Trilhas</span>
+        </div>
+        <div class="bg-dark-800 border border-dark-700 rounded-xl px-5 py-3">
+          <span class="text-2xl font-bold text-primary">30</span>
+          <span class="text-neutral-400 text-sm ml-2">M&oacute;dulos</span>
+        </div>
+        <div class="bg-dark-800 border border-dark-700 rounded-xl px-5 py-3">
+          <span class="text-2xl font-bold text-primary">~180</span>
+          <span class="text-neutral-400 text-sm ml-2">T&oacute;picos</span>
+        </div>
+        <div class="bg-dark-800 border border-dark-700 rounded-xl px-5 py-3">
+          <span class="text-2xl font-bold text-primary">&#x221E;</span>
+          <span class="text-neutral-400 text-sm ml-2">Todos os N&iacute;veis</span>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <p class="text-neutral-400 max-w-2xl mx-auto text-base leading-relaxed">
+        O pipeline <span class="text-emerald-400 font-semibold">MindSpider</span> &rarr;
+        <span class="text-blue-400 font-semibold">BettaFish</span> &rarr;
+        <span class="text-yellow-400 font-semibold">MiroFish</span>:
+        da coleta de dados at&eacute; a simula&ccedil;&atilde;o de cen&aacute;rios futuros com milhares de agentes de IA
+      </p>
+    </div>
+  </section>
+
+  <!-- Trail Cards -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-bold text-neutral-100 text-center mb-12">Trilhas do Curso</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- T1 Fundamentos -->
+        <a href="curso/trilha1/index.html" class="group block bg-dark-800 border border-dark-700 rounded-2xl p-6 hover:border-emerald-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/5">
+          <div class="flex items-start justify-start gap-3 mb-4">
+            <span class="bg-emerald-500/20 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full">T1</span>
+            <h3 class="text-lg font-bold text-neutral-100 group-hover:text-emerald-400 transition-colors">
+              &#x1F9E0; Fundamentos
+            </h3>
+          </div>
+          <p class="text-neutral-400 text-sm leading-relaxed mb-4">
+            Entenda os conceitos por tr&aacute;s da simula&ccedil;&atilde;o multiagente, GraphRAG, intelig&ecirc;ncia de enxame e como o ecossistema MiroFish funciona.
+          </p>
+          <div class="flex items-center justify-start gap-4 text-xs text-neutral-500">
+            <span class="bg-emerald-500/10 text-emerald-400 px-2 py-1 rounded">6 m&oacute;dulos</span>
+            <span>~36 t&oacute;picos</span>
+          </div>
+        </a>
+
+        <!-- T2 Aplicações Empresariais -->
+        <a href="curso/trilha2/index.html" class="group block bg-dark-800 border border-dark-700 rounded-2xl p-6 hover:border-blue-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/5">
+          <div class="flex items-start justify-start gap-3 mb-4">
+            <span class="bg-blue-500/20 text-blue-400 text-xs font-bold px-3 py-1 rounded-full">T2</span>
+            <h3 class="text-lg font-bold text-neutral-100 group-hover:text-blue-400 transition-colors">
+              &#x1F3E2; Aplica&ccedil;&otilde;es Empresariais
+            </h3>
+          </div>
+          <p class="text-neutral-400 text-sm leading-relaxed mb-4">
+            Como usar o MiroFish em marketing, compliance, gest&atilde;o de risco, comunica&ccedil;&atilde;o corporativa, RH e estrat&eacute;gia.
+          </p>
+          <div class="flex items-center justify-start gap-4 text-xs text-neutral-500">
+            <span class="bg-blue-500/10 text-blue-400 px-2 py-1 rounded">6 m&oacute;dulos</span>
+            <span>~36 t&oacute;picos</span>
+          </div>
+        </a>
+
+        <!-- T3 Avançado -->
+        <a href="curso/trilha3/index.html" class="group block bg-dark-800 border border-dark-700 rounded-2xl p-6 hover:border-purple-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/5">
+          <div class="flex items-start justify-start gap-3 mb-4">
+            <span class="bg-purple-500/20 text-purple-400 text-xs font-bold px-3 py-1 rounded-full">T3</span>
+            <h3 class="text-lg font-bold text-neutral-100 group-hover:text-purple-400 transition-colors">
+              &#x2699;&#xFE0F; Avan&ccedil;ado
+            </h3>
+          </div>
+          <p class="text-neutral-400 text-sm leading-relaxed mb-4">
+            Mergulhe no OASIS, mem&oacute;ria de agentes, personaliza&ccedil;&atilde;o de personas, ReportAgent, ForumEngine e customiza&ccedil;&atilde;o de forks.
+          </p>
+          <div class="flex items-center justify-start gap-4 text-xs text-neutral-500">
+            <span class="bg-purple-500/10 text-purple-400 px-2 py-1 rounded">6 m&oacute;dulos</span>
+            <span>~36 t&oacute;picos</span>
+          </div>
+        </a>
+
+        <!-- T4 Exemplos Práticos -->
+        <a href="curso/trilha4/index.html" class="group block bg-dark-800 border border-dark-700 rounded-2xl p-6 hover:border-amber-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/5">
+          <div class="flex items-start justify-start gap-3 mb-4">
+            <span class="bg-amber-500/20 text-amber-400 text-xs font-bold px-3 py-1 rounded-full">T4</span>
+            <h3 class="text-lg font-bold text-neutral-100 group-hover:text-amber-400 transition-colors">
+              &#x1F3AF; Exemplos Pr&aacute;ticos
+            </h3>
+          </div>
+          <p class="text-neutral-400 text-sm leading-relaxed mb-4">
+            Cen&aacute;rios reais: simule crises, teste lan&ccedil;amentos, preveja rea&ccedil;&otilde;es a pol&iacute;ticas, analise sentimento e crie mundos digitais.
+          </p>
+          <div class="flex items-center justify-start gap-4 text-xs text-neutral-500">
+            <span class="bg-amber-500/10 text-amber-400 px-2 py-1 rounded">6 m&oacute;dulos</span>
+            <span>~36 t&oacute;picos</span>
+          </div>
+        </a>
+
+        <!-- T5 Instalação Passo a Passo -->
+        <a href="curso/trilha5/index.html" class="group block bg-dark-800 border border-dark-700 rounded-2xl p-6 hover:border-teal-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-teal-500/5">
+          <div class="flex items-start justify-start gap-3 mb-4">
+            <span class="bg-teal-500/20 text-teal-400 text-xs font-bold px-3 py-1 rounded-full">T5</span>
+            <h3 class="text-lg font-bold text-neutral-100 group-hover:text-teal-400 transition-colors">
+              &#x1F527; Instala&ccedil;&atilde;o Passo a Passo
+            </h3>
+          </div>
+          <p class="text-neutral-400 text-sm leading-relaxed mb-4">
+            Configure o ambiente, clone o fork inematds, escolha seu LLM, suba com Docker e rode sua primeira simula&ccedil;&atilde;o.
+          </p>
+          <div class="flex items-center justify-start gap-4 text-xs text-neutral-500">
+            <span class="bg-teal-500/10 text-teal-400 px-2 py-1 rounded">6 m&oacute;dulos</span>
+            <span>~36 t&oacute;picos</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Pipeline Section -->
+  <section class="py-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-bold text-neutral-100 text-center mb-12">O Pipeline</h2>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+        <!-- MindSpider -->
+        <div class="bg-dark-800 border border-emerald-500/30 rounded-2xl p-6 text-center flex-1 w-full sm:w-auto">
+          <div class="text-3xl mb-3">&#x1F577;&#xFE0F;</div>
+          <h3 class="text-emerald-400 font-bold text-lg mb-1">MindSpider</h3>
+          <p class="text-neutral-400 text-sm">Coleta</p>
+          <p class="text-neutral-500 text-xs mt-2">Crawler inteligente que coleta dados de m&uacute;ltiplas fontes</p>
+        </div>
+
+        <!-- Arrow -->
+        <div class="text-neutral-500 text-2xl sm:text-3xl rotate-90 sm:rotate-0">&#x2192;</div>
+
+        <!-- BettaFish -->
+        <div class="bg-dark-800 border border-blue-500/30 rounded-2xl p-6 text-center flex-1 w-full sm:w-auto">
+          <div class="text-3xl mb-3">&#x1F41F;</div>
+          <h3 class="text-blue-400 font-bold text-lg mb-1">BettaFish</h3>
+          <p class="text-neutral-400 text-sm">An&aacute;lise</p>
+          <p class="text-neutral-500 text-xs mt-2">Processa e estrutura dados com GraphRAG</p>
+        </div>
+
+        <!-- Arrow -->
+        <div class="text-neutral-500 text-2xl sm:text-3xl rotate-90 sm:rotate-0">&#x2192;</div>
+
+        <!-- MiroFish -->
+        <div class="bg-dark-800 border border-primary/40 rounded-2xl p-6 text-center flex-1 w-full sm:w-auto">
+          <div class="text-3xl mb-3">&#x1F30A;</div>
+          <h3 class="text-yellow-400 font-bold text-lg mb-1">MiroFish</h3>
+          <p class="text-neutral-400 text-sm">Predi&ccedil;&atilde;o</p>
+          <p class="text-neutral-500 text-xs mt-2">Simula cen&aacute;rios futuros com milhares de agentes</p>
+        </div>
+      </div>
+
+      <!-- Fork info -->
+      <div class="mt-12 bg-dark-800 border border-dark-700 rounded-2xl p-6 text-center">
+        <p class="text-neutral-400 text-sm leading-relaxed">
+          O fork <span class="text-primary font-semibold">inematds</span> adiciona:
+          tradu&ccedil;&atilde;o English/PT-BR, KuzuDB local (sem Zep Cloud), suporte multi-LLM
+          (<span class="text-purple-400">Claude CLI</span>, <span class="text-emerald-400">OpenAI</span>, <span class="text-blue-400">Anthropic</span>)
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-700 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-neutral-500 text-sm">
+        &#x1F41F; Ecossistema MiroFish &mdash; 2026
+      </p>
+    </div>
+  </footer>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    (function() {
+      const toggle = document.getElementById('theme-toggle');
+      const iconSun = document.getElementById('icon-sun');
+      const iconMoon = document.getElementById('icon-moon');
+      const html = document.documentElement;
+
+      function applyTheme(dark) {
+        if (dark) {
+          html.classList.add('dark');
+          iconSun.classList.remove('hidden');
+          iconMoon.classList.add('hidden');
+        } else {
+          html.classList.remove('dark');
+          iconSun.classList.add('hidden');
+          iconMoon.classList.remove('hidden');
+        }
+      }
+
+      // Load saved preference or default to dark
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light') {
+        applyTheme(false);
+      } else {
+        applyTheme(true);
+      }
+
+      toggle.addEventListener('click', function() {
+        const isDark = html.classList.contains('dark');
+        applyTheme(!isDark);
+        localStorage.setItem('theme', isDark ? 'light' : 'dark');
+      });
+    })();
+  </script>
+</body>
+</html>

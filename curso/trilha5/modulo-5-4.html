@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5.4 Deploy com Docker | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .bg-teal-500\/20 { background-color: rgba(13, 148, 136, 0.12); }
+    html:not(.dark) .bg-teal-500\/10 { background-color: rgba(13, 148, 136, 0.08); }
+    html:not(.dark) .border-teal-500\/30 { border-color: rgba(13, 148, 136, 0.25); }
+    html:not(.dark) .hover\:bg-teal-500\/30:hover { background-color: rgba(13, 148, 136, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-teal-400 bg-teal-500/10"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <div class="bg-gradient-to-b from-teal-900/30 to-dark-900 border-b border-dark-700">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="px-2 py-0.5 bg-teal-500/20 text-teal-400 text-xs font-semibold rounded">MÓDULO 5.4</span>
+      </div>
+      <h1 class="text-2xl font-bold text-neutral-100 mb-2">🐳 Deploy com Docker</h1>
+      <p class="text-neutral-400">Docker Compose, Dockerfile multi-stage, volumes, Traefik com SSL e monitoramento.</p>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-4">
+
+    <!-- Topic 1 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+        <span class="text-neutral-100 font-semibold">📝 docker-compose.yml - Estrutura e serviços</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> O docker-compose.yml orquestra dois serviços: app (MiroFish) e traefik (proxy reverso com SSL). Define volumes, redes, portas e variáveis de ambiente.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Entender o compose file permite customizar portas, domínios, volumes e adicionar serviços extras (como monitoramento).</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># docker-compose.yml (simplificado)</p>
+          <p class="text-neutral-300">version: '3.8'</p>
+          <p class="text-neutral-300">services:</p>
+          <p class="text-neutral-300">  app:</p>
+          <p class="text-neutral-300">    build: .</p>
+          <p class="text-neutral-300">    ports:</p>
+          <p class="text-neutral-300">      - "5001:5001"</p>
+          <p class="text-neutral-300">    volumes:</p>
+          <p class="text-neutral-300">      - ./backend/uploads:/app/backend/uploads</p>
+          <p class="text-neutral-300">      - ./backend/data:/app/backend/data</p>
+          <p class="text-neutral-300">      - ~/.claude:/root/.claude</p>
+          <p class="text-neutral-300">      - ~/.local/share/claude:/root/.local/share/claude</p>
+          <p class="text-neutral-300">    env_file: .env</p>
+          <p class="text-neutral-300">    restart: unless-stopped</p>
+          <p class="text-neutral-300 mt-2">  traefik:</p>
+          <p class="text-neutral-300">    image: traefik:v3.0</p>
+          <p class="text-neutral-300">    ports:</p>
+          <p class="text-neutral-300">      - "80:80"</p>
+          <p class="text-neutral-300">      - "443:443"</p>
+          <p class="text-neutral-300">    volumes:</p>
+          <p class="text-neutral-300">      - /var/run/docker.sock:/var/run/docker.sock</p>
+          <p class="text-neutral-300">      - ./acme.json:/acme.json</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+        <span class="text-neutral-100 font-semibold">🏗️ Dockerfile - Build multi-stage</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> O Dockerfile usa build multi-stage para criar uma imagem otimizada. Stage 1 (node:20-bookworm-slim) compila o frontend. Stage 2 (python:3.11-slim) configura o backend.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Multi-stage build mantém a imagem final menor (só inclui artefatos necessários). Entender as stages ajuda a debugar falhas de build.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Dockerfile (estrutura)</p>
+          <p class="text-neutral-300"># Stage 1: Build do Frontend</p>
+          <p class="text-neutral-300">FROM node:20-bookworm-slim AS frontend-build</p>
+          <p class="text-neutral-300">WORKDIR /app/frontend</p>
+          <p class="text-neutral-300">COPY frontend/package*.json ./</p>
+          <p class="text-neutral-300">RUN npm ci</p>
+          <p class="text-neutral-300">COPY frontend/ ./</p>
+          <p class="text-neutral-300">RUN npm run build</p>
+          <p class="text-neutral-300 mt-2"># Stage 2: Runtime (Python + Node)</p>
+          <p class="text-neutral-300">FROM python:3.11-slim</p>
+          <p class="text-neutral-300">RUN apt-get update && apt-get install -y nodejs npm</p>
+          <p class="text-neutral-300">WORKDIR /app</p>
+          <p class="text-neutral-300">COPY --from=frontend-build /app/frontend/dist ./frontend/dist</p>
+          <p class="text-neutral-300">COPY backend/ ./backend/</p>
+          <p class="text-neutral-300">RUN pip install uv && cd backend && uv sync</p>
+          <p class="text-neutral-300">EXPOSE 5001</p>
+          <p class="text-neutral-300">CMD ["python", "backend/app.py"]</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+        <span class="text-neutral-100 font-semibold">📂 Volumes Montados - Persistência e CLI</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Volumes Docker mapeiam diretórios do host para dentro do container, garantindo persistência de dados e acesso a credenciais do Claude CLI.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Sem os volumes corretos: dados são perdidos ao recriar containers, Claude CLI não autentica, e uploads desaparecem.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Volumes essenciais no docker-compose.yml</p>
+          <p class="text-neutral-300">volumes:</p>
+          <p class="text-neutral-300">  # Documentos enviados pelo usuário</p>
+          <p class="text-neutral-300">  - ./backend/uploads:/app/backend/uploads</p>
+          <p class="text-neutral-300 mt-1">  # Banco KuzuDB e dados de simulação</p>
+          <p class="text-neutral-300">  - ./backend/data:/app/backend/data</p>
+          <p class="text-neutral-300 mt-1">  # Credenciais do Claude CLI (ESSENCIAL!)</p>
+          <p class="text-neutral-300">  - ~/.claude:/root/.claude</p>
+          <p class="text-neutral-300">  - ~/.local/share/claude:/root/.local/share/claude</p>
+          <p class="text-neutral-300 mt-1">  # Credenciais do Codex CLI (se usar)</p>
+          <p class="text-neutral-300">  - ~/.codex:/root/.codex</p>
+          <p class="text-teal-400 mt-3 mb-2"># Sem esses volumes, o Claude CLI dentro do Docker</p>
+          <p class="text-neutral-300"># não consegue autenticar e retorna erro de login.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+        <span class="text-neutral-100 font-semibold">🌐 Traefik e SSL - Let's Encrypt automático</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Traefik é um proxy reverso moderno que obtém certificados SSL automaticamente via Let's Encrypt. Configurado via labels no docker-compose.yml.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> HTTPS é obrigatório para produção. Traefik automatiza tudo: emissão, renovação de certificados e roteamento de tráfego.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Labels Traefik no serviço app</p>
+          <p class="text-neutral-300">labels:</p>
+          <p class="text-neutral-300">  - "traefik.enable=true"</p>
+          <p class="text-neutral-300">  - "traefik.http.routers.mirofish.rule=Host(`synth.scty.org`)"</p>
+          <p class="text-neutral-300">  - "traefik.http.routers.mirofish.tls=true"</p>
+          <p class="text-neutral-300">  - "traefik.http.routers.mirofish.tls.certresolver=letsencrypt"</p>
+          <p class="text-neutral-300">  - "traefik.http.services.mirofish.loadbalancer.server.port=5001"</p>
+          <p class="text-teal-400 mt-3 mb-2"># Configuração do Traefik</p>
+          <p class="text-neutral-300">command:</p>
+          <p class="text-neutral-300">  - "--providers.docker=true"</p>
+          <p class="text-neutral-300">  - "--entrypoints.websecure.address=:443"</p>
+          <p class="text-neutral-300">  - "--certificatesresolvers.letsencrypt.acme.email=seu@email.com"</p>
+          <p class="text-neutral-300">  - "--certificatesresolvers.letsencrypt.acme.storage=/acme.json"</p>
+          <p class="text-neutral-300">  - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"</p>
+          <p class="text-teal-400 mt-3 mb-2"># Pré-requisito: criar acme.json</p>
+          <p class="text-neutral-300">touch acme.json && chmod 600 acme.json</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+        <span class="text-neutral-100 font-semibold">🚀 Subindo o Container</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> O comando docker compose up -d --build constrói a imagem Docker e sobe todos os serviços em background. O primeiro build leva 5-10 minutos.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Este é o comando que coloca o MiroFish em produção. Entender os flags evita problemas comuns de deploy.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Subir tudo (primeira vez - vai demorar)</p>
+          <p class="text-neutral-300">docker compose up -d --build</p>
+          <p class="text-teal-400 mt-3 mb-2"># Flags explicados:</p>
+          <p class="text-neutral-300">-d       → Detached (roda em background)</p>
+          <p class="text-neutral-300">--build  → Rebuild a imagem (necessário após mudanças)</p>
+          <p class="text-teal-400 mt-3 mb-2"># Comandos úteis após subir:</p>
+          <p class="text-neutral-300">docker compose ps          # Ver status dos serviços</p>
+          <p class="text-neutral-300">docker compose stop        # Parar sem destruir</p>
+          <p class="text-neutral-300">docker compose down        # Parar e remover containers</p>
+          <p class="text-neutral-300">docker compose restart app # Reiniciar só o app</p>
+          <p class="text-teal-400 mt-3 mb-2"># Verificar se está rodando:</p>
+          <p class="text-neutral-300">curl http://localhost:5001/health  # Deve retornar OK</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+        <span class="text-neutral-100 font-semibold">🔍 Logs e Monitoramento</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Docker Compose oferece ferramentas de log e monitoramento integradas. Use docker compose logs para ver saída dos containers em tempo real.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Logs são a ferramenta #1 de diagnóstico. Erros de API, falhas de memória e problemas de configuração aparecem aqui.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Ver logs em tempo real (todos os serviços)</p>
+          <p class="text-neutral-300">docker compose logs -f</p>
+          <p class="text-teal-400 mt-3 mb-2"># Ver logs só do app</p>
+          <p class="text-neutral-300">docker compose logs -f app</p>
+          <p class="text-teal-400 mt-3 mb-2"># Ver últimas 100 linhas</p>
+          <p class="text-neutral-300">docker compose logs --tail=100 app</p>
+          <p class="text-teal-400 mt-3 mb-2"># Verificar uso de recursos</p>
+          <p class="text-neutral-300">docker stats   # CPU, RAM, I/O em tempo real</p>
+          <p class="text-teal-400 mt-3 mb-2"># Entrar no container para debug</p>
+          <p class="text-neutral-300">docker compose exec app bash</p>
+          <p class="text-neutral-300">docker compose exec app python --version</p>
+          <p class="text-neutral-300">docker compose exec app claude --version</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mt-8 pt-6 border-t border-dark-700">
+      <a href="modulo-5-3.html" class="flex items-center gap-2 text-neutral-400 hover:text-teal-400 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        Anterior: Provedores LLM
+      </a>
+      <a href="modulo-5-5.html" class="flex items-center gap-2 text-neutral-400 hover:text-teal-400 transition-colors">
+        Próximo: Primeira Simulação
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const allExplanations = document.querySelectorAll('.topic-explanation.active');
+      allExplanations.forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 3.4: ReportAgent e o Padrão ReACT | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124, 58, 237, 0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124, 58, 237, 0.25); }
+    html:not(.dark) .hover\:bg-purple-500\/30:hover { background-color: rgba(124, 58, 237, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Module Header -->
+  <div class="bg-gradient-to-r from-purple-900/30 to-dark-900 border-b border-purple-500/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex items-center gap-3 mb-3">
+        <a href="index.html" class="text-purple-400 hover:text-purple-300 text-sm">← Trilha 3</a>
+        <span class="text-neutral-600">|</span>
+        <span class="bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded text-xs font-bold border border-purple-500/30">Módulo 3.4</span>
+      </div>
+      <h1 class="text-2xl font-bold text-neutral-100 flex items-center gap-3">📋 ReportAgent e o Padrão ReACT</h1>
+      <p class="text-neutral-400 mt-2">Reasoning + Acting em loop, ferramentas de análise e geração de relatórios estruturados</p>
+    </div>
+  </div>
+
+  <!-- Topics -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <div class="p-6 space-y-2">
+
+        <!-- Topic 1 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-neutral-300 text-left">🔄 O que é ReACT - Reasoning + Acting em loop</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">ReACT (Reasoning + Acting) é um paradigma de agentes LLM proposto por Yao et al. (2023) onde o modelo alterna entre raciocínio explícito e execução de ferramentas. Em cada iteração do loop: (1) Thought - o LLM raciocina sobre o que precisa fazer. (2) Action - escolhe uma ferramenta e seus parâmetros. (3) Observation - recebe o resultado da ferramenta. (4) Thought - raciocina sobre o resultado e decide se precisa de mais informação. O loop continua até o agente decidir que tem informação suficiente para gerar a resposta final, ou até atingir o limite máximo de iterações (tipicamente 5-10). Diferente de chain-of-thought puro, ReACT permite ao agente buscar ativamente informações em vez de apenas raciocinar sobre o que já está no prompt.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">ReACT é o paradigma fundamental do ReportAgent do BettaFish. Sem ele, o agente estaria limitado ao que está no context window. Com ReACT, ele busca dados, entrevista agentes, e analisa traces ativamente, produzindo relatórios baseados em evidência em vez de especulação.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Loop Thought → Action → Observation: ciclo de raciocínio-ação</li><li>Stopping criterion: "tenho informação suficiente" ou max_iterations</li><li>Tool selection: LLM decide qual ferramenta usar a cada iteração</li><li>Observation parsing: resultado da ferramenta é formatado e injetado no contexto</li><li>Diferença vs CoT: ReACT age no mundo, CoT apenas raciocina internamente</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 2 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-neutral-300 text-left">🛠️ As 3 Ferramentas - insight_forge, panorama_search, interview_agents</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">O ReportAgent dispõe de três ferramentas especializadas no loop ReACT: (1) insight_forge - analisa os dados brutos da simulação para identificar padrões estatísticos: clusters de opinião, tendências temporais, outliers, correlações entre ações de diferentes agentes. Recebe uma query analítica e retorna insights estruturados. (2) panorama_search - realiza busca ampla em todas as fontes: posts da simulação, dados externos crawlados, memórias de agentes, logs de ações. Combina full-text search com embedding search para máximo recall. (3) interview_agents - permite interrogar agentes individuais pós-simulação, re-instanciando-os com toda sua persona e memória para responder perguntas específicas.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Cada ferramenta serve uma dimensão analítica diferente: insight_forge encontra padrões quantitativos, panorama_search provê contexto qualitativo amplo, e interview_agents oferece explicação causal individual. O ReportAgent combina as três para produzir análise multi-dimensional.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>insight_forge: input=query analítica, output=patterns + statistics + anomalies</li><li>panorama_search: input=search query, output=ranked list of relevant documents</li><li>interview_agents: input=(agent_id, questions[]), output=agent responses with reasoning</li><li>Tool composition: o ReportAgent frequentemente usa as 3 em sequência</li><li>Typical pattern: panorama → insight → interview para drill-down progressivo</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 3 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-neutral-300 text-left">📊 Geração de Relatório - Outline JSON → seções Markdown</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">A geração de relatório segue um pipeline bifásico para garantir coerência em documentos longos: Fase 1 (Outline) - Após coletar dados via ReACT loop, o LLM gera um outline em JSON com a estrutura do relatório: {sections: [{title, key_points, data_references, subsections}]}. O outline é validado contra um schema e pode ser ajustado antes da Fase 2. Fase 2 (Expansion) - Cada seção do outline é expandida independentemente em Markdown completo, com dados, citações de agentes, tabelas e análise. Seções independentes podem ser geradas em paralelo. A montagem final concatena seções com transições geradas para coerência narrativa.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O pipeline bifásico é uma técnica reutilizável para qualquer geração de documentos longos com LLM. Evita o problema de "context drift" em documentos extensos e permite iteração rápida na estrutura sem reger todo o conteúdo.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Outline JSON: schema validável com hierarquia de seções e metadados</li><li>Parallel expansion: seções independentes geradas simultaneamente</li><li>Data references: cada ponto do outline aponta para dados específicos coletados</li><li>Transition generation: LLM gera parágrafos de transição entre seções</li><li>Template system: headers, footers e formatação consistentes via Jinja2</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 4 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-neutral-300 text-left">🔍 Análise de Traces - Identificação de pontos de virada e coalizões</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">Cada simulação gera traces: logs detalhados de todas as ações de todos os agentes com timestamps, contexto e reasoning. O insight_forge processa esses traces para identificar: (1) Turning points - rounds onde métricas agregadas (sentimento médio, volume de posts, diversidade de opinião) mudam abruptamente, detectados via change point detection com algoritmo PELT. (2) Coalizões - clusters de agentes que convergem em opinião e comportamento, identificados via community detection no grafo de interações. (3) Cascatas de influência - sequências de ações onde um post desencadeia reações em cadeia, reconstruídas como árvores de propagação a partir dos traces de reply/repost.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Traces brutos são incompreensíveis em escala. Uma simulação com 500 agentes e 50 rounds gera 25.000+ entradas de log. A análise automatizada transforma esse volume em insights acionáveis: "no round 23, a coalizão A se fragmentou após o post viral do Agent_127".</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Change point detection (PELT): identifica onde séries temporais mudam de regime</li><li>Community detection (Louvain): clustering de agentes no grafo de interações</li><li>Propagation trees: árvore de cascata original_post → replies → reposts</li><li>Influence score: métrica composta de reach × engagement × opinion_shift</li><li>Temporal correlation: eventos que co-ocorrem ou se precedem sistematicamente</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 5 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-neutral-300 text-left">💬 Entrevistas com Agentes - Interrogar agentes individuais sobre suas decisões</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">A ferramenta interview_agents permite ao ReportAgent "conversar" com agentes individuais pós-simulação. O processo: (1) O agente é re-instanciado com toda sua persona (Big Five, perspectiva, posicionamento) e memória completa (todas as memórias acumuladas até o final da simulação). (2) O ReportAgent faz perguntas dirigidas como "Por que você mudou de opinião sobre X entre o round 15 e 30?" ou "Qual post mais influenciou sua posição atual?". (3) O agente responde com seu chain-of-thought, referenciando memórias específicas. As respostas são formatadas como citações diretas no relatório final.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Entrevistas com agentes são a ponte entre análise quantitativa e compreensão qualitativa. Elas adicionam narrativa humana aos padrões estatísticos. Um relatório que diz "3 agentes mudaram de opinião" é informativo; um que inclui "Agent_042 disse: mudei de opinião depois de ler o post sobre os dados econômicos" é convincente.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Re-instanciação: persona + memória completa carregadas para responder</li><li>Directed questions: perguntas baseadas em anomalias detectadas pelo insight_forge</li><li>Memory reference: agente pode citar memórias específicas como justificativa</li><li>Post-hoc rationalization caveat: agente racionaliza, não reporta processo real</li><li>Quote formatting: respostas inseridas como blockquotes no Markdown final</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 6 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-neutral-300 text-left">📝 Estrutura do Relatório - Tendências, atores-chave, cenários prováveis</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">O relatório final segue uma estrutura padronizada de 6 seções: (1) Executive Summary - 3 parágrafos com os achados mais importantes, escrito por último para refletir todo o conteúdo. (2) Tendências Identificadas - padrões macro com dados quantitativos e gráficos textuais (sparklines ASCII). (3) Atores-Chave - top-10 agentes por influence score com perfil, trajetória de opinião e citações de entrevista. (4) Pontos de Virada - momentos críticos com timeline e análise causal. (5) Dinâmicas de Grupo - mapa de coalizões, conflitos inter-grupo e alianças inesperadas. (6) Cenários Prováveis - 3 cenários projetados (otimista, pessimista, mais provável) com probabilidades estimadas.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">A estrutura do relatório é o produto final visível ao tomador de decisão. Ela transforma dados complexos de simulação em narrativa clara e acionável. Entender cada seção permite customizar o template para diferentes audiências (executivos, pesquisadores, analistas).</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Executive Summary: escrito por último, reflete todo o conteúdo em 3 parágrafos</li><li>Sparklines ASCII: visualizações de tendência em texto puro (ex: ▁▂▃▅▇▇▅▃)</li><li>Influence score ranking: agentes ordenados por reach × engagement × opinion_shift</li><li>Causal timeline: sequência de eventos com setas de causalidade</li><li>Scenario modeling: 3 cenários com probabilidades e assumptions explícitas</li></ul></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mt-8">
+      <a href="modulo-3-3.html" class="text-purple-400 hover:text-purple-300 text-sm font-medium">← Personalização de Agentes</a>
+      <a href="modulo-3-5.html" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">Próximo: BettaFish Profundo →</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-700 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>🐟 Ecossistema MiroFish · Módulo 3.4</p>
+      <p class="mt-1">Projeto <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+
+</body>
+</html>

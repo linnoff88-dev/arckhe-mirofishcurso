@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2.1 Marketing e Inteligência de Mercado | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37, 99, 235, 0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37, 99, 235, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13, 148, 136, 0.08); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span>
+          </a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span>
+          </a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- Breadcrumb -->
+    <div class="flex items-center space-x-2 text-sm text-neutral-400 mb-6">
+      <a href="../../index.html" class="hover:text-blue-400 transition-colors">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-blue-400 transition-colors">Trilha 2</a>
+      <span>/</span>
+      <span class="text-blue-400">Módulo 2.1</span>
+    </div>
+
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-2xl p-8 mb-8 border border-blue-500/30">
+      <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm font-bold">MÓDULO 2.1</span>
+      <h1 class="text-2xl font-bold text-neutral-100 mt-4 mb-2">📢 Marketing e Inteligência de Mercado</h1>
+      <p class="text-neutral-300">Simule campanhas, preveja reações do mercado e maximize o ROI de marketing com o ecossistema MiroFish. Descubra como substituir pesquisas de $500K por simulações de $5K com resultados comparáveis.</p>
+    </div>
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🎯 Teste de Narrativas</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Simular recepção de campanhas antes do lançamento: como usar MiroFish para pré-testar mensagens de marketing em escala.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">O Teste de Narrativas com MiroFish funciona como um focus group de milhares de pessoas instantâneo. Você cria agentes com perfis demográficos, psicográficos e comportamentais que representam seu público-alvo, e então "publica" sua campanha no ambiente simulado. Os agentes reagem, comentam, compartilham ou rejeitam a mensagem, gerando dados preditivos sobre a recepção real. Diferente de focus groups tradicionais (8-12 pessoas, $15K-$25K, 4-6 semanas), MiroFish pode simular 10.000 agentes por $1K-$5K em horas.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">Segundo a Forrester Research, empresas que pré-testam campanhas têm 3.5x mais chance de atingir metas de ROI. O mercado de pesquisa de mercado global é de $84B (2025), mas empresas com IA agêntica reportam ROI de 171%, comprimindo ciclos de pesquisa de semanas para horas. Uma campanha média mal calibrada desperdiça $250K-$500K. Com MiroFish, o custo de validação cai para $1K-$10K.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-primary/40 mb-4">
+        <h3 class="text-primary font-bold mb-2">Dica Prática</h3>
+        <p class="text-neutral-300 text-sm">Comece com 3 variações de sua narrativa principal. Configure agentes com pelo menos 5 perfis demográficos distintos (idade, renda, região, interesses, estilo de vida). Execute a simulação por 48 horas simuladas e analise: (1) taxa de engajamento por perfil, (2) sentimento dominante, (3) pontos de fricção na mensagem. Use BettaFish para pontuar o sentimento e MindSpider para entender as motivações por trás das reações.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+        <div class="bg-dark-700 rounded-xl p-5 border border-emerald-500/30">
+          <h3 class="text-emerald-400 font-bold mb-2">Fazer</h3>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>+ Criar agentes diversos que representem seu público real</li>
+            <li>+ Testar pelo menos 3 variações de cada campanha</li>
+            <li>+ Comparar resultados simulados com dados históricos reais</li>
+            <li>+ Iterar rapidamente com base no feedback dos agentes</li>
+          </ul>
+        </div>
+        <div class="bg-dark-700 rounded-xl p-5 border border-red-500/30">
+          <h3 class="text-red-400 font-bold mb-2">Evitar</h3>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>- Usar perfis de agentes genéricos sem calibração</li>
+            <li>- Confiar 100% na simulação sem validação cruzada</li>
+            <li>- Ignorar outliers nas reações dos agentes</li>
+            <li>- Não documentar premissas e configurações usadas</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold text-neutral-100">📊 Análise Competitiva</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Prever reações do mercado a movimentos de concorrentes usando simulação de agentes sociais inteligentes.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">A Análise Competitiva com MiroFish transforma o war gaming tradicional em uma ciência de dados. Em vez de reunir executivos em uma sala para especular sobre movimentos de concorrentes, você simula o cenário completo: o lançamento do concorrente, a reação dos consumidores, a resposta da mídia, e o impacto no seu market share. Os agentes MiroFish interagem entre si, criando cascatas de opinião que refletem dinâmicas de mercado reais. Pode-se injetar o evento ("Concorrente X lança produto Y a preço Z") e observar como o sentimento evolui ao longo de dias simulados.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">O mercado global de inteligência competitiva vale $7.6B em 2025, crescendo 12.3% ao ano. Empresas que monitoram ativamente concorrentes têm 2.3x mais probabilidade de superar a média do mercado. No entanto, 67% das empresas relatam que suas análises competitivas são reativas, não preditivas. MiroFish inverte essa equação: em vez de reagir a movimentos já feitos, você os antecipa.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-primary/40 mb-4">
+        <h3 class="text-primary font-bold mb-2">Dica Prática</h3>
+        <p class="text-neutral-300 text-sm">Monte um "cenário competitivo" com 3 tipos de agentes: (1) consumidores fiéis à sua marca, (2) consumidores do concorrente, (3) indecisos. Injete o movimento competitivo e observe: quantos dos seus clientes fiéis mudam de opinião? Quanto tempo leva? Quais argumentos os convencem? Use esses dados para preparar uma contra-estratégia antes que o concorrente sequer aja.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-dark-700 rounded-xl p-5 border border-emerald-500/30">
+          <h3 class="text-emerald-400 font-bold mb-2">Fazer</h3>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>+ Simular múltiplos cenários competitivos simultaneamente</li>
+            <li>+ Incluir agentes que representem a mídia e analistas</li>
+            <li>+ Testar suas contra-estratégias na mesma simulação</li>
+            <li>+ Atualizar perfis de agentes com dados reais regularmente</li>
+          </ul>
+        </div>
+        <div class="bg-dark-700 rounded-xl p-5 border border-red-500/30">
+          <h3 class="text-red-400 font-bold mb-2">Evitar</h3>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>- Subestimar concorrentes na configuração dos agentes</li>
+            <li>- Simular apenas cenários favoráveis à sua empresa</li>
+            <li>- Ignorar concorrentes indiretos ou novos entrantes</li>
+            <li>- Usar dados desatualizados para calibrar perfis</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🔍 Identificação de Influenciadores</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Agentes que naturalmente ganham seguidores: como a dinâmica de rede do MiroFish revela perfis de influência orgânica.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">No ecossistema MiroFish, agentes interagem livremente formando redes sociais emergentes. Alguns agentes naturalmente acumulam mais conexões, engajamento e capacidade de influenciar opiniões. Esses "influenciadores emergentes" não são programados para isso -- eles surgem organicamente da simulação. Ao analisar quais perfis demográficos e comportamentais geram influência natural, as marcas podem identificar o tipo ideal de influenciador para suas campanhas, sem gastar milhões em testes reais.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">O mercado de marketing de influenciadores cresce 29% ao ano, atingindo $21.1B em 2025. Porém, 61% das marcas relatam dificuldade em encontrar influenciadores relevantes, e 38% já foram vítimas de fraude (seguidores falsos). MiroFish elimina ambos os problemas: a simulação identifica perfis de influência genuína baseada em métricas de rede como centralidade de grau, intermediação e autovetor.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-primary/40 mb-4">
+        <h3 class="text-primary font-bold mb-2">Dica Prática</h3>
+        <p class="text-neutral-300 text-sm">Execute uma simulação com 1.000+ agentes representando seu mercado-alvo. Após 7 dias simulados, exporte o grafo de rede social e identifique os 10 agentes com maior centralidade. Analise seus perfis: idade, interesses, tom de comunicação, valores. Esses são os perfis de influenciadores que você deve buscar no mundo real. Use MindSpider para entender por que eles se tornaram influentes.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-dark-700 rounded-xl p-5 border border-emerald-500/30">
+          <h3 class="text-emerald-400 font-bold mb-2">Fazer</h3>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>+ Analisar múltiplas métricas de rede (grau, intermediação, proximidade)</li>
+            <li>+ Comparar influenciadores de diferentes nichos simulados</li>
+            <li>+ Validar perfis simulados contra influenciadores reais</li>
+            <li>+ Testar mensagens de campanha através dos influenciadores simulados</li>
+          </ul>
+        </div>
+        <div class="bg-dark-700 rounded-xl p-5 border border-red-500/30">
+          <h3 class="text-red-400 font-bold mb-2">Evitar</h3>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>- Focar apenas em quantidade de conexões (popularidade)</li>
+            <li>- Ignorar micro-influenciadores que surgem na simulação</li>
+            <li>- Extrapolar diretamente sem considerar diferenças plataforma-a-plataforma</li>
+            <li>- Desconsiderar o contexto cultural dos agentes influenciadores</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold text-neutral-100">💰 ROI de Simulação vs Pesquisa Tradicional</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">$1K-$10K vs $50K-$500K: por que a simulação é a nova fronteira de eficiência em pesquisa de mercado.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">A economia da simulação é transformadora. Pesquisa de mercado tradicional envolve recrutamento de participantes, aluguel de espaço, moderadores profissionais, transcrição e análise. Cada ciclo custa $50K-$500K e leva 4-12 semanas. MiroFish comprime isso para $1K-$10K e horas. Mas não se trata de substituição total: a simulação é ideal para triagem rápida (testar 20 conceitos para selecionar os 3 melhores) e iteração (refinar mensagens em ciclos rápidos), enquanto a pesquisa tradicional valida os finalistas.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">Empresas que adotam IA agêntica reportam ROI médio de 171% (Deloitte, 2025). O custo por insight com MiroFish é 50-100x menor que métodos tradicionais. Tempo de entrega: horas vs semanas. Capacidade de iteração: ilimitada vs 2-3 rodadas por projeto. Uma empresa de FMCG que substituiu 70% de seus focus groups por simulação economizou $2.3M no primeiro ano.</p>
+      </div>
+
+      <!-- Timeline -->
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-3">Timeline: Pesquisa Tradicional vs MiroFish</h3>
+        <div class="space-y-3 text-sm">
+          <div class="flex items-start space-x-3">
+            <span class="w-2 h-2 rounded-full bg-red-400 mt-1.5 flex-shrink-0"></span>
+            <div><span class="text-neutral-400">Tradicional Semana 1-2:</span> <span class="text-neutral-300">Recrutamento e briefing</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="w-2 h-2 rounded-full bg-blue-400 mt-1.5 flex-shrink-0"></span>
+            <div><span class="text-neutral-400">MiroFish Hora 1:</span> <span class="text-neutral-300">Configuração de agentes e cenário</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="w-2 h-2 rounded-full bg-red-400 mt-1.5 flex-shrink-0"></span>
+            <div><span class="text-neutral-400">Tradicional Semana 3-6:</span> <span class="text-neutral-300">Execução de grupos e análise</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="w-2 h-2 rounded-full bg-blue-400 mt-1.5 flex-shrink-0"></span>
+            <div><span class="text-neutral-400">MiroFish Hora 2-8:</span> <span class="text-neutral-300">Simulação completa + resultados</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="w-2 h-2 rounded-full bg-red-400 mt-1.5 flex-shrink-0"></span>
+            <div><span class="text-neutral-400">Tradicional Semana 7-12:</span> <span class="text-neutral-300">Relatório final e apresentação</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="w-2 h-2 rounded-full bg-blue-400 mt-1.5 flex-shrink-0"></span>
+            <div><span class="text-neutral-400">MiroFish Hora 9-12:</span> <span class="text-neutral-300">Iteração e refinamento (3+ rodadas)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold text-neutral-100">📈 Monitoramento de Campanha</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">BettaFish + MindSpider em tempo real: monitorar sentimento e entender o "porquê" durante campanhas ativas.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">Quando uma campanha está no ar, o monitoramento em tempo real com BettaFish captura o sentimento segundo a segundo. BettaFish analisa menções, comentários e reações, atribuindo scores de sentimento (positivo, negativo, neutro) com granularidade temática. MindSpider complementa explicando as motivações: "Por que o sentimento caiu às 14h? Porque o anúncio foi interpretado como insensível pelo público feminino 25-34 anos." Essa combinação permite ajustes de campanha em tempo real.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">Campanhas monitoradas em tempo real com ajuste ativo apresentam performance 40% superior às estáticas (McKinsey, 2024). O tempo médio de resposta a uma crise de campanha cai de 48h para 2h com monitoramento automatizado. BettaFish pode processar 100.000+ menções/hora com acurácia de sentimento de 89%.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-primary/40">
+        <h3 class="text-primary font-bold mb-2">Dica Prática</h3>
+        <p class="text-neutral-300 text-sm">Configure alertas de sentimento no BettaFish para: (1) queda de mais de 10% no sentimento positivo em 1 hora, (2) surgimento de novo tema negativo não previsto, (3) viralização de reação negativa. Para cada alerta, tenha um playbook de resposta pré-aprovado. Use MindSpider para analisar as causas antes de reagir -- nem toda queda de sentimento requer ação.</p>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🎭 Segmentação por Persona</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Entender diferentes públicos via agentes: como a simulação revela nuances invisíveis em métodos tradicionais.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">Segmentação por Persona com MiroFish vai além das personas estáticas do marketing tradicional. Cada agente é uma persona viva que interage, evolui e reage de forma contextual. Ao executar uma simulação com múltiplos segmentos, você observa não apenas como cada segmento reage individualmente, mas como os segmentos influenciam uns aos outros. Por exemplo: como a reação negativa do segmento "mães millennials" impacta a percepção do segmento "pais Gen X"?</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">Segmentação precisa pode aumentar taxa de conversão em até 760% (Campaign Monitor). Empresas que personalizam experiências por segmento geram 40% mais receita (McKinsey). MiroFish permite testar 50+ segmentos simultaneamente vs 3-5 segmentos em pesquisa tradicional, a um custo 90% menor.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-primary/40">
+        <h3 class="text-primary font-bold mb-2">Dica Prática</h3>
+        <p class="text-neutral-300 text-sm">Crie "clusters de agentes" que representem suas top 10 personas de marketing. Para cada persona, defina: faixa etária, renda, interesses, valores, sensibilidades, canais preferidos. Execute a mesma campanha para todos os clusters e gere um mapa de calor de recepção. Identifique quais mensagens funcionam universalmente e quais precisam de customização por segmento.</p>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-blue-500/30">
+      <h3 class="text-xl font-bold text-neutral-100 mb-4">Resumo do Módulo 2.1</h3>
+      <div class="space-y-2 mb-6">
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Entendo como testar narrativas de campanha com agentes simulados</span>
+        </label>
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Sei configurar análises competitivas no MiroFish</span>
+        </label>
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Compreendo como identificar perfis de influenciadores via simulação</span>
+        </label>
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Conheço o ROI comparativo: simulação vs pesquisa tradicional</span>
+        </label>
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Sei usar BettaFish + MindSpider para monitorar campanhas ativas</span>
+        </label>
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Domino segmentação por persona com agentes simulados</span>
+        </label>
+      </div>
+      <div class="flex justify-between items-center pt-4 border-t border-dark-700">
+        <a href="index.html" class="text-neutral-400 hover:text-blue-400 transition-colors text-sm font-medium">← Voltar para Trilha 2</a>
+        <a href="modulo-2-2.html" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold transition-colors">Próximo: Compliance →</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-dark-700 mt-16 py-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>🐟 Ecossistema MiroFish — Curso desenvolvido por <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+
+</body>
+</html>

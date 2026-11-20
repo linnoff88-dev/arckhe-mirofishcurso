@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 1.2 - Inteligência de Enxame | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5, 150, 105, 0.18); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span>
+          </a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span>
+          </a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm text-neutral-400 mb-8">
+      <a href="../../index.html" class="hover:text-emerald-400 transition-colors">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-emerald-400 transition-colors">Trilha 1</a>
+      <span>/</span>
+      <span class="text-neutral-100">Módulo 1.2</span>
+    </nav>
+
+    <!-- Header -->
+    <div class="mb-12">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-sm font-semibold rounded-full mb-4">MÓDULO 1.2</span>
+      <h1 class="text-2xl font-bold text-neutral-100 mb-4">🧠 Inteligência de Enxame</h1>
+      <p class="text-neutral-300 text-lg">Descubra como comportamentos coletivos inteligentes emergem de agentes simples interagindo sem coordenação central - o princípio fundamental por trás do MiroFish.</p>
+    </div>
+
+    <!-- Topic 1 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🐜 O que é Swarm Intelligence</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Swarm Intelligence (Inteligência de Enxame) é um campo da inteligência artificial inspirado na natureza: formigas encontram o caminho mais curto para comida sem GPS, cardumes de peixes evitam predadores sem líder, e abelhas escolhem o melhor local para a colmeia por votação coletiva. Nenhum indivíduo entende o problema todo, mas juntos resolvem problemas complexos.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300">No MiroFish, a inteligência de enxame funciona assim: cada agente tem uma visão limitada do mundo (suas experiências, opiniões e memórias), mas quando centenas deles interagem publicando posts, comentando e reagindo, padrões globais emergem - como tendências de opinião, formação de grupos e pontos de virada social. Esses padrões são as "previsões" que o sistema gera.</p>
+      </div>
+
+      <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-blue-400 font-semibold mb-3">Dados e Pesquisa</h3>
+        <p class="text-neutral-300">Pesquisas em inteligência de enxame mostram que grupos de agentes autônomos frequentemente superam especialistas individuais em tarefas de previsão. O "Wisdom of Crowds" (Sabedoria das Multidões) de Surowiecki demonstrou que a média de muitas estimativas independentes tende a ser mais precisa que a opinião de qualquer especialista individual, especialmente quando há diversidade de perspectivas.</p>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🔄 Princípios Fundamentais</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Três pilares sustentam a inteligência de enxame no MiroFish: descentralização, interação local e auto-organização. Juntos, eles permitem que comportamentos coletivos complexos surjam de regras individuais simples.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300 mb-3"><strong>Descentralização:</strong> Não existe um agente "líder" que coordena os outros. Cada agente toma decisões independentes baseadas em sua personalidade e no que observa ao redor.</p>
+        <p class="text-neutral-300 mb-3"><strong>Interação Local:</strong> Agentes não veem toda a simulação - eles interagem apenas com posts e comentários que aparecem no seu "feed", similar a como humanos usam redes sociais.</p>
+        <p class="text-neutral-300"><strong>Auto-organização:</strong> Padrões globais (como polarização ou consenso) surgem naturalmente das interações locais, sem serem programados explicitamente.</p>
+      </div>
+
+      <div class="bg-primary/10 border border-primary/40 rounded-xl p-6 mb-6">
+        <h3 class="text-primary font-semibold mb-3">Dica Prática</h3>
+        <p class="text-neutral-300">Ao analisar resultados de simulação, procure os padrões emergentes em vez de focar em agentes individuais. A força do MiroFish está justamente nos fenômenos coletivos que nenhum agente sozinho poderia produzir.</p>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🎭 Agentes no MiroFish</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Cada agente no MiroFish é uma entidade autônoma com três componentes fundamentais: personalidade (quem ele é), memória (o que ele vivenciou) e regras comportamentais (como ele decide agir). Juntos, esses componentes fazem o agente se comportar de forma consistente e realista.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300"><strong>Personalidade:</strong> Gerada a partir do grafo de conhecimento, define opiniões, valores, tom de voz e nível de influência social. <strong>Memória:</strong> Registra interações passadas, permitindo que o agente evolua sua opinião ao longo da simulação. <strong>Regras Comportamentais:</strong> Determinam com que frequência o agente posta, comenta, curtie ou compartilha, e quão susceptível ele é à influência de outros.</p>
+      </div>
+
+      <!-- Timeline -->
+      <div class="space-y-4 mb-6">
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
+          </div>
+          <div class="pb-6">
+            <h4 class="text-emerald-400 font-semibold">Criação da Persona</h4>
+            <p class="text-neutral-300 text-sm mt-1">O grafo de conhecimento fornece contexto para gerar uma personalidade única via LLM, incluindo opiniões, background e estilo de comunicação.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
+          </div>
+          <div class="pb-6">
+            <h4 class="text-emerald-400 font-semibold">Inicialização da Memória</h4>
+            <p class="text-neutral-300 text-sm mt-1">O agente recebe memórias iniciais baseadas no contexto da simulação, como opiniões prévias sobre o tema.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
+          </div>
+          <div class="pb-6">
+            <h4 class="text-emerald-400 font-semibold">Ação na Simulação</h4>
+            <p class="text-neutral-300 text-sm mt-1">A cada turno, o agente observa seu feed, decide agir (postar, comentar, curtir) e atualiza sua memória com a interação.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+          </div>
+          <div>
+            <h4 class="text-emerald-400 font-semibold">Evolução de Opinião</h4>
+            <p class="text-neutral-300 text-sm mt-1">Com o acúmulo de interações, o agente pode mudar de opinião, se polarizar ou formar alianças com outros agentes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold text-neutral-100">📈 Fenômenos Emergentes</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Os fenômenos emergentes são os resultados mais valiosos da simulação. Eles revelam dinâmicas sociais que pesquisas tradicionais não conseguem capturar, porque só aparecem quando muitos agentes interagem ao longo do tempo.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300"><strong>Polarização:</strong> Agentes com opiniões moderadas tendem a se radicalizar ao interagir com grupos de opinião forte. <strong>Efeito Manada:</strong> Quando um grupo atinge massa crítica, outros agentes começam a seguir a maioria. <strong>Cascata Informacional:</strong> Uma informação (verdadeira ou falsa) se espalha exponencialmente quando compartilhada por agentes influentes. <strong>Coalizões:</strong> Agentes com valores similares formam grupos coesos naturalmente.</p>
+      </div>
+
+      <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-blue-400 font-semibold mb-3">Dados e Pesquisa</h3>
+        <p class="text-neutral-300">Estudos de simulação social mostram que a polarização de opinião emerge em grupos a partir de 30-50 agentes com diversidade adequada. Abaixo desse número, os padrões são instáveis. Acima de 200 agentes, os fenômenos se estabilizam e se tornam reproduzíveis entre simulações diferentes.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-5">
+          <h4 class="text-emerald-400 font-semibold mb-3">Sinais Valiosos</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Ponto de virada: quando a maioria muda de opinião</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Formação de subgrupos com opiniões distintas</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Velocidade de propagação de uma ideia</li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 border border-red-500/30 rounded-xl p-5">
+          <h4 class="text-red-400 font-semibold mb-3">Ruído a Ignorar</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Opinião de um único agente isolado</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Flutuações nos primeiros turnos da simulação</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Padrões que não se repetem entre simulações</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold text-neutral-100">⚖️ Comparação com Métodos Tradicionais</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">A simulação multiagente não substitui métodos tradicionais de pesquisa - ela os complementa. Entender os pontos fortes e fracos de cada abordagem é essencial para escolher a ferramenta certa para cada situação.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300 mb-3"><strong>vs Pesquisas de Opinião:</strong> Pesquisas capturam o que as pessoas dizem que fariam. A simulação captura o que provavelmente fariam quando influenciadas pelo grupo.</p>
+        <p class="text-neutral-300 mb-3"><strong>vs Opinião de Especialistas:</strong> Especialistas têm viés de expertise. A simulação diversifica perspectivas automaticamente.</p>
+        <p class="text-neutral-300"><strong>vs Dados Históricos:</strong> Dados históricos refletem o passado. A simulação pode modelar cenários inéditos.</p>
+      </div>
+
+      <div class="bg-primary/10 border border-primary/40 rounded-xl p-6 mb-6">
+        <h3 class="text-primary font-semibold mb-3">Dica Prática</h3>
+        <p class="text-neutral-300">Use a simulação multiagente quando precisar entender dinâmicas de grupo que pesquisas tradicionais não capturam - como reações em cadeia, polarização e formação de consenso. Para dados factuais simples (ex: "quantos clientes temos?"), métodos tradicionais são mais eficientes.</p>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🌊 Escala e Diversidade</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">A relação entre número de agentes e qualidade dos resultados segue uma curva interessante: há um "ponto mágico" onde mais agentes param de melhorar significativamente os resultados, mas a diversidade das personas sempre importa mais que a quantidade bruta.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300">A lei dos grandes números se aplica: com poucos agentes (menos de 20), os resultados são altamente variáveis e pouco confiáveis. Entre 50 e 200 agentes, os fenômenos emergentes se estabilizam. Acima de 500, o ganho marginal diminui enquanto o custo computacional (e de tokens de LLM) aumenta linearmente. A chave é maximizar a diversidade das personas, não apenas a quantidade.</p>
+      </div>
+
+      <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-blue-400 font-semibold mb-3">Dados e Pesquisa</h3>
+        <p class="text-neutral-300">O custo por simulação é proporcional ao número de agentes x número de turnos x custo do LLM por chamada. Uma simulação com 100 agentes e 10 turnos usando DeepSeek pode custar menos de US$ 5, enquanto a mesma simulação com GPT-4 pode custar US$ 50+. O fork inematds permite usar modelos mais baratos sem sacrificar qualidade significativamente.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-5">
+          <h4 class="text-emerald-400 font-semibold mb-3">Fazer</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Priorizar diversidade de personas sobre quantidade</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Começar com 50-100 agentes para teste rápido</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Escalar para 200+ apenas para resultados finais</li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 border border-red-500/30 rounded-xl p-5">
+          <h4 class="text-red-400 font-semibold mb-3">Evitar</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Rodar simulações com menos de 20 agentes</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Usar 500+ agentes em testes exploratórios</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Ignorar o custo de LLM ao escalar</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="bg-dark-800 border border-dark-700 rounded-xl p-8 mb-8">
+      <h2 class="text-2xl font-bold text-neutral-100 mb-6">Resumo do Módulo</h2>
+      <div class="space-y-3 mb-6">
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Entendo os princípios de inteligência de enxame: descentralização, interação local, auto-organização</span>
+        </label>
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Conheço a anatomia de um agente: personalidade, memória e regras comportamentais</span>
+        </label>
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Sei identificar fenômenos emergentes: polarização, efeito manada, coalizões</span>
+        </label>
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Entendo quando usar simulação multiagente vs métodos tradicionais</span>
+        </label>
+      </div>
+
+      <div class="flex justify-between items-center pt-4 border-t border-dark-700">
+        <a href="modulo-1-1.html" class="flex items-center gap-2 text-neutral-400 hover:text-emerald-400 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+          Anterior: O que é o MiroFish
+        </a>
+        <a href="modulo-1-3.html" class="flex items-center gap-2 text-neutral-400 hover:text-emerald-400 transition-colors">
+          Próximo: GraphRAG e Grafos
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => {
+        if (exp !== explanation) exp.classList.remove('active');
+      });
+      explanation.classList.toggle('active');
+    }
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

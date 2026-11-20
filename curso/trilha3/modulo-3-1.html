@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 3.1: OASIS - O Motor de Simulação Social | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124, 58, 237, 0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124, 58, 237, 0.25); }
+    html:not(.dark) .hover\:bg-purple-500\/30:hover { background-color: rgba(124, 58, 237, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Module Header -->
+  <div class="bg-gradient-to-r from-purple-900/30 to-dark-900 border-b border-purple-500/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex items-center gap-3 mb-3">
+        <a href="index.html" class="text-purple-400 hover:text-purple-300 text-sm">← Trilha 3</a>
+        <span class="text-neutral-600">|</span>
+        <span class="bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded text-xs font-bold border border-purple-500/30">Módulo 3.1</span>
+      </div>
+      <h1 class="text-2xl font-bold text-neutral-100 flex items-center gap-3">⚡ OASIS: O Motor de Simulação Social</h1>
+      <p class="text-neutral-400 mt-2">Framework CAMEL-AI para simulação social em escala com até 1 milhão de agentes</p>
+    </div>
+  </div>
+
+  <!-- Topics -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <div class="p-6 space-y-2">
+
+        <!-- Topic 1 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-neutral-300 text-left">🎯 O que é OASIS - Framework CAMEL-AI para simulação social em escala</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">OASIS (Open Agent Social Interaction Simulations) é um framework open-source para simulação de dinâmicas sociais usando agentes LLM. Desenvolvido como parte do ecossistema CAMEL-AI e documentado no paper arXiv:2411.11581, o OASIS cria ambientes de mídia social completos onde agentes autônomos publicam, comentam, seguem e interagem. Diferente de simulações baseadas em agentes tradicionais (ABM) que usam regras fixas, o OASIS delega decisões ao LLM, permitindo comportamentos emergentes mais ricos e imprevisíveis. A arquitetura separa o Environment Server (que mantém o estado do mundo) dos Agent Workers (que processam decisões individuais), permitindo escalonamento horizontal.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O OASIS é a fundação sobre a qual o MiroFish constrói suas simulações sociais. Compreender sua arquitetura é essencial para customizar simulações, diagnosticar comportamentos inesperados e interpretar resultados corretamente. Ele representa o estado da arte em simulação social com LLMs.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>CAMEL-AI: plataforma multi-agente que provê primitivas de comunicação, memória e tool use</li><li>Environment Server: serviço centralizado que mantém estado global (posts, relações, feeds)</li><li>Agent Workers: processos distribuídos que executam decisões de cada agente via LLM</li><li>Action Loop: ciclo observe → reason → act executado a cada round da simulação</li><li>Paper arXiv:2411.11581: fundamentação teórica com validação experimental</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 2 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-neutral-300 text-left">📊 Escala de 1 Milhão - Como simular até 1M de agentes simultaneamente</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">O OASIS alcança a escala de 1 milhão de agentes através de três inovações arquiteturais: (1) Paralelização massiva de chamadas LLM usando async workers com rate limiting inteligente que respeita limites de API sem desperdiçar throughput. (2) Batching de decisões onde múltiplos agentes similares têm suas decisões processadas em uma única chamada LLM com few-shot examples. (3) Group subscriptions que reduzem a complexidade de comunicação de O(n²) para O(n·k), onde k é o número de grupos, usando broadcast dentro de clusters de agentes com interesses similares em vez de comunicação ponto-a-ponto.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Fenômenos emergentes dependem de escala. Polarização, cascatas de informação e formação de bolhas só se manifestam de forma realista com populações grandes. Entender como o OASIS escala permite projetar simulações que capturam esses fenômenos macro sem explodir custos de API.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Async workers com semáforo: até N chamadas LLM simultâneas configuráveis</li><li>Decision batching: 10-50 agentes decidem por batch, reduzindo chamadas em 10-50x</li><li>Group subscriptions: agentes agrupados por cluster de interesses</li><li>Fidelity vs scale trade-off: agentes em batch perdem nuance individual</li><li>Cost estimation: ~$0.01 por agente por round com GPT-4o-mini</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 3 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-neutral-300 text-left">🔄 As 23 Ações Sociais - Seguir, comentar, repostar, curtir, silenciar, buscar, publicar</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">O OASIS define um espaço de ações discretas que modela o comportamento em redes sociais reais. As 23 ações cobrem quatro categorias: Conteúdo (create_post, reply, repost, quote_post, edit_post, delete_post), Social (follow, unfollow, mute, unmute, block, unblock), Engajamento (like, unlike, bookmark, unbookmark, search, view_trend, view_profile), e Passivas (scroll_feed, refresh, do_nothing, log_off). Cada agente escolhe uma ação por round com base em seu feed atual, persona e memória. O LLM recebe a lista de ações válidas e retorna sua escolha com parâmetros.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O espaço de ações é a interface entre cognição e comportamento. Cada ação tem consequências diferentes na propagação de informação: um repost amplifica exponencialmente, um mute cria bolha de filtro, um do_nothing modela inatividade real. Configurar quais ações estão disponíveis muda drasticamente a dinâmica da simulação.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Action space: conjunto de ações válidas, configurável por simulação</li><li>Action parameters: cada ação aceita parâmetros específicos (ex: reply precisa de post_id e content)</li><li>Action probability: influenciada por personality traits e contexto do feed</li><li>do_nothing: ação essencial que modela inatividade e previne hiperatividade artificial</li><li>Action validation: Environment Server valida se a ação é legal no estado atual</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 4 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-neutral-300 text-left">📱 Twitter + Reddit Simultâneo - Dual-platform simulation</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">O OASIS implementa dois ambientes de plataforma social: TwitterEnv (baseado em timeline cronológica com modelo follow/follower, retweets e trending topics) e RedditEnv (baseado em subreddits com upvote/downvote, threading aninhado e múltiplos rankings: hot, new, top, controversial). Os agentes podem participar de ambas plataformas simultaneamente, com comportamento adaptado ao contexto de cada uma - por exemplo, posts mais longos e argumentativos no Reddit, mais curtos e virais no Twitter.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Fenômenos de migração cross-platform são cruciais em desinformação e formação de opinião. Conteúdo nasce em uma plataforma e viraliza em outra. A simulação dual-platform captura essa dinâmica que simulações single-platform ignoram completamente.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>TwitterEnv: follow graph, retweet cascade, chronological + algorithmic feed</li><li>RedditEnv: subreddit hierarchy, vote-based ranking, threaded discussion</li><li>Cross-platform agents: mesma persona, comportamento adaptado ao contexto</li><li>Content migration: mecanismo de cross-posting entre plataformas</li><li>Platform-specific metrics: impressions (Twitter) vs karma (Reddit)</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 5 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-neutral-300 text-left">🧠 Sistemas de Recomendação - Baseado em interesses e hot score</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">Cada plataforma simulada implementa seu próprio sistema de recomendação que determina o feed de cada agente. O TwitterEnv combina timeline cronológica dos seguidores com um ranking baseado em cosine similarity entre os interesses declarados do agente e o conteúdo dos posts. O RedditEnv implementa o hot score do Reddit real: score = log10(max(|ups - downs|, 1)) + sign(ups - downs) × epoch_seconds / 45000. Ambos incluem um feed_size_limit que controla quantos posts o agente "vê" por round, simulando atenção limitada.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O sistema de recomendação é o fator mais determinante na formação de bolhas de informação. Alterar a fórmula de ranking (ex: aumentar peso de recência vs engagement) muda completamente quais fenômenos emergem. É a variável experimental mais poderosa do OASIS.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Hot score formula: combina magnitude de votos com decaimento temporal</li><li>Interest matching: cosine similarity entre embedding do perfil e do post</li><li>Feed size limit: atenção simulada, tipicamente 10-50 posts por round</li><li>Echo chamber effect: recomendações reforçam preferências existentes</li><li>Configuração experimental: variar algoritmo para medir impacto em polarização</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 6 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-neutral-300 text-left">📈 Fenômenos Validados - Disseminação, polarização, efeito manada</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">O paper arXiv:2411.11581 apresenta validação experimental rigorosa mostrando que o OASIS reproduz três fenômenos sociológicos fundamentais: (1) Cascatas de informação que seguem distribuição power-law, compatível com dados reais do Twitter - poucos posts viralizam, a maioria morre rapidamente. (2) Polarização de grupo onde opiniões intra-grupo convergem e inter-grupo divergem, medida via distância de opinião em escala Likert. (3) Efeito manada (herd behavior) onde agentes LLM demonstram conformidade social mais intensa que humanos reais - um achado crucial que sugere que LLMs treinados com RLHF têm viés inerente de conformidade.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">A validação empírica é o que diferencia simulação de especulação. Saber que cascatas power-law são reproduzidas com fidelidade dá confiança nesse aspecto. Saber que herd behavior é amplificado alerta para cautela na interpretação de consensos simulados. Esta calibração é essencial para uso responsável.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Power-law distribution: P(cascade_size = k) ~ k^(-α), com α ≈ 2.1 compatível com dados reais</li><li>Group polarization index: divergência inter-grupo / convergência intra-grupo</li><li>Herd behavior ratio: taxa de conformidade dos agentes vs baseline humano</li><li>RLHF conformity bias: treinamento com feedback humano favorece respostas "socialmente aceitáveis"</li><li>Limitação reconhecida: agentes LLM não modelam irracionalidade emocional humana</li></ul></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mt-8">
+      <a href="index.html" class="text-purple-400 hover:text-purple-300 text-sm font-medium">← Voltar à Trilha 3</a>
+      <a href="modulo-3-2.html" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">Próximo: Memória de Agentes →</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-700 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>🐟 Ecossistema MiroFish · Módulo 3.1</p>
+      <p class="mt-1">Projeto <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+
+</body>
+</html>

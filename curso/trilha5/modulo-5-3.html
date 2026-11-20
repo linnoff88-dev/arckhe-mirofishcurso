@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5.3 Configurando Provedores LLM | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .bg-teal-500\/20 { background-color: rgba(13, 148, 136, 0.12); }
+    html:not(.dark) .bg-teal-500\/10 { background-color: rgba(13, 148, 136, 0.08); }
+    html:not(.dark) .border-teal-500\/30 { border-color: rgba(13, 148, 136, 0.25); }
+    html:not(.dark) .hover\:bg-teal-500\/30:hover { background-color: rgba(13, 148, 136, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-teal-400 bg-teal-500/10"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <div class="bg-gradient-to-b from-teal-900/30 to-dark-900 border-b border-dark-700">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="px-2 py-0.5 bg-teal-500/20 text-teal-400 text-xs font-semibold rounded">MÓDULO 5.3</span>
+      </div>
+      <h1 class="text-2xl font-bold text-neutral-100 mb-2">🔌 Configurando Provedores LLM</h1>
+      <p class="text-neutral-400">Escolha entre Claude CLI, Codex CLI, OpenAI ou Anthropic. Compare custos e configure o .env.</p>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-4">
+
+    <!-- Topic 1 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+        <span class="text-neutral-100 font-semibold">🤖 Opção A: Claude CLI - Sem custo de API</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Claude CLI permite usar o Claude diretamente via linha de comando, aproveitando sua assinatura Pro/Team existente. Zero custo extra de API.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> É a forma mais barata de começar. Ideal para aprendizado, testes e simulações pequenas. Limitação: rate limits da assinatura.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># 1. Instalar Claude CLI</p>
+          <p class="text-neutral-300">npm install -g @anthropic-ai/claude-code</p>
+          <p class="text-teal-400 mt-3 mb-2"># 2. Autenticar (primeira vez)</p>
+          <p class="text-neutral-300">claude  # Abre navegador para login</p>
+          <p class="text-teal-400 mt-3 mb-2"># 3. Configurar .env</p>
+          <p class="text-neutral-300">LLM_PROVIDER=claude-cli</p>
+          <p class="text-neutral-300">LLM_API_KEY=          # deixar vazio</p>
+          <p class="text-neutral-300">LLM_MODEL_NAME=       # usa padrão (Sonnet)</p>
+          <p class="text-teal-400 mt-3 mb-2"># 4. Testar</p>
+          <p class="text-neutral-300">echo "Olá, tudo bem?" | claude --print</p>
+          <p class="text-neutral-300"># Deve retornar uma resposta do Claude</p>
+        </div>
+        <p class="text-neutral-400 text-xs">Custo: $0 extra (incluído na assinatura Claude Pro ~$20/mês). Perfeito para começar.</p>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+        <span class="text-neutral-100 font-semibold">📟 Opção B: Codex CLI - Alternativa sem custo</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Codex CLI é outra opção de CLI que usa assinatura existente do serviço Codex. Funciona de forma similar ao Claude CLI no contexto do MiroFish.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Ter um segundo provedor sem custo é útil como backup quando Claude CLI atinge rate limits ou está indisponível.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># 1. Instalar Codex CLI</p>
+          <p class="text-neutral-300">npm install -g @openai/codex</p>
+          <p class="text-teal-400 mt-3 mb-2"># 2. Autenticar</p>
+          <p class="text-neutral-300">codex  # Seguir instruções de login</p>
+          <p class="text-teal-400 mt-3 mb-2"># 3. Configurar .env</p>
+          <p class="text-neutral-300">LLM_PROVIDER=codex-cli</p>
+          <p class="text-neutral-300">LLM_API_KEY=          # deixar vazio</p>
+          <p class="text-neutral-300">LLM_MODEL_NAME=       # usa padrão</p>
+        </div>
+        <p class="text-neutral-400 text-xs">Mesma interface que Claude CLI. O fork abstrai a diferença entre os dois no backend.</p>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+        <span class="text-neutral-100 font-semibold">🧠 Opção C: OpenAI API - GPT-4o/mini</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> A API da OpenAI oferece GPT-4o (potente) e GPT-4o-mini (barato). É a opção com melhor compatibilidade com OASIS, que espera formato OpenAI-compatible.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> OASIS (motor de simulação) foi projetado para APIs OpenAI-compatible. Usar OpenAI direta garante máxima compatibilidade.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Configurar .env para OpenAI</p>
+          <p class="text-neutral-300">LLM_PROVIDER=openai</p>
+          <p class="text-neutral-300">LLM_API_KEY=sk-proj-abc123def456...</p>
+          <p class="text-neutral-300">LLM_MODEL_NAME=gpt-4o-mini</p>
+          <p class="text-neutral-300">LLM_BASE_URL=https://api.openai.com/v1</p>
+          <p class="text-teal-400 mt-3 mb-2"># Modelos disponíveis (custo por 1M tokens):</p>
+          <p class="text-neutral-300">gpt-4o-mini    → $0.15 input / $0.60 output  (recomendado)</p>
+          <p class="text-neutral-300">gpt-4o         → $2.50 input / $10.00 output  (melhor qualidade)</p>
+          <p class="text-neutral-300">gpt-4-turbo    → $10.00 input / $30.00 output (mais caro)</p>
+          <p class="text-teal-400 mt-3 mb-2"># Obter API key:</p>
+          <p class="text-neutral-300"># https://platform.openai.com/api-keys</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+        <span class="text-neutral-100 font-semibold">🟣 Opção D: Anthropic API - Claude direto</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> A API direta da Anthropic dá acesso ao Claude Sonnet e Opus com controle fino de parâmetros (temperature, max_tokens, system prompts).</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Para simulações que exigem raciocínio de alta qualidade, Claude Opus via API é a melhor opção (mas também a mais cara).</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Configurar .env para Anthropic</p>
+          <p class="text-neutral-300">LLM_PROVIDER=anthropic</p>
+          <p class="text-neutral-300">LLM_API_KEY=sk-ant-api03-abc123...</p>
+          <p class="text-neutral-300">LLM_MODEL_NAME=claude-sonnet-4-20250514</p>
+          <p class="text-neutral-300">LLM_BASE_URL=https://api.anthropic.com</p>
+          <p class="text-teal-400 mt-3 mb-2"># Modelos disponíveis (custo por 1M tokens):</p>
+          <p class="text-neutral-300">claude-sonnet-4  → $3.00 input / $15.00 output (recomendado)</p>
+          <p class="text-neutral-300">claude-opus-4    → $15.00 input / $75.00 output (máx qualidade)</p>
+          <p class="text-neutral-300">claude-haiku     → $0.25 input / $1.25 output  (mais barato)</p>
+          <p class="text-teal-400 mt-3 mb-2"># Obter API key:</p>
+          <p class="text-neutral-300"># https://console.anthropic.com/settings/keys</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+        <span class="text-neutral-100 font-semibold">⚡ LLM de Boost - Simulações em massa</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> LLM_BOOST é um segundo provedor LLM usado especificamente para as rodadas de simulação OASIS. Permite usar um modelo barato nas simulações e um caro na análise.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Em uma simulação com 100 agentes e 30 rodadas, são 3.000 chamadas LLM. Usar GPT-4o-mini no boost e Claude Sonnet na análise otimiza custo drasticamente.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Configuração dual-LLM no .env</p>
+          <p class="text-neutral-300 mt-1"># LLM Principal (análise, relatório, grafo)</p>
+          <p class="text-neutral-300">LLM_PROVIDER=anthropic</p>
+          <p class="text-neutral-300">LLM_API_KEY=sk-ant-api03-...</p>
+          <p class="text-neutral-300">LLM_MODEL_NAME=claude-sonnet-4-20250514</p>
+          <p class="text-neutral-300 mt-2"># LLM de Boost (simulação OASIS em massa)</p>
+          <p class="text-neutral-300">LLM_BOOST_PROVIDER=openai</p>
+          <p class="text-neutral-300">LLM_BOOST_API_KEY=sk-proj-...</p>
+          <p class="text-neutral-300">LLM_BOOST_MODEL_NAME=gpt-4o-mini</p>
+          <p class="text-teal-400 mt-3 mb-2"># Economia estimada:</p>
+          <p class="text-neutral-300"># Sem boost: 3000 chamadas × Claude Sonnet = ~$45</p>
+          <p class="text-neutral-300"># Com boost: 3000 chamadas × GPT-4o-mini  = ~$2</p>
+          <p class="text-neutral-300">#            + 10 chamadas × Claude Sonnet = ~$0.15</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+        <span class="text-neutral-100 font-semibold">💰 Comparação de Custos</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Tabela comparativa de custos por simulação típica (20 agentes, 20 rodadas) para cada provedor. O custo varia dramaticamente dependendo da escolha.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Sem planejamento de custos, uma única simulação pode custar de $0 a $10.000+. A escolha correta economiza ordens de magnitude.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Custo estimado por simulação (20 agentes, 20 rodadas)</p>
+          <p class="text-neutral-300 mt-1">┌─────────────────┬──────────┬────────────┐</p>
+          <p class="text-neutral-300">│ Provedor         │ Custo    │ Qualidade  │</p>
+          <p class="text-neutral-300">├─────────────────┼──────────┼────────────┤</p>
+          <p class="text-neutral-300">│ Claude CLI       │ $0       │ ★★★★☆     │</p>
+          <p class="text-neutral-300">│ Codex CLI        │ $0       │ ★★★☆☆     │</p>
+          <p class="text-neutral-300">│ GPT-4o-mini      │ $1-5     │ ★★★☆☆     │</p>
+          <p class="text-neutral-300">│ GPT-4o           │ $10-50   │ ★★★★☆     │</p>
+          <p class="text-neutral-300">│ Claude Sonnet    │ $15-60   │ ★★★★★     │</p>
+          <p class="text-neutral-300">│ Claude Opus      │ $50-200  │ ★★★★★     │</p>
+          <p class="text-neutral-300">└─────────────────┴──────────┴────────────┘</p>
+          <p class="text-teal-400 mt-3 mb-2"># Recomendação:</p>
+          <p class="text-neutral-300">Testes:     Claude CLI ($0)</p>
+          <p class="text-neutral-300">Produção:   GPT-4o-mini + Claude Sonnet (boost)</p>
+          <p class="text-neutral-300">Premium:    Claude Opus (simulações críticas)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mt-8 pt-6 border-t border-dark-700">
+      <a href="modulo-5-2.html" class="flex items-center gap-2 text-neutral-400 hover:text-teal-400 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        Anterior: Clonando o Fork
+      </a>
+      <a href="modulo-5-4.html" class="flex items-center gap-2 text-neutral-400 hover:text-teal-400 transition-colors">
+        Próximo: Deploy com Docker
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const allExplanations = document.querySelectorAll('.topic-explanation.active');
+      allExplanations.forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

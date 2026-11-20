@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 1.3 - GraphRAG e Grafos de Conhecimento | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5, 150, 105, 0.18); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span>
+          </a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span>
+          </a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm text-neutral-400 mb-8">
+      <a href="../../index.html" class="hover:text-emerald-400 transition-colors">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-emerald-400 transition-colors">Trilha 1</a>
+      <span>/</span>
+      <span class="text-neutral-100">Módulo 1.3</span>
+    </nav>
+
+    <!-- Header -->
+    <div class="mb-12">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-sm font-semibold rounded-full mb-4">MÓDULO 1.3</span>
+      <h1 class="text-2xl font-bold text-neutral-100 mb-4">📊 GraphRAG e Grafos de Conhecimento</h1>
+      <p class="text-neutral-300 text-lg">Entenda como o MiroFish transforma documentos em grafos de conhecimento navegáveis que alimentam a memória e a personalidade de cada agente.</p>
+    </div>
+
+    <!-- Topic 1 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold text-neutral-100">📚 RAG Tradicional vs GraphRAG</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">RAG (Retrieval-Augmented Generation) é a técnica de enriquecer prompts de LLMs com informações recuperadas de uma base de dados. O RAG tradicional divide documentos em chunks e busca os mais similares por embedding vetorial. O GraphRAG vai além: extrai entidades e relações, construindo um grafo navegável que preserva a estrutura do conhecimento.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300">No RAG tradicional, se você busca "CEO da empresa X", pode receber um chunk que menciona o CEO mas não conecta com a empresa. No GraphRAG, a relação "João [é CEO de] Empresa X" está explícita no grafo. Isso permite respostas que navegam relações complexas: "Quem são os parceiros da empresa que João lidera?" - algo impossível com busca vetorial pura.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-5">
+          <h4 class="text-emerald-400 font-semibold mb-3">GraphRAG - Pontos Fortes</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Preserva relações entre entidades</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Navega caminhos complexos de conexão</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Contexto mais rico e estruturado</li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 border border-red-500/30 rounded-xl p-5">
+          <h4 class="text-red-400 font-semibold mb-3">RAG Tradicional - Limitações</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Perde relações entre chunks separados</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Busca por similaridade nem sempre é relevância</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Não entende conexões entre conceitos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🕸️ Grafos de Conhecimento</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Um grafo de conhecimento é uma estrutura de dados composta por nós (entidades) e arestas (relações) que representam conhecimento de forma navegável. No MiroFish, o grafo é a espinha dorsal que conecta pessoas, organizações, eventos, opiniões e conceitos.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300">Cada fato é armazenado como uma tripla: Sujeito → Predicado → Objeto. Por exemplo: "Elon Musk [fundou] Tesla", "Tesla [compete_com] BYD", "BYD [é_popular_em] China". Navegando essas relações, o sistema pode inferir que opiniões sobre Elon Musk podem afetar percepções sobre Tesla e, por extensão, sobre o mercado de veículos elétricos na China.</p>
+      </div>
+
+      <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-blue-400 font-semibold mb-3">Dados e Pesquisa</h3>
+        <p class="text-neutral-300">Um grafo de conhecimento típico para uma simulação do MiroFish contém entre 500 e 5.000 nós (entidades) e 2.000 a 20.000 arestas (relações). A extração é feita por LLMs que processam os documentos de entrada, identificando automaticamente entidades nomeadas e as relações entre elas com precisão superior a 85%.</p>
+      </div>
+
+      <div class="bg-primary/10 border border-primary/40 rounded-xl p-6 mb-6">
+        <h3 class="text-primary font-semibold mb-3">Dica Prática</h3>
+        <p class="text-neutral-300">Ao preparar documentos para o GraphRAG, prefira textos que mencionem relações explícitas entre entidades (reportagens, artigos de análise) em vez de textos opinativos sem referências concretas. Quanto mais relações o LLM puder extrair, mais rico será o grafo.</p>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🔍 Busca Híbrida</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">O MiroFish combina três métodos de busca para maximizar a qualidade do contexto fornecido aos agentes: busca semântica (por significado), BM25 (por palavras-chave) e travessia de grafo (por relações estruturais).</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300 mb-3"><strong>Busca Semântica:</strong> Converte a consulta e os documentos em vetores e encontra os mais próximos no espaço vetorial. Boa para encontrar conteúdo com significado similar, mesmo com palavras diferentes.</p>
+        <p class="text-neutral-300 mb-3"><strong>BM25:</strong> Algoritmo clássico de busca por palavras-chave ponderadas pela frequência e raridade. Excelente para encontrar menções específicas de termos técnicos ou nomes próprios.</p>
+        <p class="text-neutral-300"><strong>Travessia de Grafo:</strong> Partindo de uma entidade, navega as relações do grafo para encontrar entidades conectadas. Captura contexto que os outros dois métodos perdem.</p>
+      </div>
+
+      <!-- Timeline -->
+      <div class="space-y-4 mb-6">
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
+          </div>
+          <div class="pb-6">
+            <h4 class="text-emerald-400 font-semibold">Consulta Recebida</h4>
+            <p class="text-neutral-300 text-sm mt-1">O agente precisa de contexto sobre um tópico. A consulta é enviada aos três mecanismos de busca simultaneamente.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
+          </div>
+          <div class="pb-6">
+            <h4 class="text-emerald-400 font-semibold">Busca Paralela</h4>
+            <p class="text-neutral-300 text-sm mt-1">Semântica, BM25 e travessia de grafo executam em paralelo, cada uma retornando seus top resultados.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
+          </div>
+          <div class="pb-6">
+            <h4 class="text-emerald-400 font-semibold">Fusão e Reranking</h4>
+            <p class="text-neutral-300 text-sm mt-1">Os resultados são combinados, deduplicados e reordenados por relevância usando um modelo de reranking.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+          </div>
+          <div>
+            <h4 class="text-emerald-400 font-semibold">Contexto Entregue</h4>
+            <p class="text-neutral-300 text-sm mt-1">O contexto final, rico e diversificado, é injetado no prompt do agente para sua próxima ação.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🏗️ Zep Cloud vs KuzuDB</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Uma das decisões arquiteturais mais importantes do MiroFish é onde armazenar o grafo de conhecimento. O projeto original usa o Zep Cloud (serviço pago na nuvem), enquanto o fork inematds optou pelo KuzuDB, um banco de grafos embarcado que roda localmente.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300"><strong>Zep Cloud:</strong> Serviço gerenciado que oferece GraphRAG como serviço, com APIs prontas e escalabilidade automática. Custo mensal, dados trafegam pela internet, depende de disponibilidade do serviço. <strong>KuzuDB:</strong> Banco de grafos embarcado em C++, roda como uma biblioteca dentro da aplicação. Zero custo, dados ficam locais, funciona offline. Tradeoff: exige mais configuração e não escala horizontalmente.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-5">
+          <h4 class="text-emerald-400 font-semibold mb-3">KuzuDB (Fork)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Gratuito e open-source</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Dados 100% locais e privados</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Funciona offline</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Baixa latência (sem rede)</li>
+          </ul>
+        </div>
+        <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-5">
+          <h4 class="text-blue-400 font-semibold mb-3">Zep Cloud (Original)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">+</span> Setup simplificado (SaaS)</li>
+            <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">+</span> Escalabilidade automática</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Custo mensal recorrente</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Dados trafegam pela internet</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🧩 Como o MiroFish Usa GraphRAG</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">O GraphRAG é a primeira etapa do pipeline do MiroFish. Documentos de entrada são processados por um LLM que extrai entidades e relações, constrói o grafo de conhecimento e depois usa esse grafo para gerar personas diversas e contextualizar os agentes durante a simulação.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300">O fluxo completo: (1) Documentos são ingeridos (artigos, posts, relatórios); (2) Um LLM extrai entidades (pessoas, empresas, eventos) e relações (trabalha_em, compete_com, apoiou); (3) Essas triplas são armazenadas no grafo; (4) O grafo é consultado para gerar personas diversas com opiniões embasadas; (5) Durante a simulação, agentes consultam o grafo para recuperar contexto relevante antes de cada ação.</p>
+      </div>
+
+      <div class="bg-primary/10 border border-primary/40 rounded-xl p-6 mb-6">
+        <h3 class="text-primary font-semibold mb-3">Dica Prática</h3>
+        <p class="text-neutral-300">A qualidade do grafo de conhecimento determina diretamente a qualidade da simulação. Invista em documentos de entrada diversificados: artigos de diferentes perspectivas, posts de diferentes demografias e análises de diferentes fontes. Um grafo enviesado gera personas enviesadas.</p>
+      </div>
+
+      <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-blue-400 font-semibold mb-3">Dados e Pesquisa</h3>
+        <p class="text-neutral-300">O processo de extração de entidades e relações consome entre 2.000 e 10.000 tokens por documento de entrada, dependendo do comprimento e complexidade. Para uma simulação típica com 20-30 documentos, o custo de GraphRAG building fica entre US$ 0,50 e US$ 3 usando modelos como DeepSeek ou Qwen.</p>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold text-neutral-100">💡 Graphiti e Temporalidade</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Graphiti é a camada que adiciona a dimensão temporal ao grafo de conhecimento. Fatos não são estáticos - opiniões mudam, empresas se transformam, contextos evoluem. O Graphiti registra quando cada fato foi aprendido e como resolver conflitos quando informações novas contradizem antigas.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300">Cada aresta no grafo tem um timestamp e um nível de confiança. Se em janeiro o grafo diz "João [apoia] Candidato A" e em março um novo documento diz "João [apoia] Candidato B", o Graphiti não simplesmente sobrescreve - ele mantém ambos os fatos com seus timestamps e marca o mais recente como ativo. Isso permite que agentes tenham memória de como opiniões evoluíram ao longo do tempo.</p>
+      </div>
+
+      <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-blue-400 font-semibold mb-3">Dados e Pesquisa</h3>
+        <p class="text-neutral-300">A resolução de conflitos temporais é especialmente importante em simulações de longo prazo ou quando os dados de entrada cobrem períodos extensos. Sem temporalidade, o grafo pode conter informações contraditórias que geram agentes com opiniões incoerentes. O Graphiti resolve esse problema automaticamente usando heurísticas de recência e confiança.</p>
+      </div>
+
+      <div class="bg-primary/10 border border-primary/40 rounded-xl p-6 mb-6">
+        <h3 class="text-primary font-semibold mb-3">Dica Prática</h3>
+        <p class="text-neutral-300">Ao preparar dados para uma simulação, inclua timestamps nos documentos quando possível. Isso permite que o Graphiti ordene corretamente a evolução dos fatos e gere agentes com uma linha temporal coerente de opiniões e conhecimentos.</p>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="bg-dark-800 border border-dark-700 rounded-xl p-8 mb-8">
+      <h2 class="text-2xl font-bold text-neutral-100 mb-6">Resumo do Módulo</h2>
+      <div class="space-y-3 mb-6">
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Entendo a diferença entre RAG tradicional e GraphRAG</span>
+        </label>
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Sei como grafos de conhecimento armazenam entidades e relações</span>
+        </label>
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Conheço os três métodos da busca híbrida: semântica, BM25 e travessia</span>
+        </label>
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Entendo as diferenças entre Zep Cloud e KuzuDB e por que o fork usa local</span>
+        </label>
+      </div>
+
+      <div class="flex justify-between items-center pt-4 border-t border-dark-700">
+        <a href="modulo-1-2.html" class="flex items-center gap-2 text-neutral-400 hover:text-emerald-400 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+          Anterior: Inteligência de Enxame
+        </a>
+        <a href="modulo-1-4.html" class="flex items-center gap-2 text-neutral-400 hover:text-emerald-400 transition-colors">
+          Próximo: O Ecossistema Completo
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => {
+        if (exp !== explanation) exp.classList.remove('active');
+      });
+      explanation.classList.toggle('active');
+    }
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 1.6 - LLMs como Agentes | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5, 150, 105, 0.18); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span>
+          </a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span>
+          </a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm text-neutral-400 mb-8">
+      <a href="../../index.html" class="hover:text-emerald-400 transition-colors">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-emerald-400 transition-colors">Trilha 1</a>
+      <span>/</span>
+      <span class="text-neutral-100">Módulo 1.6</span>
+    </nav>
+
+    <!-- Header -->
+    <div class="mb-12">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-sm font-semibold rounded-full mb-4">MÓDULO 1.6</span>
+      <h1 class="text-2xl font-bold text-neutral-100 mb-4">🤖 LLMs como Agentes</h1>
+      <p class="text-neutral-300 text-lg">Entenda como LLMs se tornam agentes autônomos com o padrão ReACT, personas geradas por grafos de conhecimento, memória de longo prazo e ferramentas especializadas.</p>
+    </div>
+
+    <!-- Topic 1 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🧩 O Problema do Agente</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Um LLM sozinho não é um agente. Ele é uma função que recebe texto e gera texto - sem memória entre chamadas, sem capacidade de usar ferramentas e sem loop de raciocínio. Para transformar um LLM em agente, é preciso adicionar camadas de infraestrutura ao redor dele.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300">Um agente é composto por: (1) <strong>LLM como cérebro</strong> - processa informações e gera respostas; (2) <strong>Memória persistente</strong> - lembra de interações passadas entre chamadas; (3) <strong>Ferramentas</strong> - pode executar ações no mundo (buscar informações, salvar dados, interagir com APIs); (4) <strong>Loop de raciocínio</strong> - pode pensar, agir, observar o resultado e pensar novamente. Sem essas camadas, o LLM é apenas um gerador de texto sofisticado.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-5">
+          <h4 class="text-emerald-400 font-semibold mb-3">LLM como Agente</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Mantém memória entre interações</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Usa ferramentas para agir no mundo</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Loop de raciocínio iterativo</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Personalidade consistente</li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 border border-red-500/30 rounded-xl p-5">
+          <h4 class="text-red-400 font-semibold mb-3">LLM Puro (Sem Agente)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Sem memória entre chamadas</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Apenas gera texto</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Resposta única (sem iteração)</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Sem identidade persistente</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🔄 Padrão ReACT</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">O ReACT (Reasoning + Acting) é o padrão arquitetural que permite a LLMs resolver problemas complexos combinando raciocínio explícito com ações concretas em um loop iterativo. É a base cognitiva dos agentes do MiroFish.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300">O loop ReACT funciona em três passos que se repetem: <strong>Thought (Raciocínio):</strong> O agente pensa sobre a situação atual, o que sabe e o que precisa fazer. <strong>Action (Ação):</strong> Baseado no raciocínio, executa uma ação (postar, buscar informação, responder). <strong>Observation (Observação):</strong> Observa o resultado da ação (reações dos outros agentes, novos dados disponíveis). O ciclo se repete até o agente completar sua tarefa no turno.</p>
+      </div>
+
+      <!-- Timeline -->
+      <div class="space-y-4 mb-6">
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">T</span>
+            <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
+          </div>
+          <div class="pb-4">
+            <h4 class="text-emerald-400 font-semibold">Thought (Raciocínio)</h4>
+            <p class="text-neutral-300 text-sm mt-1">"Vi um post controverso sobre energia nuclear. Dado minha personalidade ambientalista, devo expressar preocupação mas reconhecer os dados apresentados."</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">A</span>
+            <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
+          </div>
+          <div class="pb-4">
+            <h4 class="text-emerald-400 font-semibold">Action (Ação)</h4>
+            <p class="text-neutral-300 text-sm mt-1">Escreve um comentário ponderado que questiona os riscos ambientais enquanto reconhece os benefícios de emissão zero.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">O</span>
+          </div>
+          <div>
+            <h4 class="text-emerald-400 font-semibold">Observation (Observação)</h4>
+            <p class="text-neutral-300 text-sm mt-1">Observa que 3 agentes curtiram e 1 respondeu discordando. Atualiza sua memória com essa interação para o próximo turno.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-blue-400 font-semibold mb-3">Dados e Pesquisa</h3>
+        <p class="text-neutral-300">O paper original do ReACT (Yao et al., 2022) demonstrou que a combinação de raciocínio e ação melhora significativamente a performance de LLMs em tarefas que exigem tomada de decisão. No contexto do MiroFish, o ReACT permite que agentes ajam de forma contextual e consistente com sua personalidade ao longo de toda a simulação.</p>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🎭 Criação de Personas</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">O MiroFish gera personalidades únicas para cada agente a partir do grafo de conhecimento. Cada persona inclui opiniões sobre o tema, valores pessoais, estilo de comunicação, nível de influência social e predisposição a diferentes tipos de comportamento.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300">O processo de geração de personas: (1) O grafo de conhecimento é analisado para identificar diferentes perspectivas sobre o tema; (2) Um LLM gera personas diversas que representam essas perspectivas; (3) Cada persona recebe: nome, background, opiniões sobre o tema, estilo de comunicação (formal/informal, agressivo/diplomático), nível de atividade (muito ativo/lurker) e susceptibilidade a influência. A diversidade das personas é o que garante fenômenos emergentes realistas.</p>
+      </div>
+
+      <div class="bg-primary/10 border border-primary/40 rounded-xl p-6 mb-6">
+        <h3 class="text-primary font-semibold mb-3">Dica Prática</h3>
+        <p class="text-neutral-300">Revise as personas geradas antes de rodar uma simulação importante. Verifique se há diversidade suficiente de opiniões, estilos de comunicação e níveis de influência. Personas muito similares entre si geram simulações monótonas e previsíveis. Se necessário, ajuste os parâmetros de geração para aumentar a diversidade.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-5">
+          <h4 class="text-emerald-400 font-semibold mb-3">Persona Bem Construída</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Opinião clara e fundamentada sobre o tema</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Estilo de comunicação coerente</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Background que justifica suas posições</li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 border border-red-500/30 rounded-xl p-5">
+          <h4 class="text-red-400 font-semibold mb-3">Persona Problemática</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Opinião genérica ou contraditória</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Estilo que muda a cada interação</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Sem contexto que embase suas posições</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold text-neutral-100">💭 Memória de Longo Prazo</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">A memória é o que torna os agentes consistentes ao longo da simulação. Sem memória, cada turno seria independente e o agente poderia se contradizer. O MiroFish implementa três tipos de memória inspirados na psicologia cognitiva.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300 mb-3"><strong>Memória Episódica:</strong> Registra eventos específicos vivenciados pelo agente. "No turno 3, respondi ao post de @AgenteMaria sobre energia nuclear e recebi 5 curtidas." Usada para manter consistência comportamental.</p>
+        <p class="text-neutral-300 mb-3"><strong>Memória Semântica:</strong> Conhecimento geral sobre o tema, extraído do grafo de conhecimento. "Energia nuclear gera 10% da eletricidade mundial." Usada para fundamentar opiniões.</p>
+        <p class="text-neutral-300"><strong>Memória Temporal:</strong> Registra quando cada informação foi aprendida e como opiniões evoluíram. "Antes do turno 5 eu era neutro sobre o tema, depois de ler os argumentos mudei para levemente favorável." Usada para modelar evolução de opinião.</p>
+      </div>
+
+      <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-blue-400 font-semibold mb-3">Dados e Pesquisa</h3>
+        <p class="text-neutral-300">O sistema de memória é o componente que mais consome tokens: a cada turno, as memórias relevantes precisam ser incluídas no prompt do agente. Para uma simulação com 100 agentes e 10 turnos, o custo de memória pode representar 30-40% do total de tokens consumidos. O MiroFish usa técnicas de compressão e seleção de memórias para otimizar esse custo.</p>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🛠️ Ferramentas dos Agentes</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Os agentes do ecossistema MiroFish/BettaFish não apenas geram texto - eles têm acesso a ferramentas que estendem suas capacidades, permitindo buscas, análises e interações estruturadas com outros agentes.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300 mb-3"><strong>insight_forge:</strong> Ferramenta de geração de insights estruturados. O agente pode usar para sintetizar informações de múltiplas fontes em um insight formatado com evidências, confiança e recomendações.</p>
+        <p class="text-neutral-300 mb-3"><strong>panorama_search:</strong> Busca contextual ampla que combina múltiplas fontes de dados. Permite que o agente encontre informações relevantes não apenas no grafo de conhecimento, mas também em dados coletados pelo BettaFish.</p>
+        <p class="text-neutral-300"><strong>interview_agents:</strong> Permite que um agente "entreviste" outros agentes, fazendo perguntas específicas e coletando respostas para validação cruzada de informações. Isso cria uma dinâmica de verificação mútua entre agentes.</p>
+      </div>
+
+      <div class="bg-primary/10 border border-primary/40 rounded-xl p-6 mb-6">
+        <h3 class="text-primary font-semibold mb-3">Dica Prática</h3>
+        <p class="text-neutral-300">As ferramentas usam o padrão de "function calling" dos LLMs modernos. Quando o agente decide usar uma ferramenta, ele gera uma chamada estruturada (JSON) que o sistema executa, retornando o resultado para o agente continuar seu raciocínio. Isso é mais confiável do que pedir ao agente para gerar saídas formatadas manualmente.</p>
+      </div>
+
+      <!-- Timeline -->
+      <div class="space-y-4 mb-6">
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
+          </div>
+          <div class="pb-4">
+            <h4 class="text-emerald-400 font-semibold">Agente decide usar ferramenta</h4>
+            <p class="text-neutral-300 text-sm mt-1">No loop ReACT, o agente identifica que precisa de informação adicional e escolhe a ferramenta adequada.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
+          </div>
+          <div class="pb-4">
+            <h4 class="text-emerald-400 font-semibold">Function call executado</h4>
+            <p class="text-neutral-300 text-sm mt-1">O sistema executa a ferramenta (panorama_search, insight_forge, etc.) e retorna os resultados.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+          </div>
+          <div>
+            <h4 class="text-emerald-400 font-semibold">Agente incorpora resultado</h4>
+            <p class="text-neutral-300 text-sm mt-1">O agente usa a informação retornada para fundamentar sua próxima ação na simulação.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🎯 Diferentes LLMs para Diferentes Tarefas</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">O ecossistema MiroFish/BettaFish não se limita a um único LLM. Diferentes modelos têm diferentes pontos fortes, e o fork inematds permite configurar qual LLM usar para cada tipo de tarefa, otimizando custo e qualidade.</p>
+
+      <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
+        <p class="text-neutral-300 mb-3"><strong>DeepSeek:</strong> Excelente para raciocínio profundo e análise complexa. Usado para tarefas que exigem cadeia de pensamento longa, como geração de relatórios e análise de tendências. Custo-benefício muito alto.</p>
+        <p class="text-neutral-300 mb-3"><strong>Gemini:</strong> Forte em análise multimodal (texto + imagens). Útil quando os dados incluem conteúdo visual (screenshots de redes sociais, infográficos).</p>
+        <p class="text-neutral-300 mb-3"><strong>Qwen:</strong> Otimizado para tarefas em chinês e multilíngues. Usado quando os dados de entrada incluem conteúdo em mandarim (muito comum no ecossistema original).</p>
+        <p class="text-neutral-300"><strong>Kimi:</strong> Especializado em contextos longos (até 200k tokens). Ideal para processar documentos extensos na fase de GraphRAG building.</p>
+      </div>
+
+      <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
+        <h3 class="text-blue-400 font-semibold mb-3">Dados e Pesquisa</h3>
+        <p class="text-neutral-300">A estratégia multi-LLM pode reduzir custos em até 70% sem perda significativa de qualidade. O truque é usar modelos mais baratos (como DeepSeek) para tarefas de alto volume (respostas de agentes na simulação) e modelos mais caros (como GPT-4) apenas para tarefas críticas (geração de relatório final, extração de entidades no GraphRAG). A configuração é feita via arquivo .env com chaves API para cada provedor.</p>
+      </div>
+
+      <div class="bg-primary/10 border border-primary/40 rounded-xl p-6 mb-6">
+        <h3 class="text-primary font-semibold mb-3">Dica Prática</h3>
+        <p class="text-neutral-300">Comece com DeepSeek para tudo - é o melhor custo-benefício. Depois, experimente usar Gemini para a fase de GraphRAG (boa extração de entidades) e mantenha DeepSeek para a simulação (alto volume de chamadas). Só use modelos premium para tarefas onde a qualidade superior é mensurável.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-5">
+          <h4 class="text-emerald-400 font-semibold mb-3">Fazer</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Testar diferentes LLMs para cada etapa</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Monitorar custo por simulação</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Usar modelos baratos para alto volume</li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 border border-red-500/30 rounded-xl p-5">
+          <h4 class="text-red-400 font-semibold mb-3">Evitar</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Usar GPT-4 para todas as chamadas de simulação</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Ignorar os custos até receber a fatura</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Trocar de LLM no meio de uma simulação</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="bg-dark-800 border border-dark-700 rounded-xl p-8 mb-8">
+      <h2 class="text-2xl font-bold text-neutral-100 mb-6">Resumo do Módulo</h2>
+      <div class="space-y-3 mb-6">
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Entendo a diferença entre um LLM e um agente</span>
+        </label>
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Conheço o padrão ReACT: Raciocínio + Ação + Observação</span>
+        </label>
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Sei como personas são geradas a partir do grafo de conhecimento</span>
+        </label>
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Entendo os três tipos de memória: episódica, semântica e temporal</span>
+        </label>
+        <label class="flex items-start gap-3 text-neutral-300">
+          <input type="checkbox" class="mt-1 rounded border-dark-600 text-emerald-500 focus:ring-emerald-500">
+          <span>Conheço as ferramentas dos agentes e a estratégia multi-LLM</span>
+        </label>
+      </div>
+
+      <div class="flex justify-between items-center pt-4 border-t border-dark-700">
+        <a href="modulo-1-5.html" class="flex items-center gap-2 text-neutral-400 hover:text-emerald-400 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+          Anterior: Arquitetura Técnica
+        </a>
+        <a href="../trilha2/index.html" class="flex items-center gap-2 text-neutral-400 hover:text-blue-400 transition-colors">
+          Próxima Trilha: Aplicações
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => {
+        if (exp !== explanation) exp.classList.remove('active');
+      });
+      explanation.classList.toggle('active');
+    }
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

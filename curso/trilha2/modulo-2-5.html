@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2.5 Recursos Humanos e Cultura | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37, 99, 235, 0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37, 99, 235, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13, 148, 136, 0.08); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span>
+          </a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span>
+          </a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <div class="flex items-center space-x-2 text-sm text-neutral-400 mb-6">
+      <a href="../../index.html" class="hover:text-blue-400 transition-colors">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-blue-400 transition-colors">Trilha 2</a>
+      <span>/</span>
+      <span class="text-blue-400">Módulo 2.5</span>
+    </div>
+
+    <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-2xl p-8 mb-8 border border-blue-500/30">
+      <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm font-bold">MÓDULO 2.5</span>
+      <h1 class="text-2xl font-bold text-neutral-100 mt-4 mb-2">👥 Recursos Humanos e Cultura</h1>
+      <p class="text-neutral-300">Antecipe resistência a mudanças organizacionais, analise clima com BettaFish, otimize employer branding e navegue os limites éticos do uso de IA em RH.</p>
+    </div>
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🔄 Reestruturações Organizacionais</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Prever resistência antes do anúncio: simule como diferentes grupos de colaboradores reagirão a mudanças estruturais.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">Reestruturações organizacionais são momentos de alto risco: fusões de departamentos, mudanças de liderança, downsizing, implementação de novos modelos de trabalho. Com MiroFish, crie agentes que representem diferentes perfis de colaboradores (tempo de casa, nível hierárquico, departamento, faixa etária) e simule o anúncio da mudança. Observe: quem resiste? Quem apoia? Quais argumentos ganham tração no "boca a boca" interno? Que narrativas se formam? Isso permite calibrar a comunicação e o timing para minimizar disrução.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">70% das transformações organizacionais falham, e a causa #1 é resistência dos colaboradores (McKinsey). O custo de uma reestruturação mal executada é de 2-3x o orçamento original. Empresas que fazem análise de resistência prévia têm 2.5x mais chance de sucesso. Cada ponto percentual de redução em turnover involuntário durante reestruturações economiza em média $500K para empresas de médio porte.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-primary/40 mb-4">
+        <h3 class="text-primary font-bold mb-2">Dica Prática</h3>
+        <p class="text-neutral-300 text-sm">Crie 5 clusters de agentes baseados em perfis reais (anonimizados): (1) alta gestão, (2) gestão média, (3) colaboradores senior, (4) colaboradores junior, (5) equipes mais afetadas. Simule 3 abordagens de comunicação: (A) anúncio direto pela liderança, (B) comunicação gradual em fases, (C) consulta prévia com líderes informais. Meça "índice de aceitação" e "tempo para estabilização" em cada cenário. Use o melhor como base para o plano real de change management.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-dark-700 rounded-xl p-5 border border-emerald-500/30">
+          <h3 class="text-emerald-400 font-bold mb-2">Fazer</h3>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>+ Incluir líderes informais como agentes na simulação</li>
+            <li>+ Testar timing de comunicação (segunda vs sexta)</li>
+            <li>+ Simular fase de transição completa (30-90 dias)</li>
+            <li>+ Preparar planos de mitigação para cada cluster</li>
+          </ul>
+        </div>
+        <div class="bg-dark-700 rounded-xl p-5 border border-red-500/30">
+          <h3 class="text-red-400 font-bold mb-2">Evitar</h3>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>- Usar dados individuais reais de colaboradores nos agentes</li>
+            <li>- Simular sem incluir o grupo mais afetado pela mudança</li>
+            <li>- Assumir que silêncio simulado significa aceitação</li>
+            <li>- Ignorar o impacto em familiares e comunidade</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold text-neutral-100">📊 Análise de Clima</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">BettaFish aplicado a pesquisas internas: extraia insights profundos de dados de clima organizacional.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">BettaFish pode analisar dados de pesquisas de clima, canais internos de comunicação (com consentimento e anonimização), feedbacks de avaliações e outros dados textuais para gerar uma visão profunda do sentimento organizacional. Diferente de pesquisas de clima tradicionais que capturam um snapshot pontual, BettaFish pode fazer monitoramento contínuo, detectando mudanças de sentimento antes que se tornem problemas. O sistema identifica temas emergentes, clusters de insatisfação e tendências positivas que passam despercebidas em análises manuais.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">Pesquisas de clima tradicionais têm taxa de resposta de apenas 30-50% e capturam sentimentos declarados (não reais). BettaFish aplicado a múltiplas fontes de dados pode revelar 60% mais insights. Empresas com análise de clima contínua (vs anual) reportam 21% mais engajamento e 37% menos turnover (Gallup). O custo de perder um colaborador engajado é 50-200% do salário anual.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-primary/40">
+        <h3 class="text-primary font-bold mb-2">Dica Prática</h3>
+        <p class="text-neutral-300 text-sm">Configure BettaFish para análise trimestral de clima com 3 fontes: (1) resultados de pulse surveys (texto aberto), (2) feedbacks de avaliações de desempenho (anonimizados), (3) temas de tickets de RH. Gere um "mapa de calor" de sentimento por departamento/time. Compare trimestre a trimestre. Quando um time cai mais de 15% em sentimento, investigue com MindSpider para entender as motivações antes de intervir.</p>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🏢 Employer Branding</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Sentimento sobre a marca empregadora: otimize sua proposta de valor para atrair os talentos certos.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">Employer branding determina quem quer trabalhar para você e quem não quer. MiroFish permite simular como diferentes perfis de candidatos percebem sua marca empregadora. Crie agentes que representem: engenheiros de software senior, analistas junior de finanças, gerentes de marketing experientes. Exponha-os à sua EVP (Employee Value Proposition), vagas publicadas e presença em redes sociais. Observe: o que atrai? O que repele? Como você se compara a concorrentes de talento? Ajuste mensagens antes de gastar em recrutamento.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">Empresas com employer branding forte recebem 50% mais candidaturas qualificadas, reduzem custo de contratação em 43% e turnover em 28% (LinkedIn). O custo médio por contratação é de $4,700 (SHRM). Com simulação de employer branding, é possível otimizar mensagens de recrutamento antes de investir, economizando 20-40% em custo de aquisição de talentos.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-primary/40">
+        <h3 class="text-primary font-bold mb-2">Dica Prática</h3>
+        <p class="text-neutral-300 text-sm">Execute o "Employer Brand Audit Simulado": (1) Colete sua comunicação atual (site de carreiras, vagas, Glassdoor). (2) Crie agentes dos 5 perfis que mais busca contratar. (3) Exponha os agentes à sua comunicação e à de 3 concorrentes de talento. (4) Meça: atratividade (1-10), intenção de candidatura, e principais motivos. (5) Identifique gaps e ajuste sua EVP. Execute semestralmente para acompanhar evolução.</p>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold text-neutral-100">📋 Mudanças de Benefícios</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Simular reação por perfil de colaborador: antecipe quem vai aplaudir e quem vai reclamar antes de mudar.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">Mudanças no pacote de benefícios (plano de saúde, home office, vale-refeição, previdência) afetam diferentemente cada grupo de colaboradores. Um corte no plano de saúde impacta mais famílias com filhos. A redução de home office irrita mais a geração Z. O aumento de vale-refeição é irrelevante para quem almoça em casa. MiroFish permite simular essas nuances: crie agentes por perfil demográfico e laboral, anuncie a mudança e observe a reação segmentada. Use os dados para ajustar a mudança ou, no mínimo, a comunicação.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">Mudanças mal comunicadas em benefícios são a causa #1 de turnover voluntário nos 90 dias seguintes (Willis Towers Watson). 67% dos colaboradores consideram benefícios tão importantes quanto salário. Uma redução de 10% no pacote de benefícios pode gerar turnover de 5-8% nos grupos mais afetados. Simular com MiroFish por $3K-$8K pode prevenir perdas de $200K-$500K em custos de turnover.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-primary/40">
+        <h3 class="text-primary font-bold mb-2">Dica Prática</h3>
+        <p class="text-neutral-300 text-sm">Para cada mudança de benefício, crie uma "matriz de impacto simulado": eixo X = perfis de colaboradores (8-10 segmentos), eixo Y = opções de mudança (3-5 variações). Preencha cada célula com o score de sentimento da simulação. Identifique: (1) combinação ótima (melhor economia para empresa com menor impacto negativo), (2) grupos que precisam de comunicação especial, (3) "deal-breakers" que devem ser evitados a todo custo.</p>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold text-neutral-100">⚖️ Uso Ético em RH</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Privacidade, dados anonimizados, limites: diretrizes para uso responsável de IA em recursos humanos.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">O uso de IA e simulação em RH requer cuidados éticos rigorosos. Diretrizes fundamentais: (1) Nunca use dados individuais de colaboradores reais para criar agentes -- use apenas perfis agregados e anonimizados. (2) Nunca use simulação para avaliar desempenho individual. (3) Sempre obtenha consentimento para análise de dados textuais. (4) Garanta que decisões de RH não sejam tomadas exclusivamente com base em simulação. (5) Monitore vieses algorítmicos que podem discriminar grupos. (6) Mantenha transparência com o comitê de ética e sindicatos quando aplicável.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">72% dos colaboradores estão preocupados com o uso de IA em RH (PwC). O EU AI Act classifica IA em RH como "alto risco", exigindo auditorias e transparência. A LGPD brasileira exige consentimento explícito para processamento de dados de colaboradores. Multas por uso inadequado de IA em RH podem chegar a 2% do faturamento global (GDPR). Empresas que são transparentes sobre uso de IA têm 31% mais confiança dos colaboradores.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-dark-700 rounded-xl p-5 border border-emerald-500/30">
+          <h3 class="text-emerald-400 font-bold mb-2">Fazer</h3>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>+ Usar apenas dados agregados e anonimizados</li>
+            <li>+ Documentar propósito e limites de cada análise</li>
+            <li>+ Manter comitê de ética informado sobre uso de IA</li>
+            <li>+ Auditar vieses regularmente nas simulações</li>
+          </ul>
+        </div>
+        <div class="bg-dark-700 rounded-xl p-5 border border-red-500/30">
+          <h3 class="text-red-400 font-bold mb-2">Evitar</h3>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>- NUNCA criar agentes baseados em colaboradores específicos</li>
+            <li>- NUNCA usar simulação para justificar demissões individuais</li>
+            <li>- NUNCA processar dados pessoais sem consentimento</li>
+            <li>- NUNCA tomar decisões de RH baseadas apenas em simulação</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🎯 Engajamento e Retenção</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Identificar clusters de insatisfação: detecte riscos de turnover antes que se tornem demissões.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">A análise de engajamento com MiroFish combina BettaFish (análise de sentimento em dados de RH) com simulação (teste de intervenções). O processo: (1) BettaFish identifica clusters de insatisfação em dados anonimizados -- não indivíduos, mas padrões como "engenheiros com 3-5 anos de casa", (2) MindSpider analisa as motivações por trás da insatisfação, (3) MiroFish simula diferentes intervenções (aumento salarial, promoção, novo projeto, mentoria) para identificar qual tem maior impacto no sentimento do cluster. O resultado é uma estratégia de retenção personalizada por grupo.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">O custo de substituição de um colaborador é de 50-200% do salário anual (SHRM). Empresas perdem em média $15K-$30K por colaborador que sai voluntariamente. Programas de retenção proativos (vs reativos) são 5x mais eficazes. A detecção precoce de insatisfação pode reduzir turnover em 15-25%. Com MiroFish, o ROI de um programa de retenção pode ser simulado antes do investimento.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-primary/40">
+        <h3 class="text-primary font-bold mb-2">Dica Prática</h3>
+        <p class="text-neutral-300 text-sm">Implemente o "Sistema de Alerta de Retenção" em 3 camadas: (1) BettaFish analisa dados de pulse surveys e feedbacks trimestralmente, identificando clusters com sentimento abaixo de 6/10. (2) Para cada cluster em risco, MindSpider analisa as 3 principais causas de insatisfação. (3) MiroFish simula 5 intervenções possíveis para cada cluster e rankeia por impacto esperado e custo. Apresente ao CHRO como: "Cluster X (N pessoas) tem risco de turnover de Y%. Intervenção recomendada: Z. ROI estimado: W%."</p>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-blue-500/30">
+      <h3 class="text-xl font-bold text-neutral-100 mb-4">Resumo do Módulo 2.5</h3>
+      <div class="space-y-2 mb-6">
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Sei simular resistência a reestruturações organizacionais</span>
+        </label>
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Conheço a análise de clima organizacional com BettaFish</span>
+        </label>
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Entendo como otimizar employer branding via simulação</span>
+        </label>
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Sei simular impacto de mudanças de benefícios por perfil</span>
+        </label>
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Domino as diretrizes éticas de uso de IA em RH</span>
+        </label>
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Conheço o Sistema de Alerta de Retenção com MiroFish</span>
+        </label>
+      </div>
+      <div class="flex justify-between items-center pt-4 border-t border-dark-700">
+        <a href="modulo-2-4.html" class="text-neutral-400 hover:text-blue-400 transition-colors text-sm font-medium">← Estratégia</a>
+        <a href="modulo-2-6.html" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold transition-colors">Próximo: Finanças →</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-dark-700 mt-16 py-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>🐟 Ecossistema MiroFish — Curso desenvolvido por <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+
+</body>
+</html>

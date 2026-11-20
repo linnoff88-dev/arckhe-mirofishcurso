@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trilha 2: Aplicações Empresariais | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37, 99, 235, 0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37, 99, 235, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13, 148, 136, 0.08); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span>
+          </a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span>
+          </a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-2xl p-8 mb-8 border border-blue-500/30">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm font-bold">TRILHA 2</span>
+        <span class="text-neutral-500 text-sm">Intermediário</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-neutral-100 mb-4">🏢 Aplicações Empresariais</h1>
+      <p class="text-neutral-300 text-lg max-w-3xl mb-6">Como o ecossistema MiroFish pode transformar setores inteiros: marketing, compliance, comunicação, estratégia, RH e finanças.</p>
+      <div class="flex flex-wrap gap-4 text-sm">
+        <span class="flex items-center space-x-2 text-blue-400"><span class="font-bold">6</span><span class="text-neutral-400">Módulos</span></span>
+        <span class="text-neutral-600">|</span>
+        <span class="flex items-center space-x-2 text-blue-400"><span class="font-bold">36</span><span class="text-neutral-400">Tópicos</span></span>
+        <span class="text-neutral-600">|</span>
+        <span class="flex items-center space-x-2 text-blue-400"><span class="font-bold">~3h</span><span class="text-neutral-400">Duração</span></span>
+        <span class="text-neutral-600">|</span>
+        <span class="flex items-center space-x-2 text-blue-400"><span class="font-bold">Intermediário</span></span>
+      </div>
+    </div>
+
+    <!-- Simple Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+      <a href="#mod-2-1" class="bg-dark-800 rounded-xl p-5 border border-dark-700 hover:border-blue-500/30 transition-colors group">
+        <div class="flex items-center space-x-3 mb-2">
+          <span class="text-2xl">📢</span>
+          <span class="text-sm text-blue-400 font-bold">2.1</span>
+        </div>
+        <h3 class="font-bold text-neutral-100 group-hover:text-blue-400 transition-colors">Marketing e Inteligência de Mercado</h3>
+        <p class="text-neutral-400 text-sm mt-1">6 tópicos</p>
+      </a>
+      <a href="#mod-2-2" class="bg-dark-800 rounded-xl p-5 border border-dark-700 hover:border-blue-500/30 transition-colors group">
+        <div class="flex items-center space-x-3 mb-2">
+          <span class="text-2xl">⚖️</span>
+          <span class="text-sm text-blue-400 font-bold">2.2</span>
+        </div>
+        <h3 class="font-bold text-neutral-100 group-hover:text-blue-400 transition-colors">Compliance e Risco Regulatório</h3>
+        <p class="text-neutral-400 text-sm mt-1">6 tópicos</p>
+      </a>
+      <a href="#mod-2-3" class="bg-dark-800 rounded-xl p-5 border border-dark-700 hover:border-blue-500/30 transition-colors group">
+        <div class="flex items-center space-x-3 mb-2">
+          <span class="text-2xl">📰</span>
+          <span class="text-sm text-blue-400 font-bold">2.3</span>
+        </div>
+        <h3 class="font-bold text-neutral-100 group-hover:text-blue-400 transition-colors">Comunicação Corporativa e Crises</h3>
+        <p class="text-neutral-400 text-sm mt-1">6 tópicos</p>
+      </a>
+      <a href="#mod-2-4" class="bg-dark-800 rounded-xl p-5 border border-dark-700 hover:border-blue-500/30 transition-colors group">
+        <div class="flex items-center space-x-3 mb-2">
+          <span class="text-2xl">🎯</span>
+          <span class="text-sm text-blue-400 font-bold">2.4</span>
+        </div>
+        <h3 class="font-bold text-neutral-100 group-hover:text-blue-400 transition-colors">Estratégia e Tomada de Decisão</h3>
+        <p class="text-neutral-400 text-sm mt-1">6 tópicos</p>
+      </a>
+      <a href="#mod-2-5" class="bg-dark-800 rounded-xl p-5 border border-dark-700 hover:border-blue-500/30 transition-colors group">
+        <div class="flex items-center space-x-3 mb-2">
+          <span class="text-2xl">👥</span>
+          <span class="text-sm text-blue-400 font-bold">2.5</span>
+        </div>
+        <h3 class="font-bold text-neutral-100 group-hover:text-blue-400 transition-colors">Recursos Humanos e Cultura</h3>
+        <p class="text-neutral-400 text-sm mt-1">6 tópicos</p>
+      </a>
+      <a href="#mod-2-6" class="bg-dark-800 rounded-xl p-5 border border-dark-700 hover:border-blue-500/30 transition-colors group">
+        <div class="flex items-center space-x-3 mb-2">
+          <span class="text-2xl">💰</span>
+          <span class="text-sm text-blue-400 font-bold">2.6</span>
+        </div>
+        <h3 class="font-bold text-neutral-100 group-hover:text-blue-400 transition-colors">Finanças e Análise de Investimentos</h3>
+        <p class="text-neutral-400 text-sm mt-1">6 tópicos</p>
+      </a>
+    </div>
+
+    <!-- Detailed Module Cards -->
+
+    <!-- Module 2.1 -->
+    <div id="mod-2-1" class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center space-x-3">
+          <span class="text-2xl">📢</span>
+          <div>
+            <span class="text-xs text-blue-400 font-bold">MÓDULO 2.1</span>
+            <h2 class="text-2xl font-bold text-neutral-100">Marketing e Inteligência de Mercado</h2>
+          </div>
+        </div>
+        <button onclick="openModal('modulo-2-1.html')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold transition-colors">Abrir Módulo</button>
+      </div>
+      <p class="text-neutral-300 mb-4">Simule campanhas, preveja reações do mercado e maximize o ROI de marketing com o ecossistema MiroFish.</p>
+      <div class="space-y-2">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">🎯 Teste de Narrativas - Simular recepção de campanhas antes do lançamento</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Usar agentes MiroFish para simular como diferentes públicos-alvo reagiriam a narrativas de campanha antes de gastar orçamento real. Cada agente representa um perfil demográfico e comportamental.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Empresas gastam em média $500K em campanhas que falham. Com simulação prévia (custo de $1K-$10K), é possível identificar mensagens que ressoam e evitar erros caros.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Teste A/B simulado, análise de sentimento preditiva, calibração de tom, iteração rápida de mensagens, validação pré-lançamento.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">📊 Análise Competitiva - Prever reações a movimentos de concorrentes</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Simular como o mercado reagiria a movimentos estratégicos de concorrentes, como lançamentos de produto, mudanças de preço ou novas campanhas.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Antecipar movimentos competitivos pode representar vantagem de semanas ou meses. O mercado de inteligência competitiva movimenta $7.6B globalmente em 2025.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> War gaming digital, simulação de cenários competitivos, análise de share of voice, mapeamento de posicionamento.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">🔍 Identificação de Influenciadores - Agentes que naturalmente ganham seguidores</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Na simulação MiroFish, alguns agentes naturalmente acumulam mais conexões e influência. Esses padrões revelam quais perfis de influenciadores funcionam para cada nicho.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> O marketing de influenciadores cresce 29% ao ano. Identificar os perfis certos antes de investir reduz desperdício e aumenta conversão.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Análise de redes sociais simuladas, centralidade de grau, propagação de informação, influência orgânica vs patrocinada.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">💰 ROI de Simulação vs Pesquisa Tradicional - $1K-$10K vs $50K-$500K</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Comparação direta de custos, tempo e precisão entre pesquisa de mercado tradicional (focus groups, surveys) e simulação com MiroFish.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Empresas que adotam IA agêntica reportam ROI médio de 171%. A simulação entrega resultados em horas vs semanas, por uma fração do custo.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Custo por insight, velocidade de iteração, escalabilidade, complementaridade com pesquisa tradicional, validação cruzada.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">📈 Monitoramento de Campanha - BettaFish + MindSpider em tempo real</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Usar BettaFish para análise de sentimento em tempo real e MindSpider para entender o "porquê" por trás das reações durante campanhas ativas.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Campanhas que monitoram sentimento em tempo real podem ajustar mensagens e aumentar eficácia em até 40% durante a execução.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Monitoramento contínuo, alertas de sentimento, ajuste em tempo real, análise causal com MindSpider, feedback loop.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">🎭 Segmentação por Persona - Entender diferentes públicos via agentes</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Criar agentes que representam diferentes personas de marketing e observar como cada segmento reage de forma distinta às mesmas mensagens.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Segmentação precisa pode aumentar a taxa de conversão em até 760%. MiroFish permite testar dezenas de segmentos simultaneamente.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Personas baseadas em dados, micro-segmentação, personalização de mensagem, teste multivariado simulado.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 2.2 -->
+    <div id="mod-2-2" class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center space-x-3">
+          <span class="text-2xl">⚖️</span>
+          <div>
+            <span class="text-xs text-blue-400 font-bold">MÓDULO 2.2</span>
+            <h2 class="text-2xl font-bold text-neutral-100">Compliance e Risco Regulatório</h2>
+          </div>
+        </div>
+        <button onclick="openModal('modulo-2-2.html')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold transition-colors">Abrir Módulo</button>
+      </div>
+      <p class="text-neutral-300 mb-4">Antecipe impactos regulatórios, monitore compliance e realize due diligence com simulação de stakeholders.</p>
+      <div class="space-y-2">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">📋 Impacto de Nova Regulamentação - Simular reações de stakeholders</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Simular como diferentes stakeholders (consumidores, investidores, reguladores, mídia) reagiriam a novas regulamentações antes de sua implementação.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Regulamentações inesperadas custam em média 4% do faturamento anual. Antecipar reações permite preparação estratégica adequada.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Mapeamento de stakeholders, análise de impacto regulatório, simulação de cenários de compliance, preparação proativa.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">🔍 Monitoramento de Compliance - BettaFish detectando críticas emergentes</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Usar BettaFish para detectar sinais precoces de insatisfação regulatória ou críticas públicas que podem escalar para problemas de compliance.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Detecção antecipada reduz multas regulatórias em até 60%. BettaFish identifica padrões antes que se tornem crises.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Detecção de anomalias de sentimento, monitoramento regulatório contínuo, alertas precoces, escalation automática.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">📊 Due Diligence em M&A - Sentimento público antes de aquisições</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Simular a percepção pública de fusões e aquisições antes do anúncio, identificando riscos reputacionais e resistência de stakeholders.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> 70% das M&As falham em atingir sinergias esperadas. Análise de sentimento preditivo pode identificar deal-breakers antes do investimento.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Due diligence reputacional, simulação de reação de mercado, análise de compatibilidade cultural, risk scoring.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">🛡️ Trilha de Auditoria - Documentação auditável das análises</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> MiroFish gera logs completos de todas as simulações, permitindo que decisões baseadas em dados simulados sejam rastreáveis e auditáveis.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Reguladores exigem cada vez mais transparência nos processos decisórios. Trilhas de auditoria robustas protegem a empresa legalmente.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Logs de simulação, rastreabilidade de decisões, conformidade documental, reprodutibilidade de análises.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">⏱️ Detecção Antecipada de Riscos - De semanas para horas</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> A capacidade do MiroFish de comprimir tempo: simular semanas de evolução de opinião pública em horas, permitindo detecção precoce de riscos.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Cada hora de antecipação em uma crise regulatória pode economizar milhões. A compressão temporal é um dos superpoderes do MiroFish.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Compressão temporal, simulação acelerada, early warning systems, indicadores antecedentes simulados.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">🌐 Compliance Internacional - Simulação multi-mercado</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Executar simulações paralelas em diferentes mercados, com agentes calibrados para culturas e regulamentações locais de cada país.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Empresas multinacionais enfrentam compliance em dezenas de jurisdições. Simular cada mercado separadamente identifica riscos específicos.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Simulação multi-jurisdicional, calibração cultural, GDPR/LGPD/CCPA, regulamentação setorial por país.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 2.3 -->
+    <div id="mod-2-3" class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center space-x-3">
+          <span class="text-2xl">📰</span>
+          <div>
+            <span class="text-xs text-blue-400 font-bold">MÓDULO 2.3</span>
+            <h2 class="text-2xl font-bold text-neutral-100">Comunicação Corporativa e Crises</h2>
+          </div>
+        </div>
+        <button onclick="openModal('modulo-2-3.html')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold transition-colors">Abrir Módulo</button>
+      </div>
+      <p class="text-neutral-300 mb-4">Teste comunicados, gerencie crises em tempo real e prepare porta-vozes com simulações realistas.</p>
+      <div class="space-y-2">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">📝 Teste de Press Release - Simular recepção antes de publicar</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Submeter press releases a agentes simulados que representam jornalistas, investidores, consumidores e reguladores antes da publicação real.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Um press release mal recebido pode destruir valor de mercado em horas. Testar antes elimina surpresas e permite ajustes estratégicos.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Teste de mensagem, análise de framing, reação por audiência, ajuste de tom e linguagem.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">🚨 Gestão de Crise em Tempo Real - BettaFish + MindSpider 24/7</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Durante uma crise ativa, usar BettaFish para monitorar sentimento 24/7 e MindSpider para entender as motivações por trás das reações negativas.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Crises mal gerenciadas custam em média 22% do valor de mercado. Monitoramento em tempo real permite respostas calibradas e oportunas.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> War room digital, monitoramento contínuo, análise de motivações, resposta calibrada, timeline de crise.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">🎤 Preparação de Porta-Voz - Entrevistar agentes simulados</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Porta-vozes podem "entrevistar" agentes simulados que representam jornalistas agressivos, investidores preocupados ou consumidores indignados.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Preparação adequada de porta-vozes reduz danos reputacionais em até 50%. Simular perguntas difíceis antes da coletiva real é inestimável.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Media training simulado, perguntas adversariais, calibração de respostas, linguagem corporal e tom.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">📊 Dashboard de Sentimento - Sala de crise com dados em tempo real</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Configurar dashboards que integram BettaFish, MindSpider e dados de simulação MiroFish para visualização em tempo real durante crises.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Visibilidade é poder durante crises. Dashboards integrados permitem decisões informadas em minutos, não dias.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Visualização de sentimento, métricas de crise, tendências em tempo real, alertas automáticos, KPIs de reputação.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">🔄 Cenários de Resposta - Silêncio vs nota vs ação: qual funciona melhor</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Simular diferentes estratégias de resposta a crises (silêncio, nota oficial, ação corretiva) e comparar resultados antes de agir.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> A resposta errada pode amplificar uma crise em 10x. Simulação permite testar todas as opções sem risco real.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Análise comparativa de respostas, timing de comunicação, escalation vs contenção, reparação de reputação.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">🏛️ Caso Universidade de Wuhan - Exemplo real de simulação do MiroFish</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Estudo de caso real onde o MiroFish simulou a recepção pública de uma política universitária, prevendo com precisão a reação real.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Casos reais validam a metodologia. O caso Wuhan demonstra que agentes simulados podem prever comportamento coletivo com alta fidelidade.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Validação empírica, correlação simulado-real, calibração de modelos, lições aprendidas, reprodutibilidade.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 2.4 -->
+    <div id="mod-2-4" class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center space-x-3">
+          <span class="text-2xl">🎯</span>
+          <div>
+            <span class="text-xs text-blue-400 font-bold">MÓDULO 2.4</span>
+            <h2 class="text-2xl font-bold text-neutral-100">Estratégia e Tomada de Decisão</h2>
+          </div>
+        </div>
+        <button onclick="openModal('modulo-2-4.html')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold transition-colors">Abrir Módulo</button>
+      </div>
+      <p class="text-neutral-300 mb-4">Use o MiroFish como laboratório de decisão para testar estratégias, entrar em mercados e desenvolver produtos.</p>
+      <div class="space-y-2">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">🧪 Laboratório de Decisão - MiroFish como "rehearsal laboratory"</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Conceito central do MiroFish como um laboratório onde decisões estratégicas podem ser ensaiadas antes da implementação real.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Decisões estratégicas erradas custam em média $10M para empresas Fortune 500. Um laboratório de ensaio reduz drasticamente esse risco.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Rehearsal laboratory, simulação de decisão, teste de hipóteses estratégicas, iteração sem risco, aprendizado organizacional.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">🌍 Entrada em Novos Mercados - Simular receptividade do consumidor</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Antes de investir em expansão, simular como consumidores de um novo mercado reagiriam ao produto, marca e comunicação da empresa.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> 60% das tentativas de entrada em novos mercados falham nos primeiros 3 anos. Simulação prévia identifica barreiras culturais e de aceitação.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Market-entry simulation, calibração cultural de agentes, teste de proposta de valor, barreiras de adoção.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">🏗️ Desenvolvimento de Produto - Feedback preditivo antes do investimento</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Testar conceitos de produto com agentes simulados que representam o público-alvo antes de investir em desenvolvimento.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> 95% dos novos produtos falham. Feedback preditivo pode identificar problemas de product-market fit antes de gastar recursos significativos.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Concept testing simulado, validação de product-market fit, feedback iterativo, priorização de features.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">⚔️ Benchmarking Estratégico - Percepção de marca vs concorrentes</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Comparar como agentes simulados percebem sua marca versus concorrentes em atributos-chave como confiança, inovação e valor.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Percepção de marca impacta diretamente no market share. Entender gaps competitivos permite ações estratégicas focadas.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Brand perception mapping, análise comparativa, atributos de marca, gap analysis, positioning strategy.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">📊 Cenários "E Se?" - Injetar variáveis e observar reações</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> A capacidade de injetar eventos hipotéticos na simulação ("e se um concorrente lançar X?", "e se o câmbio subir 20%?") e observar cascatas de reações.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Cenários "e se?" são a essência do planejamento estratégico. MiroFish permite testar centenas de variáveis rapidamente.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> What-if analysis, injeção de eventos, cascatas de reação, análise de sensibilidade, stress testing estratégico.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">💡 Tomada de Decisão Baseada em Dados Simulados - Framework prático</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Framework estruturado para usar dados de simulação MiroFish em processos reais de tomada de decisão corporativa.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Dados sem framework são ruído. Um processo estruturado garante que insights simulados se traduzam em ações estratégicas eficazes.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Framework DECIDE (Define, Execute, Collect, Interpret, Decide, Evaluate), integração com processos existentes, governança de dados simulados.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 2.5 -->
+    <div id="mod-2-5" class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center space-x-3">
+          <span class="text-2xl">👥</span>
+          <div>
+            <span class="text-xs text-blue-400 font-bold">MÓDULO 2.5</span>
+            <h2 class="text-2xl font-bold text-neutral-100">Recursos Humanos e Cultura</h2>
+          </div>
+        </div>
+        <button onclick="openModal('modulo-2-5.html')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold transition-colors">Abrir Módulo</button>
+      </div>
+      <p class="text-neutral-300 mb-4">Antecipe resistência a mudanças, analise clima organizacional e otimize employer branding com simulações.</p>
+      <div class="space-y-2">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">🔄 Reestruturações Organizacionais - Prever resistência antes do anúncio</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Simular como diferentes grupos de colaboradores reagiriam a reestruturações, fusões de departamentos ou mudanças de liderança.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> 70% das transformações organizacionais falham por resistência dos colaboradores. Antecipar essa resistência permite planejamento de change management.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Change management simulado, mapeamento de resistência, grupos de influência interna, comunicação segmentada.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">📊 Análise de Clima - BettaFish aplicado a pesquisas internas</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Aplicar BettaFish para análise de sentimento em dados internos (pesquisas de clima, canais de comunicação, feedbacks) de forma anonimizada.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Pesquisas de clima tradicionais capturam apenas 30% dos sentimentos reais. Análise de sentimento em múltiplas fontes revela o quadro completo.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Análise de sentimento interno, dados anonimizados, triangulação de fontes, indicadores de engajamento.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">🏢 Employer Branding - Sentimento sobre a marca empregadora</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Simular como candidatos potenciais percebem a marca empregadora e testar mensagens de atração de talentos.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Empresas com employer branding forte reduzem custo de contratação em 43% e turnover em 28%. Simulação otimiza a mensagem.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Employee Value Proposition (EVP), percepção de marca empregadora, atração de talentos, teste de mensagens de recrutamento.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">📋 Mudanças de Benefícios - Simular reação por perfil de colaborador</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Antes de alterar pacotes de benefícios, simular como diferentes perfis de colaboradores (idade, cargo, tempo de casa) reagiriam.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Mudanças mal comunicadas em benefícios são a causa #1 de turnover voluntário. Simulação identifica grupos mais sensíveis.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Segmentação de colaboradores, sensibilidade a benefícios, comunicação segmentada, gestão de expectativas.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">⚖️ Uso Ético em RH - Privacidade, dados anonimizados, limites</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Diretrizes éticas para uso de simulação e análise de sentimento em contextos de RH, incluindo privacidade, consentimento e limites.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Uso inadequado de IA em RH pode gerar processos trabalhistas e danos reputacionais. Ética não é opcional, é imperativo.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> LGPD em RH, anonimização de dados, consentimento informado, viés algorítmico, governança ética de IA.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">🎯 Engajamento e Retenção - Identificar clusters de insatisfação</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Usar análise de sentimento para identificar clusters de insatisfação antes que se transformem em turnover, e simular intervenções.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> O custo de substituição de um colaborador é de 50-200% do salário anual. Identificar insatisfação precocemente é financeiramente crítico.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Análise de clusters, predição de turnover, intervenções simuladas, ROI de retenção, pulse surveys.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 2.6 -->
+    <div id="mod-2-6" class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center space-x-3">
+          <span class="text-2xl">💰</span>
+          <div>
+            <span class="text-xs text-blue-400 font-bold">MÓDULO 2.6</span>
+            <h2 class="text-2xl font-bold text-neutral-100">Finanças e Análise de Investimentos</h2>
+          </div>
+        </div>
+        <button onclick="openModal('modulo-2-6.html')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold transition-colors">Abrir Módulo</button>
+      </div>
+      <p class="text-neutral-300 mb-4">Simule sentimento de mercado, preveja fluxos de capital e analise riscos geopolíticos com agentes inteligentes.</p>
+      <div class="space-y-2">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">📈 Sentimento de Mercado - Simulação pós-anúncios financeiros</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Simular como investidores, analistas e público reagiriam a anúncios financeiros (resultados trimestrais, guidance, dividendos) antes da divulgação.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Anúncios financeiros mal comunicados podem causar quedas de 15-30% no valor de ações. Simulação prévia permite calibrar a comunicação.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Earnings call simulation, reação de investidores, calibração de guidance, comunicação de resultados.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">🔄 Fluxo de Capital - Prever movimentos após eventos-chave</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Simular como eventos (eleições, desastres naturais, mudanças regulatórias) afetariam fluxos de capital entre setores e geografias.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Fluxos de capital movimentam trilhões diariamente. Antecipar redirecionamentos oferece vantagem competitiva significativa.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Capital flow modeling, event-driven analysis, flight to quality, rotação setorial, safe haven assets.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">🏦 Impacto de Política Monetária - Simular reação a corte/aumento de juros</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Simular como diferentes stakeholders (bancos, empresas, consumidores, investidores) reagiriam a mudanças na taxa de juros.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Decisões de política monetária afetam todos os setores. Antecipar reações permite posicionamento estratégico antes do anúncio oficial.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Simulação de política monetária, transmissão de juros, expectativas de mercado, forward guidance, yield curve.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">💱 Cripto e Exchanges - Caso de hack de exchange como exemplo</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Simular reações do mercado cripto a eventos como hacks de exchanges, regulamentações e mudanças de protocolo.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> O mercado cripto é altamente reativo a sentimento. Simulação pode antecipar pânico, FOMO e movimentos de preço significativos.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Sentimento cripto, FUD analysis, bank run simulation, confiança em exchanges, contágio de mercado.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">📊 Volatilidade e Sentimento - Correlação entre opinião simulada e mercado</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Estudar a correlação entre sentimento simulado por MiroFish e volatilidade real de mercado, validando o poder preditivo do sistema.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Se sentimento simulado correlaciona com movimentos reais, o MiroFish se torna uma ferramenta de previsão financeira poderosa.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> VIX e sentimento, correlação simulado-real, indicadores antecedentes, backtesting de simulações.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-neutral-100 text-sm font-medium text-left">🛡️ Análise de Risco Geopolítico - Stakeholders governo/empresas/consumidores</span>
+          </button>
+          <div class="topic-explanation ml-9 mt-2 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300 space-y-2">
+            <p><strong class="text-blue-400">O que é:</strong> Simular o impacto de eventos geopolíticos (sanções, guerras comerciais, eleições) nas decisões de investimento de diferentes stakeholders.</p>
+            <p><strong class="text-blue-400">Por que aprender:</strong> Risco geopolítico é o fator #1 de preocupação para investidores institucionais em 2025. Simulação permite preparação antecipada.</p>
+            <p><strong class="text-blue-400">Conceitos-chave:</strong> Geopolitical risk scoring, simulação multi-stakeholder, supply chain risk, country risk premium, scenario planning.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mt-12 pt-8 border-t border-dark-700">
+      <a href="../trilha1/index.html" class="flex items-center space-x-2 text-neutral-400 hover:text-emerald-400 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        <span class="font-medium">Fundamentos</span>
+      </a>
+      <a href="../trilha3/index.html" class="flex items-center space-x-2 text-neutral-400 hover:text-purple-400 transition-colors">
+        <span class="font-medium">Avançado</span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Modal -->
+  <div id="module-modal" class="fixed inset-0 z-[100] hidden">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal()"></div>
+    <div class="absolute inset-4 sm:inset-8 bg-dark-900 rounded-2xl overflow-hidden border border-dark-600 flex flex-col">
+      <div class="flex justify-between items-center p-4 border-b border-dark-700">
+        <h3 class="text-lg font-bold text-neutral-100" id="modal-title">Módulo</h3>
+        <button onclick="closeModal()" class="p-2 rounded-lg hover:bg-dark-700 text-neutral-400 hover:text-neutral-100 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+      <iframe id="modal-iframe" class="flex-1 w-full" frameborder="0"></iframe>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-700 mt-16 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>🐟 Ecossistema MiroFish — Curso desenvolvido por <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    function openModal(url) {
+      document.getElementById('module-modal').classList.remove('hidden');
+      document.getElementById('modal-iframe').src = url;
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      document.getElementById('module-modal').classList.add('hidden');
+      document.getElementById('modal-iframe').src = '';
+      document.body.style.overflow = '';
+    }
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 3.2: Memória de Agentes | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124, 58, 237, 0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124, 58, 237, 0.25); }
+    html:not(.dark) .hover\:bg-purple-500\/30:hover { background-color: rgba(124, 58, 237, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Module Header -->
+  <div class="bg-gradient-to-r from-purple-900/30 to-dark-900 border-b border-purple-500/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex items-center gap-3 mb-3">
+        <a href="index.html" class="text-purple-400 hover:text-purple-300 text-sm">← Trilha 3</a>
+        <span class="text-neutral-600">|</span>
+        <span class="bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded text-xs font-bold border border-purple-500/30">Módulo 3.2</span>
+      </div>
+      <h1 class="text-2xl font-bold text-neutral-100 flex items-center gap-3">💾 Memória de Agentes: Zep Cloud vs KuzuDB</h1>
+      <p class="text-neutral-400 mt-2">Persistência de estado, grafos temporais e busca híbrida para agentes LLM</p>
+    </div>
+  </div>
+
+  <!-- Topics -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <div class="p-6 space-y-2">
+
+        <!-- Topic 1 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-neutral-300 text-left">🧠 O Problema da Memória - LLMs são stateless, simulações precisam de continuidade</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">LLMs processam cada request de forma completamente isolada. Quando o agente "Maria" discute política no round 15, no round 16 ela não tem nenhuma lembrança dessa conversa a menos que a informação seja explicitamente re-injetada no prompt. O context window do LLM funciona como "memória de trabalho" limitada (128K-200K tokens nos melhores modelos), mas uma simulação de 100 rounds com 50 agentes pode gerar milhões de tokens de histórico. O problema da memória é: como dar ao agente acesso a informações relevantes do passado sem exceder o context window e sem explodir custos de tokens?</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Sem memória, agentes se contradizem, repetem posts idênticos, e não desenvolvem opiniões consistentes ao longo do tempo. A memória é o que transforma chamadas LLM desconexas em uma simulação social coerente com agentes que parecem "vivos".</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Stateless paradox: cada chamada LLM é uma "amnésia" completa</li><li>Context window como gargalo: 128K tokens ~ 96K palavras ~ poucos rounds completos</li><li>External memory: banco de dados especializado que armazena e recupera memórias</li><li>RAG para memória: retrieval de memórias relevantes antes de cada decisão</li><li>Token economics: cada memória injetada custa tokens, exigindo seleção criteriosa</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 2 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-neutral-300 text-left">☁️ Zep Cloud - Plataforma de engenharia de contexto, grafo temporal Graphiti</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">Zep Cloud é uma plataforma SaaS de engenharia de contexto projetada especificamente para aplicações LLM. Seu componente central é o Graphiti, um engine de grafo temporal de conhecimento que armazena não apenas fatos ("AgentX é conservador") mas também quando esse fato foi estabelecido e como ele mudou ao longo do tempo. O Graphiti usa Neo4j como backend de grafo e combina com embeddings vetoriais para busca semântica. Zep possui certificação SOC 2 Type II, garantindo compliance para uso enterprise com dados sensíveis. A API oferece endpoints para add_memory, search_memory, e get_entity_timeline.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O Zep é a solução de memória padrão do OASIS original. Entender o Graphiti permite otimizar queries de memória, reduzir latência e custos, e avaliar se o trade-off cloud vs local faz sentido para seu caso de uso.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Graphiti engine: grafo temporal com nodes (entidades), edges (relações) e timestamps</li><li>Fact extraction pipeline: LLM extrai fatos estruturados de conversas automaticamente</li><li>Entity timeline: histórico de como uma entidade mudou ao longo do tempo</li><li>SOC 2 Type II: auditoria de segurança para dados enterprise</li><li>Pricing: pay-per-use com tier gratuito limitado a 1000 memories</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 3 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-neutral-300 text-left">🗄️ KuzuDB Local - Alternativa embutida do fork inematds, gratuita</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">KuzuDB é um banco de dados de grafo embutido (embedded) que funciona como uma biblioteca, sem necessidade de servidor separado. Similar ao SQLite para dados relacionais, o KuzuDB armazena grafos em arquivos locais. O fork inematds substituiu toda a camada Zep Cloud por KuzuDB, implementando: armazenamento de memórias como nodes no grafo, relações temporais como edges com timestamps, e busca via Cypher queries combinadas com embeddings locais (sentence-transformers). A migração elimina 100% dos custos de cloud e funciona sem internet.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O KuzuDB é a solução de memória do MiroFish e de todos os forks derivados do inematds. Ele elimina custos recorrentes, permite operação offline, e dá controle total sobre os dados. Para pesquisa acadêmica e prototipagem, é a escolha ideal.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Embedded DB: carrega como biblioteca Python, sem processo separado</li><li>Cypher-compatible: linguagem de consulta padrão para grafos</li><li>Local embeddings: sentence-transformers para vetorização sem API</li><li>Zero-cost: sem licença, sem API keys, sem limites de uso</li><li>Trade-off: menos features que Graphiti (sem fact extraction automática)</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 4 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-neutral-300 text-left">🔍 Busca Híbrida - Score = 0.7 × semântica + 0.3 × BM25</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">A busca híbrida combina dois paradigmas de information retrieval: busca semântica (que converte textos em vetores densos de 384-1536 dimensões e calcula cosine similarity, capturando significado e sinonímia) e BM25 (evolução do TF-IDF que ranqueia por frequência de termos com normalização de comprimento, capturando matches exatos de keywords). O score combinado é: final_score = 0.7 × semantic_score + 0.3 × bm25_score. Esses pesos foram otimizados empiricamente para equilibrar recall semântico com precisão lexical em queries de memória de agentes.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">A qualidade da busca de memória determina diretamente a qualidade das decisões do agente. Se a busca retorna memórias irrelevantes, o agente age de forma incoerente. A busca híbrida maximiza a chance de recuperar memórias verdadeiramente relevantes.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Semantic search: embeddings vetoriais via sentence-transformers ou OpenAI</li><li>BM25: TF-IDF com saturação de frequência e normalização de documento</li><li>Weight tuning: 0.7/0.3 como default, ajustável por domínio</li><li>Reciprocal Rank Fusion (RRF): método alternativo para combinar rankings</li><li>Top-k retrieval: tipicamente k=5 memórias por query para economizar tokens</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 5 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-neutral-300 text-left">📊 Tipos de Memória - Episódica, semântica, temporal</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">Inspirado na neurociência cognitiva, o sistema organiza memórias em três tipos: Memória Episódica armazena eventos específicos com contexto ("No round 23, vi um post do AgentX defendendo desmatamento e fiquei indignada"). Memória Semântica armazena fatos consolidados sem contexto específico ("AgentX é um apoiador do agronegócio"). Memória Temporal armazena a sequência e timing de eventos, permitindo raciocínio causal ("Minha opinião sobre AgentX mudou depois do round 23"). O sistema implementa consolidação: episódicas repetidas são promovidas a semânticas.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Cada tipo de memória serve uma função cognitiva diferente. Episódicas permitem referências específicas ("como daquela vez que..."), semânticas provêm contexto geral rápido, e temporais permitem raciocínio causal. A combinação produz agentes com comportamento mais natural e coerente.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Episódica: eventos com contexto, sujeita a decay temporal (memórias antigas são esquecidas)</li><li>Semântica: fatos consolidados, persistem indefinidamente no knowledge graph</li><li>Temporal: timestamps e ordering para raciocínio causal "A aconteceu antes de B"</li><li>Consolidação: 3+ episódicas similares geram 1 semântica via summarization LLM</li><li>Decay function: relevance = base_score × exp(-λ × age), com λ configurável</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 6 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-neutral-300 text-left">⚡ Performance - P95 < 200ms, 80.32% precisão no benchmark LoCoMO</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">Os benchmarks de performance do sistema de memória mostram: Zep Cloud atinge P95 < 200ms (95% das queries respondem em menos de 200ms) com 80.32% de precisão no benchmark LoCoMO (Long Context Memory Optimization), que mede capacidade de recuperar informações corretas em históricos longos. O KuzuDB local atinge P95 < 50ms (mais rápido por ser local, sem latência de rede) mas com precisão levemente menor (~75%) por usar embeddings locais menores. Em simulações com 1000 agentes e 100 rounds, o KuzuDB processa ~100K queries de memória em ~8 minutos, enquanto o Zep Cloud leva ~25 minutos mas com melhor qualidade de retrieval.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Performance de memória é o gargalo em simulações de escala. Cada agente consulta memória a cada round. Com 10.000 agentes e 50 rounds, são 500.000 queries de memória. A diferença entre 200ms e 50ms por query é a diferença entre 27 horas e 7 horas de simulação.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>P95 latency: 95° percentil, melhor que média para avaliar worst-case</li><li>LoCoMO benchmark: teste padronizado com 1000 queries em históricos de 100K+ tokens</li><li>Zep Cloud: melhor precisão (80.32%), maior latência (rede), custo por query</li><li>KuzuDB local: menor latência (< 50ms), menor precisão (~75%), zero custo marginal</li><li>Scaling factor: overhead de memória cresce linearmente com nº de agentes × rounds</li></ul></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mt-8">
+      <a href="modulo-3-1.html" class="text-purple-400 hover:text-purple-300 text-sm font-medium">← OASIS: Simulação Social</a>
+      <a href="modulo-3-3.html" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">Próximo: Personalização de Agentes →</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-700 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>🐟 Ecossistema MiroFish · Módulo 3.2</p>
+      <p class="mt-1">Projeto <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+
+</body>
+</html>

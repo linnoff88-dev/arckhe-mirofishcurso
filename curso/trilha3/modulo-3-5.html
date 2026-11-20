@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 3.5: BettaFish Profundo - ForumEngine e Debate | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124, 58, 237, 0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124, 58, 237, 0.25); }
+    html:not(.dark) .hover\:bg-purple-500\/30:hover { background-color: rgba(124, 58, 237, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Module Header -->
+  <div class="bg-gradient-to-r from-purple-900/30 to-dark-900 border-b border-purple-500/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex items-center gap-3 mb-3">
+        <a href="index.html" class="text-purple-400 hover:text-purple-300 text-sm">← Trilha 3</a>
+        <span class="text-neutral-600">|</span>
+        <span class="bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded text-xs font-bold border border-purple-500/30">Módulo 3.5</span>
+      </div>
+      <h1 class="text-2xl font-bold text-neutral-100 flex items-center gap-3">🐠 BettaFish Profundo: ForumEngine e Debate</h1>
+      <p class="text-neutral-400 mt-2">Arquitetura de 5 agentes, colisão de cadeias de pensamento e modelos de sentimento</p>
+    </div>
+  </div>
+
+  <!-- Topics -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <div class="p-6 space-y-2">
+
+        <!-- Topic 1 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-neutral-300 text-left">🏗️ Arquitetura dos 5 Agentes - QueryEngine, MediaEngine, InsightEngine, ReportEngine, ForumEngine</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">O BettaFish implementa uma arquitetura de 5 agentes especializados que operam como um pipeline cooperativo: (1) QueryEngine recebe a pergunta do usuário e a decompõe em sub-queries otimizadas para busca - por exemplo, "impacto da IA na educação brasileira" vira ["IA educação Brasil tendências", "edtech Brasil 2024", "professores opinião IA sala de aula"]. (2) MediaEngine executa web crawling assíncrono nas sub-queries, coletando dados de múltiplas fontes com deduplicação. (3) InsightEngine analisa os dados coletados, identificando padrões, contradições e lacunas de informação. (4) ForumEngine promove debate entre perspectivas divergentes para stress-test das conclusões do InsightEngine. (5) ReportEngine gera o relatório final consolidando dados, insights e resultado do debate.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">A arquitetura de 5 agentes é um caso de estudo em design de sistemas multi-agente. Cada agente tem responsabilidade única (Single Responsibility), comunica via shared state (não mensagens diretas), e pode ser substituído independentemente. Este padrão é replicável para outros domínios.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Pipeline flow: Query → Media → Insight → Forum → Report (com feedback loops)</li><li>Shared state: todos os agentes leem/escrevem em um estado compartilhado</li><li>Agent independence: cada agente pode usar LLM diferente (ex: GPT-4 para Insight, Claude para Report)</li><li>Orchestrator: controlador central decide sequência, repetições e early stopping</li><li>Feedback loops: InsightEngine pode pedir mais dados ao MediaEngine</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 2 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-neutral-300 text-left">💬 ForumEngine - Mecanismo de "colisão de cadeia de pensamento"</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">O ForumEngine é o componente mais inovador do BettaFish. Ele implementa "chain-of-thought collision" - um mecanismo onde múltiplos agentes com perspectivas divergentes debatem uma conclusão, cada um expondo seu raciocínio completo (chain-of-thought). O processo: (1) O Orchestrator cria N participantes com perspectivas designadas (otimista, pessimista, cético, técnico, etc.). (2) Na Rodada 1, cada participante apresenta sua análise independente. (3) Nas rodadas subsequentes, cada participante lê os argumentos dos outros e responde: concordando com evidência, refutando com contra-evidência, ou refinando sua posição. (4) O debate continua até convergência (posições estabilizam) ou até max_rounds. (5) Um moderador LLM sintetiza o debate em: pontos de consenso, pontos de dissenso, e nível de confiança por conclusão.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O ForumEngine é o que diferencia o BettaFish de sistemas single-agent. Um agente sozinho produz uma perspectiva; o debate revela incertezas, contradições e nuances que um agente isolado nunca capturaria. É a diferença entre um artigo de opinião e um painel de especialistas.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>CoT collision: raciocínios explícitos se confrontam diretamente</li><li>Perspective assignment: cada participante recebe uma perspectiva designada</li><li>Devil's advocate: pelo menos 1 participante argumenta contra a conclusão principal</li><li>Convergence criterion: posições mudam menos que threshold por 2 rounds consecutivos</li><li>Confidence scoring: cada conclusão recebe score 0-1 baseado no nível de consenso</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 3 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-neutral-300 text-left">🔄 Padrão Publish-Subscribe - Logs compartilhados com moderação LLM</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">A comunicação entre os 5 agentes do BettaFish segue o padrão publish-subscribe (pub-sub): cada agente publica suas conclusões em um shared log (um registro central), e os outros agentes se inscrevem para receber atualizações quando há novas entradas relevantes para seu trabalho. Um moderador LLM atua como filtro: ele lê cada nova publicação e decide se ela (a) deve ser encaminhada a outros agentes, (b) é redundante e deve ser descartada, ou (c) indica que o debate não está progredindo e precisa de nova direção. Este padrão desacopla os agentes - nenhum agente precisa saber da existência dos outros, apenas do log compartilhado.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O padrão pub-sub com moderação LLM resolve dois problemas clássicos de sistemas multi-agente: (1) acoplamento - adicionar ou remover agentes não exige mudanças nos existentes; (2) degeneração - sem moderação, agentes tendem a concordar vazio ou debater em círculos. O moderador LLM mantém o debate produtivo.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Shared log: append-only log de mensagens com timestamps e agent_id</li><li>Topic-based subscription: agentes recebem apenas mensagens de tópicos relevantes</li><li>LLM moderator: filtra redundância, detecta deadlock, sugere nova direção</li><li>Decoupling: agentes não se referenciam diretamente, apenas ao log</li><li>Replay capability: log pode ser replayed para debug ou análise post-mortem</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 4 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-neutral-300 text-left">📊 Modelos de Sentimento - 5 abordagens (Transformer, BERT LoRA, GPT-2 LoRA, Qwen3, SVM)</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">O BettaFish implementa 5 modelos de análise de sentimento intercambiáveis via plugin system: (1) Transformer pré-treinado (cardiffnlp/twitter-roberta-base-sentiment) - baseline rápido, ~85% accuracy em inglês. (2) BERT + LoRA fine-tuning - BERT base adaptado com Low-Rank Adaptation (rank=8, alpha=16) em dados do domínio, ~91% accuracy, requer GPU para fine-tuning. (3) GPT-2 + LoRA - modelo generativo adaptado para classificação, útil quando se quer tanto label quanto justificativa textual. (4) Qwen3 via API - modelo multilíngue que funciona bem em português sem fine-tuning, custo por chamada. (5) SVM + TF-IDF - modelo clássico de machine learning, sem GPU, sem dependência de API, ~80% accuracy, latência < 1ms.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Análise de sentimento é essencial para medir polarização, mapear opinião pública e detectar mudanças de humor em simulações. Ter 5 opções permite otimizar para cada cenário: SVM para prototipagem rápida, BERT LoRA para produção com GPU, Qwen3 para análise multilíngue.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>LoRA: adapta 0.1% dos parâmetros do modelo base, fine-tuning em minutos</li><li>Plugin system: models/ directory com interface padronizada predict(text) → {label, score}</li><li>Trade-off matrix: accuracy vs latência vs custo vs multilíngue por modelo</li><li>Ensemble: média ponderada de múltiplos modelos para maior robustez</li><li>PT-BR support: Qwen3 e SVM com dados brasileiros são as melhores opções</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 5 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-neutral-300 text-left">📈 Pipeline de Processamento - Query → Ciclos de Forum → IR → Renderização</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">O pipeline completo do BettaFish do input ao output: (1) Query Stage (~30s): QueryEngine decompõe a pergunta em 3-7 sub-queries otimizadas. (2) Collection Stage (~2-5min): MediaEngine faz crawling assíncrono, coleta 50-200 documentos, deduplica e filtra por relevância. (3) Analysis Stage (~1-2min): InsightEngine identifica padrões, contradições e gaps nos dados. (4) Forum Stage (~3-8min, configurável): N ciclos de debate entre 3-5 perspectivas, com moderação LLM. (5) IR Consolidation (~30s): resultados do debate são ranqueados por evidência e consenso. (6) Rendering Stage (~1-2min): ReportEngine gera Markdown estruturado com dados, citações e visualizações. Total: 8-18 minutos para uma query completa em modo multi-agente.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Entender o pipeline permite: diagnosticar gargalos (Forum Stage tipicamente domina), otimizar custos (reduzir ciclos de forum para queries simples), e customizar estágios individuais sem afetar o resto do pipeline.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Stage isolation: cada estágio pode falhar e ser retried independentemente</li><li>Forum cycles: configurável 1-10, default 3, custo dominante do pipeline</li><li>Caching: resultados de Collection são cached para re-runs rápidos</li><li>Streaming: relatório pode ser renderizado progressivamente seção por seção</li><li>Cost breakdown: Collection ~20%, Forum ~50%, Rendering ~20%, outros ~10%</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 6 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-neutral-300 text-left">📱 Modos de Execução - Multi-agente, agente isolado, apenas crawler, apenas relatório</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">O BettaFish suporta 4 modos de execução selecionáveis via flag --mode: (1) full - Pipeline completo com todos os 5 engines, máxima qualidade, 8-18 minutos, custo mais alto. (2) single - Apenas 1 engine (ex: --mode single --engine insight), útil para debug e testes de componentes individuais. (3) crawl-only - Apenas Collection stage, gera dataset de documentos sem análise LLM, útil para preparar dados offline ou para pipelines customizados. (4) report-only - Usa dados pré-coletados (de um crawl-only anterior ou de uma run anterior cached), regenera relatório com parâmetros diferentes sem recoletar dados, útil para iteração rápida no formato do relatório.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O modo correto para cada situação otimiza custo e tempo drasticamente. Debug em modo full desperdiça dinheiro; produção em modo single perde qualidade. Crawl-only + report-only separados permitem workflow de "coletar uma vez, analisar muitas vezes".</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>--mode full: pipeline completo, produção, ~$0.50-2.00 por query</li><li>--mode single --engine X: testa 1 engine isoladamente, debug</li><li>--mode crawl-only: coleta dados sem LLM analysis, ~$0.01 por query</li><li>--mode report-only --data-dir ./cache: reutiliza dados coletados, ~$0.20 por query</li><li>Composability: crawl-only → (iterate) → report-only é o workflow mais custo-eficiente</li></ul></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mt-8">
+      <a href="modulo-3-4.html" class="text-purple-400 hover:text-purple-300 text-sm font-medium">← ReportAgent e ReACT</a>
+      <a href="modulo-3-6.html" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">Próximo: Customização e Forks →</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-700 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>🐟 Ecossistema MiroFish · Módulo 3.5</p>
+      <p class="mt-1">Projeto <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+
+</body>
+</html>

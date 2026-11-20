@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trilha 1 - Fundamentos | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5, 150, 105, 0.18); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span>
+          </a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span>
+          </a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <div class="bg-gradient-to-b from-emerald-900/30 to-dark-900 border-b border-dark-700">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-sm font-semibold rounded-full mb-4">TRILHA 1</span>
+      <h1 class="text-4xl font-extrabold text-neutral-100 mb-4">🧠 Fundamentos</h1>
+      <p class="text-neutral-300 text-lg max-w-3xl mb-6">Entenda os conceitos por trás da simulação multiagente, GraphRAG, inteligência de enxame e como o ecossistema MiroFish funciona de ponta a ponta.</p>
+      <div class="flex flex-wrap gap-4 text-sm text-neutral-400">
+        <span class="flex items-center gap-1.5"><span class="text-emerald-400 font-bold">6</span> Módulos</span>
+        <span class="text-neutral-600">|</span>
+        <span class="flex items-center gap-1.5"><span class="text-emerald-400 font-bold">36</span> Tópicos</span>
+        <span class="text-neutral-600">|</span>
+        <span class="flex items-center gap-1.5">~<span class="text-emerald-400 font-bold">3h</span></span>
+        <span class="text-neutral-600">|</span>
+        <span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded text-xs font-semibold">Básico</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Simple Cards Grid -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
+      <a href="modulo-1-1.html" class="block bg-dark-800 border border-dark-700 rounded-xl p-5 hover:border-emerald-500/30 hover:bg-emerald-500/10 transition-all group">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 text-lg font-bold flex items-center justify-center flex-shrink-0">1</span>
+          <div>
+            <h3 class="text-neutral-100 font-semibold group-hover:text-emerald-400 transition-colors">🌐 O que é o MiroFish</h3>
+            <p class="text-neutral-400 text-sm">O motor de predição multiagente</p>
+          </div>
+        </div>
+      </a>
+      <a href="modulo-1-2.html" class="block bg-dark-800 border border-dark-700 rounded-xl p-5 hover:border-emerald-500/30 hover:bg-emerald-500/10 transition-all group">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 text-lg font-bold flex items-center justify-center flex-shrink-0">2</span>
+          <div>
+            <h3 class="text-neutral-100 font-semibold group-hover:text-emerald-400 transition-colors">🧠 Inteligência de Enxame</h3>
+            <p class="text-neutral-400 text-sm">Comportamento coletivo emergente</p>
+          </div>
+        </div>
+      </a>
+      <a href="modulo-1-3.html" class="block bg-dark-800 border border-dark-700 rounded-xl p-5 hover:border-emerald-500/30 hover:bg-emerald-500/10 transition-all group">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 text-lg font-bold flex items-center justify-center flex-shrink-0">3</span>
+          <div>
+            <h3 class="text-neutral-100 font-semibold group-hover:text-emerald-400 transition-colors">📊 GraphRAG e Grafos de Conhecimento</h3>
+            <p class="text-neutral-400 text-sm">A evolução da recuperação de contexto</p>
+          </div>
+        </div>
+      </a>
+      <a href="modulo-1-4.html" class="block bg-dark-800 border border-dark-700 rounded-xl p-5 hover:border-emerald-500/30 hover:bg-emerald-500/10 transition-all group">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 text-lg font-bold flex items-center justify-center flex-shrink-0">4</span>
+          <div>
+            <h3 class="text-neutral-100 font-semibold group-hover:text-emerald-400 transition-colors">🔗 O Ecossistema Completo</h3>
+            <p class="text-neutral-400 text-sm">MindSpider, BettaFish e MiroFish</p>
+          </div>
+        </div>
+      </a>
+      <a href="modulo-1-5.html" class="block bg-dark-800 border border-dark-700 rounded-xl p-5 hover:border-emerald-500/30 hover:bg-emerald-500/10 transition-all group">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 text-lg font-bold flex items-center justify-center flex-shrink-0">5</span>
+          <div>
+            <h3 class="text-neutral-100 font-semibold group-hover:text-emerald-400 transition-colors">🏗️ Arquitetura Técnica</h3>
+            <p class="text-neutral-400 text-sm">Frontend, Backend e Motor de Simulação</p>
+          </div>
+        </div>
+      </a>
+      <a href="modulo-1-6.html" class="block bg-dark-800 border border-dark-700 rounded-xl p-5 hover:border-emerald-500/30 hover:bg-emerald-500/10 transition-all group">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 text-lg font-bold flex items-center justify-center flex-shrink-0">6</span>
+          <div>
+            <h3 class="text-neutral-100 font-semibold group-hover:text-emerald-400 transition-colors">🤖 LLMs como Agentes</h3>
+            <p class="text-neutral-400 text-sm">Personas, memória e ferramentas</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Detailed Cards -->
+    <h2 class="text-2xl font-bold text-neutral-100 mb-6">Conteúdo Detalhado</h2>
+
+    <!-- Module 1.1 Detailed -->
+    <div class="bg-dark-800 border border-dark-700 rounded-xl p-6 mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 text-lg font-bold flex items-center justify-center flex-shrink-0">1</span>
+          <div>
+            <h3 class="text-xl font-bold text-neutral-100">🌐 O que é o MiroFish</h3>
+            <p class="text-neutral-400 text-sm">6 tópicos</p>
+          </div>
+        </div>
+        <button onclick="openModal('modal-1-1')" class="px-4 py-2 bg-emerald-500/20 text-emerald-400 rounded-lg text-sm font-semibold hover:bg-emerald-500/30 transition-colors">Abrir Módulo</button>
+      </div>
+      <div class="space-y-2">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-neutral-300 text-sm">🎯 Visão Geral - O motor de predição multiagente</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> O MiroFish é um motor de predição que simula mundos digitais paralelos com centenas de agentes autônomos controlados por LLMs, cada um com personalidade e memória únicas.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> Entender a visão geral é essencial para contextualizar cada componente do sistema e compreender como a predição multiagente difere de métodos tradicionais.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Simulação multiagente, predição comportamental, mundos digitais paralelos, agentes autônomos com LLM.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-neutral-300 text-sm">🌍 Mundo Digital Paralelo - Como funciona a ideia central</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> A ideia central é criar um "espelho" digital da sociedade, onde agentes simulam comportamentos reais baseados em dados coletados e grafos de conhecimento.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> Compreender o conceito de mundo paralelo ajuda a entender por que os resultados do MiroFish são mais ricos que pesquisas tradicionais.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Simulação social, espelho digital, comportamento emergente, representatividade populacional.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-neutral-300 text-sm">📊 As 5 Etapas do Pipeline</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> O pipeline do MiroFish consiste em: GraphRAG (construção de conhecimento), Setup (configuração do ambiente), Simulação (execução paralela), Relatório (geração de insights) e Interação (exploração profunda).</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> Conhecer as 5 etapas permite entender o fluxo completo de uma simulação, desde a preparação até a análise dos resultados.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> GraphRAG building, environment setup, parallel simulation, report generation, deep interaction.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-neutral-300 text-sm">🏗️ Origem e Contexto</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> O MiroFish foi criado por BaiFu em apenas 10 dias de "Vibe Coding" e recebeu investimento de 30 milhões de yuan do Shanda Group, validando o potencial da abordagem.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> A história de origem revela a filosofia de desenvolvimento rápido e o reconhecimento do mercado ao potencial da simulação multiagente.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Vibe Coding, BaiFu, Shanda Group, prototipagem rápida, validação de mercado.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-neutral-300 text-sm">🔄 Fork inematds - Versão em PT-BR</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> O fork inematds trouxe o MiroFish para PT-BR e inglês, adicionou suporte multi-LLM (DeepSeek, Gemini, Qwen, Kimi) e substituiu o Zep Cloud pelo KuzuDB local para funcionar sem dependências externas.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> O fork é a versão recomendada para uso, pois resolve limitações do original como dependência de serviços pagos e suporte apenas a chinês.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Multi-LLM, KuzuDB, internacionalização, independência de serviços cloud.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-neutral-300 text-sm">🎯 Para Quem Serve</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> O MiroFish serve pesquisadores, analistas de mercado, equipes de marketing, cientistas políticos e qualquer profissional que precise prever reações coletivas a eventos ou produtos.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> Identificar o público-alvo ajuda a calibrar expectativas e entender em quais cenários a simulação multiagente é mais valiosa que outros métodos.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Casos de uso, análise de mercado, predição social, pesquisa de opinião, teste de cenários.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 1.2 Detailed -->
+    <div class="bg-dark-800 border border-dark-700 rounded-xl p-6 mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 text-lg font-bold flex items-center justify-center flex-shrink-0">2</span>
+          <div>
+            <h3 class="text-xl font-bold text-neutral-100">🧠 Inteligência de Enxame</h3>
+            <p class="text-neutral-400 text-sm">6 tópicos</p>
+          </div>
+        </div>
+        <button onclick="openModal('modal-1-2')" class="px-4 py-2 bg-emerald-500/20 text-emerald-400 rounded-lg text-sm font-semibold hover:bg-emerald-500/30 transition-colors">Abrir Módulo</button>
+      </div>
+      <div class="space-y-2">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-neutral-300 text-sm">🐜 O que é Swarm Intelligence</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> Swarm Intelligence é o comportamento inteligente que emerge de grupos de agentes simples interagindo entre si, sem coordenação central, inspirado em formigas, abelhas e cardumes de peixes.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> É o princípio fundamental que torna o MiroFish possível - a inteligência coletiva dos agentes produz insights que nenhum agente individual poderia gerar.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Comportamento emergente, inteligência coletiva, auto-organização, sistemas complexos adaptativos.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-neutral-300 text-sm">🔄 Princípios Fundamentais</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> Os três pilares da inteligência de enxame: descentralização (sem líder central), interação local (cada agente age com base no que vê ao redor) e auto-organização (padrões globais surgem de regras locais).</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> Esses princípios explicam como centenas de agentes no MiroFish podem gerar previsões coerentes sem instruções explícitas de coordenação.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Descentralização, interação local, auto-organização, feedback positivo e negativo, estigmergia.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-neutral-300 text-sm">🎭 Agentes no MiroFish</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> Cada agente no MiroFish tem: personalidade única (gerada a partir do grafo de conhecimento), memória de interações passadas e regras comportamentais que guiam suas decisões.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> Entender a anatomia de um agente é essencial para configurar simulações realistas e interpretar os resultados corretamente.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Persona, memória episódica, regras comportamentais, prompt de personalidade, contexto social.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-neutral-300 text-sm">📈 Fenômenos Emergentes</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> Na simulação surgem fenômenos como polarização de opinião, efeito manada (agentes seguindo a maioria), formação de coalizões e cascatas de informação.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> Esses fenômenos são os sinais mais valiosos da simulação, pois revelam dinâmicas sociais que pesquisas tradicionais não conseguem capturar.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Polarização, efeito manada, cascata informacional, formação de coalizões, ponto de virada social.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-neutral-300 text-sm">⚖️ Comparação com Métodos Tradicionais</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> Comparação direta entre simulação multiagente e métodos como pesquisas de opinião, painéis de especialistas e análise de dados históricos, mostrando vantagens e limitações de cada abordagem.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> Saber quando usar simulação vs métodos tradicionais é fundamental para escolher a ferramenta certa para cada problema.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Pesquisa quantitativa, opinião de especialistas, análise histórica, viés de amostragem, custo-benefício.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-neutral-300 text-sm">🌊 Escala e Diversidade</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> A relação entre o número de agentes e a qualidade dos resultados: mais agentes significam mais diversidade de perspectivas e fenômenos emergentes mais ricos e realistas.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> Entender a escala ajuda a dimensionar simulações corretamente - poucas vezes é melhor que muitas, e vice-versa.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Escala de simulação, diversidade de personas, representatividade, custo computacional, lei dos grandes números.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 1.3 Detailed -->
+    <div class="bg-dark-800 border border-dark-700 rounded-xl p-6 mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 text-lg font-bold flex items-center justify-center flex-shrink-0">3</span>
+          <div>
+            <h3 class="text-xl font-bold text-neutral-100">📊 GraphRAG e Grafos de Conhecimento</h3>
+            <p class="text-neutral-400 text-sm">6 tópicos</p>
+          </div>
+        </div>
+        <button onclick="openModal('modal-1-3')" class="px-4 py-2 bg-emerald-500/20 text-emerald-400 rounded-lg text-sm font-semibold hover:bg-emerald-500/30 transition-colors">Abrir Módulo</button>
+      </div>
+      <div class="space-y-2">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-neutral-300 text-sm">📚 RAG Tradicional vs GraphRAG</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> RAG tradicional busca chunks de texto por similaridade vetorial. GraphRAG adiciona relações estruturais entre entidades, permitindo navegação contextual e respostas que consideram conexões entre conceitos.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> GraphRAG é o alicerce que permite ao MiroFish construir personas ricas e contextualizadas a partir de documentos e dados coletados.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> RAG, embeddings, chunks, grafos de conhecimento, busca vetorial vs estrutural.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-neutral-300 text-sm">🕸️ Grafos de Conhecimento</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> Estruturas de dados compostas por entidades (nós) e relações (arestas) que representam conhecimento de forma navegável, como "Pessoa A trabalha_em Empresa B" ou "Produto X compete_com Produto Y".</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> Os grafos de conhecimento são a base da memória compartilhada dos agentes, permitindo que eles "conheçam" o contexto da simulação.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Nós, arestas, triplas (sujeito-predicado-objeto), ontologia, travessia de grafo.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-neutral-300 text-sm">🔍 Busca Híbrida</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> Combinação de três métodos de busca: semântica (por significado), BM25 (por palavras-chave) e travessia de grafo (por relações estruturais), maximizando a precisão da recuperação de contexto.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> A busca híbrida é o que garante que os agentes recebam o contexto mais relevante possível durante a simulação.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Busca semântica, BM25, travessia de grafo, reranking, fusão de resultados.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-neutral-300 text-sm">🏗️ Zep Cloud vs KuzuDB</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> O MiroFish original usa Zep Cloud (serviço pago na nuvem). O fork inematds substituiu pelo KuzuDB, um banco de grafos embarcado e local, eliminando custos e dependências externas.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> A escolha entre nuvem e local afeta custo, privacidade, latência e facilidade de deploy. É uma decisão arquitetural fundamental.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Zep Cloud, KuzuDB, banco de grafos embarcado, latência, privacidade de dados.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-neutral-300 text-sm">🧩 Como o MiroFish Usa GraphRAG</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> O fluxo completo: documentos são processados, entidades e relações extraídas por LLM, armazenadas no grafo, e depois consultadas para gerar personas e alimentar o contexto dos agentes durante a simulação.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> Entender esse fluxo é essencial para preparar dados de entrada adequados e obter simulações de alta qualidade.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Extração de entidades, construção de grafo, geração de personas, contextualização de agentes.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-neutral-300 text-sm">💡 Graphiti e Temporalidade</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> Graphiti é a camada que adiciona memória temporal ao grafo de conhecimento, registrando quando fatos foram aprendidos e resolvendo conflitos quando informações mudam ao longo do tempo.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> A temporalidade é crucial para simulações que modelam mudanças de opinião e evolução de cenários ao longo do tempo.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Memória temporal, resolução de conflitos, versionamento de fatos, Graphiti, evolução de conhecimento.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 1.4 Detailed -->
+    <div class="bg-dark-800 border border-dark-700 rounded-xl p-6 mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 text-lg font-bold flex items-center justify-center flex-shrink-0">4</span>
+          <div>
+            <h3 class="text-xl font-bold text-neutral-100">🔗 O Ecossistema Completo</h3>
+            <p class="text-neutral-400 text-sm">6 tópicos</p>
+          </div>
+        </div>
+        <button onclick="openModal('modal-1-4')" class="px-4 py-2 bg-emerald-500/20 text-emerald-400 rounded-lg text-sm font-semibold hover:bg-emerald-500/30 transition-colors">Abrir Módulo</button>
+      </div>
+      <div class="space-y-2">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-neutral-300 text-sm">🕷️ MindSpider - O crawler de opinião pública</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> MindSpider é um crawler de IA que coleta opinião pública de 13+ plataformas (Twitter/X, Reddit, Weibo, etc.). Foi arquivado mas suas funcionalidades foram integradas ao BettaFish.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> A coleta de dados é o primeiro passo para qualquer simulação - sem dados reais, as personas dos agentes não refletem a realidade.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Web crawling, coleta de opinião, plataformas sociais, dados brutos, pré-processamento.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-neutral-300 text-sm">🐠 BettaFish - O analista multiagente</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> BettaFish (39.6k stars) é um sistema de análise com 5 agentes especializados: QueryEngine, MediaEngine, InsightEngine, ReportEngine e ForumEngine, cada um responsável por uma etapa da análise.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> O BettaFish alimenta o MiroFish com análises estruturadas, sendo a ponte entre dados brutos e simulações informadas.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Agentes especializados, pipeline de análise, QueryEngine, MediaEngine, InsightEngine, ReportEngine, ForumEngine.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-neutral-300 text-sm">🐟 MiroFish - O simulador/preditor</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> O MiroFish é o coração do ecossistema: recebe dados do BettaFish, constrói um grafo de conhecimento, gera agentes com personalidades únicas e simula suas interações para prever comportamentos coletivos.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> É o componente que transforma análises em predições acionáveis, o objetivo final de toda a esteira.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Motor de simulação, predição comportamental, agentes autônomos, relatório de insights.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-neutral-300 text-sm">🔄 A Esteira Completa</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> O fluxo completo do ecossistema: Coleta (MindSpider/BettaFish) → Análise (BettaFish) → Predição (MiroFish), onde cada etapa alimenta a próxima com dados processados e estruturados.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> Visualizar a esteira completa ajuda a planejar projetos de ponta a ponta e entender quais dados cada componente precisa.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Pipeline de dados, integração de sistemas, fluxo de trabalho, automação de análise.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-neutral-300 text-sm">🔎 DeepSearchAgent</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> DeepSearchAgent é uma ferramenta de pesquisa profunda que pode ser usada antes da simulação para enriquecer o contexto, buscando informações detalhadas sobre o tema a ser simulado.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> A qualidade da simulação depende diretamente da qualidade do contexto. O DeepSearchAgent garante que o grafo de conhecimento seja rico e atualizado.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Pesquisa profunda, enriquecimento de contexto, preparação de dados, qualidade de simulação.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-neutral-300 text-sm">🗺️ Mapa de Relações</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> Diagrama visual de como cada componente do ecossistema se conecta: entradas, saídas, dependências e fluxos de dados entre MindSpider, BettaFish, MiroFish e DeepSearchAgent.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> O mapa de relações é a referência rápida para entender a arquitetura geral do ecossistema e planejar integrações.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Arquitetura de sistemas, dependências, fluxo de dados, integração, APIs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 1.5 Detailed -->
+    <div class="bg-dark-800 border border-dark-700 rounded-xl p-6 mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 text-lg font-bold flex items-center justify-center flex-shrink-0">5</span>
+          <div>
+            <h3 class="text-xl font-bold text-neutral-100">🏗️ Arquitetura Técnica</h3>
+            <p class="text-neutral-400 text-sm">6 tópicos</p>
+          </div>
+        </div>
+        <button onclick="openModal('modal-1-5')" class="px-4 py-2 bg-emerald-500/20 text-emerald-400 rounded-lg text-sm font-semibold hover:bg-emerald-500/30 transition-colors">Abrir Módulo</button>
+      </div>
+      <div class="space-y-2">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-neutral-300 text-sm">🖥️ Frontend - Vue.js 3 + Vite + D3.js</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> A interface do MiroFish é construída com Vue.js 3 e Vite para desenvolvimento rápido, D3.js para visualizações interativas de grafos e simulações, servida na porta 3000.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> Entender o frontend permite customizar visualizações e criar interfaces personalizadas para casos de uso específicos.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Vue.js 3, Vite, D3.js, SPA, componentes reativos, visualização de grafos.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-neutral-300 text-sm">⚙️ Backend - Python + Flask</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> O backend é um servidor Python com Flask na porta 5001, responsável por orquestrar simulações, gerenciar o grafo de conhecimento e servir APIs para o frontend.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> O backend é onde a lógica de negócio vive - compreendê-lo é essencial para estender funcionalidades ou debugar problemas.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Flask, APIs REST, orquestração, gestão de estado, WebSocket para simulações em tempo real.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-neutral-300 text-sm">🤖 Motor de Simulação - OASIS</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> OASIS (CAMEL-AI) é o motor de simulação social com 23 ações sociais disponíveis para agentes, suportando simulação simultânea em ambientes tipo Twitter e Reddit.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> O OASIS define o que os agentes podem fazer na simulação - entendê-lo permite criar cenários mais realistas e complexos.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> OASIS, CAMEL-AI, ações sociais, ambientes de simulação, Twitter/Reddit simultâneo.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-neutral-300 text-sm">🧠 Camada de IA - LLMs como cérebro</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> Os LLMs funcionam como o "cérebro" de cada agente, processando contexto, gerando respostas em caráter e tomando decisões baseadas na personalidade e memória do agente.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> A escolha e configuração do LLM afeta diretamente a qualidade e o custo da simulação.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> LLMs, prompts de sistema, temperature, tokens, custo por simulação.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-neutral-300 text-sm">💾 Persistência de Dados</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> O MiroFish usa SQLite para dados estruturados, JSON para configurações e resultados de simulação, e o filesystem para armazenar logs e artefatos gerados.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> Saber onde os dados são armazenados permite análises offline, backup de simulações e integração com ferramentas externas.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> SQLite, JSON, filesystem, persistência, backup de simulações.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-neutral-300 text-sm">🐳 Deploy - Docker Compose</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> O MiroFish pode ser implantado via Docker Compose (orquestrando frontend, backend e banco de dados) ou através de scripts npm para desenvolvimento local.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> Saber fazer deploy é essencial para colocar simulações em produção ou compartilhar o ambiente com equipes.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Docker, Docker Compose, containers, scripts npm, variáveis de ambiente.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 1.6 Detailed -->
+    <div class="bg-dark-800 border border-dark-700 rounded-xl p-6 mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 text-lg font-bold flex items-center justify-center flex-shrink-0">6</span>
+          <div>
+            <h3 class="text-xl font-bold text-neutral-100">🤖 LLMs como Agentes</h3>
+            <p class="text-neutral-400 text-sm">6 tópicos</p>
+          </div>
+        </div>
+        <button onclick="openModal('modal-1-6')" class="px-4 py-2 bg-emerald-500/20 text-emerald-400 rounded-lg text-sm font-semibold hover:bg-emerald-500/30 transition-colors">Abrir Módulo</button>
+      </div>
+      <div class="space-y-2">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-neutral-300 text-sm">🧩 O Problema do Agente</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> Um LLM sozinho não é um agente - ele apenas gera texto. Para ser um agente, precisa de memória persistente, capacidade de usar ferramentas e um loop de raciocínio-ação-observação.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> Entender essa distinção é fundamental para projetar agentes eficazes e evitar o erro comum de tratar o LLM como solução completa.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> LLM vs agente, memória, ferramentas, loop de ação, estado persistente.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-neutral-300 text-sm">🔄 Padrão ReACT</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> O padrão ReACT (Reasoning + Acting) combina raciocínio (Thought), ação (Action) e observação (Observation) em um loop contínuo, permitindo que agentes resolvam problemas complexos passo a passo.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> ReACT é a arquitetura cognitiva usada pelos agentes do MiroFish para tomar decisões durante a simulação.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Reasoning, Acting, Observation, loop cognitivo, tomada de decisão, cadeia de pensamento.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-neutral-300 text-sm">🎭 Criação de Personas</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> O MiroFish gera personalidades únicas para cada agente a partir do grafo de conhecimento, definindo opiniões, valores, estilo de comunicação e nível de influência social.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> A qualidade das personas determina o realismo da simulação - personas diversas e bem construídas geram resultados mais confiáveis.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Geração de personas, prompt de personalidade, diversidade, realismo, grafo de conhecimento como base.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-neutral-300 text-sm">💭 Memória de Longo Prazo</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> Os agentes possuem três tipos de memória: episódica (eventos vivenciados), semântica (conhecimento geral) e temporal (quando cada informação foi aprendida ou mudou).</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> A memória é o que torna os agentes consistentes ao longo da simulação, evitando contradições e permitindo evolução de opinião.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Memória episódica, semântica, temporal, persistência, consistência comportamental.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-neutral-300 text-sm">🛠️ Ferramentas dos Agentes</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> Os agentes do BettaFish/MiroFish têm acesso a ferramentas como insight_forge (geração de insights), panorama_search (busca contextual) e interview_agents (entrevistas entre agentes).</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> As ferramentas estendem as capacidades dos agentes além da geração de texto, permitindo ações concretas durante a simulação.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Tool use, insight_forge, panorama_search, interview_agents, function calling.</p>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-dark-700 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-neutral-300 text-sm">🎯 Diferentes LLMs para Diferentes Tarefas</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-3 bg-dark-700 rounded-lg text-sm text-neutral-300">
+            <p class="mb-2"><strong class="text-emerald-400">O que é:</strong> O ecossistema usa diferentes LLMs para diferentes tarefas: DeepSeek para raciocínio profundo, Gemini para análise multimodal, Qwen para tarefas em chinês e Kimi para contextos longos.</p>
+            <p class="mb-2"><strong class="text-emerald-400">Por que aprender:</strong> Escolher o LLM certo para cada tarefa otimiza custo e qualidade - nem sempre o modelo mais caro é o mais adequado.</p>
+            <p><strong class="text-emerald-400">Conceitos-chave:</strong> Multi-LLM, DeepSeek, Gemini, Qwen, Kimi, especialização por tarefa, otimização de custo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mt-12 pt-6 border-t border-dark-700">
+      <a href="../../index.html" class="flex items-center gap-2 text-neutral-400 hover:text-emerald-400 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        Voltar ao Início
+      </a>
+      <a href="../trilha2/index.html" class="flex items-center gap-2 text-neutral-400 hover:text-blue-400 transition-colors">
+        Próxima: Aplicações Empresariais
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Modals -->
+  <div id="modal-1-1" class="modal hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/70" onclick="closeModal()"></div>
+    <div class="relative bg-dark-900 rounded-2xl w-full max-w-5xl h-[90vh] flex flex-col border border-dark-600">
+      <div class="flex items-center justify-between p-4 border-b border-dark-700">
+        <h3 class="text-lg font-bold text-neutral-100">🌐 Módulo 1.1 - O que é o MiroFish</h3>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-neutral-100 text-2xl">&times;</button>
+      </div>
+      <iframe src="modulo-1-1.html" class="flex-1 w-full rounded-b-2xl"></iframe>
+    </div>
+  </div>
+
+  <div id="modal-1-2" class="modal hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/70" onclick="closeModal()"></div>
+    <div class="relative bg-dark-900 rounded-2xl w-full max-w-5xl h-[90vh] flex flex-col border border-dark-600">
+      <div class="flex items-center justify-between p-4 border-b border-dark-700">
+        <h3 class="text-lg font-bold text-neutral-100">🧠 Módulo 1.2 - Inteligência de Enxame</h3>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-neutral-100 text-2xl">&times;</button>
+      </div>
+      <iframe src="modulo-1-2.html" class="flex-1 w-full rounded-b-2xl"></iframe>
+    </div>
+  </div>
+
+  <div id="modal-1-3" class="modal hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/70" onclick="closeModal()"></div>
+    <div class="relative bg-dark-900 rounded-2xl w-full max-w-5xl h-[90vh] flex flex-col border border-dark-600">
+      <div class="flex items-center justify-between p-4 border-b border-dark-700">
+        <h3 class="text-lg font-bold text-neutral-100">📊 Módulo 1.3 - GraphRAG e Grafos de Conhecimento</h3>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-neutral-100 text-2xl">&times;</button>
+      </div>
+      <iframe src="modulo-1-3.html" class="flex-1 w-full rounded-b-2xl"></iframe>
+    </div>
+  </div>
+
+  <div id="modal-1-4" class="modal hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/70" onclick="closeModal()"></div>
+    <div class="relative bg-dark-900 rounded-2xl w-full max-w-5xl h-[90vh] flex flex-col border border-dark-600">
+      <div class="flex items-center justify-between p-4 border-b border-dark-700">
+        <h3 class="text-lg font-bold text-neutral-100">🔗 Módulo 1.4 - O Ecossistema Completo</h3>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-neutral-100 text-2xl">&times;</button>
+      </div>
+      <iframe src="modulo-1-4.html" class="flex-1 w-full rounded-b-2xl"></iframe>
+    </div>
+  </div>
+
+  <div id="modal-1-5" class="modal hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/70" onclick="closeModal()"></div>
+    <div class="relative bg-dark-900 rounded-2xl w-full max-w-5xl h-[90vh] flex flex-col border border-dark-600">
+      <div class="flex items-center justify-between p-4 border-b border-dark-700">
+        <h3 class="text-lg font-bold text-neutral-100">🏗️ Módulo 1.5 - Arquitetura Técnica</h3>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-neutral-100 text-2xl">&times;</button>
+      </div>
+      <iframe src="modulo-1-5.html" class="flex-1 w-full rounded-b-2xl"></iframe>
+    </div>
+  </div>
+
+  <div id="modal-1-6" class="modal hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/70" onclick="closeModal()"></div>
+    <div class="relative bg-dark-900 rounded-2xl w-full max-w-5xl h-[90vh] flex flex-col border border-dark-600">
+      <div class="flex items-center justify-between p-4 border-b border-dark-700">
+        <h3 class="text-lg font-bold text-neutral-100">🤖 Módulo 1.6 - LLMs como Agentes</h3>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-neutral-100 text-2xl">&times;</button>
+      </div>
+      <iframe src="modulo-1-6.html" class="flex-1 w-full rounded-b-2xl"></iframe>
+    </div>
+  </div>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => {
+        if (exp !== explanation) exp.classList.remove('active');
+      });
+      explanation.classList.toggle('active');
+    }
+
+    function openModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) { modal.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+    }
+    function closeModal() {
+      document.querySelectorAll('.modal').forEach(modal => modal.classList.add('hidden'));
+      document.body.style.overflow = 'auto';
+    }
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

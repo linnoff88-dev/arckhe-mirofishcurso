@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 3.3: Personalização de Agentes e Personas | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124, 58, 237, 0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124, 58, 237, 0.25); }
+    html:not(.dark) .hover\:bg-purple-500\/30:hover { background-color: rgba(124, 58, 237, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Module Header -->
+  <div class="bg-gradient-to-r from-purple-900/30 to-dark-900 border-b border-purple-500/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex items-center gap-3 mb-3">
+        <a href="index.html" class="text-purple-400 hover:text-purple-300 text-sm">← Trilha 3</a>
+        <span class="text-neutral-600">|</span>
+        <span class="bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded text-xs font-bold border border-purple-500/30">Módulo 3.3</span>
+      </div>
+      <h1 class="text-2xl font-bold text-neutral-100 flex items-center gap-3">🎭 Personalização de Agentes e Personas</h1>
+      <p class="text-neutral-400 mt-2">Pipeline de geração de personas, perfis de plataforma e análise de diversidade e viés</p>
+    </div>
+  </div>
+
+  <!-- Topics -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <div class="p-6 space-y-2">
+
+        <!-- Topic 1 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-neutral-300 text-left">🏗️ OasisProfileGenerator - Como o sistema cria personas a partir do grafo</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">O OasisProfileGenerator é o componente responsável por gerar populações de agentes com diversidade controlada. Ele opera em três fases: (1) Definição de distribuições demográficas via arquivo YAML (ex: 40% jovens, 30% adultos, 30% idosos; distribuição de interesses políticos; distribuição geográfica). (2) Amostragem estocástica de perfis base a partir dessas distribuições. (3) Enriquecimento via LLM que gera biografias, estilos de comunicação e personalidades únicas para cada agente, usando os traços amostrados como seed. O resultado é um arquivo de perfis (CSV ou JSON) pronto para ser carregado na simulação.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">A qualidade da simulação começa na qualidade das personas. Populações homogêneas produzem resultados triviais. Populações muito diversas sem estrutura produzem ruído. O OasisProfileGenerator permite controlar precisamente a composição da população simulada.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Distribuições demográficas: configuráveis via YAML com pesos por categoria</li><li>Big Five traits: cada perfil recebe scores de openness, conscientiousness, extraversion, agreeableness, neuroticism</li><li>LLM enrichment: GPT-4 gera biografias e estilos a partir de traits amostrados</li><li>Social graph seeding: conexões iniciais geradas por preferential attachment ou small-world</li><li>Reprodutibilidade: random seed fixo para reproduzir exatamente a mesma população</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 2 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-neutral-300 text-left">📝 Estrutura de um Agente - Personalidade, perspectiva, posicionamento, memória</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">Cada agente OASIS é composto por quatro pilares que são injetados no system prompt do LLM: (1) Personalidade - traços Big Five que influenciam estilo de comunicação (alto extraversion = posts mais frequentes e expressivos). (2) Perspectiva - visão de mundo e vieses (conservador/progressista, otimista/pessimista). (3) Posicionamento - opinião numérica sobre tópicos específicos em escala Likert 1-7 (1=totalmente contra, 7=totalmente a favor). (4) Memória - histórico de interações recuperado via busca híbrida. Esses quatro pilares juntos definem "quem" o agente é e como ele responde a estímulos.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Entender a estrutura interna permite criar agentes com características precisas para cenários específicos. Quer simular um debate entre libertários e socialistas? Configure posicionamento. Quer agentes introvertidos? Ajuste personalidade. Cada pilar é um dial de controle.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>System prompt template: ~500 tokens com variáveis de persona interpoladas</li><li>Likert scale 1-7: posicionamento granular, permite drift de opinião ao longo do tempo</li><li>Personality → behavior mapping: traits influenciam probabilidades de ações</li><li>Memory injection: top-5 memórias relevantes adicionadas ao user prompt</li><li>Pillar independence: cada pilar pode ser modificado sem afetar os outros</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 3 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-neutral-300 text-left">🎯 Perfis Twitter vs Reddit - profiles.csv vs profiles.json</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">Cada plataforma simulada espera perfis em formato diferente. O TwitterEnv usa profiles.csv com colunas: agent_id, username, display_name, bio, followers_count, following_count, interests (comma-separated), personality_traits (JSON string), position_scores (JSON string). O RedditEnv usa profiles.json com estrutura aninhada que inclui campos adicionais: subreddits_active (lista), karma_post, karma_comment, account_age_days, e preferred_sorting (hot/new/top). A diferença reflete as mecânicas distintas de cada plataforma.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Erros de formato de perfis são a causa #1 de falhas na inicialização de simulações OASIS. Conhecer a estrutura exata de cada formato previne horas de debug e permite gerar perfis programaticamente com scripts customizados.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>profiles.csv: formato flat tabular, ~15 colunas, encoding UTF-8 obrigatório</li><li>profiles.json: formato aninhado com arrays e objetos, schema validável</li><li>Campos obrigatórios: agent_id, username, personality_traits em ambos</li><li>Schema validation: OASIS valida perfis antes de iniciar simulação</li><li>Conversion tools: scripts utilitários para converter entre formatos</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 4 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-neutral-300 text-left">🔄 Environment Configuration Agent - Regras da simulação</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">O Environment Configuration Agent (ECA) é um meta-agente que funciona como o "game master" da simulação. Antes da simulação começar, o ECA lê um arquivo de configuração YAML e configura: número total de rounds, ações permitidas por round por agente, tópicos seed (conteúdo inicial que dispara a simulação), eventos programados (injeção de notícias ou eventos em rounds específicos), regras de moderação (filtros de conteúdo, rate limiting de posts), e parâmetros do sistema de recomendação. O ECA pode ser configurado manualmente via YAML ou gerado por LLM a partir de uma descrição em linguagem natural do cenário desejado.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O ECA determina completamente o "mundo" da simulação. Sem entendê-lo, você está limitado a cenários pré-definidos. Com domínio do ECA, pode criar qualquer cenário: desde eleições até crises de saúde pública, lançamentos de produtos ou campanhas de desinformação.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Config YAML: arquivo declarativo com todos os parâmetros do mundo</li><li>Seed topics: posts iniciais que disparam a primeira onda de reações</li><li>Scheduled events: {round: 25, type: "news", content: "..."} para injeções programadas</li><li>Moderation rules: regex patterns, toxicity thresholds, post frequency limits</li><li>LLM-generated config: descreva o cenário e o LLM gera o YAML completo</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 5 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-neutral-300 text-left">🧩 Prompt Engineering para Personas - Como o LLM recebe o contexto</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">Cada chamada LLM para decisão de um agente segue uma estrutura de prompt de 4 camadas: (1) System prompt com persona fixa (~500 tokens): "Você é {name}, {age} anos, {bio}. Seus traços de personalidade: {traits}. Sua posição sobre {topic}: {score}/7." (2) Memory injection (~200 tokens): top-k memórias recuperadas via busca híbrida. (3) Context prompt (~300 tokens): estado atual do feed, posts visíveis, notificações. (4) Action instruction (~100 tokens): lista de ações válidas com formato de resposta esperado. O LLM gera um chain-of-thought interno e retorna a ação escolhida com parâmetros.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O prompt é a interface entre a persona abstrata e o comportamento concreto. Prompts mal estruturados fazem agentes ignorarem sua personalidade, agirem de forma inconsistente ou produzirem outputs impossíveis de parsear. Otimizar o prompt é a forma mais direta de melhorar a qualidade da simulação.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>4-layer prompt: system + memories + context + action instruction</li><li>Token budget: ~1100 tokens totais por decisão, otimizado para custo</li><li>Chain-of-thought: agente explicita raciocínio antes de escolher ação</li><li>Structured output: resposta em JSON para parsing determinístico</li><li>Prompt versioning: diferentes versões para diferentes modelos LLM</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Topic 6 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-neutral-300 text-left">📊 Diversidade e Viés - Comportamento de rebanho mais intenso que humanos reais</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">O paper arXiv:2411.11581 identificou que agentes LLM exibem "herd behavior" significativamente mais intenso que humanos reais em datasets comparáveis. Em experimentos de polarização, agentes convergiram para a opinião majoritária 2.3x mais rápido que populações humanas em cenários equivalentes. Este viés é atribuído ao treinamento RLHF que otimiza por "respostas socialmente aceitáveis", fazendo LLMs naturalmente gravitarem para posições de consenso. Técnicas de mitigação incluem: aumentar temperature (0.9-1.2), usar diverse sampling (top-p com p=0.95), e adicionar instruções explícitas de "resistência à pressão social" no system prompt.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Este é o viés mais perigoso em simulações sociais com LLMs. Se você não sabe que o consenso é artificialmente amplificado, pode interpretar convergência simulada como evidência de que uma opinião é "naturalmente dominante" - uma conclusão potencialmente falsa e perigosa. Conhecer o viés é essencial para interpretação responsável.</p></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>RLHF conformity bias: 2.3x mais conformidade que baseline humano</li><li>Mitigation via temperature: T=1.1 reduz conformidade em ~30%</li><li>Explicit resistance prompt: "Você é conhecido por manter suas opiniões independentemente da pressão"</li><li>Calibração empírica: comparar distribuição de opiniões com datasets reais</li><li>Disclosure: relatórios devem sempre mencionar o viés de conformidade como limitação</li></ul></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mt-8">
+      <a href="modulo-3-2.html" class="text-purple-400 hover:text-purple-300 text-sm font-medium">← Memória de Agentes</a>
+      <a href="modulo-3-4.html" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">Próximo: ReportAgent e ReACT →</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-700 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>🐟 Ecossistema MiroFish · Módulo 3.3</p>
+      <p class="mt-1">Projeto <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+
+</body>
+</html>

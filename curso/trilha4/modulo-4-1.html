@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4.1 Simulando uma Crise de Reputação | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217, 119, 6, 0.12); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217, 119, 6, 0.25); }
+    html:not(.dark) .hover\:bg-amber-500\/30:hover { background-color: rgba(217, 119, 6, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-amber-400 bg-amber-500/10"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="bg-gradient-to-b from-amber-900/30 to-dark-900 border-b border-amber-500/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="flex items-center space-x-3 mb-3">
+        <a href="index.html" class="text-amber-400 hover:text-amber-300 text-sm">← Trilha 4</a>
+        <span class="text-neutral-600">|</span>
+        <span class="bg-amber-500/20 text-amber-400 px-3 py-1 rounded-full text-sm font-semibold border border-amber-500/30">Módulo 4.1</span>
+      </div>
+      <h1 class="text-2xl font-bold text-neutral-100 mb-2">🚨 Simulando uma Crise de Reputação</h1>
+      <p class="text-neutral-400">Caso prático completo: da coleta de dados à recomendação estratégica, usando um cenário real de crise universitária.</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
+
+    <!-- Topic 1 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">📋 O Cenário - Universidade entra em crise de reputação</h3>
+          <p class="text-sm text-neutral-400 mt-1">Caso real MiroFish: reconstituindo a crise passo a passo</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">Um caso reconstituído de crise institucional: a Universidade Federal XYZ enfrenta denúncias de fraude acadêmica em seu programa de mestrado. Um ex-aluno publica uma thread no Twitter com provas documentais, que viraliza em 4 horas e é coberta por portais de notícia nas primeiras 12 horas.</p>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Por que aprender:</h4>
+            <p class="text-neutral-300 text-sm">Crises de reputação destruíram marcas centenárias em semanas. Segundo dados de monitoramento, 67% das crises corporativas poderiam ter sido mitigadas com resposta nas primeiras 6 horas. A simulação permite testar essas respostas antes que a crise real aconteça.</p>
+          </div>
+
+          <!-- Timeline Box -->
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Timeline da Crise (reconstituição):</h4>
+            <div class="space-y-3 text-sm">
+              <div class="flex items-start space-x-3">
+                <span class="bg-red-500/20 text-red-400 px-2 py-0.5 rounded text-xs font-mono flex-shrink-0">T+0h</span>
+                <span class="text-neutral-300">Ex-aluno publica thread com 12 tweets e documentos fotografados</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="bg-red-500/20 text-red-400 px-2 py-0.5 rounded text-xs font-mono flex-shrink-0">T+2h</span>
+                <span class="text-neutral-300">Thread atinge 5.000 retweets. Jornalistas independentes começam a verificar</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="bg-red-500/20 text-red-400 px-2 py-0.5 rounded text-xs font-mono flex-shrink-0">T+4h</span>
+                <span class="text-neutral-300">Hashtag #FraudeAcadêmica entra nos trending topics</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded text-xs font-mono flex-shrink-0">T+8h</span>
+                <span class="text-neutral-300">Portais de notícia publicam matérias. MEC emite nota pedindo esclarecimentos</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded text-xs font-mono flex-shrink-0">T+12h</span>
+                <span class="text-neutral-300">Universidade emite nota genérica. Reação negativa se intensifica</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded text-xs font-mono flex-shrink-0">T+48h</span>
+                <span class="text-neutral-300">Queda mensurável nas buscas por vestibular da universidade (-23%)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Documento-semente:</strong> Thread original + notícias + comunicados oficiais</li>
+              <li>- <strong>Stakeholders:</strong> Alunos, professores, MEC, mídia, candidatos ao vestibular, empregadores</li>
+              <li>- <strong>Métricas de crise:</strong> Volume de menções, sentimento, alcance, velocidade de propagação</li>
+              <li>- <strong>Janela de resposta:</strong> Tempo disponível antes que o dano se torne irreversível</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">🕷️ Etapa 1: Coleta - MindSpider capturando posts, vídeos e comentários</h3>
+          <p class="text-sm text-neutral-400 mt-1">Configurando o crawler para coletar dados da crise</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">Nesta etapa, o MindSpider é configurado para coletar todos os dados relacionados à crise: tweets com as hashtags relevantes, posts do Reddit em subreddits educacionais, vídeos do YouTube com comentários, artigos de portais de notícia e publicações em fóruns acadêmicos.</p>
+          </div>
+
+          <!-- Step-by-step Box -->
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Passo a passo da configuração:</h4>
+            <div class="space-y-3 text-sm text-neutral-300">
+              <div class="flex items-start space-x-3">
+                <span class="bg-amber-500/20 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+                <div>
+                  <strong>Definir keywords:</strong> "fraude acadêmica", "universidade XYZ", "mestrado irregular", nome do denunciante, hashtags associadas
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="bg-amber-500/20 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+                <div>
+                  <strong>Selecionar plataformas:</strong> Twitter (prioridade alta), Reddit (r/brasil, r/educação), portais de notícia (G1, Folha, UOL), YouTube
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="bg-amber-500/20 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
+                <div>
+                  <strong>Definir janela temporal:</strong> T-24h a T+72h (capturar contexto pré-crise e evolução)
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="bg-amber-500/20 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">4</span>
+                <div>
+                  <strong>Configurar filtros:</strong> Idioma (pt-BR), mínimo de engajamento (>5 interações), excluir bots conhecidos
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="bg-amber-500/20 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">5</span>
+                <div>
+                  <strong>Executar coleta:</strong> O MindSpider coleta, deduplica e estrutura os dados automaticamente
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Data Box -->
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Dados coletados neste caso:</h4>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+              <div class="bg-dark-800 rounded-lg p-3">
+                <div class="text-2xl font-bold text-amber-400">4.832</div>
+                <div class="text-xs text-neutral-400">Tweets</div>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3">
+                <div class="text-2xl font-bold text-amber-400">347</div>
+                <div class="text-xs text-neutral-400">Posts Reddit</div>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3">
+                <div class="text-2xl font-bold text-amber-400">89</div>
+                <div class="text-xs text-neutral-400">Artigos</div>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3">
+                <div class="text-2xl font-bold text-amber-400">1.205</div>
+                <div class="text-xs text-neutral-400">Comentários YT</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Rate limiting:</strong> Respeitar limites de API para não ser bloqueado durante coleta</li>
+              <li>- <strong>Deduplicação:</strong> Remover retweets sem comentário, crossposts e conteúdo replicado</li>
+              <li>- <strong>Enriquecimento:</strong> Adicionar metadados (engajamento, perfil do autor, geolocalização)</li>
+              <li>- <strong>Snapshot temporal:</strong> Preservar o estado dos dados no momento da coleta</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">📊 Etapa 2: Análise - BettaFish organizando narrativas e sentimento</h3>
+          <p class="text-sm text-neutral-400 mt-1">Os 5 agentes processando os dados coletados</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">O BettaFish recebe os 6.473 itens coletados e seus 5 agentes entram em ação: o Moderador categoriza por tema, os dois Debatedores argumentam perspectivas opostas (defesa da universidade vs acusação), o Sintetizador identifica padrões e o ReportAgent organiza tudo em um relatório estruturado.</p>
+          </div>
+
+          <!-- Agent Flow -->
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Fluxo dos 5 Agentes:</h4>
+            <div class="space-y-3 text-sm">
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <span class="text-amber-400 font-semibold">Moderador:</span>
+                <span class="text-neutral-300"> Classificou 4 narrativas dominantes: "Fraude comprovada", "Defesa institucional", "Problema sistêmico", "Revanchismo pessoal"</span>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <span class="text-amber-400 font-semibold">Debatedor A (Acusação):</span>
+                <span class="text-neutral-300"> Argumenta que documentos são inequívocos e que 73% das menções concordam com a denúncia</span>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <span class="text-amber-400 font-semibold">Debatedor B (Defesa):</span>
+                <span class="text-neutral-300"> Aponta que 15% das menções questionam motivação do denunciante e pedem auditoria independente</span>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <span class="text-amber-400 font-semibold">Sintetizador:</span>
+                <span class="text-neutral-300"> Identifica que a narrativa muda de "caso isolado" para "problema sistêmico" após T+8h</span>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <span class="text-amber-400 font-semibold">ReportAgent:</span>
+                <span class="text-neutral-300"> Gera relatório HTML com gráfico de sentimento, mapa de narrativas e recomendações</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Análise de sentimento granular:</strong> Não apenas positivo/negativo, mas indignação, decepção, cinismo, esperança</li>
+              <li>- <strong>Narrative tracking:</strong> Como narrativas nascem, evoluem e morrem ao longo do tempo</li>
+              <li>- <strong>Influencer mapping:</strong> Quem amplificou a crise e quem tentou contê-la</li>
+              <li>- <strong>Debate multi-perspectiva:</strong> O valor de forçar argumentos de ambos os lados</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">4</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">🔮 Etapa 3: Simulação - MiroFish testando respostas</h3>
+          <p class="text-sm text-neutral-400 mt-1">Silêncio vs nota genérica vs ação concreta</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">O MiroFish cria 3 cenários paralelos com 200 agentes cada, representando alunos, professores, jornalistas, candidatos ao vestibular e público geral. Cada cenário testa uma resposta diferente da universidade e simula 10 rodadas equivalentes a 7 dias.</p>
+          </div>
+
+          <!-- Scenario Comparison -->
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Os 3 Cenários Testados:</h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div class="bg-dark-800 rounded-lg p-4 border border-red-500/30">
+                <h5 class="text-red-400 font-semibold mb-2">Cenário A: Silêncio</h5>
+                <p class="text-neutral-300 text-sm mb-2">A universidade não se pronuncia. Espera a crise "passar sozinha".</p>
+                <div class="text-xs text-neutral-400">
+                  <div>Sentimento final: -78%</div>
+                  <div>Menções em 7 dias: 23.400</div>
+                  <div>Busca vestibular: -34%</div>
+                </div>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-4 border border-orange-500/30">
+                <h5 class="text-orange-400 font-semibold mb-2">Cenário B: Nota Genérica</h5>
+                <p class="text-neutral-300 text-sm mb-2">Nota em T+6h: "Estamos apurando os fatos e tomaremos providências."</p>
+                <div class="text-xs text-neutral-400">
+                  <div>Sentimento final: -52%</div>
+                  <div>Menções em 7 dias: 18.700</div>
+                  <div>Busca vestibular: -19%</div>
+                </div>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-4 border border-green-500/30">
+                <h5 class="text-green-400 font-semibold mb-2">Cenário C: Ação Concreta</h5>
+                <p class="text-neutral-300 text-sm mb-2">Em T+4h: reconhece o problema, anuncia auditoria externa e afasta envolvidos.</p>
+                <div class="text-xs text-neutral-400">
+                  <div>Sentimento final: -18%</div>
+                  <div>Menções em 7 dias: 15.200</div>
+                  <div>Busca vestibular: -5%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Do/Don't Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-green-500/10 rounded-lg p-4 border border-green-500/30">
+              <h4 class="text-green-400 font-semibold mb-2">FAZER:</h4>
+              <ul class="text-neutral-300 text-sm space-y-1">
+                <li>+ Responder nas primeiras 4-6 horas</li>
+                <li>+ Reconhecer o problema sem evasivas</li>
+                <li>+ Anunciar ações concretas e verificáveis</li>
+                <li>+ Usar porta-voz com credibilidade</li>
+              </ul>
+            </div>
+            <div class="bg-red-500/10 rounded-lg p-4 border border-red-500/30">
+              <h4 class="text-red-400 font-semibold mb-2">NÃO FAZER:</h4>
+              <ul class="text-neutral-300 text-sm space-y-1">
+                <li>- Ignorar e esperar a crise "passar"</li>
+                <li>- Emitir nota vaga sem compromissos</li>
+                <li>- Atacar o denunciante publicamente</li>
+                <li>- Deletar comentários ou restringir acesso</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Cenários paralelos:</strong> Mesmos agentes, mesma crise, respostas diferentes</li>
+              <li>- <strong>Efeito cascata:</strong> Como a resposta de um ator influencia a reação dos demais</li>
+              <li>- <strong>Ponto de inflexão:</strong> O momento em que o sentimento se estabiliza ou piora</li>
+              <li>- <strong>Janela de oportunidade:</strong> Período em que a resposta ainda tem efeito máximo</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">5</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">📈 Resultados - Comparando cenários e definindo melhor estratégia</h3>
+          <p class="text-sm text-neutral-400 mt-1">Análise comparativa e recomendação final</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">Análise lado a lado dos 3 cenários simulados: evolução temporal do sentimento, comportamento de cada grupo de stakeholder, volume de menções e impacto em métricas tangíveis (buscas, inscrições, doações).</p>
+          </div>
+
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Resultado Comparativo por Stakeholder:</h4>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="text-amber-400">
+                    <th class="text-left p-2">Stakeholder</th>
+                    <th class="text-center p-2">Silêncio</th>
+                    <th class="text-center p-2">Nota</th>
+                    <th class="text-center p-2">Ação</th>
+                  </tr>
+                </thead>
+                <tbody class="text-neutral-300">
+                  <tr class="border-t border-dark-600">
+                    <td class="p-2">Alunos atuais</td>
+                    <td class="text-center p-2 text-red-400">Revolta</td>
+                    <td class="text-center p-2 text-orange-400">Desconfiança</td>
+                    <td class="text-center p-2 text-green-400">Apoio cauteloso</td>
+                  </tr>
+                  <tr class="border-t border-dark-600">
+                    <td class="p-2">Candidatos vestibular</td>
+                    <td class="text-center p-2 text-red-400">Desistência</td>
+                    <td class="text-center p-2 text-orange-400">Hesitação</td>
+                    <td class="text-center p-2 text-green-400">Mantêm planos</td>
+                  </tr>
+                  <tr class="border-t border-dark-600">
+                    <td class="p-2">Mídia</td>
+                    <td class="text-center p-2 text-red-400">Escala cobertura</td>
+                    <td class="text-center p-2 text-orange-400">Questiona</td>
+                    <td class="text-center p-2 text-green-400">Elogia resposta</td>
+                  </tr>
+                  <tr class="border-t border-dark-600">
+                    <td class="p-2">MEC/Regulador</td>
+                    <td class="text-center p-2 text-red-400">Intervenção</td>
+                    <td class="text-center p-2 text-orange-400">Monitoramento</td>
+                    <td class="text-center p-2 text-green-400">Confiança</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Score de dano:</strong> Índice composto de impacto reputacional (0-100)</li>
+              <li>- <strong>Curva de recuperação:</strong> Tempo estimado para retorno ao baseline de sentimento</li>
+              <li>- <strong>Análise de sensibilidade:</strong> O quanto o resultado muda com variações nos parâmetros</li>
+              <li>- <strong>Recomendação baseada em evidência:</strong> O Cenário C é superior em todas as métricas</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">6</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">🎯 Lições Aprendidas - O que a simulação revela que humanos não preveem</h3>
+          <p class="text-sm text-neutral-400 mt-1">Insights contraintuitivos e o valor da simulação</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">A simulação revelou 3 insights que nenhum assessor de crise teria previsto: (1) o grupo mais influente não eram os jornalistas, mas os alunos de pós-graduação de outras universidades; (2) o silêncio tinha um efeito Streisand acelerado; (3) a janela de resposta eficaz era de apenas 4 horas, não 24 como se assume.</p>
+          </div>
+
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">3 Insights Contraintuitivos:</h4>
+            <div class="space-y-3">
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <h5 class="text-amber-400 font-semibold text-sm">1. Influenciadores ocultos</h5>
+                <p class="text-neutral-300 text-sm">Os maiores amplificadores não foram jornalistas profissionais, mas pós-graduandos de universidades rivais. A simulação detectou que esse grupo tinha 3x mais engajamento por post do que a mídia tradicional.</p>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <h5 class="text-amber-400 font-semibold text-sm">2. Efeito Streisand acelerado</h5>
+                <p class="text-neutral-300 text-sm">No cenário de silêncio, a ausência de resposta gerou especulação de que "há mais a esconder", multiplicando o volume de menções por 4.7x versus o cenário de ação.</p>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <h5 class="text-amber-400 font-semibold text-sm">3. Janela de 4 horas</h5>
+                <p class="text-neutral-300 text-sm">Após T+4h, cada hora de atraso na resposta reduzia a eficácia em 12%. Após T+12h, mesmo a melhor resposta tinha impacto limitado. A narrativa já estava cristalizada.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Viés de confirmação:</strong> Humanos buscam dados que confirmam suas suposições; a simulação não tem esse viés</li>
+              <li>- <strong>Efeitos de segunda ordem:</strong> Consequências das consequências, difíceis de prever linearmente</li>
+              <li>- <strong>Rede de influência oculta:</strong> Atores que não parecem importantes mas controlam a narrativa</li>
+              <li>- <strong>Valor da simulação:</strong> Não é prever o futuro, é revelar dinâmicas que a intuição humana não alcança</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center pt-6">
+      <a href="index.html" class="text-amber-400 hover:text-amber-300 transition-colors">← Trilha 4</a>
+      <a href="modulo-4-2.html" class="bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">Próximo: Lançamento de Produto →</a>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-700 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>🐟 Ecossistema MiroFish &mdash; Curso desenvolvido por <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+
+</body>
+</html>

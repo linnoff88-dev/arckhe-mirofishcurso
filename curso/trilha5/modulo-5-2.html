@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5.2 Clonando e Configurando o Fork | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .bg-teal-500\/20 { background-color: rgba(13, 148, 136, 0.12); }
+    html:not(.dark) .bg-teal-500\/10 { background-color: rgba(13, 148, 136, 0.08); }
+    html:not(.dark) .border-teal-500\/30 { border-color: rgba(13, 148, 136, 0.25); }
+    html:not(.dark) .hover\:bg-teal-500\/30:hover { background-color: rgba(13, 148, 136, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-teal-400 bg-teal-500/10"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <div class="bg-gradient-to-b from-teal-900/30 to-dark-900 border-b border-dark-700">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="px-2 py-0.5 bg-teal-500/20 text-teal-400 text-xs font-semibold rounded">MÓDULO 5.2</span>
+      </div>
+      <h1 class="text-2xl font-bold text-neutral-100 mb-2">📥 Clonando e Configurando o Fork inematds</h1>
+      <p class="text-neutral-400">Baixe o código, configure o .env e instale todas as dependências com um único comando.</p>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-4">
+
+    <!-- Topic 1 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+        <span class="text-neutral-100 font-semibold">📥 Git Clone - Baixando o repositório</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Clone o fork inematds do MiroFish. Este fork inclui suporte multi-LLM, KuzuDB local (sem Zep Cloud), correções de bugs e tradução para PT-BR/EN.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> O repositório original tem bugs e dependências de serviços pagos. O fork resolve esses problemas e é a base recomendada para uso.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Clonar o repositório</p>
+          <p class="text-neutral-300">git clone https://github.com/inematds/mirofish.git</p>
+          <p class="text-neutral-300">cd mirofish</p>
+          <p class="text-teal-400 mt-3 mb-2"># Estrutura principal do projeto</p>
+          <p class="text-neutral-300">mirofish/</p>
+          <p class="text-neutral-300">├── frontend/          # Vue.js 3 + Vite</p>
+          <p class="text-neutral-300">├── backend/           # Python + Flask</p>
+          <p class="text-neutral-300">│   ├── data/          # KuzuDB e dados</p>
+          <p class="text-neutral-300">│   ├── uploads/       # Documentos enviados</p>
+          <p class="text-neutral-300">│   └── config.py      # Configurações</p>
+          <p class="text-neutral-300">├── docker-compose.yml # Deploy Docker</p>
+          <p class="text-neutral-300">├── Dockerfile         # Build da imagem</p>
+          <p class="text-neutral-300">├── .env.example       # Template de configuração</p>
+          <p class="text-neutral-300">└── package.json       # Scripts npm</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+        <span class="text-neutral-100 font-semibold">📄 O Arquivo .env - Variáveis de ambiente</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> O arquivo .env centraliza todas as configurações do sistema. Copie o template e edite conforme seu provedor LLM escolhido.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Cada variável controla um aspecto crítico do sistema. Um .env mal configurado causa erros silenciosos ou custos inesperados.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># 1. Copiar template</p>
+          <p class="text-neutral-300">cp .env.example .env</p>
+          <p class="text-teal-400 mt-3 mb-2"># 2. Conteúdo do .env (exemplo com Claude CLI)</p>
+          <p class="text-neutral-300"># ---- Provedor LLM ----</p>
+          <p class="text-neutral-300">LLM_PROVIDER=claude-cli</p>
+          <p class="text-neutral-300">LLM_API_KEY=              # vazio para claude-cli</p>
+          <p class="text-neutral-300">LLM_MODEL_NAME=           # usa padrão do CLI</p>
+          <p class="text-neutral-300">LLM_BASE_URL=             # não necessário</p>
+          <p class="text-neutral-300 mt-2"># ---- Banco de Dados ----</p>
+          <p class="text-neutral-300">GRAPH_DB_PATH=./backend/data/graphdb</p>
+          <p class="text-neutral-300 mt-2"># ---- LLM de Boost (opcional) ----</p>
+          <p class="text-neutral-300">LLM_BOOST_PROVIDER=</p>
+          <p class="text-neutral-300">LLM_BOOST_API_KEY=</p>
+          <p class="text-neutral-300">LLM_BOOST_MODEL_NAME=</p>
+        </div>
+        <p class="text-neutral-400 text-xs">IMPORTANTE: O .env contém API keys sensíveis. Nunca commite este arquivo no git (já está no .gitignore).</p>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+        <span class="text-neutral-100 font-semibold">🔧 LLM_PROVIDER - Escolhendo o provedor</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> A variável LLM_PROVIDER aceita 4 valores: claude-cli, codex-cli, openai ou anthropic. Cada um configura como o sistema se comunica com o LLM.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> A escolha do provedor define custo, velocidade e compatibilidade. Claude CLI é sem custo; OpenAI tem melhor compatibilidade com OASIS.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Opções de LLM_PROVIDER:</p>
+          <p class="text-neutral-300 mt-1">claude-cli   → Usa Claude CLI local (sem API key)</p>
+          <p class="text-neutral-300">codex-cli    → Usa Codex CLI local (sem API key)</p>
+          <p class="text-neutral-300">openai       → API OpenAI (precisa de LLM_API_KEY)</p>
+          <p class="text-neutral-300">anthropic    → API Anthropic (precisa de LLM_API_KEY)</p>
+          <p class="text-teal-400 mt-3 mb-2"># Exemplo: OpenAI com GPT-4o-mini</p>
+          <p class="text-neutral-300">LLM_PROVIDER=openai</p>
+          <p class="text-neutral-300">LLM_API_KEY=sk-proj-abc123...</p>
+          <p class="text-neutral-300">LLM_MODEL_NAME=gpt-4o-mini</p>
+          <p class="text-neutral-300">LLM_BASE_URL=https://api.openai.com/v1</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+        <span class="text-neutral-100 font-semibold">🗄️ GRAPH_DB_PATH - KuzuDB local</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> GRAPH_DB_PATH define onde o KuzuDB armazena o grafo de conhecimento. O padrão ./backend/data/graphdb cria o banco localmente, sem necessidade de serviços externos.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> O fork inematds substituiu o Zep Cloud (serviço pago) pelo KuzuDB embarcado. Isso significa zero custo de banco de dados e total privacidade dos dados.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Configuração padrão (recomendada)</p>
+          <p class="text-neutral-300">GRAPH_DB_PATH=./backend/data/graphdb</p>
+          <p class="text-teal-400 mt-3 mb-2"># O que mudou do original para o fork:</p>
+          <p class="text-neutral-300 text-red-400">❌ Original: ZEP_API_KEY=z_abc123... (serviço pago)</p>
+          <p class="text-neutral-300 text-green-400">✅ Fork:     GRAPH_DB_PATH=./backend/data/graphdb (local, grátis)</p>
+          <p class="text-teal-400 mt-3 mb-2"># O banco é criado automaticamente na primeira execução</p>
+          <p class="text-neutral-300"># Dados ficam persistidos no diretório especificado</p>
+          <p class="text-neutral-300"># Para limpar: rm -rf ./backend/data/graphdb</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+        <span class="text-neutral-100 font-semibold">📦 npm run setup:all - Instalação completa</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Um único comando que instala todas as dependências: Node.js packages para o frontend e Python packages para o backend (via uv). Leva 2-5 minutos.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Este comando automatiza o que seriam 5+ passos manuais. Se falhar, o erro indica qual dependência está com problema.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Executar setup completo</p>
+          <p class="text-neutral-300">npm run setup:all</p>
+          <p class="text-teal-400 mt-3 mb-2"># O que este comando faz internamente:</p>
+          <p class="text-neutral-300">1. npm install          → Dependências do frontend (Vue.js)</p>
+          <p class="text-neutral-300">2. cd backend && uv sync → Dependências do backend (Python)</p>
+          <p class="text-neutral-300">3. Cria ambiente virtual Python</p>
+          <p class="text-neutral-300">4. Instala CAMEL-AI, KuzuDB, Flask, etc.</p>
+          <p class="text-teal-400 mt-3 mb-2"># Se falhar, verifique:</p>
+          <p class="text-neutral-300">- Python 3.12 ativo? (python --version)</p>
+          <p class="text-neutral-300">- uv instalado? (uv --version)</p>
+          <p class="text-neutral-300">- Node 18+? (node --version)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
+        <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+        <span class="text-neutral-100 font-semibold">✅ Verificação - Checklist de prontidão</span>
+      </button>
+      <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Antes de rodar sua primeira simulação, passe por este checklist para garantir que tudo está configurado corretamente.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> 90% dos problemas são detectados nesta etapa. Melhor gastar 2 minutos verificando do que 2 horas debugando.</p>
+        <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
+          <p class="text-teal-400 mb-2"># Checklist de Verificação</p>
+          <p class="text-neutral-300">node --version        # ✅ v18+ ou v20+</p>
+          <p class="text-neutral-300">python --version      # ✅ 3.11.x ou 3.12.x</p>
+          <p class="text-neutral-300">uv --version          # ✅ instalado</p>
+          <p class="text-neutral-300">cat .env              # ✅ LLM_PROVIDER configurado</p>
+          <p class="text-neutral-300">ls node_modules/      # ✅ existe (npm install OK)</p>
+          <p class="text-neutral-300">ls backend/.venv/     # ✅ existe (uv sync OK)</p>
+          <p class="text-teal-400 mt-3 mb-2"># Teste rápido - iniciar em modo dev</p>
+          <p class="text-neutral-300">npm run dev</p>
+          <p class="text-neutral-300"># Frontend: http://localhost:3000</p>
+          <p class="text-neutral-300"># Backend:  http://localhost:5001</p>
+          <p class="text-neutral-300"># Se ambos iniciaram sem erro → tudo pronto!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mt-8 pt-6 border-t border-dark-700">
+      <a href="modulo-5-1.html" class="flex items-center gap-2 text-neutral-400 hover:text-teal-400 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        Anterior: Preparando o Ambiente
+      </a>
+      <a href="modulo-5-3.html" class="flex items-center gap-2 text-neutral-400 hover:text-teal-400 transition-colors">
+        Próximo: Provedores LLM
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const allExplanations = document.querySelectorAll('.topic-explanation.active');
+      allExplanations.forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

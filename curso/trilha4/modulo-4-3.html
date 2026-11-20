@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4.3 Prevendo Reação a Mudança de Política | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217, 119, 6, 0.12); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217, 119, 6, 0.25); }
+    html:not(.dark) .hover\:bg-amber-500\/30:hover { background-color: rgba(217, 119, 6, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-amber-400 bg-amber-500/10"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="bg-gradient-to-b from-amber-900/30 to-dark-900 border-b border-amber-500/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="flex items-center space-x-3 mb-3">
+        <a href="index.html" class="text-amber-400 hover:text-amber-300 text-sm">← Trilha 4</a>
+        <span class="text-neutral-600">|</span>
+        <span class="bg-amber-500/20 text-amber-400 px-3 py-1 rounded-full text-sm font-semibold border border-amber-500/30">Módulo 4.3</span>
+      </div>
+      <h1 class="text-2xl font-bold text-neutral-100 mb-2">📜 Prevendo Reação a Mudança de Política</h1>
+      <p class="text-neutral-400">Da minuta à simulação: mapeie stakeholders, teste cenários de implementação e gere relatórios de recomendação.</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
+
+    <!-- Topic 1 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">📋 O Documento-Semente - Minuta de política ou regulamentação</h3>
+          <p class="text-sm text-neutral-400 mt-1">Preparando a minuta como input para simulação</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">Neste caso prático, usamos como documento-semente uma minuta de regulamentação sobre o uso de IA generativa em conteúdo educacional. A política propõe: obrigatoriedade de disclosure quando IA é usada em materiais didáticos, limites de uso em avaliações e criação de um comitê regulador.</p>
+          </div>
+
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Estrutura do Documento-Semente:</h4>
+            <div class="bg-dark-800 rounded-lg p-4 text-sm text-neutral-300 space-y-2 font-mono">
+              <div><span class="text-amber-400">Título:</span> Regulamentação do Uso de IA em Educação</div>
+              <div><span class="text-amber-400">Emissor:</span> Ministério da Educação (hipotético)</div>
+              <div><span class="text-amber-400">Art. 1:</span> Instituições devem declarar uso de IA em materiais</div>
+              <div><span class="text-amber-400">Art. 2:</span> Proibido uso de IA generativa em provas e avaliações</div>
+              <div><span class="text-amber-400">Art. 3:</span> Criação de Comitê Nacional de IA na Educação</div>
+              <div><span class="text-amber-400">Art. 4:</span> Multa de R$50.000-500.000 por descumprimento</div>
+              <div><span class="text-amber-400">Vigência:</span> 180 dias após publicação</div>
+              <div><span class="text-amber-400">Documentos complementares:</span> Parecer técnico, audiências públicas, regulamentações internacionais (EU AI Act)</div>
+            </div>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Linguagem jurídica:</strong> O documento deve usar linguagem similar à legislação real para gerar reações realistas</li>
+              <li>- <strong>Documentos complementares:</strong> Adicionar justificativa, impacto econômico estimado e precedentes internacionais</li>
+              <li>- <strong>Cláusulas polêmicas:</strong> Identificar previamente quais artigos gerarão mais resistência</li>
+              <li>- <strong>Timeline de implementação:</strong> Definir fases claras para a simulação testar</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">🏗️ Construção do Grafo - GraphRAG extraindo entidades e relações</h3>
+          <p class="text-sm text-neutral-400 mt-1">O GraphRAG mapeia automaticamente quem é afetado por quê</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">O GraphRAG processa a minuta e documentos complementares, extraindo automaticamente todas as entidades (MEC, universidades, empresas de EdTech, professores, alunos) e as relações entre elas (regula, é regulado por, compete com, é impactado por).</p>
+          </div>
+
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Entidades Extraídas pelo GraphRAG:</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <span class="text-red-400 font-semibold">Reguladores (3):</span>
+                <span class="text-neutral-300"> MEC, CAPES, CNE</span>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <span class="text-blue-400 font-semibold">Regulados (4):</span>
+                <span class="text-neutral-300"> Universidades públicas, privadas, EAD, cursos técnicos</span>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <span class="text-green-400 font-semibold">Empresas (5):</span>
+                <span class="text-neutral-300"> EdTechs, OpenAI, Google, editoras, plataformas EAD</span>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <span class="text-purple-400 font-semibold">Pessoas (3):</span>
+                <span class="text-neutral-300"> Professores, alunos, pesquisadores</span>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <span class="text-orange-400 font-semibold">Mídia (2):</span>
+                <span class="text-neutral-300"> Imprensa educacional, influenciadores tech</span>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <span class="text-teal-400 font-semibold">Relações (28):</span>
+                <span class="text-neutral-300"> regula, impacta, compete, depende, financia</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Community detection:</strong> O grafo revelou 4 clusters naturais: reguladores, educadores, empresas e sociedade civil</li>
+              <li>- <strong>Hub nodes:</strong> MEC e universidades privadas são os nós mais conectados</li>
+              <li>- <strong>Bridge nodes:</strong> EdTechs conectam o cluster empresarial ao educacional</li>
+              <li>- <strong>Relações indiretas:</strong> Alunos são impactados por 3 caminhos diferentes (direto, via universidade, via mercado de trabalho)</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">🎭 Stakeholders como Agentes - Governo, empresas, consumidores, mídia</h3>
+          <p class="text-sm text-neutral-400 mt-1">Transformando cada stakeholder em agente autônomo</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">Cada entidade extraída pelo GraphRAG é transformada em um agente com personalidade, motivações, recursos e estratégia. Criamos 180 agentes: 40 representando universidades (públicas e privadas), 30 empresas EdTech, 50 professores, 40 alunos e 20 representando reguladores e mídia.</p>
+          </div>
+
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Matriz Poder vs Interesse dos Agentes:</h4>
+            <div class="grid grid-cols-2 gap-3 text-sm">
+              <div class="bg-dark-800 rounded-lg p-3 border border-red-500/30">
+                <h5 class="text-red-400 font-semibold text-xs mb-1">ALTO PODER + ALTO INTERESSE</h5>
+                <p class="text-neutral-300 text-xs">MEC, Universidades privadas, grandes EdTechs</p>
+                <p class="text-neutral-500 text-xs mt-1">Estratégia: Engajamento constante</p>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-orange-500/30">
+                <h5 class="text-orange-400 font-semibold text-xs mb-1">ALTO PODER + BAIXO INTERESSE</h5>
+                <p class="text-neutral-300 text-xs">Congresso, Tribunal de Contas, Big Tech</p>
+                <p class="text-neutral-500 text-xs mt-1">Estratégia: Manter satisfeitos</p>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-yellow-500/30">
+                <h5 class="text-yellow-400 font-semibold text-xs mb-1">BAIXO PODER + ALTO INTERESSE</h5>
+                <p class="text-neutral-300 text-xs">Professores, alunos, sindicatos, blogs de educação</p>
+                <p class="text-neutral-500 text-xs mt-1">Estratégia: Manter informados</p>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-green-500/30">
+                <h5 class="text-green-400 font-semibold text-xs mb-1">BAIXO PODER + BAIXO INTERESSE</h5>
+                <p class="text-neutral-300 text-xs">Público geral, empresas não-educacionais</p>
+                <p class="text-neutral-500 text-xs mt-1">Estratégia: Monitorar</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Motivações codificadas:</strong> EdTechs querem flexibilidade; professores querem proteção; alunos querem acesso</li>
+              <li>- <strong>Adversarial agents:</strong> Agentes que ativamente trabalham contra a política</li>
+              <li>- <strong>Coalition modeling:</strong> Agentes podem formar alianças temporárias (universidades + EdTechs vs regulador)</li>
+              <li>- <strong>Mídia como amplificador:</strong> Agentes de mídia escolhem qual narrativa amplificar baseado em engajamento</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">4</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">🔮 Cenários de Implementação - Gradual vs imediata vs compensações</h3>
+          <p class="text-sm text-neutral-400 mt-1">Testando três estratégias de implementação</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">Três cenários de implementação são simulados com os mesmos 180 agentes: (A) aplicação imediata em 180 dias, (B) implementação gradual em 3 fases ao longo de 2 anos, e (C) implementação imediata com pacote de transição incluindo funding para adaptação.</p>
+          </div>
+
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Resultado Comparativo:</h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div class="bg-dark-800 rounded-lg p-4 border border-red-500/30">
+                <h5 class="text-red-400 font-semibold text-sm mb-2">A: Imediata (180 dias)</h5>
+                <div class="text-xs text-neutral-400 space-y-1">
+                  <div>Aderência em 1 ano: <span class="text-red-400">34%</span></div>
+                  <div>Resistência organizada: <span class="text-red-400">Alta</span></div>
+                  <div>Judicialização: <span class="text-red-400">67 ações</span></div>
+                  <div>Sentimento público: <span class="text-red-400">-42%</span></div>
+                </div>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-4 border border-yellow-500/30">
+                <h5 class="text-yellow-400 font-semibold text-sm mb-2">B: Gradual (3 fases)</h5>
+                <div class="text-xs text-neutral-400 space-y-1">
+                  <div>Aderência em 1 ano: <span class="text-yellow-400">58%</span></div>
+                  <div>Resistência organizada: <span class="text-yellow-400">Média</span></div>
+                  <div>Judicialização: <span class="text-yellow-400">23 ações</span></div>
+                  <div>Sentimento público: <span class="text-yellow-400">-12%</span></div>
+                </div>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-4 border border-green-500/30">
+                <h5 class="text-green-400 font-semibold text-sm mb-2">C: Imediata + Funding</h5>
+                <div class="text-xs text-neutral-400 space-y-1">
+                  <div>Aderência em 1 ano: <span class="text-green-400">71%</span></div>
+                  <div>Resistência organizada: <span class="text-green-400">Baixa</span></div>
+                  <div>Judicialização: <span class="text-green-400">11 ações</span></div>
+                  <div>Sentimento público: <span class="text-green-400">+8%</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Resistance curve:</strong> A resistência segue uma curva previsível: pico inicial, platô e declínio</li>
+              <li>- <strong>Compensação reduz resistência:</strong> O custo do funding se paga em menor judicialização e maior aderência</li>
+              <li>- <strong>Efeito da gradualidade:</strong> Dá tempo para adaptação mas também para organização de oposição</li>
+              <li>- <strong>Tipping point:</strong> Em todos os cenários, 40% de aderência desencadeia efeito de manada positivo</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">5</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">📊 Mapeando Resistência - Clusters de oposição e pontos de alavancagem</h3>
+          <p class="text-sm text-neutral-400 mt-1">Quem se opõe, por que, e como converter</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">A simulação identificou 3 clusters de oposição com motivações distintas. Mais importante: identificou "swing stakeholders" que podem ser convertidos de opositores a apoiadores com intervenções específicas.</p>
+          </div>
+
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Clusters de Oposição Identificados:</h4>
+            <div class="space-y-3">
+              <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+                <div class="flex items-center space-x-2 mb-2">
+                  <span class="bg-red-500/20 text-red-400 px-2 py-0.5 rounded text-xs font-semibold">CLUSTER 1</span>
+                  <span class="text-neutral-300 font-semibold text-sm">EdTechs e Inovadores (32% da oposição)</span>
+                </div>
+                <p class="text-neutral-400 text-sm">Argumento: "Regulação vai atrasar o Brasil na corrida global de IA educacional"</p>
+                <p class="text-green-400 text-xs mt-1">Alavancagem: Incluir EdTechs no comitê regulador satisfaz 60% deste cluster</p>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+                <div class="flex items-center space-x-2 mb-2">
+                  <span class="bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded text-xs font-semibold">CLUSTER 2</span>
+                  <span class="text-neutral-300 font-semibold text-sm">Universidades Privadas (45% da oposição)</span>
+                </div>
+                <p class="text-neutral-400 text-sm">Argumento: "Custo de compliance inviabiliza instituições menores"</p>
+                <p class="text-green-400 text-xs mt-1">Alavancagem: Escalonar multas por porte da instituição converte 70%</p>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-4 border border-dark-600">
+                <div class="flex items-center space-x-2 mb-2">
+                  <span class="bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded text-xs font-semibold">CLUSTER 3</span>
+                  <span class="text-neutral-300 font-semibold text-sm">Libertários Digitais (23% da oposição)</span>
+                </div>
+                <p class="text-neutral-400 text-sm">Argumento: "O governo não deveria regular tecnologia"</p>
+                <p class="text-red-400 text-xs mt-1">Alavancagem: Baixa. Este cluster se opõe por princípio, não por pragmatismo</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Swing stakeholders:</strong> Clusters 1 e 2 podem ser convertidos com ajustes na política</li>
+              <li>- <strong>Resistência ideológica vs pragmática:</strong> Pragmáticos negociam; ideológicos não</li>
+              <li>- <strong>Custo de conversão:</strong> Incluir EdTechs no comitê tem custo zero e alto retorno</li>
+              <li>- <strong>Estratégia de isolamento:</strong> Converter Clusters 1 e 2 isola o Cluster 3 como minoria</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">6</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">📝 Relatório de Recomendação - Do ReportAgent para o tomador de decisão</h3>
+          <p class="text-sm text-neutral-400 mt-1">Compilando a simulação em decisões acionáveis</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">O ReportAgent compila todos os dados de simulação em um relatório executivo de 12 páginas: sumário, cenários testados, mapa de stakeholders, análise de resistência, recomendações e plano de comunicação. O relatório é gerado em HTML interativo, PDF e Markdown.</p>
+          </div>
+
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Estrutura do Relatório Final:</h4>
+            <div class="space-y-2 text-sm text-neutral-300">
+              <div class="flex items-start space-x-3">
+                <span class="text-amber-400 font-mono text-xs flex-shrink-0">Seção 1</span>
+                <span>Executive Summary (1 página) - Recomendação: Cenário C com 3 ajustes</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="text-amber-400 font-mono text-xs flex-shrink-0">Seção 2</span>
+                <span>Metodologia - 180 agentes, 3 cenários, 10 rodadas, 7 dias simulados</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="text-amber-400 font-mono text-xs flex-shrink-0">Seção 3</span>
+                <span>Mapa de Stakeholders - Grafo interativo com poder, interesse e posição</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="text-amber-400 font-mono text-xs flex-shrink-0">Seção 4</span>
+                <span>Comparativo de Cenários - Tabelas, gráficos e análise por stakeholder</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="text-amber-400 font-mono text-xs flex-shrink-0">Seção 5</span>
+                <span>Mapa de Resistência - 3 clusters, pontos de alavancagem, estratégias</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="text-amber-400 font-mono text-xs flex-shrink-0">Seção 6</span>
+                <span>Recomendações - 5 ajustes na política + plano de comunicação por stakeholder</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tip Box -->
+          <div class="bg-blue-500/10 rounded-lg p-4 border border-blue-500/30">
+            <h4 class="text-blue-400 font-semibold mb-2">Dica profissional:</h4>
+            <p class="text-neutral-300 text-sm">O relatório HTML interativo permite que o tomador de decisão clique nos nós do grafo para ver detalhes de cada stakeholder, filtre cenários por variável e exporte gráficos individuais. Sempre prefira entregar o HTML ao invés do PDF quando o destinatário for tech-savvy.</p>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Executive summary first:</strong> Decisores leem 1 página. As 11 restantes são para a equipe técnica</li>
+              <li>- <strong>Recomendação clara:</strong> "Implementar Cenário C com multas escalonadas e EdTechs no comitê"</li>
+              <li>- <strong>Plano de comunicação:</strong> Mensagem diferente para cada cluster de stakeholder</li>
+              <li>- <strong>Múltiplos formatos:</strong> HTML para exploração, PDF para arquivo, Markdown para colaboração</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center pt-6">
+      <a href="modulo-4-2.html" class="text-amber-400 hover:text-amber-300 transition-colors">← Lançamento de Produto</a>
+      <a href="modulo-4-4.html" class="bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">Próximo: Sentimento em Tempo Real →</a>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-700 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>🐟 Ecossistema MiroFish &mdash; Curso desenvolvido por <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4.6 Criando Seu Primeiro Mundo Digital | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217, 119, 6, 0.12); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217, 119, 6, 0.25); }
+    html:not(.dark) .hover\:bg-amber-500\/30:hover { background-color: rgba(217, 119, 6, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-amber-400 bg-amber-500/10"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="bg-gradient-to-b from-amber-900/30 to-dark-900 border-b border-amber-500/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="flex items-center space-x-3 mb-3">
+        <a href="index.html" class="text-amber-400 hover:text-amber-300 text-sm">← Trilha 4</a>
+        <span class="text-neutral-600">|</span>
+        <span class="bg-amber-500/20 text-amber-400 px-3 py-1 rounded-full text-sm font-semibold border border-amber-500/30">Módulo 4.6</span>
+      </div>
+      <h1 class="text-2xl font-bold text-neutral-100 mb-2">🌐 Criando Seu Primeiro Mundo Digital</h1>
+      <p class="text-neutral-400">Passo a passo completo: do tema à interpretação do relatório, crie e execute sua própria simulação no MiroFish.</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
+
+    <!-- Topic 1 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">📝 Escolhendo o Tema - O que faz um bom cenário para simulação</h3>
+          <p class="text-sm text-neutral-400 mt-1">Critérios para selecionar um tema que funciona</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">Nem todo tema funciona bem em simulação. Os melhores cenários têm: múltiplos stakeholders com interesses divergentes, resultado genuinamente incerto, dados disponíveis para calibração e relevância prática para tomada de decisão.</p>
+          </div>
+
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Checklist: Seu Tema é Bom para Simulação?</h4>
+            <div class="space-y-2 text-sm text-neutral-300">
+              <div class="flex items-center space-x-2">
+                <span class="text-green-400">&#10003;</span>
+                <span>Tem pelo menos 3 grupos de stakeholders com interesses diferentes?</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-green-400">&#10003;</span>
+                <span>O resultado é genuinamente incerto? (se a resposta é óbvia, não precisa simular)</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-green-400">&#10003;</span>
+                <span>Existem dados reais para calibrar os agentes? (notícias, pesquisas, relatórios)</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-green-400">&#10003;</span>
+                <span>O resultado da simulação vai influenciar uma decisão real?</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-green-400">&#10003;</span>
+                <span>É possível validar (parte dos) resultados com dados históricos?</span>
+              </div>
+            </div>
+            <p class="text-amber-400 text-xs mt-3">Se marcou 4+ itens: excelente cenário. 3: viável. 2 ou menos: reconsidere.</p>
+          </div>
+
+          <!-- Do/Don't -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-green-500/10 rounded-lg p-4 border border-green-500/30">
+              <h4 class="text-green-400 font-semibold mb-2">Bons temas:</h4>
+              <ul class="text-neutral-300 text-sm space-y-1">
+                <li>+ Lançamento de produto/serviço</li>
+                <li>+ Crise de reputação corporativa</li>
+                <li>+ Mudança de política pública</li>
+                <li>+ Reação a evento (esportivo, cultural)</li>
+                <li>+ Campanha eleitoral/política</li>
+              </ul>
+            </div>
+            <div class="bg-red-500/10 rounded-lg p-4 border border-red-500/30">
+              <h4 class="text-red-400 font-semibold mb-2">Temas que não funcionam:</h4>
+              <ul class="text-neutral-300 text-sm space-y-1">
+                <li>- "O que vai acontecer amanhã" (bola de cristal)</li>
+                <li>- Temas com 1 stakeholder apenas</li>
+                <li>- Previsão de eventos naturais</li>
+                <li>- Cenários sem dados de calibração</li>
+                <li>- Perguntas com resposta técnica fixa</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Complexidade adequada:</strong> Nem simples demais (sem valor) nem complexo demais (inviável)</li>
+              <li>- <strong>Escopo definido:</strong> "Reação ao lançamento em 30 dias" é melhor que "O futuro da empresa"</li>
+              <li>- <strong>Actionable:</strong> O resultado deve informar uma decisão que você precisa tomar</li>
+              <li>- <strong>Iterativo:</strong> Comece simples, adicione complexidade com base nos primeiros resultados</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">📄 Preparando Documentos-Semente - Formato, quantidade e qualidade</h3>
+          <p class="text-sm text-neutral-400 mt-1">Garbage in, garbage out: a qualidade dos inputs determina tudo</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">Documentos-semente são os textos que alimentam a simulação. Eles definem o contexto, os fatos, os stakeholders e as variáveis. O mínimo viável é 3 documentos; o ideal é 5-10 de fontes diversificadas.</p>
+          </div>
+
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Receita para Bons Documentos-Semente:</h4>
+            <div class="space-y-3 text-sm">
+              <div class="flex items-start space-x-3 bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <span class="bg-amber-500/20 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+                <div class="text-neutral-300">
+                  <strong>Documento principal (obrigatório):</strong> O fato central. Ex: comunicado de lançamento, minuta de política, notícia do evento.
+                </div>
+              </div>
+              <div class="flex items-start space-x-3 bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <span class="bg-amber-500/20 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+                <div class="text-neutral-300">
+                  <strong>Contexto (obrigatório):</strong> Background do setor, dados de mercado, histórico relevante. 2-3 documentos.
+                </div>
+              </div>
+              <div class="flex items-start space-x-3 bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <span class="bg-amber-500/20 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
+                <div class="text-neutral-300">
+                  <strong>Perspectivas (recomendado):</strong> Artigos de opinião, análises, manifestos de stakeholders. 2-4 documentos.
+                </div>
+              </div>
+              <div class="flex items-start space-x-3 bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <span class="bg-amber-500/20 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">4</span>
+                <div class="text-neutral-300">
+                  <strong>Dados quantitativos (recomendado):</strong> Pesquisas, estatísticas, dados de mercado. 1-2 documentos.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quality Checklist -->
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Checklist de Qualidade por Documento:</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-neutral-300">
+              <div class="flex items-center space-x-2"><span class="text-green-400">&#10003;</span><span>Fonte confiável e verificável</span></div>
+              <div class="flex items-center space-x-2"><span class="text-green-400">&#10003;</span><span>Atualizado (menos de 6 meses)</span></div>
+              <div class="flex items-center space-x-2"><span class="text-green-400">&#10003;</span><span>Fatos separados de opinião</span></div>
+              <div class="flex items-center space-x-2"><span class="text-green-400">&#10003;</span><span>Sem paywall ou resumo truncado</span></div>
+              <div class="flex items-center space-x-2"><span class="text-green-400">&#10003;</span><span>Perspectiva diversa (não só um lado)</span></div>
+              <div class="flex items-center space-x-2"><span class="text-green-400">&#10003;</span><span>Texto completo (não apenas headline)</span></div>
+            </div>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Mínimo viável:</strong> 3 documentos (principal + 2 contexto) geram simulação funcional</li>
+              <li>- <strong>Sweet spot:</strong> 5-8 documentos equilibram qualidade e custo computacional</li>
+              <li>- <strong>Diversidade de fontes:</strong> Usar apenas uma fonte gera viés unilateral na simulação</li>
+              <li>- <strong>Formato:</strong> Texto puro, PDF ou URL. O MindSpider extrai conteúdo automaticamente</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">⚙️ Configurando a Simulação - Número de agentes, rodadas, plataformas</h3>
+          <p class="text-sm text-neutral-400 mt-1">Os parâmetros que definem profundidade vs velocidade</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">A configuração da simulação determina o equilíbrio entre profundidade e tempo de execução. Os principais parâmetros são: número de agentes, número de rodadas, plataformas simuladas e nível de interação entre agentes.</p>
+          </div>
+
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Guia de Configuração por Caso de Uso:</h4>
+            <div class="space-y-3">
+              <div class="bg-dark-800 rounded-lg p-3 border border-green-500/30">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-green-400 font-semibold text-sm">Exploratório (rápido)</span>
+                  <span class="text-neutral-400 text-xs">~15 min</span>
+                </div>
+                <div class="grid grid-cols-4 gap-2 text-xs text-neutral-400">
+                  <div>Agentes: <span class="text-neutral-300">10-25</span></div>
+                  <div>Rodadas: <span class="text-neutral-300">3-5</span></div>
+                  <div>Plataformas: <span class="text-neutral-300">1-2</span></div>
+                  <div>Uso: <span class="text-neutral-300">Teste inicial</span></div>
+                </div>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-yellow-500/30">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-yellow-400 font-semibold text-sm">Padrão (balanceado)</span>
+                  <span class="text-neutral-400 text-xs">~1-2h</span>
+                </div>
+                <div class="grid grid-cols-4 gap-2 text-xs text-neutral-400">
+                  <div>Agentes: <span class="text-neutral-300">50-200</span></div>
+                  <div>Rodadas: <span class="text-neutral-300">5-10</span></div>
+                  <div>Plataformas: <span class="text-neutral-300">3-5</span></div>
+                  <div>Uso: <span class="text-neutral-300">Análise regular</span></div>
+                </div>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-red-500/30">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-red-400 font-semibold text-sm">Profundo (completo)</span>
+                  <span class="text-neutral-400 text-xs">~4-8h</span>
+                </div>
+                <div class="grid grid-cols-4 gap-2 text-xs text-neutral-400">
+                  <div>Agentes: <span class="text-neutral-300">200-1000</span></div>
+                  <div>Rodadas: <span class="text-neutral-300">10-20</span></div>
+                  <div>Plataformas: <span class="text-neutral-300">5-10</span></div>
+                  <div>Uso: <span class="text-neutral-300">Decisão crítica</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tip -->
+          <div class="bg-blue-500/10 rounded-lg p-4 border border-blue-500/30">
+            <h4 class="text-blue-400 font-semibold mb-2">Dica para iniciantes:</h4>
+            <p class="text-neutral-300 text-sm">Comece SEMPRE com o modo exploratório (10-25 agentes, 3 rodadas). Use os resultados para calibrar antes de investir em uma simulação profunda. 80% do valor vem dos primeiros 50 agentes.</p>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Convergência:</strong> Após certo número de rodadas, os resultados se estabilizam</li>
+              <li>- <strong>Diminishing returns:</strong> 500 agentes não dão 5x mais insight que 100</li>
+              <li>- <strong>Custo computacional:</strong> Mais agentes e rodadas consomem mais tokens de LLM</li>
+              <li>- <strong>Reproducibilidade:</strong> Mesmos parâmetros + mesma seed geram resultados similares</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">4</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">🚀 Executando e Acompanhando - Interface de progresso em tempo real</h3>
+          <p class="text-sm text-neutral-400 mt-1">Do comando de início ao resultado final</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">O processo de execução: iniciar a simulação, acompanhar o progresso em tempo real, diagnosticar problemas e entender quando a simulação está convergindo ou se precisa de ajustes.</p>
+          </div>
+
+          <!-- Execution Flow -->
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Fluxo de Execução Passo a Passo:</h4>
+            <div class="space-y-3 text-sm">
+              <div class="flex items-start space-x-3">
+                <span class="bg-amber-500/20 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+                <div class="text-neutral-300">
+                  <strong>Validação:</strong> O sistema verifica documentos-semente, parâmetros e configuração. Erros são reportados antes de gastar tokens.
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="bg-amber-500/20 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+                <div class="text-neutral-300">
+                  <strong>Criação de agentes:</strong> O GraphRAG processa os documentos e cria os agentes. Barra de progresso mostra quantos foram criados.
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="bg-amber-500/20 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
+                <div class="text-neutral-300">
+                  <strong>Rodadas de simulação:</strong> Cada rodada mostra: número de posts gerados, interações entre agentes, sentimento médio e narrativas emergentes.
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="bg-amber-500/20 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">4</span>
+                <div class="text-neutral-300">
+                  <strong>Convergência:</strong> O sistema detecta quando rodadas adicionais não mudam o resultado significativamente e pode encerrar antecipadamente.
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="bg-amber-500/20 text-amber-400 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">5</span>
+                <div class="text-neutral-300">
+                  <strong>Geração de relatório:</strong> Após a última rodada, o ReportAgent compila os dados em relatório nos formatos escolhidos.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Troubleshooting -->
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Problemas Comuns e Soluções:</h4>
+            <div class="space-y-2 text-sm text-neutral-300">
+              <div><strong class="text-red-400">Simulação travou na rodada X:</strong> Geralmente limite de API. Espere 5 min e retome com --resume.</div>
+              <div><strong class="text-orange-400">Agentes repetindo mesmos posts:</strong> Documentos-semente insuficientes. Adicione mais contexto.</div>
+              <div><strong class="text-yellow-400">Resultados não fazem sentido:</strong> Verifique se os documentos-semente estão coerentes entre si.</div>
+              <div><strong class="text-green-400">Simulação muito lenta:</strong> Reduza agentes ou rodadas. Use modo exploratório primeiro.</div>
+            </div>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Health check:</strong> Indicadores que mostram se a simulação está rodando corretamente</li>
+              <li>- <strong>Early termination:</strong> Parar quando convergiu economiza tokens sem perder qualidade</li>
+              <li>- <strong>Checkpoint:</strong> Resultados parciais são salvos a cada rodada para recovery</li>
+              <li>- <strong>Cache:</strong> Re-executar com pequenas mudanças reutiliza resultados anteriores</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">5</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">📊 Interpretando o Relatório - O que significa cada seção</h3>
+          <p class="text-sm text-neutral-400 mt-1">Transformando dados em decisões</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">Guia prático para interpretar cada seção do relatório gerado pelo MiroFish. O relatório típico tem 6 seções, cada uma com propósito e audiência diferentes. Saber ler o relatório é tão importante quanto executar a simulação.</p>
+          </div>
+
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Anatomia do Relatório:</h4>
+            <div class="space-y-3">
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-amber-400 font-semibold text-sm">1. Executive Summary</span>
+                  <span class="text-neutral-500 text-xs">Para: C-Level / Decisores</span>
+                </div>
+                <p class="text-neutral-400 text-xs">1 parágrafo com conclusão principal, cenário recomendado e 3 métricas-chave. Se o leitor só ler esta seção, deve ter o essencial.</p>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-amber-400 font-semibold text-sm">2. Mapa de Sentimento</span>
+                  <span class="text-neutral-500 text-xs">Para: Marketing / PR</span>
+                </div>
+                <p class="text-neutral-400 text-xs">Gráfico temporal de sentimento, breakdown por plataforma e por tema. Mostra onde e quando o sentimento muda.</p>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-amber-400 font-semibold text-sm">3. Narrativas Dominantes</span>
+                  <span class="text-neutral-500 text-xs">Para: Estratégia / Comunicação</span>
+                </div>
+                <p class="text-neutral-400 text-xs">Top 5 narrativas identificadas, com volume, sentimento e exemplos de posts. Mostra o "porquê" por trás dos números.</p>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-amber-400 font-semibold text-sm">4. Clusters de Opinião</span>
+                  <span class="text-neutral-500 text-xs">Para: Produto / Pesquisa</span>
+                </div>
+                <p class="text-neutral-400 text-xs">Grupos de agentes com opinião similar, tamanho de cada grupo, argumentos principais e possibilidade de conversão.</p>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-amber-400 font-semibold text-sm">5. Comparativo de Cenários</span>
+                  <span class="text-neutral-500 text-xs">Para: Planejamento</span>
+                </div>
+                <p class="text-neutral-400 text-xs">Se múltiplos cenários foram testados: tabela comparativa com métricas, prós/contras e recomendação.</p>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-amber-400 font-semibold text-sm">6. Recomendações</span>
+                  <span class="text-neutral-500 text-xs">Para: Todos</span>
+                </div>
+                <p class="text-neutral-400 text-xs">Lista priorizada de ações sugeridas, com impacto estimado, dificuldade de implementação e timeline.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Audiência-específico:</strong> Cada seção tem um público-alvo. Distribua apenas o relevante</li>
+              <li>- <strong>Métricas de confiança:</strong> O relatório inclui margem de erro e nível de confiança</li>
+              <li>- <strong>Exportação:</strong> HTML para exploração, PDF para arquivo, Markdown para equipe</li>
+              <li>- <strong>Versionamento:</strong> Compare relatórios de simulações diferentes para ver evolução</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">6</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">💬 Interação Profunda - Entrevistando agentes e testando "E se?"</h3>
+          <p class="text-sm text-neutral-400 mt-1">Explorando o mundo digital após a simulação</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">Após a simulação, o mundo digital permanece "vivo": você pode entrevistar agentes individuais para entender suas decisões, testar cenários "E se?" alterando variáveis e explorar relações entre agentes que não apareceram no relatório.</p>
+          </div>
+
+          <!-- Interview Examples -->
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Exemplos de Interação Pós-Simulação:</h4>
+            <div class="space-y-3">
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <div class="text-blue-400 text-xs font-semibold mb-1">Entrevista com Agente #47 (Consumidor Cético)</div>
+                <div class="space-y-2 text-sm">
+                  <div><span class="text-amber-400">Você:</span> <span class="text-neutral-300">"Por que você não adotou o produto mesmo após 5 reviews positivos?"</span></div>
+                  <div><span class="text-green-400">Agente #47:</span> <span class="text-neutral-300">"Os reviews eram todos de influenciadores patrocinados. Eu precisaria de um amigo pessoal recomendando ou uma análise técnica independente."</span></div>
+                  <div><span class="text-amber-400">Você:</span> <span class="text-neutral-300">"E se houvesse uma garantia de devolução de 60 dias?"</span></div>
+                  <div><span class="text-green-400">Agente #47:</span> <span class="text-neutral-300">"Isso mudaria minha decisão. O risco financeiro era minha segunda maior objeção."</span></div>
+                </div>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <div class="text-purple-400 text-xs font-semibold mb-1">Cenário "E se?"</div>
+                <div class="space-y-2 text-sm">
+                  <div><span class="text-amber-400">Você:</span> <span class="text-neutral-300">"E se o preço fosse R$14,90 ao invés de R$29,90?"</span></div>
+                  <div><span class="text-purple-400">MiroFish:</span> <span class="text-neutral-300">"Re-simulando... Adoção de mainstream sobe de 35% para 62%. Porém, percepção de qualidade cai em 18% dos early adopters (associam preço baixo a produto inferior). Net sentiment sobe de +47% para +53%."</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tips -->
+          <div class="bg-blue-500/10 rounded-lg p-4 border border-blue-500/30">
+            <h4 class="text-blue-400 font-semibold mb-2">Perguntas poderosas para fazer aos agentes:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- "O que te faria mudar de opinião?"</li>
+              <li>- "Quem mais influenciou sua decisão?"</li>
+              <li>- "Se o produto fosse gratuito, você usaria?"</li>
+              <li>- "O que te levou a compartilhar/não compartilhar com outros?"</li>
+              <li>- "Qual foi o momento decisivo para você?"</li>
+            </ul>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Agent interview:</strong> Conversar diretamente com um agente para entender seu raciocínio</li>
+              <li>- <strong>What-if scenarios:</strong> Alterar uma variável e re-simular para ver o impacto</li>
+              <li>- <strong>Counterfactual analysis:</strong> "O que teria acontecido se X não tivesse ocorrido?"</li>
+              <li>- <strong>Sensitivity testing:</strong> Descobrir quais variáveis têm mais impacto no resultado final</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Final CTA -->
+    <div class="bg-amber-500/10 rounded-xl p-6 border border-amber-500/30 text-center">
+      <h3 class="text-xl font-bold text-amber-400 mb-2">Parabéns! Você completou a Trilha 4</h3>
+      <p class="text-neutral-300 text-sm mb-4">Agora você tem o conhecimento prático para executar simulações completas no ecossistema MiroFish. Na Trilha 5, vamos instalar e configurar tudo do zero.</p>
+      <a href="../trilha5/index.html" class="inline-block bg-amber-600 hover:bg-amber-500 text-white px-6 py-3 rounded-lg font-semibold transition-colors">Iniciar Trilha 5: Instalação →</a>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center pt-6">
+      <a href="modulo-4-5.html" class="text-amber-400 hover:text-amber-300 transition-colors">← Cenários Financeiros</a>
+      <a href="index.html" class="text-amber-400 hover:text-amber-300 transition-colors">Voltar ao Índice da Trilha 4</a>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-700 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>🐟 Ecossistema MiroFish &mdash; Curso desenvolvido por <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+
+</body>
+</html>

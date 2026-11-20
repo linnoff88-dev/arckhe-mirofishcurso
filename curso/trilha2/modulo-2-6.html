@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2.6 Finanças e Análise de Investimentos | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37, 99, 235, 0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37, 99, 235, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13, 148, 136, 0.08); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span>
+          </a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span>
+          </a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <div class="flex items-center space-x-2 text-sm text-neutral-400 mb-6">
+      <a href="../../index.html" class="hover:text-blue-400 transition-colors">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-blue-400 transition-colors">Trilha 2</a>
+      <span>/</span>
+      <span class="text-blue-400">Módulo 2.6</span>
+    </div>
+
+    <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-2xl p-8 mb-8 border border-blue-500/30">
+      <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm font-bold">MÓDULO 2.6</span>
+      <h1 class="text-2xl font-bold text-neutral-100 mt-4 mb-2">💰 Finanças e Análise de Investimentos</h1>
+      <p class="text-neutral-300">Simule sentimento de mercado pós-anúncios financeiros, preveja fluxos de capital, analise impacto de política monetária e navegue riscos geopolíticos com agentes inteligentes.</p>
+    </div>
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold text-neutral-100">📈 Sentimento de Mercado</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Simulação pós-anúncios financeiros: como investidores, analistas e público reagirão aos seus resultados.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">Anúncios financeiros -- resultados trimestrais, mudanças de guidance, dividendos, recompra de ações -- movem mercados. MiroFish permite simular a reação antes do anúncio. Configure agentes representando: investidores institucionais (conservadores, agressivos, value, growth), analistas sell-side, investidores de varejo, jornalistas financeiros. Apresente os números e a narrativa do earnings call. Observe: o mercado vai interpretar como beat ou miss? Qual será o sentimento dominante? Que perguntas os analistas farão? Quais manchetes a mídia vai publicar?</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">Anúncios de resultados causam movimentos médios de 5-8% no preço de ações no dia do anúncio (S&P Capital IQ). Earnings calls mal conduzidos podem amplificar movimentos negativos em 2-3x. O mercado de investor relations movimenta $2.1B globalmente. Empresas que pré-testam comunicação de resultados com simulação reportam volatilidade 20% menor no dia do anúncio.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-primary/40 mb-4">
+        <h3 class="text-primary font-bold mb-2">Dica Prática</h3>
+        <p class="text-neutral-300 text-sm">Antes de cada earnings call, execute uma simulação com 3 cenários de comunicação: (1) tom otimista com guidance elevado, (2) tom cauteloso com guidance conservador, (3) tom realista com guidance mantido. Para cada cenário, meça: sentimento de investidores institucionais (os que mais movem preço), perguntas prováveis de analistas, e headlines previstas. Prepare respostas para as perguntas mais difíceis identificadas na simulação.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-dark-700 rounded-xl p-5 border border-emerald-500/30">
+          <h3 class="text-emerald-400 font-bold mb-2">Fazer</h3>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>+ Simular diferentes narrativas para os mesmos números</li>
+            <li>+ Incluir agentes sell-side com diferentes teses</li>
+            <li>+ Testar Q&A completo do earnings call</li>
+            <li>+ Comparar sentimento simulado com consenso de mercado</li>
+          </ul>
+        </div>
+        <div class="bg-dark-700 rounded-xl p-5 border border-red-500/30">
+          <h3 class="text-red-400 font-bold mb-2">Evitar</h3>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>- Usar simulação para tentar manipular mercado</li>
+            <li>- Compartilhar números reais pré-anúncio na simulação</li>
+            <li>- Ignorar cenários onde o mercado reage negativamente</li>
+            <li>- Não considerar insider trading regulations</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🔄 Fluxo de Capital</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Prever movimentos após eventos-chave: para onde o dinheiro vai quando o mundo muda.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">Fluxos de capital seguem sentimento: quando investidores ficam pessimistas sobre um setor, o capital migra para alternativas percebidas como mais seguras. MiroFish permite modelar essa dinâmica. Configure agentes representando diferentes tipos de investidores (institucional, hedge fund, retail, soberano) e injete um evento (eleição, pandemia, guerra comercial, desastre natural). Observe como cada tipo de investidor reage: quem vende? Quem compra? Para onde o capital migra? Quais setores ganham e quais perdem?</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">Fluxos globais de capital movimentam $6.6T diariamente (BIS). Em crises, a rotação setorial pode mover 15-25% do capital em semanas. O "flight to quality" (migração para ativos seguros) após eventos de risco é previsível em direção mas imprevisível em magnitude. MiroFish pode estimar a magnitude com base no sentimento simulado de diferentes classes de investidores.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-primary/40">
+        <h3 class="text-primary font-bold mb-2">Dica Prática</h3>
+        <p class="text-neutral-300 text-sm">Crie um "modelo de fluxo" com 4 classes de agentes investidores: (1) Conservador/renda fixa, (2) Moderado/balanceado, (3) Agressivo/growth, (4) Especulativo/trading. Defina as "regras de decisão" de cada perfil (risk tolerance, horizonte, triggers de venda). Injete eventos macro e observe a cascata: quando o especulativo vende, o conservador compra? Quanto tempo leva para estabilizar? Use como modelo mental para posicionamento de portfólio.</p>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🏦 Impacto de Política Monetária</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Simular reação a corte/aumento de juros: como diferentes stakeholders respondem a mudanças na Selic, Fed Funds ou ECB rate.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">Decisões de política monetária afetam toda a economia: crédito, investimentos, consumo, câmbio, inflação. MiroFish permite simular como diferentes stakeholders reagiriam a cenários de juros. Configure agentes representando: bancos (ajuste de spread e crédito), empresas (decisões de investimento e captação), consumidores (consumo e poupança), investidores (realocação de portfólio), governo (impacto fiscal). A simulação revela não apenas reações individuais, mas cascatas de segunda e terceira ordem.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">Cada 1% de mudança na Selic impacta o PIB em 0.3-0.5% (BCB). O mercado de renda fixa brasileiro é de R$7.5T. Decisões do COPOM movem R$50B+ em fluxos de realocação. O lag entre decisão monetária e impacto real na economia é de 6-18 meses -- período que MiroFish pode "comprimir" em horas para antecipar impactos.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-primary/40">
+        <h3 class="text-primary font-bold mb-2">Dica Prática</h3>
+        <p class="text-neutral-300 text-sm">Antes de cada reunião do COPOM/Fed, simule 3 cenários: (1) corte de 25bps, (2) manutenção, (3) aumento de 25bps. Para cada cenário, configure 5 tipos de agentes (bancos, empresas, consumidores, investidores, governo) e meça: mudança em decisões de crédito, investimento, consumo e alocação. Compare com o consenso de mercado para identificar onde a simulação diverge -- essas divergências podem ser oportunidades de posicionamento.</p>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold text-neutral-100">💱 Cripto e Exchanges</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Caso de hack de exchange como exemplo: simule pânico, FUD e recuperação no mercado cripto.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">O mercado cripto é altamente reativo a sentimento -- mais que qualquer outro mercado financeiro. Eventos como hacks de exchanges, mudanças regulatórias, ou tweets de figuras influentes podem mover preços 20-50% em horas. MiroFish é especialmente poderoso aqui: simule um hack de grande exchange e observe a cascata -- pânico inicial, bank run (retirada massiva de fundos), contágio para outras exchanges, venda de Bitcoin e alts, flight para stablecoins, e eventual recuperação. A velocidade e magnitude de cada fase podem ser previstas com simulação.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">Hacks de exchanges já causaram perdas de $3.8B em 2022 (Chainalysis). O hack do Mt. Gox (2014) fez o Bitcoin cair 36% em dias. O colapso da FTX (2022) causou uma queda de 25% no mercado cripto em uma semana e contágio para todo o setor. O mercado cripto vale $2.5T+ (2025) e o sentimento é responsável por 60-70% dos movimentos de preço de curto prazo.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-primary/40">
+        <h3 class="text-primary font-bold mb-2">Dica Prática</h3>
+        <p class="text-neutral-300 text-sm">Para análise cripto, crie agentes com 4 perfis: (1) HODLers de longo prazo (mantêm posição), (2) Traders ativos (reagem rápido), (3) Investidores institucionais (movem grande volume), (4) Novatos (reagem emocionalmente). Simule eventos de estresse: hack, ban regulatório, crash de 30%, halving. Meça: tempo para pânico atingir pico, volume de "venda" simulada, tempo para recuperação. Use como modelo de risco para dimensionar posições.</p>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold text-neutral-100">📊 Volatilidade e Sentimento</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Correlação entre opinião simulada e mercado: validando o poder preditivo do MiroFish para finanças.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">A hipótese central é que sentimento simulado por MiroFish correlaciona com movimentos reais de mercado. Isso pode ser validado empiricamente: execute simulações de eventos passados (ex: anúncio de resultados da Apple Q3 2024) e compare o sentimento simulado com o movimento real do preço. Se a correlação for consistente, MiroFish se torna uma ferramenta de previsão financeira poderosa. A correlação entre sentimento social (Twitter/X, Reddit) e volatilidade do VIX já está documentada em múltiplos estudos acadêmicos.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">Estudos acadêmicos mostram correlação de 0.7-0.85 entre sentimento de redes sociais e volatilidade de mercado (Bollen et al., Tetlock). O VIX (índice de medo) correlaciona fortemente com sentimento negativo em mídias sociais. Bloomberg e Reuters já integram análise de sentimento em seus terminais. MiroFish adiciona a dimensão preditiva: em vez de medir sentimento presente, simula sentimento futuro.</p>
+      </div>
+
+      <!-- Timeline -->
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30">
+        <h3 class="text-blue-400 font-bold mb-3">Processo de Validação</h3>
+        <div class="space-y-3 text-sm">
+          <div class="flex items-start space-x-3">
+            <span class="w-2 h-2 rounded-full bg-blue-400 mt-1.5 flex-shrink-0"></span>
+            <div><span class="text-blue-400 font-medium">Etapa 1:</span> <span class="text-neutral-300">Selecione 20 eventos financeiros passados com dados de mercado disponíveis</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="w-2 h-2 rounded-full bg-blue-400 mt-1.5 flex-shrink-0"></span>
+            <div><span class="text-blue-400 font-medium">Etapa 2:</span> <span class="text-neutral-300">Execute simulações MiroFish para cada evento (sem usar dados de resultado)</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="w-2 h-2 rounded-full bg-blue-400 mt-1.5 flex-shrink-0"></span>
+            <div><span class="text-blue-400 font-medium">Etapa 3:</span> <span class="text-neutral-300">Compare sentimento simulado com movimento real de preço e VIX</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="w-2 h-2 rounded-full bg-blue-400 mt-1.5 flex-shrink-0"></span>
+            <div><span class="text-blue-400 font-medium">Etapa 4:</span> <span class="text-neutral-300">Calcule correlação e identifique padrões de acerto/erro</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="w-2 h-2 rounded-full bg-blue-400 mt-1.5 flex-shrink-0"></span>
+            <div><span class="text-blue-400 font-medium">Etapa 5:</span> <span class="text-neutral-300">Calibre parâmetros dos agentes e repita para melhorar precisão</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🛡️ Análise de Risco Geopolítico</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Stakeholders governo/empresas/consumidores: simule o impacto financeiro de tensões geopolíticas.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">Risco geopolítico é o fator mais difícil de precificar em modelos financeiros tradicionais. MiroFish oferece uma abordagem única: simule agentes representando governos (diferentes facções e tendências), empresas multinacionais (diferentes exposições geográficas), investidores (diferentes risk appetites) e consumidores (diferentes países). Injete um evento geopolítico (sanção, guerra comercial, eleição surpresa, conflito) e observe a cascata multi-stakeholder: como governos reagem? Como empresas ajustam supply chain? Como investidores realocam? Como consumidores mudam comportamento?</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">Risco geopolítico é a preocupação #1 para 67% dos investidores institucionais em 2025 (BlackRock). Eventos geopolíticos causaram 8 dos 10 maiores drawdowns de mercado na última década. O custo de supply chain disruption por eventos geopolíticos atingiu $1.2T globalmente em 2023. Empresas com análise de risco geopolítico sofrem 40% menos em drawdowns vs empresas sem análise (Willis Towers Watson).</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-primary/40">
+        <h3 class="text-primary font-bold mb-2">Dica Prática</h3>
+        <p class="text-neutral-300 text-sm">Construa um "radar geopolítico" com MiroFish: identifique os 5 riscos geopolíticos mais relevantes para seu negócio/portfólio. Para cada um, execute uma simulação trimestral com cenários de escalação e de-escalação. Gere um "heat map de risco" com probabilidade (baseada em simulação) x impacto (em valor de mercado). Use para: (1) dimensionamento de hedge, (2) diversificação geográfica, (3) planejamento de supply chain resiliente, (4) comunicação com investidores sobre preparação.</p>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-blue-500/30">
+      <h3 class="text-xl font-bold text-neutral-100 mb-4">Resumo do Módulo 2.6</h3>
+      <div class="space-y-2 mb-6">
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Sei simular sentimento de mercado pré-earnings e anúncios financeiros</span>
+        </label>
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Entendo como modelar fluxos de capital com agentes investidores</span>
+        </label>
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Conheço a simulação de impacto de política monetária</span>
+        </label>
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Domino análise de sentimento cripto com MiroFish</span>
+        </label>
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Sei validar correlação entre sentimento simulado e volatilidade real</span>
+        </label>
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Conheço o framework de análise de risco geopolítico com simulação</span>
+        </label>
+      </div>
+      <div class="flex justify-between items-center pt-4 border-t border-dark-700">
+        <a href="modulo-2-5.html" class="text-neutral-400 hover:text-blue-400 transition-colors text-sm font-medium">← Recursos Humanos</a>
+        <a href="../trilha3/index.html" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold transition-colors">Próxima Trilha: Avançado →</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-dark-700 mt-16 py-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>🐟 Ecossistema MiroFish — Curso desenvolvido por <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+
+</body>
+</html>

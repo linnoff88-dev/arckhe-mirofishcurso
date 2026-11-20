@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4.5 Simulação de Cenários Financeiros | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217, 119, 6, 0.12); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217, 119, 6, 0.25); }
+    html:not(.dark) .hover\:bg-amber-500\/30:hover { background-color: rgba(217, 119, 6, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-amber-400 bg-amber-500/10"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="bg-gradient-to-b from-amber-900/30 to-dark-900 border-b border-amber-500/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="flex items-center space-x-3 mb-3">
+        <a href="index.html" class="text-amber-400 hover:text-amber-300 text-sm">← Trilha 4</a>
+        <span class="text-neutral-600">|</span>
+        <span class="bg-amber-500/20 text-amber-400 px-3 py-1 rounded-full text-sm font-semibold border border-amber-500/30">Módulo 4.5</span>
+      </div>
+      <h1 class="text-2xl font-bold text-neutral-100 mb-2">💰 Simulação de Cenários Financeiros</h1>
+      <p class="text-neutral-400">Agentes investidores reagem a eventos econômicos: taxa de juros, crypto hacks e volatilidade de mercado.</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
+
+    <!-- Disclaimer -->
+    <div class="bg-red-500/10 rounded-xl p-4 border border-red-500/30">
+      <div class="flex items-start space-x-3">
+        <span class="text-red-400 text-xl flex-shrink-0">⚠️</span>
+        <div>
+          <h4 class="text-red-400 font-semibold mb-1">Aviso Importante</h4>
+          <p class="text-neutral-300 text-sm">Este módulo é educacional. As simulações financeiras do MiroFish NÃO constituem aconselhamento financeiro, previsão de mercado ou recomendação de investimento. Sempre consulte profissionais qualificados para decisões financeiras.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 1 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">📋 Sinais Financeiros como Semente - Notícias econômicas e anúncios</h3>
+          <p class="text-sm text-neutral-400 mt-1">Preparando dados financeiros como input para simulação</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">Para simulação financeira, os documentos-semente são dados econômicos reais: comunicados do COPOM, relatórios de earnings de empresas, notícias de fusões/aquisições, dados de inflação e eventos geopolíticos. A qualidade da simulação depende da completude desses dados.</p>
+          </div>
+
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Tipos de Documentos-Semente Financeiros:</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <span class="text-amber-400 font-semibold">Macro:</span>
+                <span class="text-neutral-300"> Atas do COPOM, IPCA, PIB, taxa de câmbio, balança comercial</span>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <span class="text-amber-400 font-semibold">Corporativo:</span>
+                <span class="text-neutral-300"> Earnings reports, M&A, mudança de CEO, recall de produto</span>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <span class="text-amber-400 font-semibold">Geopolítico:</span>
+                <span class="text-neutral-300"> Sanções, guerras comerciais, eleições, mudanças regulatórias</span>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <span class="text-amber-400 font-semibold">Crypto:</span>
+                <span class="text-neutral-300"> Hacks de exchanges, regulação SEC, halvings, listagens</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Dados estruturados:</strong> Números, datas e valores exatos (não apenas texto narrativo)</li>
+              <li>- <strong>Contexto temporal:</strong> Incluir o estado do mercado antes do evento (bull/bear/lateral)</li>
+              <li>- <strong>Precedentes:</strong> Adicionar como o mercado reagiu a eventos similares no passado</li>
+              <li>- <strong>Expectativas:</strong> O que o mercado esperava vs o que aconteceu (o gap gera volatilidade)</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">🎭 Agentes Investidores - Varejistas, institucionais e analistas</h3>
+          <p class="text-sm text-neutral-400 mt-1">Cada tipo de investidor reage de forma diferente</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">Criamos 120 agentes investidores representando o ecossistema real do mercado: varejistas emocionais, fundos institucionais com algoritmos, analistas fundamentalistas, traders técnicos e formadores de opinião financeira. Cada um tem regras de decisão e tolerância a risco diferentes.</p>
+          </div>
+
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Perfis de Agentes Financeiros:</h4>
+            <div class="space-y-3">
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-amber-400 font-semibold text-sm">Varejista Emocional (40 agentes)</span>
+                  <span class="bg-red-500/20 text-red-400 px-2 py-0.5 rounded text-xs">Alto risco</span>
+                </div>
+                <p class="text-neutral-400 text-xs">Reage a manchetes. Compra no hype, vende no pânico. Influenciado por redes sociais e finfluencers. Horizonte: dias a semanas.</p>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-amber-400 font-semibold text-sm">Institucional Algorítmico (20 agentes)</span>
+                  <span class="bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded text-xs">Baixo risco</span>
+                </div>
+                <p class="text-neutral-400 text-xs">Regras matemáticas de decisão. Rebalanceamento automático. Stop loss definido. Não é influenciado por emoção. Horizonte: meses a anos.</p>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-amber-400 font-semibold text-sm">Analista Fundamentalista (20 agentes)</span>
+                  <span class="bg-green-500/20 text-green-400 px-2 py-0.5 rounded text-xs">Médio risco</span>
+                </div>
+                <p class="text-neutral-400 text-xs">Analisa balanços e fundamentos. Compra valor, ignora ruído de curto prazo. Publica relatórios que influenciam outros agentes.</p>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-amber-400 font-semibold text-sm">Trader de Momentum (25 agentes)</span>
+                  <span class="bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded text-xs">Alto risco</span>
+                </div>
+                <p class="text-neutral-400 text-xs">Segue tendências. Compra o que está subindo, vende o que está caindo. Amplifica movimentos em ambas as direções.</p>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-dark-600">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-amber-400 font-semibold text-sm">Finfluencer (15 agentes)</span>
+                  <span class="bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded text-xs">Influência alta</span>
+                </div>
+                <p class="text-neutral-400 text-xs">Não investe diretamente, mas publica análises e opiniões que movem os agentes varejistas. Alguns são responsáveis, outros são sensacionalistas.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Herding behavior:</strong> Varejistas copiam o que outros varejistas fazem (efeito manada)</li>
+              <li>- <strong>Smart money vs dumb money:</strong> Institucionais geralmente compram quando varejistas vendem em pânico</li>
+              <li>- <strong>Information asymmetry:</strong> Analistas têm acesso a dados que varejistas não têm</li>
+              <li>- <strong>Feedback loops:</strong> Finfluencers criam profecias autorrealizáveis</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">📈 Simulando Anúncio de Taxa de Juros - Reação do mercado simulada</h3>
+          <p class="text-sm text-neutral-400 mt-1">O COPOM anuncia: como cada agente reage?</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">Simulação completa: o COPOM anuncia aumento de 0.5% na Selic (para 14.25%), quando o mercado esperava manutenção. Os 120 agentes reagem em cadeia ao longo de 5 rodadas (equivalentes a 5 dias úteis). Observamos renda fixa, ações, câmbio e derivativos.</p>
+          </div>
+
+          <!-- Timeline -->
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Cascata de Reações Simuladas:</h4>
+            <div class="space-y-3 text-sm">
+              <div class="flex items-start space-x-3">
+                <span class="bg-red-500/20 text-red-400 px-2 py-0.5 rounded text-xs font-mono flex-shrink-0">T+0min</span>
+                <span class="text-neutral-300">Anúncio: Selic sobe 0.5% (esperava-se 0%). Algoritmos institucionais vendem ações imediatamente (-2.1% no Ibovespa).</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="bg-red-500/20 text-red-400 px-2 py-0.5 rounded text-xs font-mono flex-shrink-0">T+15min</span>
+                <span class="text-neutral-300">Traders de momentum amplificam a venda (-3.4%). Dólar sobe 1.8%. Finfluencers publicam "ALERTA" no Twitter.</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded text-xs font-mono flex-shrink-0">T+1h</span>
+                <span class="text-neutral-300">Varejistas em pânico vendem ações tech e small caps (-5.2% no segmento). Renda fixa atrai capital.</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded text-xs font-mono flex-shrink-0">T+1dia</span>
+                <span class="text-neutral-300">Analistas publicam relatórios: "Selic alta favorece bancos e utilities". Rotation setorial começa.</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="bg-green-500/20 text-green-400 px-2 py-0.5 rounded text-xs font-mono flex-shrink-0">T+3dias</span>
+                <span class="text-neutral-300">Institucionais compram ações de bancos a preço descontado. Ibovespa recupera 1.8%. Nova estabilidade.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Expectativa vs realidade:</strong> O gap entre o esperado e o anunciado determina a magnitude da reação</li>
+              <li>- <strong>Flight to quality:</strong> Capital sai de risco (ações) e vai para segurança (renda fixa)</li>
+              <li>- <strong>Rotation setorial:</strong> Juros altos beneficiam bancos/utilities e prejudicam tech/varejo</li>
+              <li>- <strong>Overshooting:</strong> A reação inicial é sempre exagerada; o mercado corrige em dias</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">4</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">💱 Caso Crypto Exchange Hack - Fluxo de capital pós-incidente</h3>
+          <p class="text-sm text-neutral-400 mt-1">Pânico, corrida de saques e recuperação</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">Simulação de um hack em uma exchange top-10 de criptomoedas: roubo de US$200M em ETH. Os agentes reagem em cascata: pânico inicial, corrida de saques em todas as exchanges (contágio), queda de preço, resposta regulatória simulada e recuperação gradual ao longo de 30 dias.</p>
+          </div>
+
+          <!-- Scenario Box -->
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Fases da Crise Simulada:</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div class="bg-dark-800 rounded-lg p-3 border border-red-500/30">
+                <h5 class="text-red-400 font-semibold text-sm mb-1">Fase 1: Pânico (0-6h)</h5>
+                <p class="text-neutral-400 text-xs">Varejistas tentam sacar de todas as exchanges. ETH cai 18%. BTC cai 12% por contágio. Volume de saques 40x normal.</p>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-orange-500/30">
+                <h5 class="text-orange-400 font-semibold text-sm mb-1">Fase 2: Contágio (6-48h)</h5>
+                <p class="text-neutral-400 text-xs">FUD generalizado: "E se minha exchange também for hackeada?" Exchanges menores veem saques 10x. 3 pausam operações.</p>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-yellow-500/30">
+                <h5 class="text-yellow-400 font-semibold text-sm mb-1">Fase 3: Estabilização (2-7 dias)</h5>
+                <p class="text-neutral-400 text-xs">Exchange hackeada anuncia fundo de compensação. Reguladores emitem nota. Institucionais começam a comprar na queda.</p>
+              </div>
+              <div class="bg-dark-800 rounded-lg p-3 border border-green-500/30">
+                <h5 class="text-green-400 font-semibold text-sm mb-1">Fase 4: Recuperação (7-30 dias)</h5>
+                <p class="text-neutral-400 text-xs">Preços recuperam 60% da queda. Exchange hackeada perde 35% dos clientes permanentemente. Exchanges com "proof of reserves" ganham market share.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Bank run dynamics:</strong> Medo de insolvência causa corrida que pode causar insolvência real</li>
+              <li>- <strong>FUD propagation:</strong> Fear, Uncertainty, Doubt se espalha mais rápido que fatos</li>
+              <li>- <strong>Contagion effect:</strong> Problema em uma exchange afeta todo o ecossistema</li>
+              <li>- <strong>Recovery asymmetry:</strong> Queda é rápida (horas), recuperação é lenta (semanas)</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">5</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">📊 Volatilidade Prevista vs Real - Limites e calibração</h3>
+          <p class="text-sm text-neutral-400 mt-1">Onde a simulação acerta, onde erra, e como melhorar</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">Comparação rigorosa entre os resultados da simulação e dados reais de eventos passados. Para o cenário de Selic, comparamos com as 5 últimas decisões surpresa do COPOM. Para o hack crypto, comparamos com o hack da Bybit (2025) e a queda do FTX (2022).</p>
+          </div>
+
+          <div class="bg-amber-500/10 rounded-lg p-4 border border-amber-500/30">
+            <h4 class="text-amber-400 font-semibold mb-3">Precisão da Simulação (backtesting):</h4>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="text-amber-400">
+                    <th class="text-left p-2">Métrica</th>
+                    <th class="text-center p-2">Simulado</th>
+                    <th class="text-center p-2">Real</th>
+                    <th class="text-center p-2">Erro</th>
+                  </tr>
+                </thead>
+                <tbody class="text-neutral-300">
+                  <tr class="border-t border-dark-600">
+                    <td class="p-2">Queda inicial Ibovespa</td>
+                    <td class="text-center p-2">-3.4%</td>
+                    <td class="text-center p-2">-2.8%</td>
+                    <td class="text-center p-2 text-yellow-400">+0.6pp</td>
+                  </tr>
+                  <tr class="border-t border-dark-600">
+                    <td class="p-2">Recuperação em 5 dias</td>
+                    <td class="text-center p-2">+1.8%</td>
+                    <td class="text-center p-2">+1.5%</td>
+                    <td class="text-center p-2 text-green-400">+0.3pp</td>
+                  </tr>
+                  <tr class="border-t border-dark-600">
+                    <td class="p-2">Direção do câmbio</td>
+                    <td class="text-center p-2">Alta</td>
+                    <td class="text-center p-2">Alta</td>
+                    <td class="text-center p-2 text-green-400">Correto</td>
+                  </tr>
+                  <tr class="border-t border-dark-600">
+                    <td class="p-2">Rotation setorial</td>
+                    <td class="text-center p-2">Bancos +3%</td>
+                    <td class="text-center p-2">Bancos +2.1%</td>
+                    <td class="text-center p-2 text-yellow-400">+0.9pp</td>
+                  </tr>
+                  <tr class="border-t border-dark-600">
+                    <td class="p-2">Timing da recuperação</td>
+                    <td class="text-center p-2">3 dias</td>
+                    <td class="text-center p-2">4 dias</td>
+                    <td class="text-center p-2 text-yellow-400">-1 dia</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="text-neutral-400 text-xs mt-2">Margem de erro média: 15-25%. Direção acertada em 90% dos casos.</p>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Direção vs magnitude:</strong> A simulação acerta a direção (90%) melhor que a magnitude (70%)</li>
+              <li>- <strong>Overshooting simulado:</strong> Agentes tendem a reagir mais fortemente que investidores reais</li>
+              <li>- <strong>Calibração iterativa:</strong> Cada backtesting melhora os parâmetros dos agentes</li>
+              <li>- <strong>Black swans:</strong> Eventos nunca vistos antes (cisnes negros) não podem ser simulados a partir de precedentes</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="topic-item bg-dark-800 rounded-xl border border-dark-700 overflow-hidden">
+      <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-4 p-5 hover:bg-amber-500/10 transition-colors text-left">
+        <span class="bg-amber-500/20 text-amber-400 w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">6</span>
+        <div>
+          <h3 class="font-semibold text-neutral-100">⚠️ Limitações e Cuidados - Viés de rebanho, validação, uso responsável</h3>
+          <p class="text-sm text-neutral-400 mt-1">O que a simulação NÃO pode fazer</p>
+        </div>
+      </button>
+      <div class="topic-explanation px-5 pb-5">
+        <div class="space-y-4">
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">O que é:</h4>
+            <p class="text-neutral-300 text-sm">Discussão honesta e obrigatória sobre as limitações da simulação financeira: viéses inerentes ao modelo, cenários que não podem ser simulados, riscos de overconfidence e responsabilidades legais e éticas do uso.</p>
+          </div>
+
+          <!-- Critical Limitations -->
+          <div class="bg-red-500/10 rounded-lg p-4 border border-red-500/30">
+            <h4 class="text-red-400 font-semibold mb-3">5 Limitações Críticas:</h4>
+            <div class="space-y-2 text-sm">
+              <div class="flex items-start space-x-3">
+                <span class="text-red-400 flex-shrink-0">1.</span>
+                <div class="text-neutral-300"><strong>Viés de rebanho amplificado:</strong> Os agentes LLM tendem a convergir mais que investidores reais, gerando cenários de pânico exagerados.</div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="text-red-400 flex-shrink-0">2.</span>
+                <div class="text-neutral-300"><strong>Cisnes negros imprevisíveis:</strong> Eventos sem precedente (COVID, 11/Set) não podem ser simulados a partir de dados históricos.</div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="text-red-400 flex-shrink-0">3.</span>
+                <div class="text-neutral-300"><strong>Ilusão de precisão:</strong> Números como "-3.4%" dão falsa sensação de exatidão. A margem real é de 15-25%.</div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="text-red-400 flex-shrink-0">4.</span>
+                <div class="text-neutral-300"><strong>Falta de skin in the game:</strong> Agentes simulados não perdem dinheiro real, então suas decisões são mais "racionais" que as humanas.</div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="text-red-400 flex-shrink-0">5.</span>
+                <div class="text-neutral-300"><strong>Regulação:</strong> Usar simulação para tomar decisões de investimento pode ter implicações legais dependendo da jurisdição.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-green-500/10 rounded-lg p-4 border border-green-500/30">
+              <h4 class="text-green-400 font-semibold mb-2">Uso responsável:</h4>
+              <ul class="text-neutral-300 text-sm space-y-1">
+                <li>+ Educação e treinamento</li>
+                <li>+ Stress testing de portfólios</li>
+                <li>+ Compreender dinâmicas de mercado</li>
+                <li>+ Preparar planos de contingência</li>
+              </ul>
+            </div>
+            <div class="bg-red-500/10 rounded-lg p-4 border border-red-500/30">
+              <h4 class="text-red-400 font-semibold mb-2">Uso irresponsável:</h4>
+              <ul class="text-neutral-300 text-sm space-y-1">
+                <li>- Tomar decisões de investimento</li>
+                <li>- Vender como "previsão de mercado"</li>
+                <li>- Ignorar margem de erro nos dados</li>
+                <li>- Confiar 100% em cenários simulados</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-dark-700 rounded-lg p-4 border border-dark-600">
+            <h4 class="text-amber-400 font-semibold mb-2">Conceitos-chave:</h4>
+            <ul class="text-neutral-300 text-sm space-y-1">
+              <li>- <strong>Humildade epistêmica:</strong> A simulação é uma ferramenta de exploração, não uma bola de cristal</li>
+              <li>- <strong>Validação cruzada:</strong> Sempre comparar resultados simulados com dados reais e outras fontes</li>
+              <li>- <strong>Disclaimer obrigatório:</strong> Qualquer relatório financeiro deve conter aviso de não-aconselhamento</li>
+              <li>- <strong>Viés do operador:</strong> Quem configura a simulação pode (inconscientemente) influenciar os resultados</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center pt-6">
+      <a href="modulo-4-4.html" class="text-amber-400 hover:text-amber-300 transition-colors">← Sentimento em Tempo Real</a>
+      <a href="modulo-4-6.html" class="bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">Próximo: Seu Primeiro Mundo Digital →</a>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-700 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>🐟 Ecossistema MiroFish &mdash; Curso desenvolvido por <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+
+</body>
+</html>

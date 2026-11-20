@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2.3 Comunicação Corporativa e Crises | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37, 99, 235, 0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37, 99, 235, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13, 148, 136, 0.08); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10">
+            <span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span>
+          </a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span>
+          </a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <div class="flex items-center space-x-2 text-sm text-neutral-400 mb-6">
+      <a href="../../index.html" class="hover:text-blue-400 transition-colors">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-blue-400 transition-colors">Trilha 2</a>
+      <span>/</span>
+      <span class="text-blue-400">Módulo 2.3</span>
+    </div>
+
+    <div class="bg-gradient-to-r from-blue-900/30 to-dark-800 rounded-2xl p-8 mb-8 border border-blue-500/30">
+      <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm font-bold">MÓDULO 2.3</span>
+      <h1 class="text-2xl font-bold text-neutral-100 mt-4 mb-2">📰 Comunicação Corporativa e Crises</h1>
+      <p class="text-neutral-300">Teste comunicados antes de publicar, gerencie crises em tempo real e prepare porta-vozes com simulações realistas. Inclui o caso Universidade de Wuhan como exemplo real.</p>
+    </div>
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold text-neutral-100">📝 Teste de Press Release</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Simular recepção antes de publicar: nunca mais seja pego de surpresa pela reação pública a um comunicado.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">Um press release é uma aposta de alto risco: uma vez publicado, não pode ser "despublicado". MiroFish permite submeter o texto a centenas de agentes simulados que representam jornalistas (de diferentes editorias e veículos), investidores (conservadores e agressivos), consumidores (fiéis e críticos), e reguladores. Cada grupo reage ao texto: interpreta, questiona, compartilha ou critica. Em horas, você tem um mapa completo de como o comunicado será recebido, com tempo para ajustar antes de clicar "enviar".</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">Press releases mal recebidos podem causar quedas de 5-15% no valor de ações em horas (Bloomberg). 43% das empresas relatam ter publicado comunicados que geraram reações inesperadas negativas. O custo de gestão de crise pós-comunicado mal feito é 10-50x maior que o custo de uma simulação prévia com MiroFish ($2K-$8K).</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-primary/40 mb-4">
+        <h3 class="text-primary font-bold mb-2">Dica Prática</h3>
+        <p class="text-neutral-300 text-sm">Crie 4 versões do press release variando: (1) tom (formal vs empático), (2) nível de detalhe (completo vs high-level), (3) framing (defensivo vs proativo), (4) timing (manhã vs tarde, segunda vs sexta). Submeta todas as versões simultaneamente a agentes simulados e compare: qual gera melhor sentimento geral? Qual minimiza reações negativas? Qual é mais compartilhada positivamente?</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-dark-700 rounded-xl p-5 border border-emerald-500/30">
+          <h3 class="text-emerald-400 font-bold mb-2">Fazer</h3>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>+ Testar pelo menos 3 variações de cada comunicado</li>
+            <li>+ Incluir agentes jornalistas com diferentes editorias</li>
+            <li>+ Simular perguntas de follow-up dos agentes</li>
+            <li>+ Preparar FAQ baseado nas perguntas simuladas</li>
+          </ul>
+        </div>
+        <div class="bg-dark-700 rounded-xl p-5 border border-red-500/30">
+          <h3 class="text-red-400 font-bold mb-2">Evitar</h3>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>- Testar apenas com agentes favoráveis à empresa</li>
+            <li>- Ignorar reações de segmentos "pequenos" mas vocais</li>
+            <li>- Publicar sem testar por pressão de tempo</li>
+            <li>- Não preparar plano B se a recepção real diferir</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🚨 Gestão de Crise em Tempo Real</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">BettaFish + MindSpider 24/7: monitoramento e compreensão contínua durante crises ativas.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">Quando uma crise explode, o tempo é o recurso mais escasso. A combinação BettaFish + MindSpider cria uma "sala de guerra digital" que opera 24/7. BettaFish monitora sentimento em tempo real em todas as plataformas: cada menção, comentário e compartilhamento é capturado e analisado. MindSpider entra em ação para explicar as motivações: por que o sentimento está caindo? Qual grupo está liderando a crítica? Que narrativa está ganhando tração? Esse duo permite que a equipe de comunicação tome decisões informadas em minutos, não dias.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">Crises corporativas que não são abordadas nas primeiras 4 horas escalam 8x mais (Weber Shandwick). O custo médio de uma crise reputacional é de 22% do valor de mercado. Empresas com sistemas de monitoramento em tempo real reduzem o impacto de crises em 40%. Tempo de resposta com MiroFish: 15-30 minutos para análise completa vs 2-4 dias no método tradicional.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-primary/40">
+        <h3 class="text-primary font-bold mb-2">Dica Prática</h3>
+        <p class="text-neutral-300 text-sm">Configure o "kit de crise MiroFish" antes da crise acontecer: (1) BettaFish com alertas configurados para quedas abruptas de sentimento, (2) MindSpider pré-configurado para análise de motivações, (3) Templates de simulação rápida para testar respostas. Quando a crise chegar, ative o kit: monitore (BettaFish), compreenda (MindSpider), simule respostas (MiroFish) e aja com dados.</p>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🎤 Preparação de Porta-Voz</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Entrevistar agentes simulados: media training de última geração com personas de jornalistas, analistas e críticos.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">A preparação de porta-vozes tradicionalmente envolve um consultor de comunicação fazendo perguntas difíceis. Com MiroFish, o porta-voz pode "entrevistar" dezenas de agentes simulados: jornalistas investigativos, analistas financeiros céticos, consumidores indignados, ativistas. Cada agente faz perguntas baseadas em seu perfil e reage às respostas do porta-voz. O resultado é uma preparação muito mais abrangente: em vez de 10-15 perguntas de um consultor, o porta-voz enfrenta 100+ perguntas de perfis diversos.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">Porta-vozes bem preparados reduzem danos reputacionais em até 50% (Edelman). Media training tradicional custa $10K-$50K por sessão e cobre 10-20 cenários. MiroFish permite simular 200+ cenários por $2K-$5K. A taxa de "perguntas surpresa" em coletivas reais cai de 30% para menos de 5% com preparação via simulação.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-primary/40">
+        <h3 class="text-primary font-bold mb-2">Dica Prática</h3>
+        <p class="text-neutral-300 text-sm">Crie agentes com perfis de jornalistas reais (sem usar dados pessoais -- use perfis de editoria): "jornalista investigativo financeiro", "colunista de opinião progressista", "analista de mercado conservador". O porta-voz responde via texto ou voz transcrita. MindSpider analisa quais respostas foram eficazes e quais geraram mais pressão. Itere até que 90% das respostas recebam sentimento neutro ou positivo.</p>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold text-neutral-100">📊 Dashboard de Sentimento</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Sala de crise com dados em tempo real: visualizar o pulso da opinião pública durante eventos críticos.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">O Dashboard de Sentimento integra dados de BettaFish (sentimento em tempo real), MindSpider (análise de motivações) e simulações MiroFish (projeções) em uma visualização unificada. A sala de crise digital mostra: (1) sentimento geral e por segmento, (2) tendência (melhorando ou piorando), (3) tópicos mais mencionados, (4) stakeholders mais vocais, (5) projeção de evolução baseada em simulação. Tudo atualizado minuto a minuto.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">Empresas com dashboards de sentimento em tempo real tomam decisões de comunicação 5x mais rápido (Gartner). A capacidade de visualizar tendências permite antecipar picos de negatividade com 2-4 horas de antecedência. Integração de múltiplas fontes de dados aumenta a precisão da análise de sentimento em 35%.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-primary/40">
+        <h3 class="text-primary font-bold mb-2">Dica Prática</h3>
+        <p class="text-neutral-300 text-sm">Configure seu dashboard com 4 painéis essenciais: (1) Termômetro geral (score 0-100), (2) Heatmap por stakeholder (quem está mais negativo/positivo), (3) Timeline de sentimento (últimas 24h com marcadores de eventos), (4) Projeção MiroFish (cenário provável para as próximas 12h). Defina cores: verde (>60), amarelo (40-60), vermelho (<40). Alerte a equipe quando mudar de faixa.</p>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🔄 Cenários de Resposta</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Silêncio vs nota vs ação: qual funciona melhor? Teste todas as opções antes de decidir.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">Diante de uma crise, há três respostas arquetípicas: silêncio (esperar que passe), nota oficial (comunicar posição) e ação corretiva (fazer algo concreto). Cada resposta funciona melhor em contextos diferentes. MiroFish permite simular as três simultaneamente: injete a crise e teste cada resposta separadamente. Em qual cenário o sentimento se recupera mais rápido? Qual gera menos dano a longo prazo? Qual tem melhor custo-benefício? Além disso, podem-se combinar respostas em sequência temporal.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">Estudos mostram que silêncio funciona em apenas 12% dos casos de crise (Institute for Crisis Management). Nota oficial sem ação é eficaz em 31% dos casos. Ação corretiva rápida resolve 67% das crises em 7 dias. No entanto, ação prematura sem entendimento pode amplificar a crise em 23% dos casos. A simulação elimina essa incerteza.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-dark-700 rounded-xl p-5 border border-emerald-500/30">
+          <h3 class="text-emerald-400 font-bold mb-2">Fazer</h3>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>+ Simular pelo menos 3 respostas diferentes</li>
+            <li>+ Incluir cenários de timing (resposta em 1h, 6h, 24h)</li>
+            <li>+ Testar combinações (silêncio inicial + ação depois)</li>
+            <li>+ Medir impacto a curto E longo prazo na simulação</li>
+          </ul>
+        </div>
+        <div class="bg-dark-700 rounded-xl p-5 border border-red-500/30">
+          <h3 class="text-red-400 font-bold mb-2">Evitar</h3>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>- Reagir sem simular primeiro (exceto emergências legais)</li>
+            <li>- Simular apenas a resposta que a liderança já quer</li>
+            <li>- Ignorar cenários de "tudo dá errado"</li>
+            <li>- Não considerar o impacto em funcionários internos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 mb-6">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold text-neutral-100">🏛️ Caso Universidade de Wuhan</h2>
+      </div>
+      <p class="text-neutral-300 mb-6">Exemplo real de simulação do MiroFish: como agentes previram com precisão a reação pública a uma política universitária.</p>
+
+      <div class="bg-gradient-to-r from-blue-900/20 to-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Conceito</h3>
+        <p class="text-neutral-300 text-sm">O caso da Universidade de Wuhan é um marco na validação do MiroFish. Pesquisadores utilizaram o framework para simular a recepção pública de uma nova política universitária antes de seu anúncio. Os agentes simulados -- representando estudantes, professores, pais, mídia e reguladores educacionais -- geraram reações que foram posteriormente comparadas com a reação real após o anúncio. A correlação entre sentimento simulado e real foi notavelmente alta, validando a capacidade do MiroFish de prever comportamento coletivo a partir de agentes individuais calibrados.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-blue-500/30 mb-4">
+        <h3 class="text-blue-400 font-bold mb-2">Dados</h3>
+        <p class="text-neutral-300 text-sm">O estudo demonstrou que agentes LLM calibrados com dados demográficos e psicográficos podem prever tendências de opinião pública com acurácia significativa. Os pesquisadores publicaram os resultados mostrando que a simulação previu corretamente: (1) o grupo mais crítico à política, (2) os argumentos mais utilizados na oposição, (3) a evolução temporal do sentimento. Este é um dos primeiros casos documentados de simulação social preditiva com LLMs aplicada a cenários reais.</p>
+      </div>
+
+      <div class="bg-dark-700 rounded-xl p-5 border border-primary/40">
+        <h3 class="text-primary font-bold mb-2">Dica Prática</h3>
+        <p class="text-neutral-300 text-sm">Use o caso Wuhan como benchmark para suas próprias simulações. A chave do sucesso foi: (1) calibração precisa dos perfis de agentes com dados demográficos reais, (2) inclusão de todos os stakeholders relevantes, (3) simulação de tempo suficiente para emergência de dinâmicas de grupo, (4) análise tanto quantitativa (scores) quanto qualitativa (narrativas). Replique esse framework e compare seus resultados simulados com resultados reais para calibrar seu próprio sistema.</p>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="bg-dark-800 rounded-2xl p-6 border border-blue-500/30">
+      <h3 class="text-xl font-bold text-neutral-100 mb-4">Resumo do Módulo 2.3</h3>
+      <div class="space-y-2 mb-6">
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Sei testar press releases com agentes simulados antes de publicar</span>
+        </label>
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Conheço o sistema BettaFish + MindSpider para gestão de crises 24/7</span>
+        </label>
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Entendo como preparar porta-vozes com media training simulado</span>
+        </label>
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Sei configurar dashboards de sentimento para sala de crise</span>
+        </label>
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Domino a comparação de cenários de resposta a crises</span>
+        </label>
+        <label class="flex items-center space-x-3 text-neutral-300 text-sm">
+          <input type="checkbox" class="rounded border-dark-600 text-blue-600 focus:ring-blue-500">
+          <span>Conheço o caso Universidade de Wuhan como validação do MiroFish</span>
+        </label>
+      </div>
+      <div class="flex justify-between items-center pt-4 border-t border-dark-700">
+        <a href="modulo-2-2.html" class="text-neutral-400 hover:text-blue-400 transition-colors text-sm font-medium">← Compliance</a>
+        <a href="modulo-2-4.html" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold transition-colors">Próximo: Estratégia →</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-dark-700 mt-16 py-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>🐟 Ecossistema MiroFish — Curso desenvolvido por <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+
+</body>
+</html>

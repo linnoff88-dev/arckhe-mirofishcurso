@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T4 Exemplos Práticos | Ecossistema MiroFish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217, 119, 6, 0.12); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217, 119, 6, 0.25); }
+    html:not(.dark) .hover\:bg-amber-500\/30:hover { background-color: rgba(217, 119, 6, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🐟</span>
+            <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-amber-400 bg-amber-500/10"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="bg-gradient-to-b from-amber-900/30 to-dark-900 border-b border-amber-500/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="flex items-center space-x-3 mb-4">
+        <span class="bg-amber-500/20 text-amber-400 px-3 py-1 rounded-full text-sm font-semibold border border-amber-500/30">TRILHA 4</span>
+        <span class="text-neutral-500 text-sm">Ecossistema MiroFish</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-neutral-100 mb-4">🎯 Exemplos Práticos</h1>
+      <p class="text-lg text-neutral-300 max-w-3xl mb-6">Cenários reais de ponta a ponta: simule crises, teste lançamentos, preveja reações a políticas, analise sentimento e crie seus próprios mundos digitais.</p>
+      <div class="flex flex-wrap gap-4 text-sm text-neutral-400">
+        <span class="bg-dark-800 px-3 py-1.5 rounded-lg border border-dark-700">📦 6 Módulos</span>
+        <span class="bg-dark-800 px-3 py-1.5 rounded-lg border border-dark-700">📝 36 Tópicos</span>
+        <span class="bg-dark-800 px-3 py-1.5 rounded-lg border border-dark-700">⏱️ ~4h</span>
+        <span class="bg-dark-800 px-3 py-1.5 rounded-lg border border-dark-700">🔧 Prático</span>
+      </div>
+      <div class="flex justify-between items-center mt-8">
+        <a href="../trilha3/index.html" class="text-neutral-400 hover:text-purple-400 transition-colors text-sm">← Avançado</a>
+        <a href="../trilha5/index.html" class="text-neutral-400 hover:text-teal-400 transition-colors text-sm">Instalação →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simple Cards Grid -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+      <a href="modulo-4-1.html" class="group bg-dark-800 rounded-xl p-5 border border-dark-700 hover:border-amber-500/30 transition-all hover:bg-amber-500/5">
+        <div class="flex items-center space-x-3 mb-2">
+          <span class="bg-amber-500/20 text-amber-400 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">1</span>
+          <span class="text-amber-400 text-lg">🚨</span>
+        </div>
+        <h3 class="font-bold text-neutral-100 group-hover:text-amber-400 transition-colors">Simulando uma Crise de Reputação</h3>
+        <p class="text-sm text-neutral-400 mt-1">Caso prático: universidade em crise e como o MiroFish simula a melhor resposta.</p>
+      </a>
+
+      <a href="modulo-4-2.html" class="group bg-dark-800 rounded-xl p-5 border border-dark-700 hover:border-amber-500/30 transition-all hover:bg-amber-500/5">
+        <div class="flex items-center space-x-3 mb-2">
+          <span class="bg-amber-500/20 text-amber-400 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">2</span>
+          <span class="text-amber-400 text-lg">🚀</span>
+        </div>
+        <h3 class="font-bold text-neutral-100 group-hover:text-amber-400 transition-colors">Testando o Lançamento de um Produto</h3>
+        <p class="text-sm text-neutral-400 mt-1">Simule reações do mercado antes do launch day e ajuste sua estratégia.</p>
+      </a>
+
+      <a href="modulo-4-3.html" class="group bg-dark-800 rounded-xl p-5 border border-dark-700 hover:border-amber-500/30 transition-all hover:bg-amber-500/5">
+        <div class="flex items-center space-x-3 mb-2">
+          <span class="bg-amber-500/20 text-amber-400 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">3</span>
+          <span class="text-amber-400 text-lg">📜</span>
+        </div>
+        <h3 class="font-bold text-neutral-100 group-hover:text-amber-400 transition-colors">Prevendo Reação a Mudança de Política</h3>
+        <p class="text-sm text-neutral-400 mt-1">Antecipe resistências e mapeie stakeholders antes de implementar regulamentações.</p>
+      </a>
+
+      <a href="modulo-4-4.html" class="group bg-dark-800 rounded-xl p-5 border border-dark-700 hover:border-amber-500/30 transition-all hover:bg-amber-500/5">
+        <div class="flex items-center space-x-3 mb-2">
+          <span class="bg-amber-500/20 text-amber-400 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">4</span>
+          <span class="text-amber-400 text-lg">📡</span>
+        </div>
+        <h3 class="font-bold text-neutral-100 group-hover:text-amber-400 transition-colors">Análise de Sentimento em Tempo Real</h3>
+        <p class="text-sm text-neutral-400 mt-1">Monitoramento 24/7 com BettaFish e MindSpider: dashboards e alertas.</p>
+      </a>
+
+      <a href="modulo-4-5.html" class="group bg-dark-800 rounded-xl p-5 border border-dark-700 hover:border-amber-500/30 transition-all hover:bg-amber-500/5">
+        <div class="flex items-center space-x-3 mb-2">
+          <span class="bg-amber-500/20 text-amber-400 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">5</span>
+          <span class="text-amber-400 text-lg">💰</span>
+        </div>
+        <h3 class="font-bold text-neutral-100 group-hover:text-amber-400 transition-colors">Simulação de Cenários Financeiros</h3>
+        <p class="text-sm text-neutral-400 mt-1">Modele reações de mercado a eventos econômicos com agentes investidores.</p>
+      </a>
+
+      <a href="modulo-4-6.html" class="group bg-dark-800 rounded-xl p-5 border border-dark-700 hover:border-amber-500/30 transition-all hover:bg-amber-500/5">
+        <div class="flex items-center space-x-3 mb-2">
+          <span class="bg-amber-500/20 text-amber-400 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">6</span>
+          <span class="text-amber-400 text-lg">🌐</span>
+        </div>
+        <h3 class="font-bold text-neutral-100 group-hover:text-amber-400 transition-colors">Criando Seu Primeiro Mundo Digital</h3>
+        <p class="text-sm text-neutral-400 mt-1">Passo a passo: do tema ao relatório, crie e interprete sua própria simulação.</p>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Detailed Cards -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 space-y-6">
+
+    <!-- Module 4.1 -->
+    <div class="bg-dark-800 rounded-2xl border border-dark-700 overflow-hidden">
+      <div class="p-6 border-b border-dark-700">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <span class="bg-amber-500/20 text-amber-400 w-10 h-10 rounded-full flex items-center justify-center font-bold">4.1</span>
+            <div>
+              <h3 class="text-2xl font-bold text-neutral-100">🚨 Simulando uma Crise de Reputação</h3>
+              <p class="text-sm text-neutral-400 mt-1">Caso prático: universidade em crise e o MiroFish simulando respostas</p>
+            </div>
+          </div>
+          <a href="modulo-4-1.html" class="bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">Abrir Módulo</a>
+        </div>
+      </div>
+      <div class="p-6 space-y-2">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+            <span class="text-neutral-300">📋 O Cenário - Universidade entra em crise de reputação</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Reconstituição de um caso real em que uma universidade enfrentou uma crise de reputação nas redes sociais. Um escândalo acadêmico se espalhou via Twitter e portais de notícia, gerando queda em matrículas e pressão pública.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Crises de reputação podem destruir décadas de construção de marca em horas. Entender como montar o cenário no MiroFish permite que organizações testem respostas antes de agir.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Documento-semente de crise, timeline de eventos, mapeamento de stakeholders afetados, definição de variáveis de simulação e métricas de sucesso.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+            <span class="text-neutral-300">🕷️ Etapa 1: Coleta - MindSpider capturando posts, vídeos e comentários</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Configuração do MindSpider para coletar dados reais das plataformas: tweets, posts do Reddit, comentários do YouTube e artigos de portais de notícia relacionados à crise.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> A qualidade da simulação depende diretamente da qualidade dos dados coletados. Saber configurar o crawler corretamente é o primeiro passo para resultados confiáveis.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Configuração de keywords, filtros de plataforma, janela temporal de coleta, tratamento de dados duplicados e armazenamento estruturado.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
+            <span class="text-neutral-300">📊 Etapa 2: Análise - BettaFish organizando narrativas e sentimento</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Os 5 agentes do BettaFish processam os dados coletados: o Moderador organiza os temas, os Debatedores cruzam perspectivas, o Sintetizador identifica padrões e o ReportAgent gera um relatório de sentimento.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Dados brutos não bastam. A análise multi-agente identifica narrativas ocultas, grupos de opinião e tendências que uma análise manual ou de ferramenta simples não capturaria.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Classificação de sentimento (positivo/negativo/neutro), detecção de narrativas dominantes, clustering de opiniões, timeline de evolução do sentimento.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">4</span>
+            <span class="text-neutral-300">🔮 Etapa 3: Simulação - MiroFish testando respostas: silêncio vs nota vs ação</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> O MiroFish cria múltiplos cenários paralelos: o que acontece se a universidade silencia? E se publica uma nota genérica? E se toma ação concreta com demissões? Cada cenário é simulado com agentes representando diferentes públicos.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Em crises reais, você tem apenas uma chance de responder. A simulação permite testar várias respostas sem risco, medindo o impacto de cada uma na opinião pública.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Cenários paralelos, agentes reativos, propagação de narrativa, ponto de inflexão de sentimento, janela de oportunidade de resposta.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">5</span>
+            <span class="text-neutral-300">📈 Resultados - Comparando cenários simulados e definindo melhor estratégia</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Análise comparativa dos cenários simulados: gráficos de evolução do sentimento ao longo do tempo, métricas de engajamento, identificação de qual resposta minimiza dano e maximiza recuperação.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> A decisão baseada em dados simulados é mais robusta que a intuição. Aprender a interpretar os resultados permite transformar simulação em ação estratégica.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Métricas comparativas, curva de recuperação, ponto de virada, score de dano reputacional, recomendação baseada em evidência simulada.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">6</span>
+            <span class="text-neutral-300">🎯 Lições Aprendidas - O que a simulação revela que humanos não preveem</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Análise de insights contraintuitivos que a simulação revelou: efeitos cascata inesperados, públicos que reagiram diferente do esperado, e o timing ideal que humanos não conseguiriam calcular.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> O maior valor da simulação não é confirmar o que já sabemos, mas revelar o que não conseguimos prever. Essas lições transformam a maneira como organizações gerenciam crises.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Viés de confirmação, efeitos de segunda ordem, timing ótimo de resposta, efeito streisand simulado, rede de influência oculta.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Module 4.2 -->
+    <div class="bg-dark-800 rounded-2xl border border-dark-700 overflow-hidden">
+      <div class="p-6 border-b border-dark-700">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <span class="bg-amber-500/20 text-amber-400 w-10 h-10 rounded-full flex items-center justify-center font-bold">4.2</span>
+            <div>
+              <h3 class="text-2xl font-bold text-neutral-100">🚀 Testando o Lançamento de um Produto</h3>
+              <p class="text-sm text-neutral-400 mt-1">Simule reações do mercado antes de lançar</p>
+            </div>
+          </div>
+          <a href="modulo-4-2.html" class="bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">Abrir Módulo</a>
+        </div>
+      </div>
+      <div class="p-6 space-y-2">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+            <span class="text-neutral-300">📋 Definindo o Cenário - Documento-semente com descrição do produto</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Criação do documento-semente que descreve o produto: funcionalidades, preço, público-alvo, diferencial competitivo e estratégia de lançamento.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> O documento-semente é a base de toda simulação. Um documento bem construído gera simulações realistas; um documento vago gera resultados inúteis.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Estrutura do documento-semente, variáveis de produto, definição de concorrentes, positioning statement, métricas de sucesso do lançamento.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+            <span class="text-neutral-300">🎭 Criando as Personas - Agentes representando diferentes públicos-alvo</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Configuração de agentes que representam segmentos do mercado: early adopters, usuários mainstream, céticos, influenciadores e concorrentes.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Cada público reage de forma diferente a um lançamento. Criar personas diversificadas garante que a simulação captura toda a gama de reações possíveis.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Perfis demográficos, traços comportamentais, nível de influência, threshold de adoção, rede de conexões entre agentes.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
+            <span class="text-neutral-300">📱 Simulação em Redes Sociais - Twitter e Reddit reagindo ao lançamento</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Execução da simulação em plataformas virtuais: agentes publicam tweets, criam threads no Reddit, fazem reviews e interagem entre si como fariam em redes reais.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> As redes sociais são o campo de batalha de lançamentos modernos. Simular as interações permite prever viralização, backlash e pontos de tração orgânica.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Dinâmica de timeline, retweet/upvote simulado, formação de threads, hashtag tracking, velocidade de propagação.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">4</span>
+            <span class="text-neutral-300">📊 Análise de Sentimento - Quem apoia, quem critica, quem ignora</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Processamento dos resultados da simulação para classificar reações: apoio entusiasmado, interesse moderado, indiferença, crítica construtiva e rejeição ativa.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Saber quem apoia, quem critica e quem ignora permite direcionar recursos de marketing para onde terão mais impacto e preparar respostas para as objeções mais comuns.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Segmentação de sentimento por persona, mapa de objeções, identificação de advocates naturais, análise de ignorância (tão importante quanto crítica).</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">5</span>
+            <span class="text-neutral-300">🔄 Teste A/B de Messaging - Diferentes posicionamentos, diferentes reações</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Execução de múltiplas simulações com diferentes posicionamentos de produto: foco em preço vs qualidade vs inovação vs sustentabilidade. Cada variante gera reações diferentes.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> O messaging certo pode ser a diferença entre sucesso e fracasso de um lançamento. Testar variações em simulação é infinitamente mais barato que testar no mercado real.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Variantes de posicionamento, métricas de engajamento por variante, análise de ressonância emocional, identificação do messaging vencedor.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">6</span>
+            <span class="text-neutral-300">💡 Ajustando Antes de Lançar - Insights práticos para otimização</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Compilação dos insights da simulação em um plano de ação: ajustes no produto, na comunicação, no timing e na estratégia de influenciadores antes do lançamento real.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> O valor da simulação só se concretiza quando se traduz em mudanças reais. Este tópico conecta dados simulados a decisões concretas de negócio.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Relatório de recomendações, priorização de ajustes, roadmap de lançamento otimizado, plano de contingência para cenários negativos.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Module 4.3 -->
+    <div class="bg-dark-800 rounded-2xl border border-dark-700 overflow-hidden">
+      <div class="p-6 border-b border-dark-700">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <span class="bg-amber-500/20 text-amber-400 w-10 h-10 rounded-full flex items-center justify-center font-bold">4.3</span>
+            <div>
+              <h3 class="text-2xl font-bold text-neutral-100">📜 Prevendo Reação a Mudança de Política</h3>
+              <p class="text-sm text-neutral-400 mt-1">Antecipe resistências a regulamentações com simulação</p>
+            </div>
+          </div>
+          <a href="modulo-4-3.html" class="bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">Abrir Módulo</a>
+        </div>
+      </div>
+      <div class="p-6 space-y-2">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+            <span class="text-neutral-300">📋 O Documento-Semente - Minuta de política ou regulamentação</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Preparação da minuta de política como documento-semente: texto legal, justificativa, impacto estimado e cronograma de implementação.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Políticas públicas afetam milhões. Testar reações antes da implementação pode evitar crises e melhorar a aceitação da mudança.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Estrutura de documento de política, linguagem jurídica simplificada, identificação de cláusulas polêmicas, histórico de políticas similares.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+            <span class="text-neutral-300">🏗️ Construção do Grafo - GraphRAG extraindo entidades e relações</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> O GraphRAG analisa a minuta e extrai todas as entidades mencionadas (órgãos, setores, populações) e as relações entre elas (regula, impacta, beneficia).</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> O grafo de conhecimento revela conexões ocultas entre stakeholders que um leitor humano poderia ignorar, gerando uma visão sistêmica do impacto.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Extração de entidades nomeadas, relações semânticas, comunidades no grafo, centralidade de nós, identificação de hubs de influência.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
+            <span class="text-neutral-300">🎭 Stakeholders como Agentes - Governo, empresas, consumidores, mídia</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Cada stakeholder identificado no grafo é transformado em um agente autônomo com motivações, recursos e poder de influência calibrados para a simulação.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Políticas fracassam quando ignoram a diversidade de interesses. Mapear stakeholders como agentes permite prever alianças, oposições e negociações.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Mapeamento de stakeholders, matriz poder-interesse, coalitions modeling, adversarial agents, agentes de mídia como amplificadores.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">4</span>
+            <span class="text-neutral-300">🔮 Cenários de Implementação - Gradual vs imediata vs com compensações</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Simulação de três estratégias de implementação: introdução gradual em fases, aplicação imediata full-force, e implementação com pacotes de compensação para setores afetados.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> A mesma política pode ter resultados opostos dependendo de como é implementada. A simulação revela qual abordagem minimiza resistência e maximiza aderência.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Phased rollout, big bang implementation, compensation packages, resistance curves, adoption tipping points.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">5</span>
+            <span class="text-neutral-300">📊 Mapeando Resistência - Clusters de oposição e pontos de alavancagem</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Análise dos resultados da simulação para identificar clusters de oposição organizada, pontos de alavancagem (stakeholders-chave que podem ser convencidos) e estratégias de mitigação.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Resistência não é monolítica. Identificar os grupos específicos e seus argumentos permite criar contra-narrativas direcionadas e negociações eficazes.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Cluster analysis de oposição, leverage points, swing stakeholders, estratégias de neutralização, análise de argumentos-chave.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">6</span>
+            <span class="text-neutral-300">📝 Relatório de Recomendação - Do ReportAgent para o tomador de decisão</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> O ReportAgent compila todos os dados de simulação em um relatório executivo: resumo da política, cenários simulados, mapa de stakeholders, recomendações e plano de comunicação.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> O relatório é o produto final que o tomador de decisão vai usar. Saber interpretar e apresentar os dados da simulação é tão importante quanto executá-la.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Executive summary, visualizações de cenários, heat map de risco, timeline de implementação recomendada, plano de comunicação por stakeholder.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Module 4.4 -->
+    <div class="bg-dark-800 rounded-2xl border border-dark-700 overflow-hidden">
+      <div class="p-6 border-b border-dark-700">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <span class="bg-amber-500/20 text-amber-400 w-10 h-10 rounded-full flex items-center justify-center font-bold">4.4</span>
+            <div>
+              <h3 class="text-2xl font-bold text-neutral-100">📡 Análise de Sentimento em Tempo Real</h3>
+              <p class="text-sm text-neutral-400 mt-1">Monitoramento contínuo com BettaFish e MindSpider</p>
+            </div>
+          </div>
+          <a href="modulo-4-4.html" class="bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">Abrir Módulo</a>
+        </div>
+      </div>
+      <div class="p-6 space-y-2">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+            <span class="text-neutral-300">🔧 Configurando o BettaFish - Setup dos 5 agentes para monitoramento</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Configuração prática dos 5 agentes do BettaFish para modo monitoramento contínuo: definição de tópicos, calibração de sensibilidade e definição de thresholds de alerta.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> O monitoramento mal configurado gera excesso de falsos positivos ou deixa passar crises reais. A calibração correta é essencial para operação eficiente.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Configuração de agentes, sensibilidade de detecção, baseline de sentimento, janela de monitoramento, priorização de plataformas.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+            <span class="text-neutral-300">🕷️ MindSpider em Ação - Crawler 24/7 em 13+ plataformas</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> O MindSpider rodando em modo contínuo: coletando dados de Twitter, Reddit, YouTube, portais de notícia, blogs, fóruns e outras plataformas simultaneamente.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> A cobertura multi-plataforma é o que diferencia o MindSpider de ferramentas simples de social listening. Entender como operar o crawler 24/7 é fundamental para monitoramento profissional.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Multi-platform crawling, rate limiting, deduplicação em tempo real, fila de processamento, tolerância a falhas.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
+            <span class="text-neutral-300">📊 ForumEngine no Debate - Agentes cruzando perspectivas em tempo real</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> O ForumEngine processando dados em tempo real: agentes debatem as narrativas emergentes, cruzam perspectivas e identificam temas dominantes à medida que surgem.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Análise em tempo real permite respostas rápidas a mudanças de narrativa. O debate entre agentes adiciona profundidade que análise de sentimento simples não alcança.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Streaming analysis, debate em tempo real, emergent narrative detection, cross-platform synthesis, consensus tracking.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">4</span>
+            <span class="text-neutral-300">📈 Dashboard de Sentimento - Visualização por plataforma e demografia</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Interface visual em tempo real mostrando sentimento agregado e segmentado: por plataforma, por demografia, por tema, com gráficos de tendência e heatmaps geográficos.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Dashboards transformam dados complexos em informação acionável. Saber ler e configurar o dashboard é essencial para tomada de decisão rápida.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Visualização em tempo real, filtros dinâmicos, drill-down por dimensão, trend lines, anomaly highlighting.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">5</span>
+            <span class="text-neutral-300">⚡ Alertas de Virada - Detectando mudanças bruscas de sentimento</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Sistema de alertas automáticos que detecta mudanças bruscas no sentimento: queda repentina, pico de negatividade, surgimento de nova narrativa ou atividade incomum de bots.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Crises de reputação frequentemente começam com uma virada brusca de sentimento. Detectar isso em minutos ao invés de horas pode salvar milhões em danos.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Threshold de alerta, detecção de anomalia, spike detection, bot detection, classificação de urgência (amarelo/laranja/vermelho).</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">6</span>
+            <span class="text-neutral-300">📋 Relatório Automatizado - HTML interativo, PDF e Markdown</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Geração automática de relatórios em múltiplos formatos: HTML interativo com gráficos clicáveis, PDF para distribuição executiva e Markdown para integração com ferramentas de equipe.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Diferentes stakeholders precisam de diferentes formatos. O relatório automatizado garante que cada público receba a informação no formato mais adequado.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Templates de relatório, scheduling automático (diário/semanal), personalização por audiência, integração com Slack/email, versionamento de relatórios.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Module 4.5 -->
+    <div class="bg-dark-800 rounded-2xl border border-dark-700 overflow-hidden">
+      <div class="p-6 border-b border-dark-700">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <span class="bg-amber-500/20 text-amber-400 w-10 h-10 rounded-full flex items-center justify-center font-bold">4.5</span>
+            <div>
+              <h3 class="text-2xl font-bold text-neutral-100">💰 Simulação de Cenários Financeiros</h3>
+              <p class="text-sm text-neutral-400 mt-1">Agentes investidores reagindo a eventos econômicos</p>
+            </div>
+          </div>
+          <a href="modulo-4-5.html" class="bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">Abrir Módulo</a>
+        </div>
+      </div>
+      <div class="p-6 space-y-2">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+            <span class="text-neutral-300">📋 Sinais Financeiros como Semente - Notícias econômicas e anúncios</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Preparação de documentos-semente com dados financeiros: comunicados do Banco Central, relatórios de earnings, notícias de fusões e eventos geopolíticos que afetam mercados.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Mercados financeiros são o caso de uso mais desafiador para simulação. Aprender a preparar dados financeiros como sementes ensina rigor e precisão aplicável a qualquer domínio.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Dados financeiros estruturados, indicadores macroeconômicos, event-driven simulation, calibração temporal, fontes de dados confiáveis.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+            <span class="text-neutral-300">🎭 Agentes Investidores - Varejistas, institucionais e analistas</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Criação de agentes representando perfis financeiros distintos: investidor varejista emocional, fundo institucional algorítmico, analista fundamentalista e trader de momentum.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Cada tipo de investidor reage de forma diferente aos mesmos eventos. Simular essa diversidade permite prever movimentos de mercado mais realistas que modelos homogêneos.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Behavioral finance, risk appetite profiles, herding behavior, contrarian agents, institutional vs retail dynamics.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
+            <span class="text-neutral-300">📈 Simulando Anúncio de Taxa de Juros - Reação do mercado simulada</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Simulação completa: o Banco Central anuncia alteração na taxa Selic. Agentes investidores reagem em tempo simulado: renda fixa, ações, câmbio e derivativos se movem em cadeia.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Anúncios de taxa de juros são um dos eventos mais impactantes em mercados. Simular as reações permite compreender cascatas de efeitos e testar estratégias de hedge.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Reação em cadeia, flight to quality, rotation de setores, curva de juros, expectativas vs realidade.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">4</span>
+            <span class="text-neutral-300">💱 Caso Crypto Exchange Hack - Fluxo de capital pós-incidente</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Simulação de um hack em uma exchange de criptomoedas: pânico no mercado, corrida de saques, queda de preço, reação regulatória e recuperação gradual.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> O mercado crypto é altamente volátil e emocional. Simular um evento de crise nesse contexto demonstra o poder do MiroFish em cenários de alta incerteza.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Bank run dynamics, FUD (fear, uncertainty, doubt), contagion effect, recovery patterns, regulatory response modeling.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">5</span>
+            <span class="text-neutral-300">📊 Volatilidade Prevista vs Real - Limites e calibração da simulação</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Comparação entre os resultados da simulação e dados reais de eventos passados: onde a simulação acertou, onde errou, e como calibrar para melhorar a precisão.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Nenhuma simulação é perfeita. Entender os limites e saber calibrar os parâmetros é o que separa uso responsável de uso irresponsável da ferramenta.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Backtesting, calibração de parâmetros, margem de erro, overfitting vs underfitting, validação cruzada de cenários.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">6</span>
+            <span class="text-neutral-300">⚠️ Limitações e Cuidados - Viés de rebanho, validação, uso responsável</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Discussão honesta sobre as limitações da simulação financeira: viés de rebanho amplificado, cisnes negros imprevisíveis, risco de overconfidence e responsabilidade legal.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Simulação financeira carrega riscos reais se mal utilizada. Este tópico é obrigatório para qualquer pessoa que pretenda usar o MiroFish em contextos financeiros.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Herding bias, black swan events, regulatory compliance, disclaimer requirements, ethical use guidelines, não é aconselhamento financeiro.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Module 4.6 -->
+    <div class="bg-dark-800 rounded-2xl border border-dark-700 overflow-hidden">
+      <div class="p-6 border-b border-dark-700">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <span class="bg-amber-500/20 text-amber-400 w-10 h-10 rounded-full flex items-center justify-center font-bold">4.6</span>
+            <div>
+              <h3 class="text-2xl font-bold text-neutral-100">🌐 Criando Seu Primeiro Mundo Digital</h3>
+              <p class="text-sm text-neutral-400 mt-1">Passo a passo para criar e executar sua simulação</p>
+            </div>
+          </div>
+          <a href="modulo-4-6.html" class="bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">Abrir Módulo</a>
+        </div>
+      </div>
+      <div class="p-6 space-y-2">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+            <span class="text-neutral-300">📝 Escolhendo o Tema - O que faz um bom cenário para simulação</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Critérios para selecionar um tema de simulação: complexidade adequada, stakeholders diversificados, resultado incerto, relevância prática e disponibilidade de dados de validação.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Nem todo tema funciona bem em simulação. Escolher corretamente é o primeiro passo para não desperdiçar tempo com simulações que não gerarão insights úteis.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Critérios de seleção, complexidade vs factibilidade, escopo da simulação, temas que funcionam vs temas que não funcionam, exemplos por setor.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+            <span class="text-neutral-300">📄 Preparando Documentos-Semente - Formato, quantidade e qualidade</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Guia prático para criar documentos-semente: formato ideal, quantidade mínima para resultados confiáveis, indicadores de qualidade e erros comuns a evitar.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Garbage in, garbage out. A qualidade dos documentos-semente determina diretamente a qualidade dos resultados da simulação.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Formato de documento-semente, mínimo viável (3-5 documentos), checklist de qualidade, fontes confiáveis, diversidade de perspectivas no input.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
+            <span class="text-neutral-300">⚙️ Configurando a Simulação - Número de agentes, rodadas, plataformas</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Parâmetros de configuração: quantos agentes usar (10-1000+), quantas rodadas de simulação, quais plataformas simular e como equilibrar profundidade vs tempo de execução.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Configuração inadequada resulta em simulações que demoram demais ou geram resultados superficiais. Dominar os parâmetros é essencial para uso eficiente.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Scaling de agentes, convergência de rodadas, seleção de plataformas, trade-off profundidade vs velocidade, recomendações por caso de uso.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">4</span>
+            <span class="text-neutral-300">🚀 Executando e Acompanhando - Interface de progresso em tempo real</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Passo a passo de execução: comando de início, interface de progresso, indicadores de saúde da simulação e o que fazer se algo dá errado durante a execução.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Simulações podem levar de minutos a horas. Saber acompanhar o progresso e diagnosticar problemas economiza tempo e evita resultados corrompidos.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Interface CLI, barra de progresso, logs de execução, health checks, rollback de rodadas problemáticas, cache de resultados parciais.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">5</span>
+            <span class="text-neutral-300">📊 Interpretando o Relatório - O que significa cada seção</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Guia seção por seção do relatório gerado: sumário executivo, análise de sentimento, mapa de narrativas, clusters de opinião, timeline de eventos e recomendações.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> Um relatório rico em dados só é útil se você souber interpretá-lo. Este guia transforma dados em decisões acionáveis.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Estrutura do relatório, métricas-chave, leitura de gráficos de sentimento, interpretação de clusters, tradução de dados em ação.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full flex items-center justify-start space-x-3 p-3 rounded-lg hover:bg-amber-500/10 transition-colors text-left">
+            <span class="bg-amber-500/20 text-amber-400 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">6</span>
+            <span class="text-neutral-300">💬 Interação Profunda - Entrevistando agentes e testando "E se?"</span>
+          </button>
+          <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">O que é:</strong> Uso do modo de interação pós-simulação: entrevistar agentes individualmente para entender suas decisões, e testar cenários "E se?" para explorar variações.</p>
+            <p class="text-sm text-neutral-300 mb-2"><strong class="text-amber-400">Por que aprender:</strong> A interação pós-simulação é uma das funcionalidades mais poderosas do MiroFish. Permite explorar o "porquê" por trás dos resultados e testar hipóteses alternativas.</p>
+            <p class="text-sm text-neutral-300"><strong class="text-amber-400">Conceitos-chave:</strong> Agent interview mode, what-if scenarios, counterfactual analysis, sensitivity testing, exploratory simulation.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-700 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>🐟 Ecossistema MiroFish &mdash; Curso desenvolvido por <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div id="moduleModal" class="fixed inset-0 z-[100] hidden">
+    <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeModal()"></div>
+    <div class="relative z-10 w-full h-full flex items-center justify-center p-4">
+      <div class="bg-dark-800 rounded-2xl w-full max-w-5xl h-[85vh] flex flex-col border border-dark-600">
+        <div class="flex items-center justify-between p-4 border-b border-dark-700">
+          <h3 id="modalTitle" class="text-lg font-bold text-neutral-100"></h3>
+          <button onclick="closeModal()" class="text-neutral-400 hover:text-neutral-100 text-2xl">&times;</button>
+        </div>
+        <iframe id="modalIframe" class="flex-1 w-full rounded-b-2xl" frameborder="0"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal(url, title) {
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalIframe').src = url;
+      document.getElementById('moduleModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      document.getElementById('moduleModal').classList.add('hidden');
+      document.getElementById('modalIframe').src = '';
+      document.body.style.overflow = '';
+    }
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) exp.classList.remove('active'); });
+      explanation.classList.toggle('active');
+    }
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+
+</body>
+</html>
