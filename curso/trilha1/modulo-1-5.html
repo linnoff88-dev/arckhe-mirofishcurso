@@ -82,7 +82,7 @@
             <span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span>
           </a>
           <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
-            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span>
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalaçêo</span>
           </a>
           <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
             <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
@@ -108,7 +108,7 @@
     <div class="mb-12">
       <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-sm font-semibold rounded-full mb-4">MÓDULO 1.5</span>
       <h1 class="text-2xl font-bold text-neutral-100 mb-4">🏗️ Arquitetura Técnica</h1>
-      <p class="text-neutral-300 text-lg">Explore as camadas técnicas do MiroFish: do frontend Vue.js ao motor de simulação OASIS, passando pelo backend Flask e pela camada de IA.</p>
+      <p class="text-neutral-300 text-lg">Explore as camadas técnicas do MiroFish: do frontend Vue.js ao motor de simulaçêo OASIS, passando pelo backend Flask e pela camada de IA.</p>
     </div>
 
     <!-- Topic 1 -->
@@ -121,17 +121,17 @@
 
       <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
         <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
-        <p class="text-neutral-300"><strong>Vue.js 3</strong> fornece a estrutura de componentes reativos - cada parte da interface (lista de agentes, grafo de conhecimento, timeline da simulação) é um componente independente. <strong>Vite</strong> garante hot module replacement (HMR) para desenvolvimento rápido. <strong>D3.js</strong> renderiza visualizações interativas: o grafo de conhecimento como rede de nós e arestas, a timeline da simulação como diagrama temporal e os sentimentos como heatmap.</p>
+        <p class="text-neutral-300"><strong>Vue.js 3</strong> fornece a estrutura de componentes reativos - cada parte da interface (lista de agentes, grafo de conhecimento, timeline da simulaçêo) é um componente independente. <strong>Vite</strong> garante hot module replacement (HMR) para desenvolvimento rápido. <strong>D3.js</strong> renderiza visualizações interativas: o grafo de conhecimento como rede de nós e arestas, a timeline da simulaçêo como diagrama temporal e os sentimentos como heatmap.</p>
       </div>
 
       <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
         <h3 class="text-blue-400 font-semibold mb-3">Dados e Pesquisa</h3>
-        <p class="text-neutral-300">O frontend é completamente desacoplado do backend - qualquer interface pode consumir as APIs. Isso significa que é possível criar dashboards customizados, integrações com ferramentas de BI ou até interfaces de linha de comando para automatizar simulações. A porta padrão 3000 pode ser alterada no arquivo de configuração do Vite.</p>
+        <p class="text-neutral-300">O frontend é completamente desacoplado do backend - qualquer interface pode consumir as APIs. Isso significa que é possível criar dashboards customizados, integrações com ferramentas de BI ou até interfaces de linha de comando para automatizar simulações. A porta padrêo 3000 pode ser alterada no arquivo de configuraçêo do Vite.</p>
       </div>
 
       <div class="bg-primary/10 border border-primary/40 rounded-xl p-6 mb-6">
         <h3 class="text-primary font-semibold mb-3">Dica Prática</h3>
-        <p class="text-neutral-300">Para desenvolvimento, rode o frontend com <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">npm run dev</code> que ativa o HMR do Vite. Para produção, <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">npm run build</code> gera arquivos estáticos otimizados que podem ser servidos por qualquer servidor web.</p>
+        <p class="text-neutral-300">Para desenvolvimento, rode o frontend com <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">npm run dev</code> que ativa o HMR do Vite. Para produçêo, <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">npm run build</code> gera arquivos estáticos otimizados que podem ser servidos por qualquer servidor web.</p>
       </div>
     </div>
 
@@ -141,21 +141,21 @@
         <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">2</span>
         <h2 class="text-2xl font-bold text-neutral-100">⚙️ Backend</h2>
       </div>
-      <p class="text-neutral-300 mb-6">O backend é um servidor Python com Flask rodando na porta 5001. Ele é responsável por toda a lógica de negócio: orquestração de simulações, gerenciamento do grafo de conhecimento, comunicação com LLMs e persistência de dados.</p>
+      <p class="text-neutral-300 mb-6">O backend é um servidor Python com Flask rodando na porta 5001. Ele é responsável por toda a lógica de negócio: orquestraçêo de simulações, gerenciamento do grafo de conhecimento, comunicaçêo com LLMs e persistência de dados.</p>
 
       <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
         <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
-        <p class="text-neutral-300">O backend expõe APIs REST para operações CRUD (criar/ler/atualizar/deletar simulações) e usa WebSocket para comunicação em tempo real durante simulações ativas. As principais rotas incluem: <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">/api/simulation</code> (gerenciamento de simulações), <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">/api/graphrag</code> (operações no grafo de conhecimento) e <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">/api/agents</code> (interação com agentes individuais).</p>
+        <p class="text-neutral-300">O backend expõe APIs REST para operações CRUD (criar/ler/atualizar/deletar simulações) e usa WebSocket para comunicaçêo em tempo real durante simulações ativas. As principais rotas incluem: <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">/api/simulation</code> (gerenciamento de simulações), <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">/api/graphrag</code> (operações no grafo de conhecimento) e <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">/api/agents</code> (interaçêo com agentes individuais).</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-5">
           <h4 class="text-emerald-400 font-semibold mb-3">Responsabilidades do Backend</h4>
           <ul class="space-y-2 text-neutral-300 text-sm">
-            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Orquestração de simulações</li>
-            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Gestão do GraphRAG / KuzuDB</li>
-            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Comunicação com LLMs</li>
-            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Persistência e recuperação de dados</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Orquestraçêo de simulações</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Gestêo do GraphRAG / KuzuDB</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Comunicaçêo com LLMs</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Persistência e recuperaçêo de dados</li>
           </ul>
         </div>
         <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-5">
@@ -174,23 +174,23 @@
     <div class="mb-12">
       <div class="flex items-center gap-4 mb-6">
         <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">3</span>
-        <h2 class="text-2xl font-bold text-neutral-100">🤖 Motor de Simulação - OASIS</h2>
+        <h2 class="text-2xl font-bold text-neutral-100">🤖 Motor de Simulaçêo - OASIS</h2>
       </div>
-      <p class="text-neutral-300 mb-6">O OASIS (Open Agent Social Interaction Simulations) é o motor de simulação social desenvolvido pelo CAMEL-AI que o MiroFish utiliza. Ele define 23 ações sociais que os agentes podem executar em ambientes que simulam Twitter e Reddit simultaneamente.</p>
+      <p class="text-neutral-300 mb-6">O OASIS (Open Agent Social Interaction Simulations) é o motor de simulaçêo social desenvolvido pelo CAMEL-AI que o MiroFish utiliza. Ele define 23 ações sociais que os agentes podem executar em ambientes que simulam Twitter e Reddit simultaneamente.</p>
 
       <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
         <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
-        <p class="text-neutral-300">As 23 ações sociais incluem operações como: postar conteúdo original, responder a posts, curtir, compartilhar, seguir/deixar de seguir usuários, criar threads, votar em enquetes e mais. Cada agente, a cada turno da simulação, observa seu feed e decide qual ação executar baseado na sua personalidade e no contexto. O OASIS suporta simulação simultânea em ambientes tipo Twitter (posts curtos, retweets) e Reddit (threads, upvotes/downvotes, subreddits).</p>
+        <p class="text-neutral-300">As 23 ações sociais incluem operações como: postar conteúdo original, responder a posts, curtir, compartilhar, seguir/deixar de seguir usuários, criar threads, votar em enquetes e mais. Cada agente, a cada turno da simulaçêo, observa seu feed e decide qual açêo executar baseado na sua personalidade e no contexto. O OASIS suporta simulaçêo simultânea em ambientes tipo Twitter (posts curtos, retweets) e Reddit (threads, upvotes/downvotes, subreddits).</p>
       </div>
 
       <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
         <h3 class="text-blue-400 font-semibold mb-3">Dados e Pesquisa</h3>
-        <p class="text-neutral-300">O OASIS foi desenvolvido pelo CAMEL-AI (Communicative Agents for Machine Learning), um framework open-source para criação de sistemas multiagente. A simulação simultânea em dois ambientes (Twitter + Reddit) permite observar como a mesma população se comporta de forma diferente em contextos distintos - mensagens curtas vs discussões longas.</p>
+        <p class="text-neutral-300">O OASIS foi desenvolvido pelo CAMEL-AI (Communicative Agents for Machine Learning), um framework open-source para criaçêo de sistemas multiagente. A simulaçêo simultânea em dois ambientes (Twitter + Reddit) permite observar como a mesma populaçêo se comporta de forma diferente em contextos distintos - mensagens curtas vs discussões longas.</p>
       </div>
 
       <div class="bg-primary/10 border border-primary/40 rounded-xl p-6 mb-6">
         <h3 class="text-primary font-semibold mb-3">Dica Prática</h3>
-        <p class="text-neutral-300">Ao configurar uma simulação, considere qual ambiente é mais relevante para seu cenário. Notícias e reações rápidas funcionam melhor no ambiente Twitter. Discussões aprofundadas e análises são mais ricas no ambiente Reddit. Simular ambos oferece a visão mais completa.</p>
+        <p class="text-neutral-300">Ao configurar uma simulaçêo, considere qual ambiente é mais relevante para seu cenário. Notícias e reações rápidas funcionam melhor no ambiente Twitter. Discussões aprofundadas e análises sêo mais ricas no ambiente Reddit. Simular ambos oferece a visêo mais completa.</p>
       </div>
     </div>
 
@@ -200,11 +200,11 @@
         <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">4</span>
         <h2 class="text-2xl font-bold text-neutral-100">🧠 Camada de IA</h2>
       </div>
-      <p class="text-neutral-300 mb-6">Os LLMs são o "cérebro" de cada agente no MiroFish. Cada vez que um agente precisa tomar uma decisão, um prompt é construído com sua personalidade, memória e contexto atual, e enviado ao LLM para gerar uma resposta.</p>
+      <p class="text-neutral-300 mb-6">Os LLMs sêo o "cérebro" de cada agente no MiroFish. Cada vez que um agente precisa tomar uma decisêo, um prompt é construído com sua personalidade, memória e contexto atual, e enviado ao LLM para gerar uma resposta.</p>
 
       <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
         <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
-        <p class="text-neutral-300">O prompt de cada agente é composto por: (1) System prompt com a persona do agente (personalidade, valores, estilo); (2) Contexto do grafo de conhecimento relevante para a interação atual; (3) Memória das últimas interações; (4) O conteúdo que o agente está respondendo; (5) Instruções sobre as ações disponíveis. O LLM retorna tanto o conteúdo (texto do post/comentário) quanto a ação escolhida (postar, curtir, compartilhar, etc.).</p>
+        <p class="text-neutral-300">O prompt de cada agente é composto por: (1) System prompt com a persona do agente (personalidade, valores, estilo); (2) Contexto do grafo de conhecimento relevante para a interaçêo atual; (3) Memória das últimas interações; (4) O conteúdo que o agente está respondendo; (5) Instruções sobre as ações disponíveis. O LLM retorna tanto o conteúdo (texto do post/comentário) quanto a açêo escolhida (postar, curtir, compartilhar, etc.).</p>
       </div>
 
       <!-- Timeline -->
@@ -216,7 +216,7 @@
           </div>
           <div class="pb-6">
             <h4 class="text-emerald-400 font-semibold">Montagem do Prompt</h4>
-            <p class="text-neutral-300 text-sm mt-1">Persona + contexto do grafo + memória recente + conteúdo atual + ações disponíveis são combinados em um prompt.</p>
+            <p class="text-neutral-300 text-sm mt-1">Persona + contexto do grafo + memória recente + conteúdo atual + ações disponíveis sêo combinados em um prompt.</p>
           </div>
         </div>
         <div class="flex gap-4">
@@ -236,7 +236,7 @@
           </div>
           <div class="pb-6">
             <h4 class="text-emerald-400 font-semibold">Parsing da Resposta</h4>
-            <p class="text-neutral-300 text-sm mt-1">A resposta é parseada para extrair a ação escolhida e o conteúdo gerado pelo agente.</p>
+            <p class="text-neutral-300 text-sm mt-1">A resposta é parseada para extrair a açêo escolhida e o conteúdo gerado pelo agente.</p>
           </div>
         </div>
         <div class="flex gap-4">
@@ -244,8 +244,8 @@
             <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
           </div>
           <div>
-            <h4 class="text-emerald-400 font-semibold">Execução e Memória</h4>
-            <p class="text-neutral-300 text-sm mt-1">A ação é executada no ambiente simulado e a interação é salva na memória do agente.</p>
+            <h4 class="text-emerald-400 font-semibold">Execuçêo e Memória</h4>
+            <p class="text-neutral-300 text-sm mt-1">A açêo é executada no ambiente simulado e a interaçêo é salva na memória do agente.</p>
           </div>
         </div>
       </div>
@@ -257,11 +257,11 @@
         <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</span>
         <h2 class="text-2xl font-bold text-neutral-100">💾 Persistência de Dados</h2>
       </div>
-      <p class="text-neutral-300 mb-6">O MiroFish usa uma combinação pragmática de tecnologias de armazenamento: SQLite para dados estruturados, JSON para configurações e resultados, e o filesystem para logs e artefatos gerados durante simulações.</p>
+      <p class="text-neutral-300 mb-6">O MiroFish usa uma combinaçêo pragmática de tecnologias de armazenamento: SQLite para dados estruturados, JSON para configurações e resultados, e o filesystem para logs e artefatos gerados durante simulações.</p>
 
       <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
         <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
-        <p class="text-neutral-300"><strong>SQLite:</strong> Armazena metadados de simulações, perfis de agentes e dados de interação em um banco relacional embarcado. Zero configuração, perfeito para uso local. <strong>JSON:</strong> Configurações de simulação, resultados de relatórios e exportações são armazenados em JSON para fácil leitura e portabilidade. <strong>Filesystem:</strong> Logs detalhados de cada turno da simulação, grafos de conhecimento exportados e artefatos visuais são salvos em diretórios organizados por simulação.</p>
+        <p class="text-neutral-300"><strong>SQLite:</strong> Armazena metadados de simulações, perfis de agentes e dados de interaçêo em um banco relacional embarcado. Zero configuraçêo, perfeito para uso local. <strong>JSON:</strong> Configurações de simulaçêo, resultados de relatórios e exportações sêo armazenados em JSON para fácil leitura e portabilidade. <strong>Filesystem:</strong> Logs detalhados de cada turno da simulaçêo, grafos de conhecimento exportados e artefatos visuais sêo salvos em diretórios organizados por simulaçêo.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -270,14 +270,14 @@
           <ul class="space-y-2 text-neutral-300 text-sm">
             <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Fazer backup do diretório data/ regularmente</li>
             <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Usar JSON exportado para análises offline</li>
-            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Versionar configurações de simulação</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Versionar configurações de simulaçêo</li>
           </ul>
         </div>
         <div class="bg-red-900/20 border border-red-500/30 rounded-xl p-5">
           <h4 class="text-red-400 font-semibold mb-3">Evitar</h4>
           <ul class="space-y-2 text-neutral-300 text-sm">
             <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Editar o SQLite manualmente</li>
-            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Deletar logs durante uma simulação ativa</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Deletar logs durante uma simulaçêo ativa</li>
             <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Ignorar o tamanho do disco com muitas simulações</li>
           </ul>
         </div>
@@ -290,21 +290,21 @@
         <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</span>
         <h2 class="text-2xl font-bold text-neutral-100">🐳 Deploy</h2>
       </div>
-      <p class="text-neutral-300 mb-6">O MiroFish pode ser implantado de duas formas: via Docker Compose (recomendado para produção e compartilhamento) ou via scripts npm (recomendado para desenvolvimento). Ambos os métodos orquestram frontend, backend e banco de dados.</p>
+      <p class="text-neutral-300 mb-6">O MiroFish pode ser implantado de duas formas: via Docker Compose (recomendado para produçêo e compartilhamento) ou via scripts npm (recomendado para desenvolvimento). Ambos os métodos orquestram frontend, backend e banco de dados.</p>
 
       <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
         <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
-        <p class="text-neutral-300"><strong>Docker Compose:</strong> Um único <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">docker-compose up</code> sobe todos os serviços (frontend na porta 3000, backend na porta 5001, banco de dados). Ideal para ambientes de produção e para compartilhar o setup com equipes. <strong>Scripts npm:</strong> O <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">npm run dev</code> inicia frontend e backend simultaneamente com hot reload. Ideal para desenvolvimento e debug.</p>
+        <p class="text-neutral-300"><strong>Docker Compose:</strong> Um único <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">docker-compose up</code> sobe todos os serviços (frontend na porta 3000, backend na porta 5001, banco de dados). Ideal para ambientes de produçêo e para compartilhar o setup com equipes. <strong>Scripts npm:</strong> O <code class="bg-dark-700 px-2 py-0.5 rounded text-sm">npm run dev</code> inicia frontend e backend simultaneamente com hot reload. Ideal para desenvolvimento e debug.</p>
       </div>
 
       <div class="bg-primary/10 border border-primary/40 rounded-xl p-6 mb-6">
         <h3 class="text-primary font-semibold mb-3">Dica Prática</h3>
-        <p class="text-neutral-300">Configure as variáveis de ambiente antes de fazer deploy. As mais importantes são: as API keys dos LLMs que você pretende usar (DEEPSEEK_API_KEY, GEMINI_API_KEY, etc.), a porta do backend (FLASK_PORT) e o diretório de dados (DATA_DIR). Nunca comite API keys no repositório - use arquivo .env.</p>
+        <p class="text-neutral-300">Configure as variáveis de ambiente antes de fazer deploy. As mais importantes sêo: as API keys dos LLMs que você pretende usar (DEEPSEEK_API_KEY, GEMINI_API_KEY, etc.), a porta do backend (FLASK_PORT) e o diretório de dados (DATA_DIR). Nunca comite API keys no repositório - use arquivo .env.</p>
       </div>
 
       <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
         <h3 class="text-blue-400 font-semibold mb-3">Dados e Pesquisa</h3>
-        <p class="text-neutral-300">Os requisitos mínimos de hardware são: 4GB RAM (8GB recomendado), 2 cores de CPU e 5GB de espaço em disco. O maior consumo de recursos vem das chamadas paralelas aos LLMs durante a simulação. Se rodar LLMs locais (como Ollama), considere 16GB+ RAM e GPU dedicada.</p>
+        <p class="text-neutral-300">Os requisitos mínimos de hardware sêo: 4GB RAM (8GB recomendado), 2 cores de CPU e 5GB de espaço em disco. O maior consumo de recursos vem das chamadas paralelas aos LLMs durante a simulaçêo. Se rodar LLMs locais (como Ollama), considere 16GB+ RAM e GPU dedicada.</p>
       </div>
     </div>
 

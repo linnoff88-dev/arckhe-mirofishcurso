@@ -82,7 +82,7 @@
             <span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span>
           </a>
           <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors">
-            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span>
+            <span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalaçêo</span>
           </a>
           <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
             <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
@@ -121,7 +121,7 @@
 
       <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
         <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
-        <p class="text-neutral-300">No RAG tradicional, se você busca "CEO da empresa X", pode receber um chunk que menciona o CEO mas não conecta com a empresa. No GraphRAG, a relação "João [é CEO de] Empresa X" está explícita no grafo. Isso permite respostas que navegam relações complexas: "Quem são os parceiros da empresa que João lidera?" - algo impossível com busca vetorial pura.</p>
+        <p class="text-neutral-300">No RAG tradicional, se você busca "CEO da empresa X", pode receber um chunk que menciona o CEO mas nêo conecta com a empresa. No GraphRAG, a relaçêo "Joêo [é CEO de] Empresa X" está explícita no grafo. Isso permite respostas que navegam relações complexas: "Quem sêo os parceiros da empresa que Joêo lidera?" - algo impossível com busca vetorial pura.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -129,7 +129,7 @@
           <h4 class="text-emerald-400 font-semibold mb-3">GraphRAG - Pontos Fortes</h4>
           <ul class="space-y-2 text-neutral-300 text-sm">
             <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Preserva relações entre entidades</li>
-            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Navega caminhos complexos de conexão</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Navega caminhos complexos de conexêo</li>
             <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">+</span> Contexto mais rico e estruturado</li>
           </ul>
         </div>
@@ -138,7 +138,7 @@
           <ul class="space-y-2 text-neutral-300 text-sm">
             <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Perde relações entre chunks separados</li>
             <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Busca por similaridade nem sempre é relevância</li>
-            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Não entende conexões entre conceitos</li>
+            <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">-</span> Nêo entende conexões entre conceitos</li>
           </ul>
         </div>
       </div>
@@ -154,12 +154,12 @@
 
       <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
         <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
-        <p class="text-neutral-300">Cada fato é armazenado como uma tripla: Sujeito → Predicado → Objeto. Por exemplo: "Elon Musk [fundou] Tesla", "Tesla [compete_com] BYD", "BYD [é_popular_em] China". Navegando essas relações, o sistema pode inferir que opiniões sobre Elon Musk podem afetar percepções sobre Tesla e, por extensão, sobre o mercado de veículos elétricos na China.</p>
+        <p class="text-neutral-300">Cada fato é armazenado como uma tripla: Sujeito → Predicado → Objeto. Por exemplo: "Elon Musk [fundou] Tesla", "Tesla [compete_com] BYD", "BYD [é_popular_em] China". Navegando essas relações, o sistema pode inferir que opiniões sobre Elon Musk podem afetar percepções sobre Tesla e, por extensêo, sobre o mercado de veículos elétricos na China.</p>
       </div>
 
       <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
         <h3 class="text-blue-400 font-semibold mb-3">Dados e Pesquisa</h3>
-        <p class="text-neutral-300">Um grafo de conhecimento típico para uma simulação do MiroFish contém entre 500 e 5.000 nós (entidades) e 2.000 a 20.000 arestas (relações). A extração é feita por LLMs que processam os documentos de entrada, identificando automaticamente entidades nomeadas e as relações entre elas com precisão superior a 85%.</p>
+        <p class="text-neutral-300">Um grafo de conhecimento típico para uma simulaçêo do MiroFish contém entre 500 e 5.000 nós (entidades) e 2.000 a 20.000 arestas (relações). A extraçêo é feita por LLMs que processam os documentos de entrada, identificando automaticamente entidades nomeadas e as relações entre elas com precisêo superior a 85%.</p>
       </div>
 
       <div class="bg-primary/10 border border-primary/40 rounded-xl p-6 mb-6">
@@ -211,8 +211,8 @@
             <div class="w-0.5 h-full bg-emerald-500/20 mt-2"></div>
           </div>
           <div class="pb-6">
-            <h4 class="text-emerald-400 font-semibold">Fusão e Reranking</h4>
-            <p class="text-neutral-300 text-sm mt-1">Os resultados são combinados, deduplicados e reordenados por relevância usando um modelo de reranking.</p>
+            <h4 class="text-emerald-400 font-semibold">Fusêo e Reranking</h4>
+            <p class="text-neutral-300 text-sm mt-1">Os resultados sêo combinados, deduplicados e reordenados por relevância usando um modelo de reranking.</p>
           </div>
         </div>
         <div class="flex gap-4">
@@ -221,7 +221,7 @@
           </div>
           <div>
             <h4 class="text-emerald-400 font-semibold">Contexto Entregue</h4>
-            <p class="text-neutral-300 text-sm mt-1">O contexto final, rico e diversificado, é injetado no prompt do agente para sua próxima ação.</p>
+            <p class="text-neutral-300 text-sm mt-1">O contexto final, rico e diversificado, é injetado no prompt do agente para sua próxima açêo.</p>
           </div>
         </div>
       </div>
@@ -237,7 +237,7 @@
 
       <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
         <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
-        <p class="text-neutral-300"><strong>Zep Cloud:</strong> Serviço gerenciado que oferece GraphRAG como serviço, com APIs prontas e escalabilidade automática. Custo mensal, dados trafegam pela internet, depende de disponibilidade do serviço. <strong>KuzuDB:</strong> Banco de grafos embarcado em C++, roda como uma biblioteca dentro da aplicação. Zero custo, dados ficam locais, funciona offline. Tradeoff: exige mais configuração e não escala horizontalmente.</p>
+        <p class="text-neutral-300"><strong>Zep Cloud:</strong> Serviço gerenciado que oferece GraphRAG como serviço, com APIs prontas e escalabilidade automática. Custo mensal, dados trafegam pela internet, depende de disponibilidade do serviço. <strong>KuzuDB:</strong> Banco de grafos embarcado em C++, roda como uma biblioteca dentro da aplicaçêo. Zero custo, dados ficam locais, funciona offline. Tradeoff: exige mais configuraçêo e nêo escala horizontalmente.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -268,21 +268,21 @@
         <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">5</span>
         <h2 class="text-2xl font-bold text-neutral-100">🧩 Como o MiroFish Usa GraphRAG</h2>
       </div>
-      <p class="text-neutral-300 mb-6">O GraphRAG é a primeira etapa do pipeline do MiroFish. Documentos de entrada são processados por um LLM que extrai entidades e relações, constrói o grafo de conhecimento e depois usa esse grafo para gerar personas diversas e contextualizar os agentes durante a simulação.</p>
+      <p class="text-neutral-300 mb-6">O GraphRAG é a primeira etapa do pipeline do MiroFish. Documentos de entrada sêo processados por um LLM que extrai entidades e relações, constrói o grafo de conhecimento e depois usa esse grafo para gerar personas diversas e contextualizar os agentes durante a simulaçêo.</p>
 
       <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
         <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
-        <p class="text-neutral-300">O fluxo completo: (1) Documentos são ingeridos (artigos, posts, relatórios); (2) Um LLM extrai entidades (pessoas, empresas, eventos) e relações (trabalha_em, compete_com, apoiou); (3) Essas triplas são armazenadas no grafo; (4) O grafo é consultado para gerar personas diversas com opiniões embasadas; (5) Durante a simulação, agentes consultam o grafo para recuperar contexto relevante antes de cada ação.</p>
+        <p class="text-neutral-300">O fluxo completo: (1) Documentos sêo ingeridos (artigos, posts, relatórios); (2) Um LLM extrai entidades (pessoas, empresas, eventos) e relações (trabalha_em, compete_com, apoiou); (3) Essas triplas sêo armazenadas no grafo; (4) O grafo é consultado para gerar personas diversas com opiniões embasadas; (5) Durante a simulaçêo, agentes consultam o grafo para recuperar contexto relevante antes de cada açêo.</p>
       </div>
 
       <div class="bg-primary/10 border border-primary/40 rounded-xl p-6 mb-6">
         <h3 class="text-primary font-semibold mb-3">Dica Prática</h3>
-        <p class="text-neutral-300">A qualidade do grafo de conhecimento determina diretamente a qualidade da simulação. Invista em documentos de entrada diversificados: artigos de diferentes perspectivas, posts de diferentes demografias e análises de diferentes fontes. Um grafo enviesado gera personas enviesadas.</p>
+        <p class="text-neutral-300">A qualidade do grafo de conhecimento determina diretamente a qualidade da simulaçêo. Invista em documentos de entrada diversificados: artigos de diferentes perspectivas, posts de diferentes demografias e análises de diferentes fontes. Um grafo enviesado gera personas enviesadas.</p>
       </div>
 
       <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
         <h3 class="text-blue-400 font-semibold mb-3">Dados e Pesquisa</h3>
-        <p class="text-neutral-300">O processo de extração de entidades e relações consome entre 2.000 e 10.000 tokens por documento de entrada, dependendo do comprimento e complexidade. Para uma simulação típica com 20-30 documentos, o custo de GraphRAG building fica entre US$ 0,50 e US$ 3 usando modelos como DeepSeek ou Qwen.</p>
+        <p class="text-neutral-300">O processo de extraçêo de entidades e relações consome entre 2.000 e 10.000 tokens por documento de entrada, dependendo do comprimento e complexidade. Para uma simulaçêo típica com 20-30 documentos, o custo de GraphRAG building fica entre US$ 0,50 e US$ 3 usando modelos como DeepSeek ou Qwen.</p>
       </div>
     </div>
 
@@ -292,21 +292,21 @@
         <span class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 text-xl font-bold flex items-center justify-center flex-shrink-0">6</span>
         <h2 class="text-2xl font-bold text-neutral-100">💡 Graphiti e Temporalidade</h2>
       </div>
-      <p class="text-neutral-300 mb-6">Graphiti é a camada que adiciona a dimensão temporal ao grafo de conhecimento. Fatos não são estáticos - opiniões mudam, empresas se transformam, contextos evoluem. O Graphiti registra quando cada fato foi aprendido e como resolver conflitos quando informações novas contradizem antigas.</p>
+      <p class="text-neutral-300 mb-6">Graphiti é a camada que adiciona a dimensêo temporal ao grafo de conhecimento. Fatos nêo sêo estáticos - opiniões mudam, empresas se transformam, contextos evoluem. O Graphiti registra quando cada fato foi aprendido e como resolver conflitos quando informações novas contradizem antigas.</p>
 
       <div class="bg-gradient-to-r from-emerald-900/30 to-dark-800 border border-emerald-500/30 rounded-xl p-6 mb-6">
         <h3 class="text-emerald-400 font-semibold mb-3">Conceito Principal</h3>
-        <p class="text-neutral-300">Cada aresta no grafo tem um timestamp e um nível de confiança. Se em janeiro o grafo diz "João [apoia] Candidato A" e em março um novo documento diz "João [apoia] Candidato B", o Graphiti não simplesmente sobrescreve - ele mantém ambos os fatos com seus timestamps e marca o mais recente como ativo. Isso permite que agentes tenham memória de como opiniões evoluíram ao longo do tempo.</p>
+        <p class="text-neutral-300">Cada aresta no grafo tem um timestamp e um nível de confiança. Se em janeiro o grafo diz "Joêo [apoia] Candidato A" e em março um novo documento diz "Joêo [apoia] Candidato B", o Graphiti nêo simplesmente sobrescreve - ele mantém ambos os fatos com seus timestamps e marca o mais recente como ativo. Isso permite que agentes tenham memória de como opiniões evoluíram ao longo do tempo.</p>
       </div>
 
       <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-6 mb-6">
         <h3 class="text-blue-400 font-semibold mb-3">Dados e Pesquisa</h3>
-        <p class="text-neutral-300">A resolução de conflitos temporais é especialmente importante em simulações de longo prazo ou quando os dados de entrada cobrem períodos extensos. Sem temporalidade, o grafo pode conter informações contraditórias que geram agentes com opiniões incoerentes. O Graphiti resolve esse problema automaticamente usando heurísticas de recência e confiança.</p>
+        <p class="text-neutral-300">A resoluçêo de conflitos temporais é especialmente importante em simulações de longo prazo ou quando os dados de entrada cobrem períodos extensos. Sem temporalidade, o grafo pode conter informações contraditórias que geram agentes com opiniões incoerentes. O Graphiti resolve esse problema automaticamente usando heurísticas de recência e confiança.</p>
       </div>
 
       <div class="bg-primary/10 border border-primary/40 rounded-xl p-6 mb-6">
         <h3 class="text-primary font-semibold mb-3">Dica Prática</h3>
-        <p class="text-neutral-300">Ao preparar dados para uma simulação, inclua timestamps nos documentos quando possível. Isso permite que o Graphiti ordene corretamente a evolução dos fatos e gere agentes com uma linha temporal coerente de opiniões e conhecimentos.</p>
+        <p class="text-neutral-300">Ao preparar dados para uma simulaçêo, inclua timestamps nos documentos quando possível. Isso permite que o Graphiti ordene corretamente a evoluçêo dos fatos e gere agentes com uma linha temporal coerente de opiniões e conhecimentos.</p>
       </div>
     </div>
 

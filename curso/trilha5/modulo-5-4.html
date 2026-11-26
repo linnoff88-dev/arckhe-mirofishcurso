@@ -63,7 +63,7 @@
           <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span></a>
           <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
           <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span></a>
-          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-teal-400 bg-teal-500/10"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-teal-400 bg-teal-500/10"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalaçêo</span></a>
           <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
             <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
             <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
@@ -162,13 +162,13 @@
       </button>
       <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
         <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Volumes Docker mapeiam diretórios do host para dentro do container, garantindo persistência de dados e acesso a credenciais do Claude CLI.</p>
-        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Sem os volumes corretos: dados são perdidos ao recriar containers, Claude CLI não autentica, e uploads desaparecem.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Sem os volumes corretos: dados sêo perdidos ao recriar containers, Claude CLI nêo autentica, e uploads desaparecem.</p>
         <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
           <p class="text-teal-400 mb-2"># Volumes essenciais no docker-compose.yml</p>
           <p class="text-neutral-300">volumes:</p>
           <p class="text-neutral-300">  # Documentos enviados pelo usuário</p>
           <p class="text-neutral-300">  - ./backend/uploads:/app/backend/uploads</p>
-          <p class="text-neutral-300 mt-1">  # Banco KuzuDB e dados de simulação</p>
+          <p class="text-neutral-300 mt-1">  # Banco KuzuDB e dados de simulaçêo</p>
           <p class="text-neutral-300">  - ./backend/data:/app/backend/data</p>
           <p class="text-neutral-300 mt-1">  # Credenciais do Claude CLI (ESSENCIAL!)</p>
           <p class="text-neutral-300">  - ~/.claude:/root/.claude</p>
@@ -176,7 +176,7 @@
           <p class="text-neutral-300 mt-1">  # Credenciais do Codex CLI (se usar)</p>
           <p class="text-neutral-300">  - ~/.codex:/root/.codex</p>
           <p class="text-teal-400 mt-3 mb-2"># Sem esses volumes, o Claude CLI dentro do Docker</p>
-          <p class="text-neutral-300"># não consegue autenticar e retorna erro de login.</p>
+          <p class="text-neutral-300"># nêo consegue autenticar e retorna erro de login.</p>
         </div>
       </div>
     </div>
@@ -189,7 +189,7 @@
       </button>
       <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
         <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Traefik é um proxy reverso moderno que obtém certificados SSL automaticamente via Let's Encrypt. Configurado via labels no docker-compose.yml.</p>
-        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> HTTPS é obrigatório para produção. Traefik automatiza tudo: emissão, renovação de certificados e roteamento de tráfego.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> HTTPS é obrigatório para produçêo. Traefik automatiza tudo: emissêo, renovaçêo de certificados e roteamento de tráfego.</p>
         <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
           <p class="text-teal-400 mb-2"># Labels Traefik no serviço app</p>
           <p class="text-neutral-300">labels:</p>
@@ -198,7 +198,7 @@
           <p class="text-neutral-300">  - "traefik.http.routers.mirofish.tls=true"</p>
           <p class="text-neutral-300">  - "traefik.http.routers.mirofish.tls.certresolver=letsencrypt"</p>
           <p class="text-neutral-300">  - "traefik.http.services.mirofish.loadbalancer.server.port=5001"</p>
-          <p class="text-teal-400 mt-3 mb-2"># Configuração do Traefik</p>
+          <p class="text-teal-400 mt-3 mb-2"># Configuraçêo do Traefik</p>
           <p class="text-neutral-300">command:</p>
           <p class="text-neutral-300">  - "--providers.docker=true"</p>
           <p class="text-neutral-300">  - "--entrypoints.websecure.address=:443"</p>
@@ -219,7 +219,7 @@
       </button>
       <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
         <p class="mb-3"><strong class="text-teal-400">O que é:</strong> O comando docker compose up -d --build constrói a imagem Docker e sobe todos os serviços em background. O primeiro build leva 5-10 minutos.</p>
-        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Este é o comando que coloca o MiroFish em produção. Entender os flags evita problemas comuns de deploy.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Este é o comando que coloca o MiroFish em produçêo. Entender os flags evita problemas comuns de deploy.</p>
         <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
           <p class="text-teal-400 mb-2"># Subir tudo (primeira vez - vai demorar)</p>
           <p class="text-neutral-300">docker compose up -d --build</p>
@@ -245,7 +245,7 @@
       </button>
       <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
         <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Docker Compose oferece ferramentas de log e monitoramento integradas. Use docker compose logs para ver saída dos containers em tempo real.</p>
-        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Logs são a ferramenta #1 de diagnóstico. Erros de API, falhas de memória e problemas de configuração aparecem aqui.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Logs sêo a ferramenta #1 de diagnóstico. Erros de API, falhas de memória e problemas de configuraçêo aparecem aqui.</p>
         <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
           <p class="text-teal-400 mb-2"># Ver logs em tempo real (todos os serviços)</p>
           <p class="text-neutral-300">docker compose logs -f</p>
@@ -270,7 +270,7 @@
         Anterior: Provedores LLM
       </a>
       <a href="modulo-5-5.html" class="flex items-center gap-2 text-neutral-400 hover:text-teal-400 transition-colors">
-        Próximo: Primeira Simulação
+        Próximo: Primeira Simulaçêo
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
       </a>
     </div>

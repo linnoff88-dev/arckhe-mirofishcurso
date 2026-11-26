@@ -63,7 +63,7 @@
           <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Aplicações</span></a>
           <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Avançado</span></a>
           <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Exemplos</span></a>
-          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-teal-400 bg-teal-500/10"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalação</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-teal-400 bg-teal-500/10"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Instalaçêo</span></a>
           <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
             <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
             <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
@@ -91,19 +91,19 @@
     <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
       <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
         <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-        <span class="text-neutral-100 font-semibold">🐛 Backend Não Inicia - Funções ausentes em config.py</span>
+        <span class="text-neutral-100 font-semibold">🐛 Backend Nêo Inicia - Funções ausentes em config.py</span>
       </button>
       <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
-        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> O repositório original do MiroFish tem funções faltando em config.py que causam ImportError na inicialização do backend. O fork inematds corrigiu isso.</p>
-        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Se você clonou o repositório errado (original em vez do fork), este é o primeiro erro que vai encontrar. A solução é usar o fork.</p>
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> O repositório original do MiroFish tem funções faltando em config.py que causam ImportError na inicializaçêo do backend. O fork inematds corrigiu isso.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Se você clonou o repositório errado (original em vez do fork), este é o primeiro erro que vai encontrar. A soluçêo é usar o fork.</p>
         <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
           <p class="text-teal-400 mb-2"># Erro típico:</p>
           <p class="text-red-400">ImportError: cannot import name 'get_llm_config' from 'config'</p>
           <p class="text-red-400">AttributeError: module 'config' has no attribute 'get_graph_db_path'</p>
           <p class="text-teal-400 mt-3 mb-2"># Causa:</p>
-          <p class="text-neutral-300">O original não tem as funções que outros módulos importam.</p>
+          <p class="text-neutral-300">O original nêo tem as funções que outros módulos importam.</p>
           <p class="text-neutral-300">config.py original é incompleto.</p>
-          <p class="text-teal-400 mt-3 mb-2"># Solução:</p>
+          <p class="text-teal-400 mt-3 mb-2"># Soluçêo:</p>
           <p class="text-neutral-300"># Use o fork inematds (já corrigido):</p>
           <p class="text-neutral-300">git clone https://github.com/inematds/mirofish.git</p>
           <p class="text-neutral-300 mt-2"># Ou consulte MIGRATION-GUIDE.md para as</p>
@@ -119,8 +119,8 @@
         <span class="text-neutral-100 font-semibold">💥 Claude CLI Falha - Prompts longos demais</span>
       </button>
       <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
-        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Claude CLI falha quando o prompt é passado como argumento de linha de comando e excede o limite do OS (ARG_MAX ~2MB no Linux). A solução é usar stdin.</p>
-        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Este bug só aparece em simulações reais com contexto rico. É um dos problemas mais frustrantes porque a mensagem de erro não é clara.</p>
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Claude CLI falha quando o prompt é passado como argumento de linha de comando e excede o limite do OS (ARG_MAX ~2MB no Linux). A soluçêo é usar stdin.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Este bug só aparece em simulações reais com contexto rico. É um dos problemas mais frustrantes porque a mensagem de erro nêo é clara.</p>
         <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
           <p class="text-teal-400 mb-2"># Erro típico:</p>
           <p class="text-red-400">OSError: [Errno 7] Argument list too long: 'claude'</p>
@@ -128,7 +128,7 @@
           <p class="text-teal-400 mt-3 mb-2"># Causa:</p>
           <p class="text-neutral-300">claude --print "prompt muito longo aqui..."</p>
           <p class="text-neutral-300"># O prompt excede o limite de argumentos do shell</p>
-          <p class="text-teal-400 mt-3 mb-2"># Solução (já implementada no fork):</p>
+          <p class="text-teal-400 mt-3 mb-2"># Soluçêo (já implementada no fork):</p>
           <p class="text-neutral-300"># Em vez de passar como argumento:</p>
           <p class="text-red-400">❌ subprocess.run(["claude", "--print", prompt])</p>
           <p class="text-neutral-300 mt-1"># Passar via stdin:</p>
@@ -142,15 +142,15 @@
     <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
       <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
         <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-        <span class="text-neutral-100 font-semibold">🐌 Simulação Lenta/Cara - Limitar escala</span>
+        <span class="text-neutral-100 font-semibold">🐌 Simulaçêo Lenta/Cara - Limitar escala</span>
       </button>
       <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
-        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Simulações podem ser lentas (horas) ou caras ($100+) se mal dimensionadas. As principais causas são muitas rodadas, muitos agentes ou modelo LLM caro demais.</p>
-        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Otimizar a relação custo/qualidade é essencial para uso prático. Nem sempre mais rodadas = melhores resultados.</p>
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Simulações podem ser lentas (horas) ou caras ($100+) se mal dimensionadas. As principais causas sêo muitas rodadas, muitos agentes ou modelo LLM caro demais.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Otimizar a relaçêo custo/qualidade é essencial para uso prático. Nem sempre mais rodadas = melhores resultados.</p>
         <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
-          <p class="text-teal-400 mb-2"># Estratégias de otimização:</p>
-          <p class="text-neutral-300 mt-1">1. Limitar rodadas (< 40 para testes, < 100 para produção)</p>
-          <p class="text-neutral-300">2. Usar LLM mais barato para simulação (LLM_BOOST)</p>
+          <p class="text-teal-400 mb-2"># Estratégias de otimizaçêo:</p>
+          <p class="text-neutral-300 mt-1">1. Limitar rodadas (< 40 para testes, < 100 para produçêo)</p>
+          <p class="text-neutral-300">2. Usar LLM mais barato para simulaçêo (LLM_BOOST)</p>
           <p class="text-neutral-300">3. Reduzir número de agentes (10-20 é suficiente para testes)</p>
           <p class="text-neutral-300">4. Usar Claude CLI para testes ($0)</p>
           <p class="text-teal-400 mt-3 mb-2"># Tabela de referência de tempo:</p>
@@ -171,15 +171,15 @@
         <span class="text-neutral-100 font-semibold">🐳 Docker sem Claude CLI - Mapear volumes</span>
       </button>
       <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
-        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Dentro do Docker, o Claude CLI não consegue acessar suas credenciais a menos que os diretórios de configuração sejam montados como volumes.</p>
+        <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Dentro do Docker, o Claude CLI nêo consegue acessar suas credenciais a menos que os diretórios de configuraçêo sejam montados como volumes.</p>
         <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Este é o problema #1 reportado por usuários que fazem deploy com Docker + Claude CLI. A mensagem de erro é "not authenticated".</p>
         <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
           <p class="text-teal-400 mb-2"># Erro típico:</p>
           <p class="text-red-400">Error: Not authenticated. Please run 'claude' to authenticate.</p>
           <p class="text-teal-400 mt-3 mb-2"># Causa:</p>
-          <p class="text-neutral-300">O container Docker não tem acesso aos arquivos de</p>
-          <p class="text-neutral-300">autenticação do Claude CLI que ficam no host.</p>
-          <p class="text-teal-400 mt-3 mb-2"># Solução - adicionar volumes no docker-compose.yml:</p>
+          <p class="text-neutral-300">O container Docker nêo tem acesso aos arquivos de</p>
+          <p class="text-neutral-300">autenticaçêo do Claude CLI que ficam no host.</p>
+          <p class="text-teal-400 mt-3 mb-2"># Soluçêo - adicionar volumes no docker-compose.yml:</p>
           <p class="text-neutral-300">volumes:</p>
           <p class="text-neutral-300">  - ~/.claude:/root/.claude:ro</p>
           <p class="text-neutral-300">  - ~/.local/share/claude:/root/.local/share/claude:ro</p>
@@ -195,11 +195,11 @@
     <div class="topic-item bg-dark-800 border border-dark-700 rounded-xl p-4">
       <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 justify-start">
         <span class="w-8 h-8 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-        <span class="text-neutral-100 font-semibold">🔄 Importação Circular - Bug corrigido com lazy import</span>
+        <span class="text-neutral-100 font-semibold">🔄 Importaçêo Circular - Bug corrigido com lazy import</span>
       </button>
       <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
         <p class="mb-3"><strong class="text-teal-400">O que é:</strong> O código original tinha dependências circulares entre módulos Python (build_graph.py importava config.py que importava build_graph.py), causando ImportError.</p>
-        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Importação circular é um erro Python clássico. A técnica de lazy import (mover o import para dentro da função) é a solução padrão.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> Importaçêo circular é um erro Python clássico. A técnica de lazy import (mover o import para dentro da funçêo) é a soluçêo padrêo.</p>
         <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
           <p class="text-teal-400 mb-2"># Erro típico:</p>
           <p class="text-red-400">ImportError: cannot import name 'build_graph' from</p>
@@ -210,10 +210,10 @@
           <p class="text-red-400">from build_graph import process_documents</p>
           <p class="text-teal-400 mt-3 mb-2"># Código corrigido no fork (lazy import):</p>
           <p class="text-green-400">✅ def some_function():</p>
-          <p class="text-green-400">       # Import dentro da função (lazy)</p>
+          <p class="text-green-400">       # Import dentro da funçêo (lazy)</p>
           <p class="text-green-400">       from build_graph import process_documents</p>
           <p class="text-green-400">       return process_documents(data)</p>
-          <p class="text-teal-400 mt-3 mb-2"># O import só acontece quando a função é chamada,</p>
+          <p class="text-teal-400 mt-3 mb-2"># O import só acontece quando a funçêo é chamada,</p>
           <p class="text-neutral-300"># quebrando o ciclo de dependência.</p>
         </div>
       </div>
@@ -227,24 +227,24 @@
       </button>
       <div class="topic-explanation mt-4 p-4 bg-dark-700 rounded-lg text-sm text-neutral-300">
         <p class="mb-3"><strong class="text-teal-400">O que é:</strong> Tabela de referência rápida com os problemas mais frequentes, suas causas e soluções. Consulte antes de abrir uma issue no GitHub.</p>
-        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> 95% dos problemas reportados são os mesmos. Esta tabela resolve a maioria sem precisar de ajuda externa.</p>
+        <p class="mb-3"><strong class="text-teal-400">Por que aprender:</strong> 95% dos problemas reportados sêo os mesmos. Esta tabela resolve a maioria sem precisar de ajuda externa.</p>
         <div class="bg-dark-800 rounded-lg p-4 mb-3 font-mono text-xs">
-          <p class="text-teal-400 mb-2"># Tabela: Problema → Causa → Solução</p>
+          <p class="text-teal-400 mb-2"># Tabela: Problema → Causa → Soluçêo</p>
           <p class="text-neutral-300 mt-1">┌──────────────────────────────────────────────────────┐</p>
-          <p class="text-neutral-300">│ PROBLEMA              │ CAUSA        │ SOLUÇÃO        │</p>
+          <p class="text-neutral-300">│ PROBLEMA              │ CAUSA        │ SOLUÇêO        │</p>
           <p class="text-neutral-300">├──────────────────────────────────────────────────────┤</p>
           <p class="text-neutral-300">│ ModuleNotFoundError   │ Python 3.13+ │ Use 3.11/3.12  │</p>
           <p class="text-neutral-300">│ npm setup:all falha   │ uv ausente   │ Instalar uv    │</p>
-          <p class="text-neutral-300">│ Backend não inicia    │ .env faltando│ cp .env.example │</p>
+          <p class="text-neutral-300">│ Backend nêo inicia    │ .env faltando│ cp .env.example │</p>
           <p class="text-neutral-300">│ "Not authenticated"   │ Docker s/vol │ Montar ~/.claude│</p>
           <p class="text-neutral-300">│ Porta 5001 em uso     │ Outro proc.  │ lsof -i :5001  │</p>
           <p class="text-neutral-300">│ ENOMEM / killed       │ Pouca RAM    │ Usar ≥8GB      │</p>
           <p class="text-neutral-300">│ Arg list too long     │ Prompt grande│ Usar stdin     │</p>
           <p class="text-neutral-300">│ Circular import       │ Bug original │ Usar fork      │</p>
-          <p class="text-neutral-300">│ OASIS incompatível    │ API não-OAI  │ Usar LLM_BOOST │</p>
-          <p class="text-neutral-300">│ Simulação sem fim     │ Muitas rodadas│ Limitar < 40  │</p>
+          <p class="text-neutral-300">│ OASIS incompatível    │ API nêo-OAI  │ Usar LLM_BOOST │</p>
+          <p class="text-neutral-300">│ Simulaçêo sem fim     │ Muitas rodadas│ Limitar < 40  │</p>
           <p class="text-neutral-300">│ Relatório vazio       │ LLM timeout  │ Verificar logs │</p>
-          <p class="text-neutral-300">│ SSL não funciona      │ acme.json    │ chmod 600      │</p>
+          <p class="text-neutral-300">│ SSL nêo funciona      │ acme.json    │ chmod 600      │</p>
           <p class="text-neutral-300">└──────────────────────────────────────────────────────┘</p>
           <p class="text-teal-400 mt-3 mb-2"># Comandos de diagnóstico rápido:</p>
           <p class="text-neutral-300">python --version          # Deve ser 3.11 ou 3.12</p>
@@ -260,7 +260,7 @@
     <div class="flex justify-between items-center mt-8 pt-6 border-t border-dark-700">
       <a href="modulo-5-5.html" class="flex items-center gap-2 text-neutral-400 hover:text-teal-400 transition-colors">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-        Anterior: Primeira Simulação
+        Anterior: Primeira Simulaçêo
       </a>
       <a href="index.html" class="flex items-center gap-2 text-neutral-400 hover:text-teal-400 transition-colors">
         Voltar ao Índice
