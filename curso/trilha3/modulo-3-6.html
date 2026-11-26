@@ -56,7 +56,7 @@
             <span class="font-bold text-lg hidden sm:inline">Ecossistema MiroFish</span>
           </a>
           <span class="text-neutral-600">|</span>
-          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+          <a href="https://ARCKHÉ AI" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">ARCKHÉ AI</a>
         </div>
         <div class="flex items-center space-x-1 sm:space-x-2">
           <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
@@ -82,7 +82,7 @@
         <span class="bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded text-xs font-bold border border-purple-500/30">Módulo 3.6</span>
       </div>
       <h1 class="text-2xl font-bold text-neutral-100 flex items-center gap-3">🔧 Customizaçêo e Forks</h1>
-      <p class="text-neutral-400 mt-2">Forks inematds e MiroFish-Offline, correções críticas, Docker customizado e guia de fork</p>
+      <p class="text-neutral-400 mt-2">Forks linnoff88-dev e MiroFish-Offline, correções críticas, Docker customizado e guia de fork</p>
     </div>
   </div>
 
@@ -95,11 +95,11 @@
         <div class="topic-item">
           <button onclick="toggleTopic(this)" class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-purple-500/10 transition-colors justify-start">
             <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-            <span class="text-neutral-300 text-left">🔄 Fork inematds - KuzuDB, multi-LLM, PT-BR, stop/resume builds</span>
+            <span class="text-neutral-300 text-left">🔄 Fork linnoff88-dev - KuzuDB, multi-LLM, PT-BR, stop/resume builds</span>
           </button>
           <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
-            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">O fork inematds é a versêo mais extensivamente modificada do BettaFish, servindo como base para o ecossistema MiroFish. As mudanças principais: (1) Substituiçêo do Zep Cloud por KuzuDB - toda a camada de memória reescrita para usar grafo embutido local, eliminando custos recorrentes e dependência de internet. (2) Multi-LLM via LiteLLM - router inteligente que direciona chamadas para OpenAI, Anthropic, Ollama, Groq ou qualquer provedor OpenAI-compatible, com fallback automático entre provedores. (3) Traduçêo PT-BR completa - todos os prompts do sistema, mensagens de interface e templates de relatório traduzidos para português brasileiro mantendo qualidade técnica. (4) Stop/resume para builds Docker - funcionalidade que persiste o estado de builds longas, permitindo interromper e retomar sem recomeçar do zero.</p></div>
-            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O fork inematds é a base de tudo no MiroFish. Entender suas mudanças permite: contribuir com melhorias, resolver conflitos de merge com o upstream, adaptar funcionalidades futuras, e tomar decisões informadas sobre quais mudanças adotar de volta do upstream.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">O fork linnoff88-dev é a versêo mais extensivamente modificada do BettaFish, servindo como base para o ecossistema MiroFish. As mudanças principais: (1) Substituiçêo do Zep Cloud por KuzuDB - toda a camada de memória reescrita para usar grafo embutido local, eliminando custos recorrentes e dependência de internet. (2) Multi-LLM via LiteLLM - router inteligente que direciona chamadas para OpenAI, Anthropic, Ollama, Groq ou qualquer provedor OpenAI-compatible, com fallback automático entre provedores. (3) Traduçêo PT-BR completa - todos os prompts do sistema, mensagens de interface e templates de relatório traduzidos para português brasileiro mantendo qualidade técnica. (4) Stop/resume para builds Docker - funcionalidade que persiste o estado de builds longas, permitindo interromper e retomar sem recomeçar do zero.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O fork linnoff88-dev é a base de tudo no MiroFish. Entender suas mudanças permite: contribuir com melhorias, resolver conflitos de merge com o upstream, adaptar funcionalidades futuras, e tomar decisões informadas sobre quais mudanças adotar de volta do upstream.</p></div>
             <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>KuzuDB migration: 12 arquivos modificados, memory_provider.py como interface plugável</li><li>LiteLLM router: config.yaml com lista de modelos e prioridades de fallback</li><li>PT-BR prompts: diretório prompts/pt-br/ com templates traduzidos</li><li>Docker stop/resume: checkpoint de estado via Docker commit + tag</li><li>Divergência do upstream: ~2000 linhas adicionadas, ~500 modificadas, ~300 removidas</li></ul></div>
           </div>
         </div>
@@ -163,9 +163,9 @@
             <span class="text-neutral-300 text-left">🎯 Como Criar Seu Próprio Fork - Guia prático de customizaçêo</span>
           </button>
           <div class="topic-explanation ml-12 mt-2 p-4 bg-dark-700 rounded-lg border border-dark-600">
-            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">Guia passo-a-passo para criar um fork customizado: (1) Fork do repositório inematds no GitHub (nêo do upstream - o inematds já inclui as 7 correções e melhorias). (2) Clone local e setup de desenvolvimento: python -m venv .venv, pip install -e ".[dev]", pre-commit install. (3) Pontos de extensêo documentados: engines/ para novos agentes, models/ para novos modelos de sentimento, providers/ para novos provedores LLM, prompts/ para templates customizados. Cada ponto de extensêo tem uma interface abstrata (ABC) que deve ser implementada. (4) Testes: pytest tests/ com fixtures que mockam chamadas LLM para testes rápidos e determinísticos. (5) Sincronizaçêo com upstream: git remote add upstream, git fetch upstream, git rebase upstream/main periodicamente, resolvendo conflitos nos pontos de divergência documentados.</p></div>
+            <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">O que é:</span><p class="text-neutral-300 text-sm mt-1">Guia passo-a-passo para criar um fork customizado: (1) Fork do repositório linnoff88-dev no GitHub (nêo do upstream - o linnoff88-dev já inclui as 7 correções e melhorias). (2) Clone local e setup de desenvolvimento: python -m venv .venv, pip install -e ".[dev]", pre-commit install. (3) Pontos de extensêo documentados: engines/ para novos agentes, models/ para novos modelos de sentimento, providers/ para novos provedores LLM, prompts/ para templates customizados. Cada ponto de extensêo tem uma interface abstrata (ABC) que deve ser implementada. (4) Testes: pytest tests/ com fixtures que mockam chamadas LLM para testes rápidos e determinísticos. (5) Sincronizaçêo com upstream: git remote add upstream, git fetch upstream, git rebase upstream/main periodicamente, resolvendo conflitos nos pontos de divergência documentados.</p></div>
             <div class="mb-3"><span class="text-purple-400 font-semibold text-sm">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">A capacidade de criar e manter um fork próprio transforma o MiroFish de uma ferramenta pronta em uma plataforma extensível. Organizações podem ter forks com customizações específicas (novos engines, novos modelos, integrações proprietárias) enquanto se beneficiam de melhorias do upstream via rebases periódicos.</p></div>
-            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Fork base: inematds (nêo upstream) para incluir correções e melhorias</li><li>Extension points: engines/, models/, providers/, prompts/ com ABCs documentadas</li><li>Testing strategy: mocks de LLM para testes rápidos, integraçêo para validaçêo real</li><li>Rebase workflow: fetch upstream → rebase → resolve conflicts → test → push</li><li>CI/CD: GitHub Actions com lint, test, build Docker e deploy automático</li></ul></div>
+            <div><span class="text-purple-400 font-semibold text-sm">Conceitos-chave:</span><ul class="text-neutral-300 text-sm mt-1 list-disc list-inside space-y-1"><li>Fork base: linnoff88-dev (nêo upstream) para incluir correções e melhorias</li><li>Extension points: engines/, models/, providers/, prompts/ com ABCs documentadas</li><li>Testing strategy: mocks de LLM para testes rápidos, integraçêo para validaçêo real</li><li>Rebase workflow: fetch upstream → rebase → resolve conflicts → test → push</li><li>CI/CD: GitHub Actions com lint, test, build Docker e deploy automático</li></ul></div>
           </div>
         </div>
 
@@ -183,7 +183,7 @@
   <footer class="border-t border-dark-700 py-8 mt-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
       <p>🐟 Ecossistema MiroFish · Módulo 3.6</p>
-      <p class="mt-1">Projeto <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+      <p class="mt-1">Projeto <a href="https://ARCKHÉ AI" target="_blank" class="text-sky-400 hover:text-sky-300">ARCKHÉ AI</a></p>
     </div>
   </footer>
 
